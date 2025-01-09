@@ -1,20 +1,50 @@
 ![Build Status](https://github.com/internetarchive/iaux-item-metadata/actions/workflows/ci.yml/badge.svg) [![codecov](https://codecov.io/gh/internetarchive/iaux-item-metadata/branch/main/graph/badge.svg?token=ZOYRJ2BV9W)](https://codecov.io/gh/internetarchive/iaux-item-metadata)
 
-# Internet Archive Typescript WebComponent Template
+# Internet Archive Item Metadata
 
-This is a base template for creating Typescript WebComponents. It is based off of the [Open WebComponents generator](https://open-wc.org/docs/development/generator/) with some IA-specific customizations and some development niceities.
+These are the data models for Internet Archive Metadata. The Metadata models handle automatic conversions between the raw values to native Typescript data types.
 
-## Usage
+When receiving JSON responses from the Internet Archive's metadata service, the values can be strings, numbers, or arrays. These take all of those values and normalizes them.
 
-1. Click the "Use this Template" button in GitHub to create a new repository based on this one.
-2. Clone your new repo and update the things below:
+All fields, except for `identifier`, have 3 properties:
+- `.value` to get the first (or only) value in the native type
+- `.values` to get all of the values if it's an array in their native types
+- `.rawValue` to get the original value from the response
 
-### Things to update in your copy
-1. Remove this section
-2. Search for the strings `your-webcomponent` and `YourWebComponent` and those are most of the spots that need to be updated.
-3. `README.md` (this file). Update the readme in general, but also the badge URLs
-4. `package.json` Update the name and description
-5. Rename the `your-webcomponent.ts` and its associated `.test` file
+## Example
+
+```
+const metadata = new Metadata({
+    identifier: 'foo',
+    addeddate: '2021-01-01',
+    collection: ['foo', 'bar'],
+    description: 'A foo that is also a bar',
+    duration: '1:23:45',
+    mediatype: 'audio',
+})
+
+console.log('Raw metadata:', JSON.stringify(metadata.rawMetadata));
+// outputs the raw JSON response,
+// { identifier: 'foo', addeddate: '2021-01-01', collection: ['foo', 'bar'] .... }
+
+console.log('Identifier', metadata.identifier);
+// > 'foo'
+
+console.log('Addeddate', metadata.addeddate.value);
+// > Date object (Fri Jan 01 2021 00:00:00 GMT-0800 (Pacific Standard Time))
+
+// get first value of an array of values
+console.log('Collection', metadata.collection.value);
+// > 'foo'
+
+// get all values of an array
+console.log('Collection', metadata.collection.values);
+// > ['foo', 'bar']
+
+// duration is in seconds and handles conversions from hh:mm:ss if needed
+console.log('Duration', metadata.duration.value);
+// > 5025
+```
 
 ## Local Demo with `web-dev-server`
 ```bash
