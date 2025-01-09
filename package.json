@@ -12,7 +12,7 @@
   "module": "dist/index.js",
   "scripts": {
     "start": "tsc && concurrently -k -r \"tsc --watch --preserveWatchOutput\" \"wds\"",
-    "prepare": "rimraf dist && tsc && husky install",
+    "prepare": "rimraf dist && tsc && husky",
     "build": "tsc",
     "lint": "eslint && prettier \"**/*.ts\" --check",
     "format": "eslint . --fix && prettier \"**/*.ts\" --write",
