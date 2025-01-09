@@ -10,11 +10,19 @@ describe('Metadata', () => {
   });
 
   it('properly instantiates metadata with addeddate', async () => {
-    const json = { identifier: 'foo', addeddate: '2021-01-01T00:00:00Z' };
+    const json = { identifier: 'foo', addeddate: '2021-05-20T13:37:15Z' };
     const metadata = new Metadata(json);
-    expect(metadata.addeddate?.value?.getTime()).to.equal(
-      new Date('2021-01-01T08:00:00Z').getTime(),
-    );
+
+    const expected = new Date();
+    expected.setHours(13);
+    expected.setMinutes(37);
+    expected.setSeconds(15);
+    expected.setMilliseconds(0);
+    expected.setMonth(4);
+    expected.setDate(20);
+    expected.setFullYear(2021);
+
+    expect(metadata.addeddate?.value?.getTime()).to.equal(expected.getTime());
   });
 
   it('properly instantiates metadata with audio_codec', async () => {
