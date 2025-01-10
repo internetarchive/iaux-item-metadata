@@ -11,7 +11,12 @@ export { DateField } from './src/models/metadata-fields/field-types/date';
 export { DurationField } from './src/models/metadata-fields/field-types/duration';
 export { ListField } from './src/models/metadata-fields/field-types/list';
 export { MediaTypeField } from './src/models/metadata-fields/field-types/mediatype';
-export { MetadataField } from './src/models/metadata-fields/metadata-field';
 export { NumberField } from './src/models/metadata-fields/field-types/number';
 export { PageProgressionField } from './src/models/metadata-fields/field-types/page-progression';
 export { StringField } from './src/models/metadata-fields/field-types/string';
+
+export {
+  MetadataFieldInterface,
+  MetadataRawValue,
+  MetadataField,
+} from './src/models/metadata-fields/metadata-field';
