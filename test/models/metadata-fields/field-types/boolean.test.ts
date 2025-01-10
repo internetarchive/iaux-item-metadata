@@ -26,7 +26,7 @@ describe('Boolean Field', () => {
     expect(booleanField.rawValue).to.equal('boop');
   });
 
-  it('parses falsy values to true', () => {
+  it('parses falsy values to false', () => {
     const booleanField = new BooleanField(0);
 
     expect(booleanField.value).to.be.false;
