@@ -97,9 +97,11 @@ export class MetadataField<
 
   private parseRawValue(): Type[] {
     if (this.rawValue === undefined) return [];
+
     const rawValues = Array.isArray(this.rawValue)
       ? this.rawValue
       : [this.rawValue];
+
     const values: Type[] = [];
     rawValues.forEach(value => {
       const parsed = this.parser.parseValue(value);
@@ -109,6 +111,7 @@ export class MetadataField<
         values.push(parsed);
       }
     });
+
     return values;
   }
 }
