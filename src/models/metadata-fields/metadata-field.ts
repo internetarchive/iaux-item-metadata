@@ -7,7 +7,13 @@ import type { FieldParserInterface } from '@internetarchive/field-parsers';
  * This allows the parsers to know if they can handle the raw value or not and
  * how to handle it if they can.
  */
-export type MetadataRawValue = string | string[] | number | boolean;
+export type MetadataRawValue =
+  | string
+  | string[]
+  | number
+  | number[]
+  | boolean
+  | boolean[];
 
 export interface MetadataFieldInterface<T> {
   /**

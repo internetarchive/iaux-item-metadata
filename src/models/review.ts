@@ -1,8 +1,8 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Memoize } from 'typescript-memoize';
 import { DateParser, NumberParser } from '@internetarchive/field-parsers';
 
 export class Review {
+  /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
   rawValue: Record<string, any>;
 
   get reviewbody(): string | undefined {
@@ -35,6 +35,7 @@ export class Review {
       : undefined;
   }
 
+  /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
   constructor(json: Record<string, any>) {
     this.rawValue = json;
   }

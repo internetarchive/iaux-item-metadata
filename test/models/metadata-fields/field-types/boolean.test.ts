@@ -50,11 +50,19 @@ describe('Boolean Field', () => {
     expect(booleanField.rawValue).to.equal('true');
   });
 
-  it('parses array of values properly', () => {
+  it('parses array of strings properly', () => {
     const booleanField = new BooleanField(['true', 'false', 'true']);
 
     expect(booleanField.value).to.be.true;
     expect(booleanField.values).to.deep.equal([true, false, true]);
     expect(booleanField.rawValue).to.deep.equal(['true', 'false', 'true']);
+  });
+
+  it('parses array of booleans properly', () => {
+    const booleanField = new BooleanField([true, false, true]);
+
+    expect(booleanField.value).to.be.true;
+    expect(booleanField.values).to.deep.equal([true, false, true]);
+    expect(booleanField.rawValue).to.deep.equal([true, false, true]);
   });
 });
