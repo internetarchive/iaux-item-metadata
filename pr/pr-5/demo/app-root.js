@@ -44,7 +44,7 @@
           </tr>
           <tr>
             <td>Collection</td>
-            <td>${(t=this.metadata.collection)===null||t===void 0?void 0:t.values}</td>
+            <td>${(t=this.metadata.collection)===null||t===void 0?void 0:t.values.join(", ")}</td>
           </tr>
           <tr>
             <td>Description</td>
