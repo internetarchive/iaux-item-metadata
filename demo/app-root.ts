@@ -43,7 +43,7 @@ export class AppRoot extends LitElement {
           </tr>
           <tr>
             <td>Collection</td>
-            <td>${this.metadata.collection?.values}</td>
+            <td>${this.metadata.collection?.values.join(', ')}</td>
           </tr>
           <tr>
             <td>Description</td>
