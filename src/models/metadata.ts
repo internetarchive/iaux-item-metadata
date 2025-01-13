@@ -32,8 +32,8 @@ export class Metadata {
   /**
    * The item identifier.
    *
-   * _Note_ This is a plain string instead of a `MetadataField` since it's
-   * the primary key of the item.
+   * _Note_ This is a plain string instead of a `MetadataField` since it
+   * will only ever be a string and not an array.
    *
    * @type {string}
    * @memberof Metadata
