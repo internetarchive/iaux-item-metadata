@@ -1,6 +1,6 @@
 {
   "name": "@internetarchive/iaux-item-metadata",
-  "description": "The Internet Archive Typescript WebComponent template. It is based on the @open-wc template.",
+  "description": "Item metadata models for the Internet Archive",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/internetarchive/iaux-item-metadata.git"
