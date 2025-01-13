@@ -36,4 +36,10 @@ describe('Metadata', () => {
     const metadata = new Metadata(json);
     expect(metadata.audio_sample_rate?.value).to.equal(123);
   });
+
+  it('properly instantiates metadata with external-identifier', async () => {
+    const json = { identifier: 'foo', 'external-identifier': ['abc', '123'] };
+    const metadata = new Metadata(json);
+    expect(metadata.external_identifier?.values).to.deep.equal(['abc', '123']);
+  });
 });

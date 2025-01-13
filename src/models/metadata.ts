@@ -169,7 +169,7 @@ export class Metadata {
       : undefined;
   }
 
-  @Memoize() get 'external-identifier'(): StringField | undefined {
+  @Memoize() get external_identifier(): StringField | undefined {
     return this.rawMetadata?.['external-identifier']
       ? new StringField(this.rawMetadata?.['external-identifier'])
       : undefined;
