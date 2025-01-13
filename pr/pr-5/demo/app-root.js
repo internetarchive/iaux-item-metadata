@@ -64,4 +64,8 @@
     :host {
       display: block;
     }
+
+    td:first-child {
+      padding-right: 1em;
+    }
   `;re=d([Je("app-root")],re);
