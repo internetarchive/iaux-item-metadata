@@ -66,5 +66,9 @@ export class AppRoot extends LitElement {
     :host {
       display: block;
     }
+
+    td:first-child {
+      padding-right: 1em;
+    }
   `;
 }
