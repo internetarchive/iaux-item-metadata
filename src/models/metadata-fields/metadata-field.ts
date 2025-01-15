@@ -22,7 +22,7 @@ export interface MetadataFieldInterface<T> {
    * @type {MetadataRawValue}
    * @memberof MetadataField
    */
-  readonly rawValue?: Readonly<MetadataRawValue>;
+  readonly rawValue: Readonly<MetadataRawValue>;
 
   /**
    * The first value if there are multiple or the only value if there is one
@@ -75,7 +75,7 @@ export class MetadataField<
 > implements MetadataFieldInterface<Type>
 {
   /** @inheritdoc */
-  readonly rawValue?: Readonly<MetadataRawValue>;
+  readonly rawValue: Readonly<MetadataRawValue>;
 
   /** @inheritdoc */
   @Memoize() get values(): Type[] {
@@ -88,7 +88,7 @@ export class MetadataField<
     return this.values[0];
   }
 
-  constructor(parser: FieldParserInterfaceType, rawValue?: MetadataRawValue) {
+  constructor(parser: FieldParserInterfaceType, rawValue: MetadataRawValue) {
     this.parser = parser;
     this.rawValue = rawValue;
   }
@@ -96,8 +96,6 @@ export class MetadataField<
   private parser: FieldParserInterfaceType;
 
   private parseRawValue(): Type[] {
-    if (this.rawValue === undefined) return [];
-
     const rawValues = Array.isArray(this.rawValue)
       ? this.rawValue
       : [this.rawValue];

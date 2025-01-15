@@ -67,37 +67,6 @@ describe('Metadata Field', () => {
     expect(metadataField.values).to.deep.equal([1.3, 2.4, 4.5]);
   });
 
-  it('has no value if a raw value was not passed in', () => {
-    class MockFloatParser implements FieldParserInterface<number> {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      parseValue(rawValue: any): number {
-        return rawValue;
-      }
-    }
-
-    const parser = new MockFloatParser();
-    const metadataField = new MetadataField(parser);
-
-    expect(metadataField.rawValue).to.equal(undefined);
-    expect(metadataField.value).to.equal(undefined);
-    expect(metadataField.values).to.deep.equal([]);
-  });
-
-  it('does not add value to values array if parsed value is undefined', () => {
-    class MockFloatParser implements FieldParserInterface<number> {
-      parseValue(): number | undefined {
-        return undefined;
-      }
-    }
-
-    const parser = new MockFloatParser();
-    const metadataField = new MetadataField(parser);
-
-    expect(metadataField.rawValue).to.equal(undefined);
-    expect(metadataField.value).to.equal(undefined);
-    expect(metadataField.values).to.deep.equal([]);
-  });
-
   it('handles falsy `0` return values properly', () => {
     class MockFloatParser implements FieldParserInterface<number> {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
