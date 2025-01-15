@@ -22,7 +22,7 @@ export interface MetadataFieldInterface<T> {
    * @type {MetadataRawValue}
    * @memberof MetadataField
    */
-  rawValue?: MetadataRawValue;
+  readonly rawValue?: Readonly<MetadataRawValue>;
 
   /**
    * The first value if there are multiple or the only value if there is one
@@ -75,7 +75,7 @@ export class MetadataField<
 > implements MetadataFieldInterface<Type>
 {
   /** @inheritdoc */
-  rawValue?: MetadataRawValue;
+  readonly rawValue?: Readonly<MetadataRawValue>;
 
   /** @inheritdoc */
   @Memoize() get values(): Type[] {

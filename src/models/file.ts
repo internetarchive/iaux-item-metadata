@@ -15,7 +15,7 @@ import {
  */
 export class File {
   /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
-  rawValue: Record<string, any>;
+  readonly rawValue: Readonly<Record<string, any>>;
 
   get name(): string {
     return this.rawValue.name;

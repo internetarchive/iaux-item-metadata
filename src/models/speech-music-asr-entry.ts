@@ -2,9 +2,9 @@
  * This is the format used for radio transcripts
  */
 export type SpeechMusicASREntry = {
-  end: number;
-  id: number;
-  is_music: boolean;
-  start: number;
-  text: string;
+  readonly end: number;
+  readonly id: number;
+  readonly is_music: boolean;
+  readonly start: number;
+  readonly text: string;
 };

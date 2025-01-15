@@ -3,7 +3,7 @@ import { DateParser, NumberParser } from '@internetarchive/field-parsers';
 
 export class Review {
   /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
-  rawValue: Record<string, any>;
+  readonly rawValue: Readonly<Record<string, any>>;
 
   get reviewbody(): string | undefined {
     return this.rawValue.reviewbody;
