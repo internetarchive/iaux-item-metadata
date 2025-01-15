@@ -36,7 +36,7 @@ export class Review {
   }
 
   /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
-  constructor(json: Record<string, any>) {
+  constructor(json: Record<string, any> = {}) {
     this.rawValue = json;
   }
 }
