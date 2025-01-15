@@ -3,6 +3,12 @@ import { expect } from '@open-wc/testing';
 import { Metadata } from '../../src/models/metadata';
 
 describe('Metadata', () => {
+  it('properly instantiates metadata with no data', async () => {
+    const metadata = new Metadata();
+    expect(metadata.identifier).to.be.undefined;
+    expect(metadata.collection).to.be.undefined;
+  });
+
   it('properly instantiates metadata with identifier', async () => {
     const json = { identifier: 'foo', collection: 'bar' };
     const metadata = new Metadata(json);
@@ -41,5 +47,19 @@ describe('Metadata', () => {
     const json = { identifier: 'foo', 'external-identifier': ['abc', '123'] };
     const metadata = new Metadata(json);
     expect(metadata.external_identifier?.values).to.deep.equal(['abc', '123']);
+  });
+
+  it('returns undefined for fields that have not been provided', async () => {
+    const json = { identifier: 'foo', collection: ['abc', '123'] };
+    const metadata = new Metadata(json);
+    expect(metadata.runtime?.value).to.be.undefined;
+  });
+
+  it('accepts fields that have not been modeled', async () => {
+    const json = { identifier: 'foo', foo: ['abc', '123'] };
+    const metadata = new Metadata(json);
+    // foo hasn't been added to the Metadata class,
+    // but can be accessed via the rawMetadata property
+    expect(metadata.rawMetadata.foo).to.be.deep.equal(['abc', '123']);
   });
 });
