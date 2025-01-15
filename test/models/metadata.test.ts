@@ -47,4 +47,10 @@ describe('Metadata', () => {
     const metadata = new Metadata(json);
     expect(metadata.external_identifier?.values).to.deep.equal(['abc', '123']);
   });
+
+  it('returns undefined for fields that have not been provided', async () => {
+    const json = { identifier: 'foo', collection: ['abc', '123'] };
+    const metadata = new Metadata(json);
+    expect(metadata.runtime?.value).to.be.undefined;
+  });
 });
