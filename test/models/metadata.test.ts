@@ -53,4 +53,12 @@ describe('Metadata', () => {
     const metadata = new Metadata(json);
     expect(metadata.runtime?.value).to.be.undefined;
   });
+
+  it('accepts fields that have not been modeled', async () => {
+    const json = { identifier: 'foo', foo: ['abc', '123'] };
+    const metadata = new Metadata(json);
+    // foo hasn't been added to the Metadata class,
+    // but can be accessed via the rawMetadata property
+    expect(metadata.rawMetadata.foo).to.be.deep.equal(['abc', '123']);
+  });
 });
