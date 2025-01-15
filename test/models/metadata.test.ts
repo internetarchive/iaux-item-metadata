@@ -6,6 +6,7 @@ describe('Metadata', () => {
   it('properly instantiates metadata with no data', async () => {
     const metadata = new Metadata();
     expect(metadata.identifier).to.be.undefined;
+    expect(metadata.collection).to.be.undefined;
   });
 
   it('properly instantiates metadata with identifier', async () => {
