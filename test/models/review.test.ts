@@ -33,4 +33,27 @@ describe('Review', () => {
 
     expect(review.reviewdate?.getTime()).to.equal(expected.getTime());
   });
+
+  it('handles falsy values properly', async () => {
+    const review = new Review({
+      reviewtitle: 'yay',
+      reviewdate: '0',
+      stars: 0,
+    });
+
+    const expected = new Date();
+    expected.setHours(0);
+    expected.setMinutes(0);
+    expected.setSeconds(0);
+    expected.setMilliseconds(0);
+    expected.setMonth(0);
+    expected.setDate(1);
+    expected.setFullYear(2000);
+
+    expect(review.reviewtitle).to.equal('yay');
+    expect(review.reviewdate).to.not.be.undefined;
+    expect(review.reviewdate?.getTime()).to.equal(expected.getTime());
+    expect(review.stars).to.not.be.undefined;
+    expect(review.stars).to.equal(0);
+  });
 });

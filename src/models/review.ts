@@ -18,19 +18,19 @@ export class Review {
   }
 
   @Memoize() get reviewdate(): Date | undefined {
-    return this.rawValue.reviewdate
+    return this.rawValue.reviewdate != null
       ? DateParser.shared.parseValue(this.rawValue.reviewdate)
       : undefined;
   }
 
   @Memoize() get createdate(): Date | undefined {
-    return this.rawValue.createdate
+    return this.rawValue.createdate != null
       ? DateParser.shared.parseValue(this.rawValue.createdate)
       : undefined;
   }
 
   @Memoize() get stars(): number | undefined {
-    return this.rawValue.stars
+    return this.rawValue.stars != null
       ? NumberParser.shared.parseValue(this.rawValue.stars)
       : undefined;
   }

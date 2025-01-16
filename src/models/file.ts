@@ -54,7 +54,7 @@ export class File {
   }
 
   @Memoize() get size(): Byte | undefined {
-    return this.rawValue.size
+    return this.rawValue.size != null
       ? ByteParser.shared.parseValue(this.rawValue.size)
       : undefined;
   }
@@ -64,25 +64,25 @@ export class File {
   }
 
   @Memoize() get length(): Duration | undefined {
-    return this.rawValue.length
+    return this.rawValue.length != null
       ? DurationParser.shared.parseValue(this.rawValue.length)
       : undefined;
   }
 
   @Memoize() get height(): number | undefined {
-    return this.rawValue.height
+    return this.rawValue.height != null
       ? NumberParser.shared.parseValue(this.rawValue.height)
       : undefined;
   }
 
   @Memoize() get width(): number | undefined {
-    return this.rawValue.width
+    return this.rawValue.width != null
       ? NumberParser.shared.parseValue(this.rawValue.width)
       : undefined;
   }
 
   @Memoize() get track(): number | undefined {
-    return this.rawValue.track
+    return this.rawValue.track != null
       ? NumberParser.shared.parseValue(this.rawValue.track)
       : undefined;
   }

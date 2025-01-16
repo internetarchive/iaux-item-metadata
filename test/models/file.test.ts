@@ -37,4 +37,16 @@ describe('File', () => {
     });
     expect(file.external_identifier).to.deep.equal(['foo', 'bar']);
   });
+
+  it('handles falsy values properly', async () => {
+    const file = new File({
+      name: 'foo.jpg',
+      size: 0,
+      track: 0,
+    });
+    expect(file.size).to.not.be.undefined;
+    expect(file.size).to.equal(0);
+    expect(file.track).to.not.be.undefined;
+    expect(file.track).to.equal(0);
+  });
 });
