@@ -74,4 +74,34 @@ describe('Metadata', () => {
     const metadata = new Metadata(json);
     expect(metadata.year?.value).to.equal(1982);
   });
+
+  it('properly handles falsy number values', async () => {
+    const json = {
+      identifier: 'foo',
+      year: 0,
+      duration: 0,
+      collection_size: 0,
+    };
+    const metadata = new Metadata(json);
+    expect(metadata.year).to.not.be.undefined;
+    expect(metadata.year?.value).to.equal(0);
+    expect(metadata.duration).to.not.be.undefined;
+    expect(metadata.duration?.value).to.equal(0);
+    expect(metadata.collection_size).to.not.be.undefined;
+    expect(metadata.collection_size?.value).to.equal(0);
+  });
+
+  it('properly handles falsy boolean values', async () => {
+    const json = { identifier: 'foo', noindex: false };
+    const metadata = new Metadata(json);
+    expect(metadata.noindex).to.not.be.undefined;
+    expect(metadata.noindex?.value).to.be.false;
+  });
+
+  it('properly handles falsy string values', async () => {
+    const json = { identifier: 'foo', description: '' };
+    const metadata = new Metadata(json);
+    expect(metadata.description).to.not.be.undefined;
+    expect(metadata.description?.value).to.equal('');
+  });
 });
