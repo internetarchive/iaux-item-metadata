@@ -451,9 +451,9 @@ export class Metadata {
       : undefined;
   }
 
-  @Memoize() get year(): DateField | undefined {
+  @Memoize() get year(): NumberField | undefined {
     return this.rawMetadata.year
-      ? new DateField(this.rawMetadata.year)
+      ? new NumberField(this.rawMetadata.year)
       : undefined;
   }
 
