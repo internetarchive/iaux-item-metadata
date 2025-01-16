@@ -55,13 +55,13 @@ export class Metadata {
   }
 
   @Memoize() get audio_sample_rate(): NumberField | undefined {
-    return this.rawMetadata.audio_sample_rate
+    return this.rawMetadata.audio_sample_rate != null
       ? new NumberField(this.rawMetadata.audio_sample_rate)
       : undefined;
   }
 
   @Memoize() get avg_rating(): NumberField | undefined {
-    return this.rawMetadata.avg_rating
+    return this.rawMetadata.avg_rating != null
       ? new NumberField(this.rawMetadata.avg_rating)
       : undefined;
   }
@@ -152,7 +152,7 @@ export class Metadata {
    * @memberof Metadata
    */
   @Memoize() get downloads(): NumberField | undefined {
-    return this.rawMetadata.downloads
+    return this.rawMetadata.downloads != null
       ? new NumberField(this.rawMetadata.downloads)
       : undefined;
   }
@@ -182,7 +182,7 @@ export class Metadata {
    * @memberof Metadata
    */
   @Memoize() get files_count(): NumberField | undefined {
-    return this.rawMetadata.files_count
+    return this.rawMetadata.files_count != null
       ? new NumberField(this.rawMetadata.files_count)
       : undefined;
   }
@@ -212,7 +212,7 @@ export class Metadata {
    * @memberof Metadata
    */
   @Memoize() get item_count(): NumberField | undefined {
-    return this.rawMetadata.item_count
+    return this.rawMetadata.item_count != null
       ? new NumberField(this.rawMetadata.item_count)
       : undefined;
   }
