@@ -296,25 +296,25 @@ export class Metadata {
   }
 
   @Memoize() get openlibrary_edition(): StringField | undefined {
-    return this.rawMetadata.openlibrary_edition
+    return this.rawMetadata.openlibrary_edition != null
       ? new StringField(this.rawMetadata.openlibrary_edition)
       : undefined;
   }
 
   @Memoize() get openlibrary_work(): StringField | undefined {
-    return this.rawMetadata.openlibrary_work
+    return this.rawMetadata.openlibrary_work != null
       ? new StringField(this.rawMetadata.openlibrary_work)
       : undefined;
   }
 
   @Memoize() get page_progression(): PageProgressionField | undefined {
-    return this.rawMetadata.page_progression
+    return this.rawMetadata.page_progression != null
       ? new PageProgressionField(this.rawMetadata.page_progression)
       : undefined;
   }
 
   @Memoize() get partner(): StringField | undefined {
-    return this.rawMetadata.partner
+    return this.rawMetadata.partner != null
       ? new StringField(this.rawMetadata.partner)
       : undefined;
   }
@@ -326,19 +326,19 @@ export class Metadata {
   }
 
   @Memoize() get publicdate(): DateField | undefined {
-    return this.rawMetadata.publicdate
+    return this.rawMetadata.publicdate != null
       ? new DateField(this.rawMetadata.publicdate)
       : undefined;
   }
 
   @Memoize() get publisher(): StringField | undefined {
-    return this.rawMetadata.publisher
+    return this.rawMetadata.publisher != null
       ? new StringField(this.rawMetadata.publisher)
       : undefined;
   }
 
   @Memoize() get reviewdate(): DateField | undefined {
-    return this.rawMetadata.reviewdate
+    return this.rawMetadata.reviewdate != null
       ? new DateField(this.rawMetadata.reviewdate)
       : undefined;
   }
@@ -350,55 +350,55 @@ export class Metadata {
   }
 
   @Memoize() get scanner(): StringField | undefined {
-    return this.rawMetadata.scanner
+    return this.rawMetadata.scanner != null
       ? new StringField(this.rawMetadata.scanner)
       : undefined;
   }
 
   @Memoize() get source(): StringField | undefined {
-    return this.rawMetadata.source
+    return this.rawMetadata.source != null
       ? new StringField(this.rawMetadata.source)
       : undefined;
   }
 
   @Memoize() get start_localtime(): DateField | undefined {
-    return this.rawMetadata.start_localtime
+    return this.rawMetadata.start_localtime != null
       ? new DateField(this.rawMetadata.start_localtime)
       : undefined;
   }
 
   @Memoize() get start_time(): DateField | undefined {
-    return this.rawMetadata.start_time
+    return this.rawMetadata.start_time != null
       ? new DateField(this.rawMetadata.start_time)
       : undefined;
   }
 
   @Memoize() get stop_time(): DateField | undefined {
-    return this.rawMetadata.stop_time
+    return this.rawMetadata.stop_time != null
       ? new DateField(this.rawMetadata.stop_time)
       : undefined;
   }
 
   @Memoize() get subject(): StringListField | undefined {
-    return this.rawMetadata.subject
+    return this.rawMetadata.subject != null
       ? new StringListField(this.rawMetadata.subject)
       : undefined;
   }
 
   @Memoize() get taper(): StringField | undefined {
-    return this.rawMetadata.taper
+    return this.rawMetadata.taper != null
       ? new StringField(this.rawMetadata.taper)
       : undefined;
   }
 
   @Memoize() get title(): StringField | undefined {
-    return this.rawMetadata.title
+    return this.rawMetadata.title != null
       ? new StringField(this.rawMetadata.title)
       : undefined;
   }
 
   @Memoize() get transferer(): StringField | undefined {
-    return this.rawMetadata.transferer
+    return this.rawMetadata.transferer != null
       ? new StringField(this.rawMetadata.transferer)
       : undefined;
   }
@@ -410,13 +410,13 @@ export class Metadata {
   }
 
   @Memoize() get type(): StringField | undefined {
-    return this.rawMetadata.type
+    return this.rawMetadata.type != null
       ? new StringField(this.rawMetadata.type)
       : undefined;
   }
 
   @Memoize() get uploader(): StringField | undefined {
-    return this.rawMetadata.uploader
+    return this.rawMetadata.uploader != null
       ? new StringField(this.rawMetadata.uploader)
       : undefined;
   }
@@ -428,13 +428,13 @@ export class Metadata {
   }
 
   @Memoize() get venue(): StringField | undefined {
-    return this.rawMetadata.venue
+    return this.rawMetadata.venue != null
       ? new StringField(this.rawMetadata.venue)
       : undefined;
   }
 
   @Memoize() get volume(): StringField | undefined {
-    return this.rawMetadata.volume
+    return this.rawMetadata.volume != null
       ? new StringField(this.rawMetadata.volume)
       : undefined;
   }
