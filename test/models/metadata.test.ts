@@ -83,11 +83,11 @@ describe('Metadata', () => {
       collection_size: 0,
     };
     const metadata = new Metadata(json);
-    expect(metadata.year?.value).to.not.be.undefined;
+    expect(metadata.year).to.not.be.undefined;
     expect(metadata.year?.value).to.equal(0);
-    expect(metadata.duration?.value).to.not.be.undefined;
+    expect(metadata.duration).to.not.be.undefined;
     expect(metadata.duration?.value).to.equal(0);
-    expect(metadata.collection_size?.value).to.not.be.undefined;
+    expect(metadata.collection_size).to.not.be.undefined;
     expect(metadata.collection_size?.value).to.equal(0);
   });
 
