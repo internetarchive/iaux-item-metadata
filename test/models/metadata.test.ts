@@ -62,4 +62,16 @@ describe('Metadata', () => {
     // but can be accessed via the rawMetadata property
     expect(metadata.rawMetadata.foo).to.be.deep.equal(['abc', '123']);
   });
+
+  it('models the year as a NumberField, string value', async () => {
+    const json = { identifier: 'foo', year: '1982' };
+    const metadata = new Metadata(json);
+    expect(metadata.year?.value).to.equal(1982);
+  });
+
+  it('models the year as a NumberField, number value', async () => {
+    const json = { identifier: 'foo', year: 1982 };
+    const metadata = new Metadata(json);
+    expect(metadata.year?.value).to.equal(1982);
+  });
 });
