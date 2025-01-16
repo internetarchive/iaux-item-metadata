@@ -43,13 +43,13 @@ export class Metadata {
   }
 
   @Memoize() get addeddate(): DateField | undefined {
-    return this.rawMetadata.addeddate
+    return this.rawMetadata.addeddate != null
       ? new DateField(this.rawMetadata.addeddate)
       : undefined;
   }
 
   @Memoize() get audio_codec(): StringField | undefined {
-    return this.rawMetadata.audio_codec
+    return this.rawMetadata.audio_codec != null
       ? new StringField(this.rawMetadata.audio_codec)
       : undefined;
   }
@@ -75,7 +75,7 @@ export class Metadata {
    * @memberof Metadata
    */
   @Memoize() get collection(): StringField | undefined {
-    return this.rawMetadata.collection
+    return this.rawMetadata.collection != null
       ? new StringField(this.rawMetadata.collection)
       : undefined;
   }
@@ -92,7 +92,7 @@ export class Metadata {
    * @memberof Metadata
    */
   @Memoize() get collections_raw(): StringField | undefined {
-    return this.rawMetadata.collections_raw
+    return this.rawMetadata.collections_raw != null
       ? new StringField(this.rawMetadata.collections_raw)
       : undefined;
   }
@@ -110,37 +110,37 @@ export class Metadata {
   }
 
   @Memoize() get contributor(): StringField | undefined {
-    return this.rawMetadata.contributor
+    return this.rawMetadata.contributor != null
       ? new StringField(this.rawMetadata.contributor)
       : undefined;
   }
 
   @Memoize() get coverage(): StringField | undefined {
-    return this.rawMetadata.coverage
+    return this.rawMetadata.coverage != null
       ? new StringField(this.rawMetadata.coverage)
       : undefined;
   }
 
   @Memoize() get creator(): StringField | undefined {
-    return this.rawMetadata.creator
+    return this.rawMetadata.creator != null
       ? new StringField(this.rawMetadata.creator)
       : undefined;
   }
 
   @Memoize() get collection_layout(): StringField | undefined {
-    return this.rawMetadata.collection_layout
+    return this.rawMetadata.collection_layout != null
       ? new StringField(this.rawMetadata.collection_layout)
       : undefined;
   }
 
   @Memoize() get date(): DateField | undefined {
-    return this.rawMetadata.date
+    return this.rawMetadata.date != null
       ? new DateField(this.rawMetadata.date)
       : undefined;
   }
 
   @Memoize() get description(): StringField | undefined {
-    return this.rawMetadata.description
+    return this.rawMetadata.description != null
       ? new StringField(this.rawMetadata.description)
       : undefined;
   }
@@ -170,7 +170,7 @@ export class Metadata {
   }
 
   @Memoize() get external_identifier(): StringField | undefined {
-    return this.rawMetadata['external-identifier']
+    return this.rawMetadata['external-identifier'] != null
       ? new StringField(this.rawMetadata['external-identifier'])
       : undefined;
   }
@@ -188,19 +188,19 @@ export class Metadata {
   }
 
   @Memoize() get indexdate(): DateField | undefined {
-    return this.rawMetadata.indexdate
+    return this.rawMetadata.indexdate != null
       ? new DateField(this.rawMetadata.indexdate)
       : undefined;
   }
 
   @Memoize() get isbn(): StringField | undefined {
-    return this.rawMetadata.isbn
+    return this.rawMetadata.isbn != null
       ? new StringField(this.rawMetadata.isbn)
       : undefined;
   }
 
   @Memoize() get issue(): StringField | undefined {
-    return this.rawMetadata.issue
+    return this.rawMetadata.issue != null
       ? new StringField(this.rawMetadata.issue)
       : undefined;
   }
@@ -230,7 +230,7 @@ export class Metadata {
   }
 
   @Memoize() get language(): StringField | undefined {
-    return this.rawMetadata.language
+    return this.rawMetadata.language != null
       ? new StringField(this.rawMetadata.language)
       : undefined;
   }
@@ -242,7 +242,7 @@ export class Metadata {
   }
 
   @Memoize() get lineage(): StringField | undefined {
-    return this.rawMetadata.lineage
+    return this.rawMetadata.lineage != null
       ? new StringField(this.rawMetadata.lineage)
       : undefined;
   }
@@ -260,7 +260,7 @@ export class Metadata {
   }
 
   @Memoize() get mediatype(): MediaTypeField | undefined {
-    return this.rawMetadata.mediatype
+    return this.rawMetadata.mediatype != null
       ? new MediaTypeField(this.rawMetadata.mediatype)
       : undefined;
   }
@@ -272,7 +272,7 @@ export class Metadata {
   }
 
   @Memoize() get notes(): StringField | undefined {
-    return this.rawMetadata.notes
+    return this.rawMetadata.notes != null
       ? new StringField(this.rawMetadata.notes)
       : undefined;
   }

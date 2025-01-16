@@ -97,4 +97,11 @@ describe('Metadata', () => {
     expect(metadata.noindex).to.not.be.undefined;
     expect(metadata.noindex?.value).to.be.false;
   });
+
+  it('properly handles falsy string values', async () => {
+    const json = { identifier: 'foo', description: '' };
+    const metadata = new Metadata(json);
+    expect(metadata.description).to.not.be.undefined;
+    expect(metadata.description?.value).to.equal('');
+  });
 });
