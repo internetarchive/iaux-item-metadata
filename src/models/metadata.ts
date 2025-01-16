@@ -104,7 +104,7 @@ export class Metadata {
    * @memberof Metadata
    */
   @Memoize() get collection_size(): ByteField | undefined {
-    return this.rawMetadata.collection_size
+    return this.rawMetadata.collection_size != null
       ? new ByteField(this.rawMetadata.collection_size)
       : undefined;
   }
@@ -164,7 +164,7 @@ export class Metadata {
    * @memberof Metadata
    */
   @Memoize() get duration(): DurationField | undefined {
-    return this.rawMetadata.duration
+    return this.rawMetadata.duration != null
       ? new DurationField(this.rawMetadata.duration)
       : undefined;
   }
@@ -224,7 +224,7 @@ export class Metadata {
    * @memberof Metadata
    */
   @Memoize() get item_size(): ByteField | undefined {
-    return this.rawMetadata.item_size
+    return this.rawMetadata.item_size != null
       ? new ByteField(this.rawMetadata.item_size)
       : undefined;
   }
@@ -236,7 +236,7 @@ export class Metadata {
   }
 
   @Memoize() get length(): DurationField | undefined {
-    return this.rawMetadata.length
+    return this.rawMetadata.length != null
       ? new DurationField(this.rawMetadata.length)
       : undefined;
   }
@@ -254,7 +254,7 @@ export class Metadata {
    * @memberof Metadata
    */
   @Memoize() get month(): NumberField | undefined {
-    return this.rawMetadata.month
+    return this.rawMetadata.month != null
       ? new NumberField(this.rawMetadata.month)
       : undefined;
   }
@@ -266,7 +266,7 @@ export class Metadata {
   }
 
   @Memoize() get noindex(): BooleanField | undefined {
-    return this.rawMetadata.noindex
+    return this.rawMetadata.noindex != null
       ? new BooleanField(this.rawMetadata.noindex)
       : undefined;
   }
@@ -284,13 +284,13 @@ export class Metadata {
    * @memberof Metadata
    */
   @Memoize() get num_favorites(): NumberField | undefined {
-    return this.rawMetadata.num_favorites
+    return this.rawMetadata.num_favorites != null
       ? new NumberField(this.rawMetadata.num_favorites)
       : undefined;
   }
 
   @Memoize() get num_reviews(): NumberField | undefined {
-    return this.rawMetadata.num_reviews
+    return this.rawMetadata.num_reviews != null
       ? new NumberField(this.rawMetadata.num_reviews)
       : undefined;
   }
@@ -320,7 +320,7 @@ export class Metadata {
   }
 
   @Memoize() get ppi(): NumberField | undefined {
-    return this.rawMetadata.ppi
+    return this.rawMetadata.ppi != null
       ? new NumberField(this.rawMetadata.ppi)
       : undefined;
   }
@@ -344,7 +344,7 @@ export class Metadata {
   }
 
   @Memoize() get runtime(): DurationField | undefined {
-    return this.rawMetadata.runtime
+    return this.rawMetadata.runtime != null
       ? new DurationField(this.rawMetadata.runtime)
       : undefined;
   }
@@ -404,7 +404,7 @@ export class Metadata {
   }
 
   @Memoize() get track(): NumberField | undefined {
-    return this.rawMetadata.track
+    return this.rawMetadata.track != null
       ? new NumberField(this.rawMetadata.track)
       : undefined;
   }
@@ -422,7 +422,7 @@ export class Metadata {
   }
 
   @Memoize() get utc_offset(): NumberField | undefined {
-    return this.rawMetadata.utc_offset
+    return this.rawMetadata.utc_offset != null
       ? new NumberField(this.rawMetadata.utc_offset)
       : undefined;
   }
@@ -446,13 +446,13 @@ export class Metadata {
    * @memberof Metadata
    */
   @Memoize() get week(): NumberField | undefined {
-    return this.rawMetadata.week
+    return this.rawMetadata.week != null
       ? new NumberField(this.rawMetadata.week)
       : undefined;
   }
 
   @Memoize() get year(): NumberField | undefined {
-    return this.rawMetadata.year
+    return this.rawMetadata.year != null
       ? new NumberField(this.rawMetadata.year)
       : undefined;
   }
