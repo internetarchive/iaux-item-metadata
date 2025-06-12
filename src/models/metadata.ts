@@ -241,6 +241,12 @@ export class Metadata {
       : undefined;
   }
 
+  @Memoize() get licenseurl(): StringField | undefined {
+    return this.rawMetadata.licenseurl != null
+      ? new StringField(this.rawMetadata.licenseurl)
+      : undefined;
+  }
+
   @Memoize() get lineage(): StringField | undefined {
     return this.rawMetadata.lineage != null
       ? new StringField(this.rawMetadata.lineage)
