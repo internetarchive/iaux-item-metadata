@@ -367,6 +367,12 @@ export class Metadata {
       : undefined;
   }
 
+  @Memoize() get sponsor(): StringField | undefined {
+    return this.rawMetadata.sponsor != null
+      ? new StringField(this.rawMetadata.sponsor)
+      : undefined;
+  }
+
   @Memoize() get start_localtime(): DateField | undefined {
     return this.rawMetadata.start_localtime != null
       ? new DateField(this.rawMetadata.start_localtime)
