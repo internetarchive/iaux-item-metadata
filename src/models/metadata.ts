@@ -109,6 +109,12 @@ export class Metadata {
       : undefined;
   }
 
+  @Memoize() get contact(): StringField | undefined {
+    return this.rawMetadata.contact != null
+      ? new StringField(this.rawMetadata.contact)
+      : undefined;
+  }
+
   @Memoize() get contributor(): StringField | undefined {
     return this.rawMetadata.contributor != null
       ? new StringField(this.rawMetadata.contributor)
@@ -184,6 +190,12 @@ export class Metadata {
   @Memoize() get external_identifier(): StringField | undefined {
     return this.rawMetadata['external-identifier'] != null
       ? new StringField(this.rawMetadata['external-identifier'])
+      : undefined;
+  }
+
+  @Memoize() get external_link(): StringField | undefined {
+    return this.rawMetadata['external-link'] != null
+      ? new StringField(this.rawMetadata['external-link'])
       : undefined;
   }
 
