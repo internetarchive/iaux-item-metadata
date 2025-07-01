@@ -133,6 +133,12 @@ export class Metadata {
       : undefined;
   }
 
+  @Memoize() get credits(): StringField | undefined {
+    return this.rawMetadata.credits != null
+      ? new StringField(this.rawMetadata.credits)
+      : undefined;
+  }
+
   @Memoize() get collection_layout(): StringField | undefined {
     return this.rawMetadata.collection_layout != null
       ? new StringField(this.rawMetadata.collection_layout)
@@ -325,9 +331,21 @@ export class Metadata {
       : undefined;
   }
 
+  @Memoize() get paginated(): BooleanField | undefined {
+    return this.rawMetadata.paginated != null
+      ? new BooleanField(this.rawMetadata.paginated)
+      : undefined;
+  }
+
   @Memoize() get partner(): StringField | undefined {
     return this.rawMetadata.partner != null
       ? new StringField(this.rawMetadata.partner)
+      : undefined;
+  }
+
+  @Memoize() get post_text(): StringField | undefined {
+    return this.rawMetadata.post_text != null
+      ? new StringField(this.rawMetadata.post_text)
       : undefined;
   }
 
@@ -377,6 +395,18 @@ export class Metadata {
   @Memoize() get scanner(): StringField | undefined {
     return this.rawMetadata.scanner != null
       ? new StringField(this.rawMetadata.scanner)
+      : undefined;
+  }
+
+  @Memoize() get segments(): StringField | undefined {
+    return this.rawMetadata.segments != null
+      ? new StringField(this.rawMetadata.segments)
+      : undefined;
+  }
+
+  @Memoize() get shotlist(): StringField | undefined {
+    return this.rawMetadata.shotlist != null
+      ? new StringField(this.rawMetadata.shotlist)
       : undefined;
   }
 
