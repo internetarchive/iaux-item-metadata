@@ -133,7 +133,7 @@ export class Metadata {
       : undefined;
   }
 
-  @Memoize() get creatorAltScript(): StringField | undefined {
+  @Memoize() get creator_alt_script(): StringField | undefined {
     return this.rawMetadata['creator-alt-script'] != null
       ? new StringField(this.rawMetadata['creator-alt-script'])
       : undefined;
@@ -193,7 +193,7 @@ export class Metadata {
       : undefined;
   }
 
-  @Memoize() get externalLink(): StringField | undefined {
+  @Memoize() get external_link(): StringField | undefined {
     return this.rawMetadata['external-link'] != null
       ? new StringField(this.rawMetadata['external-link'])
       : undefined;
@@ -391,7 +391,7 @@ export class Metadata {
       : undefined;
   }
 
-  @Memoize() get rightsHolder(): StringField | undefined {
+  @Memoize() get rights_holder(): StringField | undefined {
     const value =
       this.rawMetadata['rights-holder'] ?? this.rawMetadata.rights_holder;
 
@@ -470,7 +470,7 @@ export class Metadata {
       : undefined;
   }
 
-  @Memoize() get titleAltScript(): StringField | undefined {
+  @Memoize() get title_alt_script(): StringField | undefined {
     return this.rawMetadata['title-alt-script'] != null
       ? new StringField(this.rawMetadata['title-alt-script'])
       : undefined;
