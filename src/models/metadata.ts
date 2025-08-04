@@ -193,7 +193,7 @@ export class Metadata {
       : undefined;
   }
 
-  @Memoize() get external_link(): StringField | undefined {
+  @Memoize() get externalLink(): StringField | undefined {
     return this.rawMetadata['external-link'] != null
       ? new StringField(this.rawMetadata['external-link'])
       : undefined;
