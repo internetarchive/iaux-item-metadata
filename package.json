@@ -7,7 +7,7 @@
   },
   "license": "AGPL-3.0-only",
   "author": "Internet Archive",
-  "version": "1.0.5-webdev-7573.4",
+  "version": "1.0.5",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "scripts": {
@@ -25,7 +25,7 @@
     "ghpages:generate": "gh-pages -t -d ghpages -m \"Build for $(git log --pretty=format:\"%h %an %ai %s\" -n1) [skip ci]\""
   },
   "dependencies": {
-    "@internetarchive/field-parsers": "^0.1.4",
+    "@internetarchive/field-parsers": "^1.0.0",
     "typescript-memoize": "^1.1.1"
   },
   "devDependencies": {
