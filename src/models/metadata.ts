@@ -109,6 +109,12 @@ export class Metadata {
       : undefined;
   }
 
+  @Memoize() get contact(): StringField | undefined {
+    return this.rawMetadata.contact != null
+      ? new StringField(this.rawMetadata.contact)
+      : undefined;
+  }
+
   @Memoize() get contributor(): StringField | undefined {
     return this.rawMetadata.contributor != null
       ? new StringField(this.rawMetadata.contributor)
@@ -124,6 +130,18 @@ export class Metadata {
   @Memoize() get creator(): StringField | undefined {
     return this.rawMetadata.creator != null
       ? new StringField(this.rawMetadata.creator)
+      : undefined;
+  }
+
+  @Memoize() get creator_alt_script(): StringField | undefined {
+    return this.rawMetadata['creator-alt-script'] != null
+      ? new StringField(this.rawMetadata['creator-alt-script'])
+      : undefined;
+  }
+
+  @Memoize() get credits(): StringField | undefined {
+    return this.rawMetadata.credits != null
+      ? new StringField(this.rawMetadata.credits)
       : undefined;
   }
 
@@ -172,6 +190,12 @@ export class Metadata {
   @Memoize() get external_identifier(): StringField | undefined {
     return this.rawMetadata['external-identifier'] != null
       ? new StringField(this.rawMetadata['external-identifier'])
+      : undefined;
+  }
+
+  @Memoize() get external_link(): StringField | undefined {
+    return this.rawMetadata['external-link'] != null
+      ? new StringField(this.rawMetadata['external-link'])
       : undefined;
   }
 
@@ -238,6 +262,12 @@ export class Metadata {
   @Memoize() get length(): DurationField | undefined {
     return this.rawMetadata.length != null
       ? new DurationField(this.rawMetadata.length)
+      : undefined;
+  }
+
+  @Memoize() get licenseurl(): StringField | undefined {
+    return this.rawMetadata.licenseurl != null
+      ? new StringField(this.rawMetadata.licenseurl)
       : undefined;
   }
 
@@ -313,9 +343,21 @@ export class Metadata {
       : undefined;
   }
 
+  @Memoize() get paginated(): BooleanField | undefined {
+    return this.rawMetadata.paginated != null
+      ? new BooleanField(this.rawMetadata.paginated)
+      : undefined;
+  }
+
   @Memoize() get partner(): StringField | undefined {
     return this.rawMetadata.partner != null
       ? new StringField(this.rawMetadata.partner)
+      : undefined;
+  }
+
+  @Memoize() get post_text(): StringField | undefined {
+    return this.rawMetadata.post_text != null
+      ? new StringField(this.rawMetadata.post_text)
       : undefined;
   }
 
@@ -343,6 +385,19 @@ export class Metadata {
       : undefined;
   }
 
+  @Memoize() get rights(): StringField | undefined {
+    return this.rawMetadata.rights != null
+      ? new StringField(this.rawMetadata.rights)
+      : undefined;
+  }
+
+  @Memoize() get rights_holder(): StringField | undefined {
+    const value =
+      this.rawMetadata['rights-holder'] ?? this.rawMetadata.rights_holder;
+
+    return value != null ? new StringField(value) : undefined;
+  }
+
   @Memoize() get runtime(): DurationField | undefined {
     return this.rawMetadata.runtime != null
       ? new DurationField(this.rawMetadata.runtime)
@@ -355,9 +410,27 @@ export class Metadata {
       : undefined;
   }
 
+  @Memoize() get segments(): StringField | undefined {
+    return this.rawMetadata.segments != null
+      ? new StringField(this.rawMetadata.segments)
+      : undefined;
+  }
+
+  @Memoize() get shotlist(): StringField | undefined {
+    return this.rawMetadata.shotlist != null
+      ? new StringField(this.rawMetadata.shotlist)
+      : undefined;
+  }
+
   @Memoize() get source(): StringField | undefined {
     return this.rawMetadata.source != null
       ? new StringField(this.rawMetadata.source)
+      : undefined;
+  }
+
+  @Memoize() get sponsor(): StringField | undefined {
+    return this.rawMetadata.sponsor != null
+      ? new StringField(this.rawMetadata.sponsor)
       : undefined;
   }
 
@@ -394,6 +467,12 @@ export class Metadata {
   @Memoize() get title(): StringField | undefined {
     return this.rawMetadata.title != null
       ? new StringField(this.rawMetadata.title)
+      : undefined;
+  }
+
+  @Memoize() get title_alt_script(): StringField | undefined {
+    return this.rawMetadata['title-alt-script'] != null
+      ? new StringField(this.rawMetadata['title-alt-script'])
       : undefined;
   }
 
