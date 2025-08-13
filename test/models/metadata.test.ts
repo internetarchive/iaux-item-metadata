@@ -1,6 +1,7 @@
 import { expect } from '@open-wc/testing';
 
 import { Metadata } from '../../src/models/metadata';
+import { StringField } from '../../src/models/metadata-fields/field-types/string';
 
 describe('Metadata', () => {
   it('properly instantiates metadata with no data', async () => {
@@ -103,5 +104,34 @@ describe('Metadata', () => {
     const metadata = new Metadata(json);
     expect(metadata.description).to.not.be.undefined;
     expect(metadata.description?.value).to.equal('');
+  });
+
+  it('valueFor returns parsed MetadataField object when available', async () => {
+    const json = { identifier: 'foo', description: 'beep boop bop' };
+    const metadata = new Metadata(json);
+    const value = metadata.valueFor('description');
+    expect(value).to.be.exist;
+    expect(value?.value).to.equal('beep boop bop');
+  });
+
+  it('valueFor returns StringField when pulled from rawMetadata', async () => {
+    const json = { identifier: 'foo', beepers: 'beep boop bop' };
+    const metadata = new Metadata(json);
+    expect(metadata.valueFor('description')).to.be.undefined;
+
+    const value = metadata.valueFor('beepers');
+    expect(value).to.be.exist;
+    expect(value).to.be.instanceOf(StringField);
+    expect(value?.value).to.equal('beep boop bop');
+  });
+
+  it('valueFor returns array StringField when parsed unavailable', async () => {
+    const json = { identifier: 'foo', beepers: ['beep', 'boop', 'bop'] };
+    const metadata = new Metadata(json);
+    expect(metadata.valueFor('description')).to.be.undefined;
+    const value = metadata.valueFor('beepers');
+    expect(value).to.be.exist;
+    expect(value?.values).to.deep.equal(['beep', 'boop', 'bop']);
+    expect(value?.value).to.equal('beep');
   });
 });

@@ -8,6 +8,10 @@ import { PageProgressionField } from './metadata-fields/field-types/page-progres
 import { ByteField } from './metadata-fields/field-types/byte';
 import { MediaTypeField } from './metadata-fields/field-types/mediatype';
 import { StringListField } from './metadata-fields/field-types/list';
+import {
+  MetadataFieldInterface,
+  MetadataRawValue,
+} from './metadata-fields/metadata-field';
 
 /**
  * Metadata is an expansive model that describes an Item.
@@ -534,6 +538,22 @@ export class Metadata {
     return this.rawMetadata.year != null
       ? new NumberField(this.rawMetadata.year)
       : undefined;
+  }
+
+  @Memoize() valueFor<T>(
+    key: string | keyof Metadata,
+  ): MetadataFieldInterface<T> | undefined {
+    const value = this[key as keyof Metadata] as
+      | MetadataFieldInterface<T>
+      | undefined;
+    if (value) return value;
+
+    const rawValue = this.rawMetadata[key] as MetadataRawValue | undefined;
+    if (rawValue) {
+      return new StringField(rawValue) as unknown as MetadataFieldInterface<T>;
+    }
+
+    return undefined;
   }
 
   /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
