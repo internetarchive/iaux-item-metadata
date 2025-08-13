@@ -540,6 +540,19 @@ export class Metadata {
       : undefined;
   }
 
+  /**
+   * Get all metadata keys.
+   */
+  get allMetadataKeys(): string[] {
+    return Object.keys(this.rawMetadata);
+  }
+
+  /**
+   * Get the value of a metadata field.
+   *
+   * This method will check for the defined Metadata fields and if none found
+   * it will return a StringField from the rawMetadata
+   */
   @Memoize() valueFor<T>(
     key: string | keyof Metadata,
   ): MetadataFieldInterface<T> | undefined {

@@ -114,6 +114,14 @@ describe('Metadata', () => {
     expect(value?.value).to.equal('beep boop bop');
   });
 
+  it('valueFor returns parsed MetadataField object array when available', async () => {
+    const json = { identifier: 'foo', description: ['beep', 'boop', 'bop'] };
+    const metadata = new Metadata(json);
+    const value = metadata.valueFor('description');
+    expect(value).to.be.exist;
+    expect(value?.values).to.deep.equal(['beep', 'boop', 'bop']);
+  });
+
   it('valueFor returns StringField when pulled from rawMetadata', async () => {
     const json = { identifier: 'foo', beepers: 'beep boop bop' };
     const metadata = new Metadata(json);
@@ -128,7 +136,6 @@ describe('Metadata', () => {
   it('valueFor returns array StringField when parsed unavailable', async () => {
     const json = { identifier: 'foo', beepers: ['beep', 'boop', 'bop'] };
     const metadata = new Metadata(json);
-    expect(metadata.valueFor('description')).to.be.undefined;
     const value = metadata.valueFor('beepers');
     expect(value).to.be.exist;
     expect(value?.values).to.deep.equal(['beep', 'boop', 'bop']);
