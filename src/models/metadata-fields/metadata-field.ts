@@ -43,6 +43,14 @@ export interface MetadataFieldInterface<T> {
    * @memberof MetadataField
    */
   values: T[];
+
+  /**
+   * Whether the field has multiple values or not.
+   *
+   * @type {boolean}
+   * @memberof MetadataField
+   */
+  hasMultipleValues: boolean;
 }
 
 /**
@@ -86,6 +94,11 @@ export class MetadataField<
   /** @inheritdoc */
   @Memoize() get value(): Type | undefined {
     return this.values[0];
+  }
+
+  /** @inheritdoc */
+  @Memoize() get hasMultipleValues(): boolean {
+    return this.values.length > 1;
   }
 
   constructor(parser: FieldParserInterfaceType, rawValue: MetadataRawValue) {
