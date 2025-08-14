@@ -578,20 +578,16 @@ export class Metadata {
     // so check both the dashed and snake versions
     // ie. 'creator-alt-script' is easier to access as 'creator_alt_script'
     const normalizedKey = key.replace(/-/g, '_');
-    if (normalizedKey === key) {
-      return this._valueFor(key);
-    } else {
-      return this._valueFor(normalizedKey) ?? this._valueFor(key);
-    }
+    return this._valueFor(normalizedKey) ?? this._valueFor(key);
   }
 
   @Memoize() private _valueFor(
     key: string,
   ): MetadataFieldInterface<unknown> | undefined {
-    const value = this[key as keyof Metadata] as
+    const field = this[key as keyof Metadata] as
       | MetadataFieldInterface<unknown>
       | undefined;
-    if (value) return value;
+    if (field) return field;
 
     const rawValue = this.rawMetadata[key];
     if (rawValue != null) {
