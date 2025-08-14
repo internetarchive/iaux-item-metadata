@@ -17,6 +17,7 @@ describe('Metadata Field', () => {
     expect(metadataField.rawValue).to.equal('foo');
     expect(metadataField.value).to.equal('foo');
     expect(metadataField.values).to.deep.equal(['foo']);
+    expect(metadataField.hasMultipleValues).to.be.false;
   });
 
   it('can be properly instantiated with array value', () => {
@@ -33,6 +34,7 @@ describe('Metadata Field', () => {
     expect(metadataField.rawValue).to.deep.equal(['foo', 'bar', 'baz']);
     expect(metadataField.value).to.equal('foo');
     expect(metadataField.values).to.deep.equal(['foo', 'bar', 'baz']);
+    expect(metadataField.hasMultipleValues).to.be.true;
   });
 
   it('properly casts values to expected parser type for single values', () => {
