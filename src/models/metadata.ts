@@ -8,10 +8,7 @@ import { PageProgressionField } from './metadata-fields/field-types/page-progres
 import { ByteField } from './metadata-fields/field-types/byte';
 import { MediaTypeField } from './metadata-fields/field-types/mediatype';
 import { StringListField } from './metadata-fields/field-types/list';
-import {
-  MetadataFieldInterface,
-  MetadataRawValue,
-} from './metadata-fields/metadata-field';
+import { MetadataFieldInterface } from './metadata-fields/metadata-field';
 
 /**
  * Metadata is an expansive model that describes an Item.
