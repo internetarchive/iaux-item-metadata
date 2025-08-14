@@ -543,27 +543,62 @@ export class Metadata {
   /**
    * Get all metadata keys.
    */
-  get allMetadataKeys(): string[] {
+  @Memoize() get allMetadataKeys(): string[] {
     return Object.keys(this.rawMetadata);
+  }
+
+  /**
+   * Get all metadata fields.
+   */
+  @Memoize() get allMetadata(): Record<
+    string,
+    MetadataFieldInterface<unknown>
+  > {
+    return this.allMetadataKeys.reduce(
+      (acc, key) => {
+        const value = this.valueFor(key);
+        if (value) {
+          acc[key] = value;
+        }
+        return acc;
+      },
+      {} as Record<string, MetadataFieldInterface<unknown>>,
+    );
   }
 
   /**
    * Get the value of a metadata field.
    *
-   * This method will check for the defined Metadata fields and if none found
-   * it will return a StringField from the rawMetadata
+   * This method will check for the modeled Metadata fields and if none found
+   * it will return a StringField from the rawMetadata.
+   *
+   * This also checks for dashed or snake-cased differences in the key names.
    */
-  @Memoize() valueFor<T>(
-    key: string | keyof Metadata,
-  ): MetadataFieldInterface<T> | undefined {
+  @Memoize() valueFor(
+    key: string,
+  ): MetadataFieldInterface<unknown> | undefined {
+    // dashed field names get normalized to use snake case
+    // so check both the dashed and snake versions
+    // ie. 'creator-alt-script' is easier to access as 'creator_alt_script'
+    const normalizedKey = key.replace(/-/g, '_');
+    if (normalizedKey === key) {
+      return this._valueFor(key);
+    } else {
+      return this._valueFor(normalizedKey) ?? this._valueFor(key);
+    }
+  }
+
+  @Memoize() private _valueFor(
+    key: string,
+  ): MetadataFieldInterface<unknown> | undefined {
     const value = this[key as keyof Metadata] as
-      | MetadataFieldInterface<T>
+      | MetadataFieldInterface<unknown>
       | undefined;
     if (value) return value;
 
-    const rawValue = this.rawMetadata[key] as MetadataRawValue | undefined;
+    const rawValue = this.rawMetadata[key];
     if (rawValue) {
-      return new StringField(rawValue) as unknown as MetadataFieldInterface<T>;
+      return new StringField(rawValue);
     }
 
     return undefined;
