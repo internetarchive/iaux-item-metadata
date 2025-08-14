@@ -174,6 +174,14 @@ describe('Metadata', () => {
       expect(snakeValue).to.be.undefined;
       expect(dashValue).to.be.undefined;
     });
+
+    it('valueFor returns StringField for falsey value', async () => {
+      const json = { identifier: 'foo', beepboop: 0 };
+      const metadata = new Metadata(json);
+      const value = metadata.valueFor('beepboop');
+      expect(value).to.exist;
+      expect(value?.value).to.equal('0');
+    });
   });
 
   describe('allMetadataKeys', () => {

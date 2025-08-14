@@ -594,7 +594,7 @@ export class Metadata {
     if (value) return value;
 
     const rawValue = this.rawMetadata[key];
-    if (rawValue) {
+    if (rawValue != null) {
       return new StringField(rawValue);
     }
 
