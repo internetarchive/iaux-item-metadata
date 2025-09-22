@@ -1,5 +1,9 @@
 // top level models
+export { File } from './src/models/file';
 export { Metadata } from './src/models/metadata';
+export { Review } from './src/models/review';
+export { SpeechMusicASREntry } from './src/models/speech-music-asr-entry';
+export { Task } from './src/models/task';
 
 // metadata field types
 export { BooleanField } from './src/models/metadata-fields/field-types/boolean';
@@ -8,8 +12,8 @@ export { DateField } from './src/models/metadata-fields/field-types/date';
 export { DurationField } from './src/models/metadata-fields/field-types/duration';
 export {
   ListField,
-  StringListField,
   NumberListField,
+  StringListField,
 } from './src/models/metadata-fields/field-types/list';
 export { MediaTypeField } from './src/models/metadata-fields/field-types/mediatype';
 export { NumberField } from './src/models/metadata-fields/field-types/number';
@@ -18,7 +22,7 @@ export { StringField } from './src/models/metadata-fields/field-types/string';
 
 // base metadata field models
 export {
+  MetadataField,
   MetadataFieldInterface,
   MetadataRawValue,
-  MetadataField,
 } from './src/models/metadata-fields/metadata-field';
