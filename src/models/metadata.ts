@@ -8,6 +8,7 @@ import { PageProgressionField } from './metadata-fields/field-types/page-progres
 import { ByteField } from './metadata-fields/field-types/byte';
 import { MediaTypeField } from './metadata-fields/field-types/mediatype';
 import { StringListField } from './metadata-fields/field-types/list';
+import { MetadataFieldInterface } from './metadata-fields/metadata-field';
 
 /**
  * Metadata is an expansive model that describes an Item.
@@ -534,6 +535,66 @@ export class Metadata {
     return this.rawMetadata.year != null
       ? new NumberField(this.rawMetadata.year)
       : undefined;
+  }
+
+  /**
+   * Get all metadata keys.
+   */
+  @Memoize() get allMetadataKeys(): string[] {
+    return Object.keys(this.rawMetadata);
+  }
+
+  /**
+   * Get all metadata fields.
+   */
+  @Memoize() get allMetadata(): Record<
+    string,
+    MetadataFieldInterface<unknown>
+  > {
+    return this.allMetadataKeys.reduce(
+      (acc, key) => {
+        const value = this.valueFor(key);
+        if (value) {
+          acc[key] = value;
+        }
+        return acc;
+      },
+      {} as Record<string, MetadataFieldInterface<unknown>>,
+    );
+  }
+
+  /**
+   * Get the value of a metadata field.
+   *
+   * This method will check for the modeled Metadata fields and if none found
+   * it will return a StringField from the rawMetadata.
+   *
+   * This also checks for dashed or snake-cased differences in the key names.
+   */
+  @Memoize() valueFor(
+    key: string,
+  ): MetadataFieldInterface<unknown> | undefined {
+    // dashed field names get normalized to use snake case
+    // so check both the dashed and snake versions
+    // ie. 'creator-alt-script' is easier to access as 'creator_alt_script'
+    const normalizedKey = key.replace(/-/g, '_');
+    return this._valueFor(normalizedKey) ?? this._valueFor(key);
+  }
+
+  @Memoize() private _valueFor(
+    key: string,
+  ): MetadataFieldInterface<unknown> | undefined {
+    const field = this[key as keyof Metadata] as
+      | MetadataFieldInterface<unknown>
+      | undefined;
+    if (field) return field;
+
+    const rawValue = this.rawMetadata[key];
+    if (rawValue != null) {
+      return new StringField(rawValue);
+    }
+
+    return undefined;
   }
 
   /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
