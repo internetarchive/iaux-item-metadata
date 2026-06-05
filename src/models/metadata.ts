@@ -385,6 +385,17 @@ export class Metadata {
       : undefined;
   }
 
+  /**
+   * Whether reviews may be added to this item. One of `true` (enabled),
+   * `none` (disabled), or `frozen` (existing reviews shown, no new ones).
+   * Absent for most items, which means reviews are enabled.
+   */
+  @Memoize() get reviews_allowed(): StringField | undefined {
+    return this.rawMetadata['reviews-allowed'] != null
+      ? new StringField(this.rawMetadata['reviews-allowed'])
+      : undefined;
+  }
+
   @Memoize() get rights(): StringField | undefined {
     return this.rawMetadata.rights != null
       ? new StringField(this.rawMetadata.rights)
