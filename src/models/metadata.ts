@@ -8,6 +8,15 @@ import { PageProgressionField } from './metadata-fields/field-types/page-progres
 import { ByteField } from './metadata-fields/field-types/byte';
 import { MediaTypeField } from './metadata-fields/field-types/mediatype';
 import { StringListField } from './metadata-fields/field-types/list';
+import { EnumField, EnumParser } from './metadata-fields/field-types/enum';
+
+/** Allowed values for the `reviews-allowed` item metadata field. */
+export type ReviewsAllowed = 'true' | 'none' | 'frozen';
+const reviewsAllowedParser = new EnumParser<ReviewsAllowed>([
+  'true',
+  'none',
+  'frozen',
+]);
 
 /**
  * Metadata is an expansive model that describes an Item.
@@ -390,9 +399,12 @@ export class Metadata {
    * `none` (disabled), or `frozen` (existing reviews shown, no new ones).
    * Absent for most items, which means reviews are enabled.
    */
-  @Memoize() get reviews_allowed(): StringField | undefined {
+  @Memoize() get reviews_allowed(): EnumField<ReviewsAllowed> | undefined {
     return this.rawMetadata['reviews-allowed'] != null
-      ? new StringField(this.rawMetadata['reviews-allowed'])
+      ? new EnumField<ReviewsAllowed>(
+          this.rawMetadata['reviews-allowed'],
+          reviewsAllowedParser,
+        )
       : undefined;
   }
 
