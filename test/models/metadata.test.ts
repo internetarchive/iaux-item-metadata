@@ -49,6 +49,30 @@ describe('Metadata', () => {
     expect(metadata.external_identifier?.values).to.deep.equal(['abc', '123']);
   });
 
+  it('properly instantiates metadata with reviews-allowed', async () => {
+    const json = { identifier: 'foo', 'reviews-allowed': 'frozen' };
+    const metadata = new Metadata(json);
+    expect(metadata.reviews_allowed?.value).to.equal('frozen');
+  });
+
+  it('accepts all valid reviews-allowed values', async () => {
+    for (const value of ['true', 'none', 'frozen']) {
+      const metadata = new Metadata({
+        identifier: 'foo',
+        'reviews-allowed': value,
+      });
+      expect(metadata.reviews_allowed?.value).to.equal(value);
+    }
+  });
+
+  it('rejects an invalid reviews-allowed value', async () => {
+    const json = { identifier: 'foo', 'reviews-allowed': 'maybe' };
+    const metadata = new Metadata(json);
+    expect(metadata.reviews_allowed?.value).to.be.undefined;
+    // the raw value is still preserved for inspection
+    expect(metadata.reviews_allowed?.rawValue).to.equal('maybe');
+  });
+
   it('returns undefined for fields that have not been provided', async () => {
     const json = { identifier: 'foo', collection: ['abc', '123'] };
     const metadata = new Metadata(json);

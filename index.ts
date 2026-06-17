@@ -1,6 +1,7 @@
 // top level models
 export { File } from './src/models/file';
 export { Metadata } from './src/models/metadata';
+export type { ReviewsAllowed } from './src/models/metadata';
 export { Review } from './src/models/review';
 export { SpeechMusicASREntry } from './src/models/speech-music-asr-entry';
 export { Task, TaskColor, TaskStatus } from './src/models/task';
@@ -10,6 +11,10 @@ export { BooleanField } from './src/models/metadata-fields/field-types/boolean';
 export { ByteField } from './src/models/metadata-fields/field-types/byte';
 export { DateField } from './src/models/metadata-fields/field-types/date';
 export { DurationField } from './src/models/metadata-fields/field-types/duration';
+export {
+  EnumField,
+  EnumParser,
+} from './src/models/metadata-fields/field-types/enum';
 export {
   ListField,
   NumberListField,
