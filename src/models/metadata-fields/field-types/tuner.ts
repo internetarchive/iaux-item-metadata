@@ -8,12 +8,12 @@ import { MetadataField, MetadataRawValue } from '../metadata-field';
  * A parsed broadcast tuner setting, e.g. `"Channel 93 (639 MHz)"` becomes
  * `{ channel: 93, frequencyMhz: 639 }`.
  */
-export interface Tuner {
+export type Tuner = {
   /** The channel number, e.g. `93` in `"Channel 93 (639 MHz)"`. */
-  channel: number;
+  readonly channel: number;
   /** The center frequency in MHz, when present, e.g. `639`. */
-  frequencyMhz?: number;
-}
+  readonly frequencyMhz?: number;
+};
 
 /**
  * Parses a tuner string of the form `Channel <n>` with an optional

@@ -8,14 +8,14 @@ import { MetadataField, MetadataRawValue } from '../metadata-field';
  * A parsed display aspect ratio, e.g. `"16:9"` becomes
  * `{ width: 16, height: 9, decimal: 1.777… }`.
  */
-export interface AspectRatio {
+export type AspectRatio = {
   /** The ratio's antecedent, e.g. `16` in `"16:9"`. */
-  width: number;
+  readonly width: number;
   /** The ratio's consequent, e.g. `9` in `"16:9"`. */
-  height: number;
+  readonly height: number;
   /** The ratio as a decimal (`width / height`), e.g. `1.777…` for `"16:9"`. */
-  decimal: number;
-}
+  readonly decimal: number;
+};
 
 /**
  * Parses an aspect ratio expressed as two numbers separated by `:`, `/`, or `x`

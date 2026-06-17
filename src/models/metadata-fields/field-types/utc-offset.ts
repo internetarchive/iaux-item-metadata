@@ -8,17 +8,17 @@ import { MetadataField, MetadataRawValue } from '../metadata-field';
  * A parsed UTC offset. The raw value is encoded as `±HHMM` (e.g. `"-800"` for
  * eight hours behind UTC, `"+0530"` for five and a half hours ahead).
  */
-export interface UtcOffset {
+export type UtcOffset = {
   /** The signed hour component, e.g. `-8` for `"-800"`. */
-  hours: number;
+  readonly hours: number;
   /** The minute component in the range `0`–`59`, e.g. `30` for `"+0530"`. */
-  minutes: number;
+  readonly minutes: number;
   /**
    * The full offset in signed minutes — the authoritative value for
    * comparisons and arithmetic, e.g. `-480` for `"-800"`, `330` for `"+0530"`.
    */
-  totalMinutes: number;
-}
+  readonly totalMinutes: number;
+};
 
 /**
  * Parses a `±HHMM` UTC offset (an optional sign, one or two hour digits, and
