@@ -59,4 +59,14 @@ describe('File', () => {
     expect(file.mtime instanceof Date).to.be.true;
     expect(file.mtime?.getTime()).to.equal(1639591034000);
   });
+
+  it('parses bitrate as a number', async () => {
+    const file = new File({ name: 'foo.mpeg', bitrate: '825000' });
+    expect(file.bitrate).to.equal(825000);
+  });
+
+  it('exposes the private flag', async () => {
+    const file = new File({ name: 'foo.mpeg', private: 'true' });
+    expect(file.private).to.equal('true');
+  });
 });

@@ -105,6 +105,16 @@ export class File {
     return this.rawValue.album;
   }
 
+  @Memoize() get bitrate(): number | undefined {
+    return this.rawValue.bitrate != null
+      ? NumberParser.shared.parseValue(this.rawValue.bitrate)
+      : undefined;
+  }
+
+  get private(): string | undefined {
+    return this.rawValue.private;
+  }
+
   /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
   constructor(json: Record<string, any> = {}) {
     this.rawValue = json;
