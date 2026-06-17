@@ -65,8 +65,9 @@ describe('File', () => {
     expect(file.bitrate).to.equal(825000);
   });
 
-  it('exposes the private flag', async () => {
-    const file = new File({ name: 'foo.mpeg', private: 'true' });
-    expect(file.private).to.equal('true');
+  it('parses the private flag as a boolean', async () => {
+    expect(new File({ name: 'foo.mpeg', private: 'true' }).private).to.be.true;
+    expect(new File({ name: 'foo.mpeg', private: 'false' }).private).to.be
+      .false;
   });
 });

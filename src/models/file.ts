@@ -1,5 +1,6 @@
 import { Memoize } from 'typescript-memoize';
 import {
+  BooleanParser,
   Byte,
   ByteParser,
   Duration,
@@ -111,8 +112,10 @@ export class File {
       : undefined;
   }
 
-  get private(): string | undefined {
-    return this.rawValue.private;
+  @Memoize() get private(): boolean | undefined {
+    return this.rawValue.private != null
+      ? BooleanParser.shared.parseValue(this.rawValue.private)
+      : undefined;
   }
 
   /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
