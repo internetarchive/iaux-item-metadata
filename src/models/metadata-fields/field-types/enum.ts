@@ -1,4 +1,7 @@
-import type { FieldParserInterface } from '@internetarchive/field-parsers';
+import type {
+  FieldParserInterface,
+  FieldParserRawValue,
+} from '@internetarchive/field-parsers';
 import { MetadataField, MetadataRawValue } from '../metadata-field';
 
 /**
@@ -14,7 +17,7 @@ import { MetadataField, MetadataRawValue } from '../metadata-field';
 export class EnumParser<T extends string> implements FieldParserInterface<T> {
   constructor(private readonly allowed: readonly T[]) {}
 
-  parseValue(rawValue: string | number | boolean): T | undefined {
+  parseValue(rawValue: FieldParserRawValue): T | undefined {
     return typeof rawValue === 'string' &&
       (this.allowed as readonly string[]).includes(rawValue)
       ? (rawValue as T)
