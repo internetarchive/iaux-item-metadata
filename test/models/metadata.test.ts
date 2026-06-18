@@ -19,14 +19,7 @@ describe('Metadata', () => {
     const json = { identifier: 'foo', addeddate: '2021-05-20T13:37:15Z' };
     const metadata = new Metadata(json);
 
-    const expected = new Date();
-    expected.setHours(13);
-    expected.setMinutes(37);
-    expected.setSeconds(15);
-    expected.setMilliseconds(0);
-    expected.setMonth(4);
-    expected.setDate(20);
-    expected.setFullYear(2021);
+    const expected = new Date(Date.UTC(2021, 4, 20, 13, 37, 15));
 
     expect(metadata.addeddate?.value?.getTime()).to.equal(expected.getTime());
   });
