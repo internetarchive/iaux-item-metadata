@@ -43,7 +43,7 @@ const FIELDS: FieldRow[] = [
 ];
 
 /** A few stable archive.org items demonstrating different metadata shapes. */
-const EXAMPLES = ['gd73-06-10.sbd.hollister.174.sbeok.shnf', 'nasa'];
+const EXAMPLES = ['gd73-06-10.sbd.hollister.174.sbeok.shnf', 'nasa', 'goody'];
 
 /** Render any parsed value (Date, number, string, array, object) as text. */
 function display(value: unknown): string {
