@@ -42,8 +42,19 @@ const FIELDS: FieldRow[] = [
   { label: 'lineage', get: m => m.lineage },
 ];
 
-/** A few stable archive.org items demonstrating different metadata shapes. */
-const EXAMPLES = ['gd73-06-10.sbd.hollister.174.sbeok.shnf', 'nasa', 'goody'];
+/**
+ * A few stable archive.org items demonstrating different metadata shapes.
+ * The last two have multi-value `subject` arrays that exercise the list parser
+ * (StringListField), so their `subject` row shows `.value` (first) diverging
+ * from `.values` (all).
+ */
+const EXAMPLES = [
+  'gd73-06-10.sbd.hollister.174.sbeok.shnf',
+  'nasa',
+  'goody',
+  'eventsounds_pack',
+  'womeningovernmen0000jame',
+];
 
 /** Render any parsed value (Date, number, string, array, object) as text. */
 function display(value: unknown): string {
