@@ -1,6 +1,6 @@
 import {
   PageProgression,
-  PageProgressionParser,
+  PageProgressionParser
 } from '@internetarchive/field-parsers';
 import { MetadataField, MetadataRawValue } from '../metadata-field';
 

@@ -1,4 +1,4 @@
-import { expect } from '@open-wc/testing';
+import { describe, it, expect } from 'vitest';
 
 import { Metadata } from '../../src/models/metadata';
 
@@ -52,7 +52,7 @@ describe('Metadata', () => {
     for (const value of ['true', 'none', 'frozen']) {
       const metadata = new Metadata({
         identifier: 'foo',
-        'reviews-allowed': value,
+        'reviews-allowed': value
       });
       expect(metadata.reviews_allowed?.value).to.equal(value);
     }
@@ -97,7 +97,7 @@ describe('Metadata', () => {
       identifier: 'foo',
       year: 0,
       duration: 0,
-      collection_size: 0,
+      collection_size: 0
     };
     const metadata = new Metadata(json);
     expect(metadata.year).to.not.be.undefined;

@@ -1,6 +1,6 @@
 import type {
   FieldParserInterface,
-  FieldParserRawValue,
+  FieldParserRawValue
 } from '@internetarchive/field-parsers';
 import { MetadataField, MetadataRawValue } from '../metadata-field';
 

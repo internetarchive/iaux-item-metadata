@@ -13,12 +13,12 @@ export { DateField } from './src/models/metadata-fields/field-types/date';
 export { DurationField } from './src/models/metadata-fields/field-types/duration';
 export {
   EnumField,
-  EnumParser,
+  EnumParser
 } from './src/models/metadata-fields/field-types/enum';
 export {
   ListField,
   NumberListField,
-  StringListField,
+  StringListField
 } from './src/models/metadata-fields/field-types/list';
 export { MediaTypeField } from './src/models/metadata-fields/field-types/mediatype';
 export { NumberField } from './src/models/metadata-fields/field-types/number';
@@ -29,5 +29,5 @@ export { StringField } from './src/models/metadata-fields/field-types/string';
 export {
   MetadataField,
   MetadataFieldInterface,
-  MetadataRawValue,
+  MetadataRawValue
 } from './src/models/metadata-fields/metadata-field';

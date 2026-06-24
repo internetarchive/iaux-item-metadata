@@ -1,4 +1,4 @@
-import { expect } from '@open-wc/testing';
+import { describe, it, expect } from 'vitest';
 import { MediaTypeField } from '../../../../src/models/metadata-fields/field-types/mediatype';
 
 describe('MediaTypeField Field', () => {
