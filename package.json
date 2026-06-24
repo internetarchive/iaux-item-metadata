@@ -56,6 +56,9 @@
     "typescript": "^5.9.3",
     "vite": "^6.4.3"
   },
+  "overrides": {
+    "puppeteer-core": "24.2.1"
+  },
   "publishConfig": {
     "access": "public"
   },
