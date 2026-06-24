@@ -49,6 +49,11 @@
     "vite": "^8.1.0",
     "vitest": "^4.1.9"
   },
+  "overrides": {
+    "madge": {
+      "typescript": "$typescript"
+    }
+  },
   "publishConfig": {
     "access": "public"
   },
