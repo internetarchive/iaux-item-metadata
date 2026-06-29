@@ -7,8 +7,15 @@ import { StringField } from './metadata-fields/field-types/string';
 import { PageProgressionField } from './metadata-fields/field-types/page-progression';
 import { ByteField } from './metadata-fields/field-types/byte';
 import { MediaTypeField } from './metadata-fields/field-types/mediatype';
-import { StringListField } from './metadata-fields/field-types/list';
+import {
+  StringListField,
+  NumberListField,
+} from './metadata-fields/field-types/list';
 import { EnumField, EnumParser } from './metadata-fields/field-types/enum';
+import { AspectRatioField } from './metadata-fields/field-types/aspect-ratio';
+import { CompactDateField } from './metadata-fields/field-types/compact-date';
+import { UtcOffsetField } from './metadata-fields/field-types/utc-offset';
+import { TunerField } from './metadata-fields/field-types/tuner';
 
 /** Allowed values for the `reviews-allowed` item metadata field. */
 export type ReviewsAllowed = 'true' | 'none' | 'frozen';
@@ -17,6 +24,14 @@ const reviewsAllowedParser = new EnumParser<ReviewsAllowed>([
   'none',
   'frozen'
 ]);
+
+/** Allowed values for the `sound` item metadata field. */
+export type Sound = 'sound' | 'silent';
+const soundParser = new EnumParser<Sound>(['sound', 'silent']);
+
+/** Allowed values for the `color` item metadata field. */
+export type Color = 'color' | 'b&w';
+const colorParser = new EnumParser<Color>(['color', 'b&w']);
 
 /**
  * Metadata is an expansive model that describes an Item.
@@ -51,9 +66,25 @@ export class Metadata {
     return this.rawMetadata.identifier;
   }
 
+  @Memoize() get access_restricted_item(): BooleanField | undefined {
+    return this.rawMetadata['access-restricted-item'] != null
+      ? new BooleanField(this.rawMetadata['access-restricted-item'])
+      : undefined;
+  }
+
   @Memoize() get addeddate(): DateField | undefined {
     return this.rawMetadata.addeddate != null
       ? new DateField(this.rawMetadata.addeddate)
+      : undefined;
+  }
+
+  /**
+   * The display aspect ratio, e.g. `"4:3"`, parsed into width, height, and a
+   * decimal ratio.
+   */
+  @Memoize() get aspect_ratio(): AspectRatioField | undefined {
+    return this.rawMetadata.aspect_ratio != null
+      ? new AspectRatioField(this.rawMetadata.aspect_ratio)
       : undefined;
   }
 
@@ -72,6 +103,28 @@ export class Metadata {
   @Memoize() get avg_rating(): NumberField | undefined {
     return this.rawMetadata.avg_rating != null
       ? new NumberField(this.rawMetadata.avg_rating)
+      : undefined;
+  }
+
+  @Memoize() get backup_location(): StringField | undefined {
+    return this.rawMetadata.backup_location != null
+      ? new StringField(this.rawMetadata.backup_location)
+      : undefined;
+  }
+
+  @Memoize() get ccnum(): StringField | undefined {
+    return this.rawMetadata.ccnum != null
+      ? new StringField(this.rawMetadata.ccnum)
+      : undefined;
+  }
+
+  /**
+   * Whether the broadcast included closed captioning. The raw `"yes"`/`"no"`
+   * value is parsed to a boolean.
+   */
+  @Memoize() get closed_captioning(): BooleanField | undefined {
+    return this.rawMetadata.closed_captioning != null
+      ? new BooleanField(this.rawMetadata.closed_captioning)
       : undefined;
   }
 
@@ -115,6 +168,12 @@ export class Metadata {
   @Memoize() get collection_size(): ByteField | undefined {
     return this.rawMetadata.collection_size != null
       ? new ByteField(this.rawMetadata.collection_size)
+      : undefined;
+  }
+
+  @Memoize() get color(): EnumField<Color> | undefined {
+    return this.rawMetadata.color != null
+      ? new EnumField<Color>(this.rawMetadata.color, colorParser)
       : undefined;
   }
 
@@ -220,6 +279,24 @@ export class Metadata {
       : undefined;
   }
 
+  @Memoize() get frames_per_second(): NumberField | undefined {
+    return this.rawMetadata.frames_per_second != null
+      ? new NumberField(this.rawMetadata.frames_per_second)
+      : undefined;
+  }
+
+  @Memoize() get identifier_access(): StringField | undefined {
+    return this.rawMetadata['identifier-access'] != null
+      ? new StringField(this.rawMetadata['identifier-access'])
+      : undefined;
+  }
+
+  @Memoize() get imagecount(): NumberField | undefined {
+    return this.rawMetadata.imagecount != null
+      ? new NumberField(this.rawMetadata.imagecount)
+      : undefined;
+  }
+
   @Memoize() get indexdate(): DateField | undefined {
     return this.rawMetadata.indexdate != null
       ? new DateField(this.rawMetadata.indexdate)
@@ -304,6 +381,18 @@ export class Metadata {
       : undefined;
   }
 
+  @Memoize() get mpeg_program(): NumberField | undefined {
+    return this.rawMetadata.mpeg_program != null
+      ? new NumberField(this.rawMetadata.mpeg_program)
+      : undefined;
+  }
+
+  @Memoize() get next_item(): StringField | undefined {
+    return this.rawMetadata.next_item != null
+      ? new StringField(this.rawMetadata.next_item)
+      : undefined;
+  }
+
   @Memoize() get noindex(): BooleanField | undefined {
     return this.rawMetadata.noindex != null
       ? new BooleanField(this.rawMetadata.noindex)
@@ -376,6 +465,18 @@ export class Metadata {
       : undefined;
   }
 
+  @Memoize() get previous_item(): StringField | undefined {
+    return this.rawMetadata.previous_item != null
+      ? new StringField(this.rawMetadata.previous_item)
+      : undefined;
+  }
+
+  @Memoize() get program(): StringField | undefined {
+    return this.rawMetadata.program != null
+      ? new StringField(this.rawMetadata.program)
+      : undefined;
+  }
+
   @Memoize() get publicdate(): DateField | undefined {
     return this.rawMetadata.publicdate != null
       ? new DateField(this.rawMetadata.publicdate)
@@ -427,9 +528,25 @@ export class Metadata {
       : undefined;
   }
 
+  /**
+   * The scan/capture date. Parses compact `YYYYMMDD[HHMMSS]` timestamps in
+   * addition to standard date strings.
+   */
+  @Memoize() get scandate(): CompactDateField | undefined {
+    return this.rawMetadata.scandate != null
+      ? new CompactDateField(this.rawMetadata.scandate)
+      : undefined;
+  }
+
   @Memoize() get scanner(): StringField | undefined {
     return this.rawMetadata.scanner != null
       ? new StringField(this.rawMetadata.scanner)
+      : undefined;
+  }
+
+  @Memoize() get scanningcenter(): StringField | undefined {
+    return this.rawMetadata.scanningcenter != null
+      ? new StringField(this.rawMetadata.scanningcenter)
       : undefined;
   }
 
@@ -445,9 +562,27 @@ export class Metadata {
       : undefined;
   }
 
+  @Memoize() get sound(): EnumField<Sound> | undefined {
+    return this.rawMetadata.sound != null
+      ? new EnumField<Sound>(this.rawMetadata.sound, soundParser)
+      : undefined;
+  }
+
   @Memoize() get source(): StringField | undefined {
     return this.rawMetadata.source != null
       ? new StringField(this.rawMetadata.source)
+      : undefined;
+  }
+
+  @Memoize() get source_pixel_height(): NumberField | undefined {
+    return this.rawMetadata.source_pixel_height != null
+      ? new NumberField(this.rawMetadata.source_pixel_height)
+      : undefined;
+  }
+
+  @Memoize() get source_pixel_width(): NumberField | undefined {
+    return this.rawMetadata.source_pixel_width != null
+      ? new NumberField(this.rawMetadata.source_pixel_width)
       : undefined;
   }
 
@@ -469,6 +604,12 @@ export class Metadata {
       : undefined;
   }
 
+  @Memoize() get station_name(): StringField | undefined {
+    return this.rawMetadata.station_name != null
+      ? new StringField(this.rawMetadata.station_name)
+      : undefined;
+  }
+
   @Memoize() get stop_time(): DateField | undefined {
     return this.rawMetadata.stop_time != null
       ? new DateField(this.rawMetadata.stop_time)
@@ -484,6 +625,18 @@ export class Metadata {
   @Memoize() get taper(): StringField | undefined {
     return this.rawMetadata.taper != null
       ? new StringField(this.rawMetadata.taper)
+      : undefined;
+  }
+
+  @Memoize() get thumbs(): NumberListField | undefined {
+    return this.rawMetadata.thumbs != null
+      ? new NumberListField(this.rawMetadata.thumbs)
+      : undefined;
+  }
+
+  @Memoize() get times(): NumberListField | undefined {
+    return this.rawMetadata.times != null
+      ? new NumberListField(this.rawMetadata.times)
       : undefined;
   }
 
@@ -511,6 +664,16 @@ export class Metadata {
       : undefined;
   }
 
+  /**
+   * The capture tuner setting. Parses the `"Channel <n> (<freq> MHz)"` form
+   * into channel and frequency; other formats expose only the raw value.
+   */
+  @Memoize() get tuner(): TunerField | undefined {
+    return this.rawMetadata.tuner != null
+      ? new TunerField(this.rawMetadata.tuner)
+      : undefined;
+  }
+
   @Memoize() get type(): StringField | undefined {
     return this.rawMetadata.type != null
       ? new StringField(this.rawMetadata.type)
@@ -523,15 +686,25 @@ export class Metadata {
       : undefined;
   }
 
-  @Memoize() get utc_offset(): NumberField | undefined {
+  /**
+   * The UTC offset encoded as `±HHMM` (e.g. `"-800"`), parsed into hours,
+   * minutes, and total signed minutes.
+   */
+  @Memoize() get utc_offset(): UtcOffsetField | undefined {
     return this.rawMetadata.utc_offset != null
-      ? new NumberField(this.rawMetadata.utc_offset)
+      ? new UtcOffsetField(this.rawMetadata.utc_offset)
       : undefined;
   }
 
   @Memoize() get venue(): StringField | undefined {
     return this.rawMetadata.venue != null
       ? new StringField(this.rawMetadata.venue)
+      : undefined;
+  }
+
+  @Memoize() get video_codec(): StringField | undefined {
+    return this.rawMetadata.video_codec != null
+      ? new StringField(this.rawMetadata.video_codec)
       : undefined;
   }
 
