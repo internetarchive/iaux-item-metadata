@@ -39,7 +39,7 @@ const FIELDS: FieldRow[] = [
   { label: 'venue', get: m => m.venue },
   { label: 'taper', get: m => m.taper },
   { label: 'source', get: m => m.source },
-  { label: 'lineage', get: m => m.lineage },
+  { label: 'lineage', get: m => m.lineage }
 ];
 
 /**
@@ -53,7 +53,7 @@ const EXAMPLES = [
   'nasa',
   'goody',
   'eventsounds_pack',
-  'womeningovernmen0000jame',
+  'womeningovernmen0000jame'
 ];
 
 /** Render any parsed value (Date, number, string, array, object) as text. */
@@ -94,7 +94,7 @@ export class AppRoot extends LitElement {
     this.error = undefined;
     try {
       const response = await fetch(
-        `https://archive.org/metadata/${encodeURIComponent(identifier)}`,
+        `https://archive.org/metadata/${encodeURIComponent(identifier)}`
       );
       if (!response.ok) {
         throw new Error(`Request failed (${response.status})`);
@@ -170,7 +170,7 @@ export class AppRoot extends LitElement {
               @click=${() => this.useExample(id)}
             >
               ${id}
-            </button>`,
+            </button>`
         )}
       </p>
 

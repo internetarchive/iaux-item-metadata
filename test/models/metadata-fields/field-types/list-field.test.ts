@@ -1,7 +1,7 @@
-import { expect } from '@open-wc/testing';
+import { describe, it, expect } from 'vitest';
 import {
   NumberListField,
-  StringListField,
+  StringListField
 } from '../../../../src/models/metadata-fields/field-types/list';
 
 describe('List Field', () => {
@@ -25,7 +25,7 @@ describe('List Field', () => {
     it('can parse lists of lists', () => {
       const stringListField = new StringListField([
         'foo, bar, baz',
-        'beep, boop, bop',
+        'beep, boop, bop'
       ]);
 
       expect(stringListField.value).to.equal('foo');
@@ -35,11 +35,11 @@ describe('List Field', () => {
         'baz',
         'beep',
         'boop',
-        'bop',
+        'bop'
       ]);
       expect(stringListField.rawValue).to.deep.equal([
         'foo, bar, baz',
-        'beep, boop, bop',
+        'beep, boop, bop'
       ]);
     });
   });

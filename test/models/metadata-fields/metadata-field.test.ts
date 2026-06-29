@@ -1,5 +1,5 @@
 import type { FieldParserInterface } from '@internetarchive/field-parsers';
-import { expect } from '@open-wc/testing';
+import { describe, it, expect } from 'vitest';
 import { MetadataField } from '../../../src/models/metadata-fields/metadata-field';
 
 describe('Metadata Field', () => {

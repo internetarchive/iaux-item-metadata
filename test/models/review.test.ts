@@ -1,25 +1,25 @@
-import { expect } from '@open-wc/testing';
+import { describe, it, expect } from 'vitest';
 
 import { Review } from '../../src/models/review';
 
 describe('Review', () => {
   it('can be instantiated with a title', async () => {
     const review = new Review({
-      reviewtitle: 'It was awesome!',
+      reviewtitle: 'It was awesome!'
     });
     expect(review.reviewtitle).to.equal('It was awesome!');
   });
 
   it('stars get converted to a number', async () => {
     const review = new Review({
-      stars: '5',
+      stars: '5'
     });
     expect(review.stars).to.equal(5);
   });
 
   it('reviewdate get converted to a date', async () => {
     const review = new Review({
-      reviewdate: '2014-05-09 09:47:15',
+      reviewdate: '2014-05-09 09:47:15'
     });
 
     const expected = new Date();
@@ -38,7 +38,7 @@ describe('Review', () => {
     const review = new Review({
       reviewtitle: 'yay',
       reviewdate: '0',
-      stars: 0,
+      stars: 0
     });
 
     const expected = new Date();

@@ -1,4 +1,4 @@
-import { expect } from '@open-wc/testing';
+import { describe, it, expect } from 'vitest';
 import { BooleanField } from '../../../../src/models/metadata-fields/field-types/boolean';
 
 describe('Boolean Field', () => {
