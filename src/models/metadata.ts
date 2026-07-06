@@ -9,7 +9,7 @@ import { ByteField } from './metadata-fields/field-types/byte';
 import { MediaTypeField } from './metadata-fields/field-types/mediatype';
 import {
   StringListField,
-  NumberListField,
+  NumberListField
 } from './metadata-fields/field-types/list';
 import { EnumField, EnumParser } from './metadata-fields/field-types/enum';
 import { AspectRatioField } from './metadata-fields/field-types/aspect-ratio';

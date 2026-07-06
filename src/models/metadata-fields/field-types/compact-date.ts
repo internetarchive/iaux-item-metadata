@@ -1,6 +1,6 @@
 import type {
   FieldParserInterface,
-  FieldParserRawValue,
+  FieldParserRawValue
 } from '@internetarchive/field-parsers';
 import { MetadataField, MetadataRawValue } from '../metadata-field';
 
@@ -22,7 +22,7 @@ export class CompactDateParser implements FieldParserInterface<Date> {
     if (typeof rawValue !== 'string') return undefined;
     const trimmed = rawValue.trim();
     const match = trimmed.match(
-      /^(\d{4})(\d{2})(\d{2})(?:(\d{2})(\d{2})(\d{2}))?$/,
+      /^(\d{4})(\d{2})(\d{2})(?:(\d{2})(\d{2})(\d{2}))?$/
     );
     const value = match
       ? `${match[1]}-${match[2]}-${match[3]}T${match[4] ?? '00'}:${

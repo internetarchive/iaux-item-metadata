@@ -1,6 +1,6 @@
 import type {
   FieldParserInterface,
-  FieldParserRawValue,
+  FieldParserRawValue
 } from '@internetarchive/field-parsers';
 import { MetadataField, MetadataRawValue } from '../metadata-field';
 
@@ -30,12 +30,12 @@ export class TunerParser implements FieldParserInterface<Tuner> {
   parseValue(rawValue: FieldParserRawValue): Tuner | undefined {
     if (typeof rawValue !== 'string') return undefined;
     const match = rawValue.match(
-      /Channel\s+(\d+)(?:\s*\(\s*([\d.]+)\s*MHz\s*\))?/i,
+      /Channel\s+(\d+)(?:\s*\(\s*([\d.]+)\s*MHz\s*\))?/i
     );
     if (!match) return undefined;
     return {
       channel: parseInt(match[1], 10),
-      frequencyMhz: match[2] ? parseFloat(match[2]) : undefined,
+      frequencyMhz: match[2] ? parseFloat(match[2]) : undefined
     };
   }
 }

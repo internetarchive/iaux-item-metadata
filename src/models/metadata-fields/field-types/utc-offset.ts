@@ -1,6 +1,6 @@
 import type {
   FieldParserInterface,
-  FieldParserRawValue,
+  FieldParserRawValue
 } from '@internetarchive/field-parsers';
 import { MetadataField, MetadataRawValue } from '../metadata-field';
 
@@ -43,7 +43,7 @@ export class UtcOffsetParser implements FieldParserInterface<UtcOffset> {
     return {
       hours: sign * hours,
       minutes,
-      totalMinutes: sign * (hours * 60 + minutes),
+      totalMinutes: sign * (hours * 60 + minutes)
     };
   }
 }

@@ -1,7 +1,7 @@
-import { expect } from '@open-wc/testing';
+import { describe, it, expect } from 'vitest';
 import {
   AspectRatioField,
-  AspectRatioParser,
+  AspectRatioParser
 } from '../../../../src/models/metadata-fields/field-types/aspect-ratio';
 
 describe('AspectRatioField', () => {
@@ -16,7 +16,7 @@ describe('AspectRatioField', () => {
   it('parses ratios separated by "/" or "x"', () => {
     expect(new AspectRatioField('4/3').value?.decimal).to.be.closeTo(
       1.333,
-      0.001,
+      0.001
     );
     expect(new AspectRatioField('16x9').value?.width).to.equal(16);
   });

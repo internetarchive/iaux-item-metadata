@@ -1,7 +1,7 @@
-import { expect } from '@open-wc/testing';
+import { describe, it, expect } from 'vitest';
 import {
   CompactDateField,
-  CompactDateParser,
+  CompactDateParser
 } from '../../../../src/models/metadata-fields/field-types/compact-date';
 
 describe('CompactDateField', () => {

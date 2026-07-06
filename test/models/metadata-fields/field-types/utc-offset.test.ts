@@ -1,7 +1,7 @@
-import { expect } from '@open-wc/testing';
+import { describe, it, expect } from 'vitest';
 import {
   UtcOffsetField,
-  UtcOffsetParser,
+  UtcOffsetParser
 } from '../../../../src/models/metadata-fields/field-types/utc-offset';
 
 describe('UtcOffsetField', () => {

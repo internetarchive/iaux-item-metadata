@@ -9,14 +9,14 @@ export { Task, TaskColor, TaskStatus } from './src/models/task';
 // metadata field types
 export {
   AspectRatioField,
-  AspectRatioParser,
+  AspectRatioParser
 } from './src/models/metadata-fields/field-types/aspect-ratio';
 export type { AspectRatio } from './src/models/metadata-fields/field-types/aspect-ratio';
 export { BooleanField } from './src/models/metadata-fields/field-types/boolean';
 export { ByteField } from './src/models/metadata-fields/field-types/byte';
 export {
   CompactDateField,
-  CompactDateParser,
+  CompactDateParser
 } from './src/models/metadata-fields/field-types/compact-date';
 export { DateField } from './src/models/metadata-fields/field-types/date';
 export { DurationField } from './src/models/metadata-fields/field-types/duration';
@@ -37,12 +37,12 @@ export type { PageProgression } from './src/models/metadata-fields/field-types/p
 export { StringField } from './src/models/metadata-fields/field-types/string';
 export {
   TunerField,
-  TunerParser,
+  TunerParser
 } from './src/models/metadata-fields/field-types/tuner';
 export type { Tuner } from './src/models/metadata-fields/field-types/tuner';
 export {
   UtcOffsetField,
-  UtcOffsetParser,
+  UtcOffsetParser
 } from './src/models/metadata-fields/field-types/utc-offset';
 export type { UtcOffset } from './src/models/metadata-fields/field-types/utc-offset';
 

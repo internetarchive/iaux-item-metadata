@@ -1,6 +1,6 @@
 import type {
   FieldParserInterface,
-  FieldParserRawValue,
+  FieldParserRawValue
 } from '@internetarchive/field-parsers';
 import { MetadataField, MetadataRawValue } from '../metadata-field';
 
@@ -32,7 +32,7 @@ export class AspectRatioParser implements FieldParserInterface<AspectRatio> {
   parseValue(rawValue: FieldParserRawValue): AspectRatio | undefined {
     if (typeof rawValue !== 'string') return undefined;
     const match = rawValue.match(
-      /^\s*(\d+(?:\.\d+)?)\s*[:/x]\s*(\d+(?:\.\d+)?)\s*$/i,
+      /^\s*(\d+(?:\.\d+)?)\s*[:/x]\s*(\d+(?:\.\d+)?)\s*$/i
     );
     if (!match) return undefined;
     const width = parseFloat(match[1]);

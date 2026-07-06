@@ -1,7 +1,7 @@
-import { expect } from '@open-wc/testing';
+import { describe, it, expect } from 'vitest';
 import {
   TunerField,
-  TunerParser,
+  TunerParser
 } from '../../../../src/models/metadata-fields/field-types/tuner';
 
 describe('TunerField', () => {

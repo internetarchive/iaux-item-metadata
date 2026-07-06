@@ -181,7 +181,7 @@ describe('Metadata', () => {
   it('parses closed_captioning "yes" as true', async () => {
     const metadata = new Metadata({
       identifier: 'foo',
-      closed_captioning: 'yes',
+      closed_captioning: 'yes'
     });
     expect(metadata.closed_captioning?.value).to.be.true;
   });
@@ -189,7 +189,7 @@ describe('Metadata', () => {
   it('parses closed_captioning "no" as false', async () => {
     const metadata = new Metadata({
       identifier: 'foo',
-      closed_captioning: 'no',
+      closed_captioning: 'no'
     });
     expect(metadata.closed_captioning?.value).to.be.false;
   });
@@ -197,7 +197,7 @@ describe('Metadata', () => {
   it('properly instantiates metadata with frames_per_second', async () => {
     const metadata = new Metadata({
       identifier: 'foo',
-      frames_per_second: '29',
+      frames_per_second: '29'
     });
     expect(metadata.frames_per_second?.value).to.equal(29);
   });
@@ -205,7 +205,7 @@ describe('Metadata', () => {
   it('properly instantiates metadata with video_codec', async () => {
     const metadata = new Metadata({
       identifier: 'foo',
-      video_codec: 'mpeg2video',
+      video_codec: 'mpeg2video'
     });
     expect(metadata.video_codec?.value).to.equal('mpeg2video');
   });
@@ -213,7 +213,7 @@ describe('Metadata', () => {
   it('properly instantiates metadata with source_pixel_width', async () => {
     const metadata = new Metadata({
       identifier: 'foo',
-      source_pixel_width: '720',
+      source_pixel_width: '720'
     });
     expect(metadata.source_pixel_width?.value).to.equal(720);
   });
@@ -221,7 +221,7 @@ describe('Metadata', () => {
   it('properly instantiates metadata with source_pixel_height', async () => {
     const metadata = new Metadata({
       identifier: 'foo',
-      source_pixel_height: '480',
+      source_pixel_height: '480'
     });
     expect(metadata.source_pixel_height?.value).to.equal(480);
   });
@@ -236,7 +236,7 @@ describe('Metadata', () => {
   it('parses a "Channel N (F MHz)" tuner into channel and frequency', async () => {
     const metadata = new Metadata({
       identifier: 'foo',
-      tuner: 'Channel 93 (639 MHz)',
+      tuner: 'Channel 93 (639 MHz)'
     });
     expect(metadata.tuner?.value?.channel).to.equal(93);
     expect(metadata.tuner?.value?.frequencyMhz).to.equal(639);
@@ -256,7 +256,7 @@ describe('Metadata', () => {
   it('properly instantiates metadata with previous_item', async () => {
     const metadata = new Metadata({
       identifier: 'foo',
-      previous_item: 'KGO_prev',
+      previous_item: 'KGO_prev'
     });
     expect(metadata.previous_item?.value).to.equal('KGO_prev');
   });
@@ -274,17 +274,17 @@ describe('Metadata', () => {
   it('properly instantiates metadata with identifier-access', async () => {
     const metadata = new Metadata({
       identifier: 'foo',
-      'identifier-access': 'https://archive.org/details/foo',
+      'identifier-access': 'https://archive.org/details/foo'
     });
     expect(metadata.identifier_access?.value).to.equal(
-      'https://archive.org/details/foo',
+      'https://archive.org/details/foo'
     );
   });
 
   it('parses a compact scandate timestamp into a Date', async () => {
     const metadata = new Metadata({
       identifier: 'foo',
-      scandate: '20101106063500',
+      scandate: '20101106063500'
     });
     const date = metadata.scandate?.value;
     expect(date).to.be.an.instanceof(Date);
@@ -296,7 +296,7 @@ describe('Metadata', () => {
   it('still parses standard date strings for scandate', async () => {
     const metadata = new Metadata({
       identifier: 'foo',
-      scandate: '2010-11-06',
+      scandate: '2010-11-06'
     });
     expect(metadata.scandate?.value).to.be.an.instanceof(Date);
   });
@@ -314,7 +314,7 @@ describe('Metadata', () => {
   it('properly instantiates metadata with backup_location', async () => {
     const metadata = new Metadata({
       identifier: 'foo',
-      backup_location: 'ia903604_7',
+      backup_location: 'ia903604_7'
     });
     expect(metadata.backup_location?.value).to.equal('ia903604_7');
   });
@@ -344,7 +344,7 @@ describe('Metadata', () => {
   it('properly instantiates metadata with access-restricted-item', async () => {
     const metadata = new Metadata({
       identifier: 'foo',
-      'access-restricted-item': 'true',
+      'access-restricted-item': 'true'
     });
     expect(metadata.access_restricted_item?.value).to.be.true;
   });
