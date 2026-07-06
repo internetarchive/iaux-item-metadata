@@ -14,10 +14,6 @@ export {
 export type { AspectRatio } from './src/models/metadata-fields/field-types/aspect-ratio';
 export { BooleanField } from './src/models/metadata-fields/field-types/boolean';
 export { ByteField } from './src/models/metadata-fields/field-types/byte';
-export {
-  CompactDateField,
-  CompactDateParser
-} from './src/models/metadata-fields/field-types/compact-date';
 export { DateField } from './src/models/metadata-fields/field-types/date';
 export { DurationField } from './src/models/metadata-fields/field-types/duration';
 export {

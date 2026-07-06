@@ -13,7 +13,6 @@ import {
 } from './metadata-fields/field-types/list';
 import { EnumField, EnumParser } from './metadata-fields/field-types/enum';
 import { AspectRatioField } from './metadata-fields/field-types/aspect-ratio';
-import { CompactDateField } from './metadata-fields/field-types/compact-date';
 import { UtcOffsetField } from './metadata-fields/field-types/utc-offset';
 import { TunerField } from './metadata-fields/field-types/tuner';
 
@@ -532,9 +531,9 @@ export class Metadata {
    * The scan/capture date. Parses compact `YYYYMMDD[HHMMSS]` timestamps in
    * addition to standard date strings.
    */
-  @Memoize() get scandate(): CompactDateField | undefined {
+  @Memoize() get scandate(): DateField | undefined {
     return this.rawMetadata.scandate != null
-      ? new CompactDateField(this.rawMetadata.scandate)
+      ? new DateField(this.rawMetadata.scandate)
       : undefined;
   }
 
