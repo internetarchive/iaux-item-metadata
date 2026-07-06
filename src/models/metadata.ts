@@ -10,6 +10,7 @@ import { MediaTypeField } from './metadata-fields/field-types/mediatype';
 import { StringListField } from './metadata-fields/field-types/list';
 import { EnumField, EnumParser } from './metadata-fields/field-types/enum';
 import { MetadataRawValue } from './metadata-fields/metadata-field';
+import { mapField } from './map-field';
 
 /** Allowed values for the `reviews-allowed` item metadata field. */
 export type ReviewsAllowed = 'true' | 'none' | 'frozen';
@@ -309,7 +310,8 @@ export class Metadata {
    * Absent for most items, which means reviews are enabled.
    */
   @Memoize() get reviews_allowed(): EnumField<ReviewsAllowed> | undefined {
-    return this.fieldFrom(
+    return mapField(
+      this.rawMetadata,
       raw => new EnumField<ReviewsAllowed>(raw, reviewsAllowedParser),
       'reviews-allowed'
     );
@@ -422,6 +424,9 @@ export class Metadata {
    * or `undefined` if none are set. Later keys act as fallbacks, for fields
    * that arrive under more than one name.
    *
+   * For fields whose class needs more than the raw value (e.g. an `EnumField`
+   * needs its parser), call {@link mapField} directly with a factory.
+   *
    * @param Ctor A field class taking a single raw value (`DateField`, `StringField`, etc.)
    * @param keys The raw metadata key(s) to read, in priority order
    */
@@ -429,26 +434,7 @@ export class Metadata {
     Ctor: new (raw: MetadataRawValue) => F,
     ...keys: string[]
   ): F | undefined {
-    return this.fieldFrom(raw => new Ctor(raw), ...keys);
-  }
-
-  /**
-   * Like {@link Metadata.field}, but takes a factory instead of a constructor,
-   * for fields whose class needs more than the raw value (e.g. an `EnumField`
-   * needs its parser).
-   *
-   * @param make Builds the field from a present raw value
-   * @param keys The raw metadata key(s) to read, in priority order
-   */
-  private fieldFrom<F>(
-    make: (raw: MetadataRawValue) => F,
-    ...keys: string[]
-  ): F | undefined {
-    for (const key of keys) {
-      const raw = this.rawMetadata[key];
-      if (raw != null) return make(raw);
-    }
-    return undefined;
+    return mapField(this.rawMetadata, raw => new Ctor(raw), ...keys);
   }
 
   /* eslint-disable-next-line @typescript-eslint/no-explicit-any */

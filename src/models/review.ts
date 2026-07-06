@@ -1,5 +1,6 @@
 import { Memoize } from 'typescript-memoize';
 import { DateParser, NumberParser } from '@internetarchive/field-parsers';
+import { parseField } from './parse-field';
 
 export class Review {
   /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
@@ -22,21 +23,27 @@ export class Review {
   }
 
   @Memoize() get reviewdate(): Date | undefined {
-    return this.rawValue.reviewdate != null
-      ? DateParser.shared.parseValue(this.rawValue.reviewdate)
-      : undefined;
+    return parseField(
+      this.rawValue,
+      v => DateParser.shared.parseValue(v),
+      'reviewdate'
+    );
   }
 
   @Memoize() get createdate(): Date | undefined {
-    return this.rawValue.createdate != null
-      ? DateParser.shared.parseValue(this.rawValue.createdate)
-      : undefined;
+    return parseField(
+      this.rawValue,
+      v => DateParser.shared.parseValue(v),
+      'createdate'
+    );
   }
 
   @Memoize() get stars(): number | undefined {
-    return this.rawValue.stars != null
-      ? NumberParser.shared.parseValue(this.rawValue.stars)
-      : undefined;
+    return parseField(
+      this.rawValue,
+      v => NumberParser.shared.parseValue(v),
+      'stars'
+    );
   }
 
   /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
