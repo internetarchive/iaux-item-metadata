@@ -5,7 +5,7 @@ import {
   ByteParser,
   Duration,
   DurationParser,
-  NumberParser,
+  NumberParser
 } from '@internetarchive/field-parsers';
 
 /**

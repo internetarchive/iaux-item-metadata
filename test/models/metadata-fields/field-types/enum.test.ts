@@ -1,7 +1,7 @@
-import { expect } from '@open-wc/testing';
+import { describe, it, expect } from 'vitest';
 import {
   EnumField,
-  EnumParser,
+  EnumParser
 } from '../../../../src/models/metadata-fields/field-types/enum';
 
 type Color = 'red' | 'green' | 'blue';

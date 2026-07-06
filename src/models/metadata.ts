@@ -22,7 +22,7 @@ export type ReviewsAllowed = 'true' | 'none' | 'frozen';
 const reviewsAllowedParser = new EnumParser<ReviewsAllowed>([
   'true',
   'none',
-  'frozen',
+  'frozen'
 ]);
 
 /** Allowed values for the `sound` item metadata field. */
@@ -504,7 +504,7 @@ export class Metadata {
     return this.rawMetadata['reviews-allowed'] != null
       ? new EnumField<ReviewsAllowed>(
           this.rawMetadata['reviews-allowed'],
-          reviewsAllowedParser,
+          reviewsAllowedParser
         )
       : undefined;
   }

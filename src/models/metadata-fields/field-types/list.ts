@@ -2,7 +2,7 @@ import {
   FieldParserInterface,
   ListParser,
   NumberParser,
-  StringParser,
+  StringParser
 } from '@internetarchive/field-parsers';
 import { MetadataField, MetadataRawValue } from '../metadata-field';
 
@@ -16,7 +16,7 @@ import { MetadataField, MetadataRawValue } from '../metadata-field';
  */
 export class ListField<
   T,
-  FieldParserInterfaceType extends FieldParserInterface<T[]>,
+  FieldParserInterfaceType extends FieldParserInterface<T[]>
 > extends MetadataField<T, FieldParserInterfaceType> {
   constructor(rawValue: MetadataRawValue, parser: FieldParserInterfaceType) {
     super(parser, rawValue);

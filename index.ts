@@ -22,16 +22,18 @@ export { DateField } from './src/models/metadata-fields/field-types/date';
 export { DurationField } from './src/models/metadata-fields/field-types/duration';
 export {
   EnumField,
-  EnumParser,
+  EnumParser
 } from './src/models/metadata-fields/field-types/enum';
 export {
   ListField,
   NumberListField,
-  StringListField,
+  StringListField
 } from './src/models/metadata-fields/field-types/list';
 export { MediaTypeField } from './src/models/metadata-fields/field-types/mediatype';
+export type { MediaType } from './src/models/metadata-fields/field-types/mediatype';
 export { NumberField } from './src/models/metadata-fields/field-types/number';
 export { PageProgressionField } from './src/models/metadata-fields/field-types/page-progression';
+export type { PageProgression } from './src/models/metadata-fields/field-types/page-progression';
 export { StringField } from './src/models/metadata-fields/field-types/string';
 export {
   TunerField,
@@ -48,5 +50,5 @@ export type { UtcOffset } from './src/models/metadata-fields/field-types/utc-off
 export {
   MetadataField,
   MetadataFieldInterface,
-  MetadataRawValue,
+  MetadataRawValue
 } from './src/models/metadata-fields/metadata-field';

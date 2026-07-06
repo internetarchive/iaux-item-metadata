@@ -1,4 +1,4 @@
-import { expect } from '@open-wc/testing';
+import { describe, it, expect } from 'vitest';
 
 import { Metadata } from '../../src/models/metadata';
 
@@ -19,14 +19,7 @@ describe('Metadata', () => {
     const json = { identifier: 'foo', addeddate: '2021-05-20T13:37:15Z' };
     const metadata = new Metadata(json);
 
-    const expected = new Date();
-    expected.setHours(13);
-    expected.setMinutes(37);
-    expected.setSeconds(15);
-    expected.setMilliseconds(0);
-    expected.setMonth(4);
-    expected.setDate(20);
-    expected.setFullYear(2021);
+    const expected = new Date(Date.UTC(2021, 4, 20, 13, 37, 15));
 
     expect(metadata.addeddate?.value?.getTime()).to.equal(expected.getTime());
   });
@@ -59,7 +52,7 @@ describe('Metadata', () => {
     for (const value of ['true', 'none', 'frozen']) {
       const metadata = new Metadata({
         identifier: 'foo',
-        'reviews-allowed': value,
+        'reviews-allowed': value
       });
       expect(metadata.reviews_allowed?.value).to.equal(value);
     }
@@ -71,6 +64,34 @@ describe('Metadata', () => {
     expect(metadata.reviews_allowed?.value).to.be.undefined;
     // the raw value is still preserved for inspection
     expect(metadata.reviews_allowed?.rawValue).to.equal('maybe');
+  });
+
+  it('properly instantiates metadata with mediatype', async () => {
+    const json = { identifier: 'foo', mediatype: 'texts' };
+    const metadata = new Metadata(json);
+    expect(metadata.mediatype?.value).to.equal('texts');
+  });
+
+  it('rejects an invalid mediatype value', async () => {
+    const json = { identifier: 'foo', mediatype: 'blah' };
+    const metadata = new Metadata(json);
+    expect(metadata.mediatype?.value).to.be.undefined;
+    // the raw value is still preserved for inspection
+    expect(metadata.mediatype?.rawValue).to.equal('blah');
+  });
+
+  it('properly instantiates metadata with page_progression', async () => {
+    const json = { identifier: 'foo', page_progression: 'rl' };
+    const metadata = new Metadata(json);
+    expect(metadata.page_progression?.value).to.equal('rl');
+  });
+
+  it('rejects an invalid page_progression value', async () => {
+    const json = { identifier: 'foo', page_progression: 'blah' };
+    const metadata = new Metadata(json);
+    expect(metadata.page_progression?.value).to.be.undefined;
+    // the raw value is still preserved for inspection
+    expect(metadata.page_progression?.rawValue).to.equal('blah');
   });
 
   it('returns undefined for fields that have not been provided', async () => {
@@ -104,7 +125,7 @@ describe('Metadata', () => {
       identifier: 'foo',
       year: 0,
       duration: 0,
-      collection_size: 0,
+      collection_size: 0
     };
     const metadata = new Metadata(json);
     expect(metadata.year).to.not.be.undefined;

@@ -1,4 +1,4 @@
-import { expect } from '@open-wc/testing';
+import { describe, it, expect } from 'vitest';
 
 import { File } from '../../src/models/file';
 
@@ -16,7 +16,7 @@ describe('File', () => {
       length: '1:23',
       height: '1080',
       width: '1920',
-      track: '1',
+      track: '1'
     });
     expect(file.size).to.equal(1234);
     expect(file.length).to.equal(83);
@@ -33,7 +33,7 @@ describe('File', () => {
   it('external_identifier can be an array', async () => {
     const file = new File({
       name: 'foo.jpg',
-      external_identifier: ['foo', 'bar'],
+      external_identifier: ['foo', 'bar']
     });
     expect(file.external_identifier).to.deep.equal(['foo', 'bar']);
   });
@@ -42,7 +42,7 @@ describe('File', () => {
     const file = new File({
       name: 'foo.jpg',
       size: 0,
-      track: 0,
+      track: 0
     });
     expect(file.size).to.not.be.undefined;
     expect(file.size).to.equal(0);
@@ -53,7 +53,7 @@ describe('File', () => {
   it('parses mtime properly', async () => {
     const file = new File({
       name: 'foo.jpg',
-      mtime: '1639591034',
+      mtime: '1639591034'
     });
     expect(file.mtime).to.not.be.undefined;
     expect(file.mtime instanceof Date).to.be.true;

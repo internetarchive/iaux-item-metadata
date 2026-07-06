@@ -7,54 +7,52 @@
   },
   "license": "AGPL-3.0-only",
   "author": "Internet Archive",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "scripts": {
-    "start": "tsc && concurrently -k -r \"tsc --watch --preserveWatchOutput\" \"wds\"",
+    "start": "tsc && concurrently -k -r \"tsc --watch --preserveWatchOutput\" \"vite\"",
     "prepare": "rimraf dist && tsc && husky",
     "build": "tsc",
     "lint": "eslint && prettier \"**/*.ts\" --check",
     "format": "eslint . --fix && prettier \"**/*.ts\" --write",
     "circular": "madge --circular --extensions ts .",
-    "test": "tsc && npm run lint && npm run circular && wtr --coverage",
-    "test:watch": "tsc && concurrently -k -r \"tsc --watch --preserveWatchOutput\" \"wtr --watch --coverage\"",
+    "test": "tsc && npm run lint && npm run circular && vitest run --coverage",
+    "test:watch": "vitest",
     "ghpages:build": "rimraf ghpages && npm run prepare && vite build",
     "ghpages:publish": "npm run ghpages:prepare -e $(git branch --show-current)",
     "ghpages:prepare": "npm run ghpages:build && touch ghpages/.nojekyll && npm run ghpages:generate",
     "ghpages:generate": "gh-pages -t -d ghpages -m \"Build for $(git log --pretty=format:\"%h %an %ai %s\" -n1) [skip ci]\""
   },
   "dependencies": {
-    "@internetarchive/field-parsers": "^1.0.0",
+    "@internetarchive/field-parsers": "^1.1.1",
     "typescript-memoize": "^1.1.1"
   },
   "devDependencies": {
-    "@open-wc/testing": "^4.0.0",
-    "@types/mocha": "^10.0.10",
-    "@typescript-eslint/eslint-plugin": "^8.20.0",
-    "@typescript-eslint/parser": "^8.20.0",
-    "@web/dev-server": "^0.4.6",
-    "@web/test-runner": "^0.20.0",
-    "concurrently": "^9.1.2",
-    "eslint": "^9.18.0",
-    "eslint-config-prettier": "^10.0.1",
-    "eslint-plugin-html": "^8.1.2",
-    "eslint-plugin-import": "^2.31.0",
-    "eslint-plugin-lit": "^1.15.0",
-    "eslint-plugin-lit-a11y": "^4.1.4",
-    "eslint-plugin-no-only-tests": "^3.3.0",
-    "eslint-plugin-wc": "^2.2.0",
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^26.0.1",
+    "@vitest/coverage-v8": "^4.1.9",
+    "concurrently": "^10.0.3",
+    "eslint": "^10.5.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-html": "^8.1.4",
     "gh-pages": "^6.3.0",
     "husky": "^9.1.7",
-    "lit": "^3.2.1",
+    "lit": "^3.3.3",
     "madge": "^8.0.0",
-    "prettier": "^3.4.2",
-    "rimraf": "^6.0.1",
-    "sinon": "^19.0.2",
+    "prettier": "^3.8.4",
+    "rimraf": "^6.1.3",
     "ts-lit-plugin": "^2.0.2",
     "tslib": "^2.8.1",
-    "typescript": "^5.7.3",
-    "vite": "^6.0.7"
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.62.0",
+    "vite": "^8.1.0",
+    "vitest": "^4.1.9"
+  },
+  "overrides": {
+    "madge": {
+      "typescript": "$typescript"
+    }
   },
   "publishConfig": {
     "access": "public"
@@ -62,7 +60,8 @@
   "types": "dist/index.d.ts",
   "prettier": {
     "singleQuote": true,
-    "arrowParens": "avoid"
+    "arrowParens": "avoid",
+    "trailingComma": "none"
   },
   "lint-staged": {
     "*.ts": [
