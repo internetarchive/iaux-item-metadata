@@ -6,6 +6,7 @@ import {
   DurationParser,
   NumberParser
 } from '@internetarchive/field-parsers';
+import { parseField } from './parse-field';
 
 /**
  * This represents an Internet Archive File
@@ -60,9 +61,11 @@ export class File {
   }
 
   @Memoize() get size(): Byte | undefined {
-    return this.rawValue.size != null
-      ? ByteParser.shared.parseValue(this.rawValue.size)
-      : undefined;
+    return parseField(
+      this.rawValue,
+      v => ByteParser.shared.parseValue(v),
+      'size'
+    );
   }
 
   get title(): string | undefined {
@@ -70,27 +73,35 @@ export class File {
   }
 
   @Memoize() get length(): Duration | undefined {
-    return this.rawValue.length != null
-      ? DurationParser.shared.parseValue(this.rawValue.length)
-      : undefined;
+    return parseField(
+      this.rawValue,
+      v => DurationParser.shared.parseValue(v),
+      'length'
+    );
   }
 
   @Memoize() get height(): number | undefined {
-    return this.rawValue.height != null
-      ? NumberParser.shared.parseValue(this.rawValue.height)
-      : undefined;
+    return parseField(
+      this.rawValue,
+      v => NumberParser.shared.parseValue(v),
+      'height'
+    );
   }
 
   @Memoize() get width(): number | undefined {
-    return this.rawValue.width != null
-      ? NumberParser.shared.parseValue(this.rawValue.width)
-      : undefined;
+    return parseField(
+      this.rawValue,
+      v => NumberParser.shared.parseValue(v),
+      'width'
+    );
   }
 
   @Memoize() get track(): number | undefined {
-    return this.rawValue.track != null
-      ? NumberParser.shared.parseValue(this.rawValue.track)
-      : undefined;
+    return parseField(
+      this.rawValue,
+      v => NumberParser.shared.parseValue(v),
+      'track'
+    );
   }
 
   get external_identifier(): string | string[] | undefined {
