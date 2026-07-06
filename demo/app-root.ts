@@ -23,6 +23,7 @@ interface FieldRow {
 const FIELDS: FieldRow[] = [
   { label: 'title', get: m => m.title },
   { label: 'mediatype', get: m => m.mediatype },
+  { label: 'page_progression', get: m => m.page_progression },
   { label: 'creator', get: m => m.creator },
   { label: 'collection', get: m => m.collection },
   { label: 'subject', get: m => m.subject },

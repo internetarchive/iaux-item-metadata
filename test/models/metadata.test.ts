@@ -66,6 +66,34 @@ describe('Metadata', () => {
     expect(metadata.reviews_allowed?.rawValue).to.equal('maybe');
   });
 
+  it('properly instantiates metadata with mediatype', async () => {
+    const json = { identifier: 'foo', mediatype: 'texts' };
+    const metadata = new Metadata(json);
+    expect(metadata.mediatype?.value).to.equal('texts');
+  });
+
+  it('rejects an invalid mediatype value', async () => {
+    const json = { identifier: 'foo', mediatype: 'blah' };
+    const metadata = new Metadata(json);
+    expect(metadata.mediatype?.value).to.be.undefined;
+    // the raw value is still preserved for inspection
+    expect(metadata.mediatype?.rawValue).to.equal('blah');
+  });
+
+  it('properly instantiates metadata with page_progression', async () => {
+    const json = { identifier: 'foo', page_progression: 'rl' };
+    const metadata = new Metadata(json);
+    expect(metadata.page_progression?.value).to.equal('rl');
+  });
+
+  it('rejects an invalid page_progression value', async () => {
+    const json = { identifier: 'foo', page_progression: 'blah' };
+    const metadata = new Metadata(json);
+    expect(metadata.page_progression?.value).to.be.undefined;
+    // the raw value is still preserved for inspection
+    expect(metadata.page_progression?.rawValue).to.equal('blah');
+  });
+
   it('returns undefined for fields that have not been provided', async () => {
     const json = { identifier: 'foo', collection: ['abc', '123'] };
     const metadata = new Metadata(json);

@@ -21,8 +21,10 @@ export {
   StringListField
 } from './src/models/metadata-fields/field-types/list';
 export { MediaTypeField } from './src/models/metadata-fields/field-types/mediatype';
+export type { MediaType } from './src/models/metadata-fields/field-types/mediatype';
 export { NumberField } from './src/models/metadata-fields/field-types/number';
 export { PageProgressionField } from './src/models/metadata-fields/field-types/page-progression';
+export type { PageProgression } from './src/models/metadata-fields/field-types/page-progression';
 export { StringField } from './src/models/metadata-fields/field-types/string';
 
 // base metadata field models
