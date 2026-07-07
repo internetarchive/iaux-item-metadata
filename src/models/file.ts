@@ -1,5 +1,6 @@
 import { Memoize } from 'typescript-memoize';
 import {
+  BooleanParser,
   Byte,
   ByteParser,
   Duration,
@@ -114,6 +115,22 @@ export class File {
 
   get album(): string | undefined {
     return this.rawValue.album;
+  }
+
+  @Memoize() get bitrate(): number | undefined {
+    return parseField(
+      this.rawValue,
+      v => NumberParser.shared.parseValue(v),
+      'bitrate'
+    );
+  }
+
+  @Memoize() get private(): boolean | undefined {
+    return parseField(
+      this.rawValue,
+      v => BooleanParser.shared.parseValue(v),
+      'private'
+    );
   }
 
   /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
