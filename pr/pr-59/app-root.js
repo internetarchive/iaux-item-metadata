@@ -2095,13 +2095,11 @@ var AppRoot = class AppRoot extends i {
 
       <p class="examples">
         Try:
-        ${EXAMPLES.map((id) => b`<button
-              type="button"
-              class="link"
-              @click=${() => this.useExample(id)}
-            >
-              ${id}
-            </button>`)}
+        ${EXAMPLES.map((id) => b`<a
+              href=${this.exampleHref(id)}
+              @click=${(event) => this.onExampleClick(event, id)}
+              >${id}</a
+            >`)}
       </p>
 
       <details>
@@ -2268,7 +2266,20 @@ var AppRoot = class AppRoot extends i {
 		event.preventDefault();
 		this.loadFromArchive();
 	}
-	useExample(id) {
+	/**
+	* Where an example link points: this page with that item loaded, keeping any
+	* filter that's already on. Real hrefs so the examples can be opened in a
+	* tab or copied like any other link.
+	*/
+	exampleHref(id) {
+		const params = new URLSearchParams({ [IDENTIFIER_PARAM]: id });
+		const filter = filterTerms(this.query).join(",");
+		if (filter) params.set(FILTER_PARAM, filter);
+		return `?${params.toString().replace(/%2C/g, ",")}`;
+	}
+	onExampleClick(event, id) {
+		if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+		event.preventDefault();
 		this.identifier = id;
 		this.loadFromArchive();
 	}
@@ -2292,7 +2303,7 @@ AppRoot.styles = i$3`
 
     /* identifiers are long unbroken tokens and will push the page sideways */
     h2,
-    .examples button {
+    .examples a {
       overflow-wrap: anywhere;
     }
 
@@ -2344,15 +2355,6 @@ AppRoot.styles = i$3`
       cursor: default;
     }
 
-    button.link {
-      background: none;
-      border: none;
-      color: #194880;
-      text-decoration: underline;
-      padding: 0;
-      cursor: pointer;
-    }
-
     .examples {
       font-size: 0.85rem;
       color: #555;
@@ -2360,6 +2362,10 @@ AppRoot.styles = i$3`
       gap: 0.75rem;
       flex-wrap: wrap;
       align-items: baseline;
+    }
+
+    .examples a {
+      color: #194880;
     }
 
     details {
