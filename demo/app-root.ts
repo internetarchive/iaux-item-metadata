@@ -241,13 +241,11 @@ export class AppRoot extends LitElement {
         Try:
         ${EXAMPLES.map(
           id =>
-            html`<button
-              type="button"
-              class="link"
-              @click=${() => this.useExample(id)}
-            >
-              ${id}
-            </button>`
+            html`<a
+              href=${this.exampleHref(id)}
+              @click=${(event: MouseEvent) => this.onExampleClick(event, id)}
+              >${id}</a
+            >`
         )}
       </p>
 
@@ -449,7 +447,30 @@ export class AppRoot extends LitElement {
     void this.loadFromArchive();
   }
 
-  private useExample(id: string): void {
+  /**
+   * Where an example link points: this page with that item loaded, keeping any
+   * filter that's already on. Real hrefs so the examples can be opened in a
+   * tab or copied like any other link.
+   */
+  private exampleHref(id: string): string {
+    const params = new URLSearchParams({ [IDENTIFIER_PARAM]: id });
+    const filter = filterTerms(this.query).join(',');
+    if (filter) params.set(FILTER_PARAM, filter);
+    return `?${params.toString().replace(/%2C/g, ',')}`;
+  }
+
+  private onExampleClick(event: MouseEvent, id: string): void {
+    // leave the modified clicks alone, they mean open it somewhere else
+    if (
+      event.button !== 0 ||
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.altKey
+    ) {
+      return;
+    }
+    event.preventDefault();
     this.identifier = id;
     void this.loadFromArchive();
   }
@@ -473,7 +494,7 @@ export class AppRoot extends LitElement {
 
     /* identifiers are long unbroken tokens and will push the page sideways */
     h2,
-    .examples button {
+    .examples a {
       overflow-wrap: anywhere;
     }
 
@@ -525,15 +546,6 @@ export class AppRoot extends LitElement {
       cursor: default;
     }
 
-    button.link {
-      background: none;
-      border: none;
-      color: #194880;
-      text-decoration: underline;
-      padding: 0;
-      cursor: pointer;
-    }
-
     .examples {
       font-size: 0.85rem;
       color: #555;
@@ -541,6 +553,10 @@ export class AppRoot extends LitElement {
       gap: 0.75rem;
       flex-wrap: wrap;
       align-items: baseline;
+    }
+
+    .examples a {
+      color: #194880;
     }
 
     details {
