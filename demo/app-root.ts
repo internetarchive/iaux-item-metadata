@@ -18,7 +18,9 @@ interface FieldRow {
 /**
  * The fields rendered in the parsed-values table. Each shows how the model
  * normalizes the raw API value into a native type. Music-specific fields
- * (venue, taper, source, lineage) populate for live-recording items.
+ * (venue, taper, source, lineage) populate for live-recording items; the TV
+ * Archive fields (aspect_ratio, closed_captioning, utc_offset, …) populate for
+ * broadcast items and show the structured field types resolving.
  */
 const FIELDS: FieldRow[] = [
   { label: 'title', get: m => m.title },
@@ -40,7 +42,17 @@ const FIELDS: FieldRow[] = [
   { label: 'venue', get: m => m.venue },
   { label: 'taper', get: m => m.taper },
   { label: 'source', get: m => m.source },
-  { label: 'lineage', get: m => m.lineage }
+  { label: 'lineage', get: m => m.lineage },
+  { label: 'station_name', get: m => m.station_name },
+  { label: 'video_codec', get: m => m.video_codec },
+  { label: 'closed_captioning', get: m => m.closed_captioning },
+  { label: 'aspect_ratio', get: m => m.aspect_ratio },
+  { label: 'utc_offset', get: m => m.utc_offset },
+  { label: 'tuner', get: m => m.tuner },
+  { label: 'scandate', get: m => m.scandate },
+  { label: 'access_restricted_item', get: m => m.access_restricted_item },
+  { label: 'times', get: m => m.times },
+  { label: 'thumbs', get: m => m.thumbs }
 ];
 
 /**
@@ -54,7 +66,8 @@ const EXAMPLES = [
   'nasa',
   'goody',
   'eventsounds_pack',
-  'womeningovernmen0000jame'
+  'womeningovernmen0000jame',
+  'KGO_20101106_063500_Nightline'
 ];
 
 /** Render any parsed value (Date, number, string, array, object) as text. */
