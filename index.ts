@@ -1,7 +1,12 @@
 // top level models
 export { File } from './src/models/file';
 export { Metadata } from './src/models/metadata';
-export type { ReviewsAllowed, Sound, Color } from './src/models/metadata';
+export type {
+  ReviewsAllowed,
+  Sound,
+  Color,
+  BookReaderDefaults
+} from './src/models/metadata';
 export { Review } from './src/models/review';
 export { SpeechMusicASREntry } from './src/models/speech-music-asr-entry';
 export { Task, TaskColor, TaskStatus } from './src/models/task';

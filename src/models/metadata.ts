@@ -36,6 +36,14 @@ const soundParser = new EnumParser<Sound>(['sound', 'silent']);
 export type Color = 'color' | 'b&w';
 const colorParser = new EnumParser<Color>(['color', 'b&w']);
 
+/** Allowed values for the `bookreader-defaults` item metadata field. */
+export type BookReaderDefaults = 'mode/1up' | 'mode/2up' | 'mode/thumb';
+const bookReaderDefaultsParser = new EnumParser<BookReaderDefaults>([
+  'mode/1up',
+  'mode/2up',
+  'mode/thumb'
+]);
+
 /**
  * Metadata is an expansive model that describes an Item.
  *
@@ -110,8 +118,15 @@ export class Metadata {
     return this.field(NumberField, 'bookplateleaf');
   }
 
-  @Memoize() get bookreader_defaults(): StringField | undefined {
-    return this.field(StringField, 'bookreader-defaults');
+  /** The BookReader view an item opens in. */
+  @Memoize() get bookreader_defaults():
+    | EnumField<BookReaderDefaults>
+    | undefined {
+    return mapField(
+      this.rawMetadata,
+      raw => new EnumField<BookReaderDefaults>(raw, bookReaderDefaultsParser),
+      'bookreader-defaults'
+    );
   }
 
   @Memoize() get boxid(): StringField | undefined {
@@ -120,6 +135,10 @@ export class Metadata {
 
   @Memoize() get camera(): StringField | undefined {
     return this.field(StringField, 'camera');
+  }
+
+  @Memoize() get cameraman(): StringField | undefined {
+    return this.field(StringField, 'cameraman');
   }
 
   @Memoize() get canister(): StringField | undefined {
@@ -134,8 +153,9 @@ export class Metadata {
     return this.field(StringField, 'col_number');
   }
 
-  @Memoize() get collection_added(): StringListField | undefined {
-    return this.field(StringListField, 'collection_added');
+  /** Repeatable, so it arrives as an array of collection names. */
+  @Memoize() get collection_added(): StringField | undefined {
+    return this.field(StringField, 'collection_added');
   }
 
   @Memoize() get collection_library(): StringField | undefined {
@@ -144,6 +164,10 @@ export class Metadata {
 
   @Memoize() get collection_set(): StringField | undefined {
     return this.field(StringField, 'collection_set');
+  }
+
+  @Memoize() get copyright_holder(): StringField | undefined {
+    return this.field(StringField, 'copyright_holder');
   }
 
   @Memoize() get court(): StringField | undefined {
@@ -170,8 +194,13 @@ export class Metadata {
     return this.field(StringField, 'dari-title');
   }
 
+  /** Sent under either key ordering. */
   @Memoize() get dari_title_romanized(): StringField | undefined {
-    return this.field(StringField, 'dari-title-romanized');
+    return this.field(
+      StringField,
+      'dari-title-romanized',
+      'dari-romanized-title'
+    );
   }
 
   @Memoize() get date_case_filed(): DateField | undefined {
@@ -208,6 +237,10 @@ export class Metadata {
 
   @Memoize() get external_metadata_update(): DateField | undefined {
     return this.field(DateField, 'external_metadata_update');
+  }
+
+  @Memoize() get fail_reasons(): StringField | undefined {
+    return this.field(StringField, 'fail-reasons');
   }
 
   /** When the item's `files.xml` was written, e.g. `"Wed Mar 23 3:18:56 UTC 2011"`. */
@@ -544,6 +577,11 @@ export class Metadata {
     return this.field(StringField, 'md5');
   }
 
+  /** A checksum listing, in the same layouts as `md5s`. */
+  @Memoize() get md5contents(): ChecksumField | undefined {
+    return this.field(ChecksumField, 'md5contents');
+  }
+
   /**
    * The item's checksum listing, one file and digest per entry. Parses either
    * the `<md5> *<file>` or `<file>:<md5>` layout.
@@ -615,6 +653,10 @@ export class Metadata {
 
   @Memoize() get num_reviews(): NumberField | undefined {
     return this.field(NumberField, 'num_reviews');
+  }
+
+  @Memoize() get numeric_id(): NumberField | undefined {
+    return this.field(NumberField, 'numeric_id');
   }
 
   @Memoize() get numwarcs(): NumberField | undefined {
@@ -697,12 +739,12 @@ export class Metadata {
     return this.field(StringField, 'osf_registry');
   }
 
-  @Memoize() get osf_subjects(): StringListField | undefined {
-    return this.field(StringListField, 'osf_subjects');
+  @Memoize() get osf_subjects(): StringField | undefined {
+    return this.field(StringField, 'osf_subjects');
   }
 
-  @Memoize() get osf_tags(): StringListField | undefined {
-    return this.field(StringListField, 'osf_tags');
+  @Memoize() get osf_tags(): StringField | undefined {
+    return this.field(StringField, 'osf_tags');
   }
 
   @Memoize() get output_time_minutes(): NumberField | undefined {
@@ -757,8 +799,13 @@ export class Metadata {
     return this.field(StringField, 'pashto-title');
   }
 
+  /** Sent under either key ordering. */
   @Memoize() get pashto_title_romanized(): StringField | undefined {
-    return this.field(StringField, 'pashto-title-romanized');
+    return this.field(
+      StringField,
+      'pashto-title-romanized',
+      'romanized-pashto-title'
+    );
   }
 
   @Memoize() get pdf_degraded(): StringField | undefined {
@@ -799,6 +846,10 @@ export class Metadata {
 
   @Memoize() get publisher(): StringField | undefined {
     return this.field(StringField, 'publisher');
+  }
+
+  @Memoize() get political_religious_party(): StringField | undefined {
+    return this.field(StringField, 'political-religious-party');
   }
 
   @Memoize() get rcs_key(): NumberField | undefined {
@@ -1048,8 +1099,9 @@ export class Metadata {
     return this.field(DateField, 'updatedate');
   }
 
-  @Memoize() get updater(): StringListField | undefined {
-    return this.field(StringListField, 'updater');
+  /** Repeatable, so it arrives as an array of account names. */
+  @Memoize() get updater(): StringField | undefined {
+    return this.field(StringField, 'updater');
   }
 
   @Memoize() get uploader(): StringField | undefined {

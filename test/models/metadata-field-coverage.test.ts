@@ -365,7 +365,7 @@ describe('Metadata field parsing', () => {
     expect(metadata.sizehint?.value).to.equal(1001937261);
   });
 
-  it('exposes every value of a multi-value field', () => {
+  it('exposes every value of a repeatable field', () => {
     const metadata = new Metadata({
       identifier: 'foo',
       collection_added: ['archiveitpartners', 'archiveitdigitalcollection'],
@@ -437,6 +437,62 @@ describe('Metadata field parsing', () => {
       'a@archive.org',
       'b@archive.org'
     ]);
+  });
+
+  it('takes a repeatable field as a single undelimited value too', () => {
+    // the API sends one collection name rather than an array for some items
+    const metadata = new Metadata({
+      identifier: 'foo',
+      collection_added: 'etree',
+      updater: 'Brad Leblanc'
+    });
+    expect(metadata.collection_added?.values).to.deep.equal(['etree']);
+    // a name with a space must not be split apart
+    expect(metadata.updater?.values).to.deep.equal(['Brad Leblanc']);
+  });
+
+  it('parses bookreader-defaults against its documented values', () => {
+    const metadata = new Metadata({
+      identifier: 'foo',
+      'bookreader-defaults': 'mode/2up'
+    });
+    expect(metadata.bookreader_defaults?.value).to.equal('mode/2up');
+
+    const unknown = new Metadata({
+      identifier: 'foo',
+      'bookreader-defaults': 'mode/sideways'
+    });
+    expect(unknown.bookreader_defaults?.value).to.be.undefined;
+    expect(unknown.bookreader_defaults?.rawValue).to.equal('mode/sideways');
+  });
+
+  it('reads the romanized titles under either key ordering', () => {
+    const suffixed = new Metadata({
+      identifier: 'foo',
+      'dari-title-romanized': 'a',
+      'pashto-title-romanized': 'b'
+    });
+    expect(suffixed.dari_title_romanized?.value).to.equal('a');
+    expect(suffixed.pashto_title_romanized?.value).to.equal('b');
+
+    const prefixed = new Metadata({
+      identifier: 'foo',
+      'dari-romanized-title': 'c',
+      'romanized-pashto-title': 'd'
+    });
+    expect(prefixed.dari_title_romanized?.value).to.equal('c');
+    expect(prefixed.pashto_title_romanized?.value).to.equal('d');
+  });
+
+  it('parses md5contents like md5s', () => {
+    const metadata = new Metadata({
+      identifier: 'foo',
+      md5contents: '05f73115fdbc4de9fa8d60a4db686a56 *ulu2004-05-15t02.flac'
+    });
+    expect(metadata.md5contents?.value).to.deep.equal({
+      file: 'ulu2004-05-15t02.flac',
+      md5: '05f73115fdbc4de9fa8d60a4db686a56'
+    });
   });
 
   it('parses the files.xml timestamp', () => {
