@@ -81,6 +81,24 @@ function paramFromUrl(name: string): string | undefined {
   return value || undefined;
 }
 
+/**
+ * The filter split on commas, so `aspect, tuner` narrows to both rather than
+ * looking for one field with that whole string in its name.
+ */
+function filterTerms(query: string): string[] {
+  return query
+    .split(',')
+    .map(term => term.trim().toLowerCase())
+    .filter(Boolean);
+}
+
+/** True when the filter is empty, or `name` contains any one of its terms. */
+function matchesFilter(name: string, terms: string[]): boolean {
+  if (!terms.length) return true;
+  const lower = name.toLowerCase();
+  return terms.some(term => lower.includes(term));
+}
+
 /** Render any parsed value (Date, number, string, array, object) as text. */
 function display(value: unknown): string {
   if (value === undefined || value === null) return '—';
@@ -106,7 +124,7 @@ export class AppRoot extends LitElement {
   /** Raw keys present in the response that no field reads. */
   @state() private unmodeledKeys: string[] = [];
 
-  /** Filters the table down to field names containing this text. */
+  /** Comma-separated terms; a field shows when its name contains any of them. */
   @state() private query = paramFromUrl(FILTER_PARAM) ?? '';
 
   /** Whether to keep rows for fields the item leaves unset. */
@@ -261,12 +279,12 @@ export class AppRoot extends LitElement {
 
       <div class="toolbar">
         <label class="field">
-          <span>Filter fields</span>
+          <span>Filter fields (comma separated)</span>
           <input
             type="search"
             .value=${this.query}
             @input=${this.onQueryInput}
-            placeholder="e.g. date, aspect, codec"
+            placeholder="e.g. aspect, tuner, scandate"
           />
         </label>
         <label class="toggle">
@@ -288,9 +306,9 @@ export class AppRoot extends LitElement {
    * unset (unless asked for) and the ones the filter excludes.
    */
   private visibleFields(metadata: Metadata): string[] {
-    const query = this.query.trim().toLowerCase();
+    const terms = filterTerms(this.query);
     return MODELED_FIELDS.filter(name => {
-      if (query && !name.toLowerCase().includes(query)) return false;
+      if (!matchesFilter(name, terms)) return false;
       return this.showUnset || fieldValue(metadata, name) !== undefined;
     });
   }
@@ -350,10 +368,8 @@ export class AppRoot extends LitElement {
    */
   private renderUnmodeled() {
     if (!this.unmodeledKeys.length) return nothing;
-    const query = this.query.trim().toLowerCase();
-    const keys = query
-      ? this.unmodeledKeys.filter(key => key.toLowerCase().includes(query))
-      : this.unmodeledKeys;
+    const terms = filterTerms(this.query);
+    const keys = this.unmodeledKeys.filter(key => matchesFilter(key, terms));
 
     return html`
       <details class="unmodeled">
@@ -390,13 +406,22 @@ export class AppRoot extends LitElement {
     const url = new URL(window.location.href);
     const params: Record<string, string> = {
       [IDENTIFIER_PARAM]: this.identifier,
-      [FILTER_PARAM]: this.query
+      // The canonical term list rather than the raw text, so the shared link
+      // stays tidy however the filter was typed.
+      [FILTER_PARAM]: filterTerms(this.query).join(',')
     };
     for (const [name, value] of Object.entries(params)) {
       if (value.trim()) url.searchParams.set(name, value.trim());
       else url.searchParams.delete(name);
     }
-    window.history.replaceState({}, '', url);
+    // Commas are legal unencoded in a query string and a multi-field filter
+    // reads far better in a shared link, so undo the percent-encoding.
+    const search = url.search.replace(/%2C/g, ',');
+    window.history.replaceState(
+      {},
+      '',
+      `${url.origin}${url.pathname}${search}`
+    );
   }
 
   private onShowUnsetChange(event: Event): void {
