@@ -9,51 +9,49 @@ interface MetadataApiResponse {
   files?: unknown[];
 }
 
-/** A field on `Metadata` we want to surface in the demo table. */
-interface FieldRow {
-  label: string;
-  get: (metadata: Metadata) => MetadataFieldInterface<unknown> | undefined;
+/**
+ * Every field the model exposes, read off `Metadata`'s prototype getters. The
+ * table is built from this, so a field added to the model shows up in the demo
+ * without anyone touching this file. Sorted to give the table a stable order.
+ */
+const MODELED_FIELDS: string[] = Object.getOwnPropertyNames(Metadata.prototype)
+  .filter(
+    name =>
+      typeof Object.getOwnPropertyDescriptor(Metadata.prototype, name)?.get ===
+      'function'
+  )
+  .sort();
+
+/** Reads a field off the model by name. */
+function fieldValue(metadata: Metadata, name: string): unknown {
+  return (metadata as unknown as Record<string, unknown>)[name];
+}
+
+/** True for parsed field objects (`StringField`, `DateField`, and friends). */
+function isMetadataField(
+  value: unknown
+): value is MetadataFieldInterface<unknown> {
+  return typeof value === 'object' && value !== null && 'rawValue' in value;
 }
 
 /**
- * The fields rendered in the parsed-values table. Each shows how the model
- * normalizes the raw API value into a native type. Music-specific fields
- * (venue, taper, source, lineage) populate for live-recording items; the TV
- * Archive fields (aspect_ratio, closed_captioning, utc_offset, …) populate for
- * broadcast items and show the structured field types resolving.
+ * The raw keys the model reads, collected by handing `Metadata` a Proxy over the
+ * raw response and then touching every field. Comparing getter names to raw keys
+ * would miss the cases that matter here: keys that differ from their getter
+ * (`access-restricted-item`) and fields that fall back across several keys.
  */
-const FIELDS: FieldRow[] = [
-  { label: 'title', get: m => m.title },
-  { label: 'mediatype', get: m => m.mediatype },
-  { label: 'page_progression', get: m => m.page_progression },
-  { label: 'creator', get: m => m.creator },
-  { label: 'collection', get: m => m.collection },
-  { label: 'subject', get: m => m.subject },
-  { label: 'description', get: m => m.description },
-  { label: 'date', get: m => m.date },
-  { label: 'addeddate', get: m => m.addeddate },
-  { label: 'publicdate', get: m => m.publicdate },
-  { label: 'language', get: m => m.language },
-  { label: 'duration', get: m => m.duration },
-  { label: 'runtime', get: m => m.runtime },
-  { label: 'downloads', get: m => m.downloads },
-  { label: 'item_size', get: m => m.item_size },
-  { label: 'files_count', get: m => m.files_count },
-  { label: 'venue', get: m => m.venue },
-  { label: 'taper', get: m => m.taper },
-  { label: 'source', get: m => m.source },
-  { label: 'lineage', get: m => m.lineage },
-  { label: 'station_name', get: m => m.station_name },
-  { label: 'video_codec', get: m => m.video_codec },
-  { label: 'closed_captioning', get: m => m.closed_captioning },
-  { label: 'aspect_ratio', get: m => m.aspect_ratio },
-  { label: 'utc_offset', get: m => m.utc_offset },
-  { label: 'tuner', get: m => m.tuner },
-  { label: 'scandate', get: m => m.scandate },
-  { label: 'access_restricted_item', get: m => m.access_restricted_item },
-  { label: 'times', get: m => m.times },
-  { label: 'thumbs', get: m => m.thumbs }
-];
+function modeledRawKeys(raw: Record<string, unknown>): Set<string> {
+  const touched = new Set<string>();
+  const probe = new Proxy(raw, {
+    get(target, key) {
+      if (typeof key === 'string') touched.add(key);
+      return Reflect.get(target, key);
+    }
+  });
+  const metadata = new Metadata(probe);
+  for (const name of MODELED_FIELDS) fieldValue(metadata, name);
+  return touched;
+}
 
 /**
  * A few stable archive.org items demonstrating different metadata shapes.
@@ -70,6 +68,37 @@ const EXAMPLES = [
   'KGO_20101106_063500_Nightline'
 ];
 
+/**
+ * Query params the demo reads on load and keeps up to date, so a link can point
+ * someone at a particular item with the table already filtered.
+ */
+const IDENTIFIER_PARAM = 'identifier';
+const FILTER_PARAM = 'filter';
+
+/** A trimmed query param off the current URL, or undefined if absent or blank. */
+function paramFromUrl(name: string): string | undefined {
+  const value = new URLSearchParams(window.location.search).get(name)?.trim();
+  return value || undefined;
+}
+
+/**
+ * The filter split on commas, so `aspect, tuner` narrows to both rather than
+ * looking for one field with that whole string in its name.
+ */
+function filterTerms(query: string): string[] {
+  return query
+    .split(',')
+    .map(term => term.trim().toLowerCase())
+    .filter(Boolean);
+}
+
+/** True when the filter is empty, or `name` contains any one of its terms. */
+function matchesFilter(name: string, terms: string[]): boolean {
+  if (!terms.length) return true;
+  const lower = name.toLowerCase();
+  return terms.some(term => lower.includes(term));
+}
+
 /** Render any parsed value (Date, number, string, array, object) as text. */
 function display(value: unknown): string {
   if (value === undefined || value === null) return '—';
@@ -82,7 +111,7 @@ function display(value: unknown): string {
 
 @customElement('app-root')
 export class AppRoot extends LitElement {
-  @state() private identifier = EXAMPLES[0];
+  @state() private identifier = paramFromUrl(IDENTIFIER_PARAM) ?? EXAMPLES[0];
 
   @state() private metadata?: Metadata;
 
@@ -91,6 +120,15 @@ export class AppRoot extends LitElement {
   @state() private loading = false;
 
   @state() private error?: string;
+
+  /** Raw keys present in the response that no field reads. */
+  @state() private unmodeledKeys: string[] = [];
+
+  /** Comma-separated terms; a field shows when its name contains any of them. */
+  @state() private query = paramFromUrl(FILTER_PARAM) ?? '';
+
+  /** Whether to keep rows for fields the item leaves unset. */
+  @state() private showUnset = false;
 
   protected firstUpdated(): void {
     // Populate the table on load so the demo shows real data immediately.
@@ -117,15 +155,26 @@ export class AppRoot extends LitElement {
       if (!json.metadata) {
         throw new Error(`No item found for identifier “${identifier}”.`);
       }
-      this.metadata = new Metadata(json.metadata);
+      this.setMetadata(json.metadata);
       this.fileCount = json.files?.length;
+      this.syncUrl();
     } catch (e) {
       this.metadata = undefined;
       this.fileCount = undefined;
+      this.unmodeledKeys = [];
       this.error = e instanceof Error ? e.message : 'Failed to load item.';
     } finally {
       this.loading = false;
     }
+  }
+
+  /** Builds the model and works out which raw keys it leaves untouched. */
+  private setMetadata(raw: Record<string, unknown>): void {
+    this.metadata = new Metadata(raw);
+    const modeled = modeledRawKeys(raw);
+    this.unmodeledKeys = Object.keys(raw)
+      .filter(key => !modeled.has(key))
+      .sort();
   }
 
   private parseJson(): void {
@@ -139,7 +188,7 @@ export class AppRoot extends LitElement {
       const parsed = JSON.parse(text) as Record<string, unknown>;
       // Accept either a full API response or a bare metadata object.
       const raw = (parsed.metadata as Record<string, unknown>) ?? parsed;
-      this.metadata = new Metadata(raw);
+      this.setMetadata(raw);
       this.fileCount = undefined;
       this.error = undefined;
     } catch {
@@ -156,7 +205,9 @@ export class AppRoot extends LitElement {
           >archive.org</a
         >
         item metadata. Load an item by identifier (or paste raw JSON) to see how
-        each field is normalized from its raw API value into a native type.
+        each field is normalized from its raw API value into a native type. The
+        item and field filter stay in the URL, so you can link straight to a
+        view.
       </p>
 
       <form class="controls" @submit=${this.onSubmit}>
@@ -226,35 +277,155 @@ export class AppRoot extends LitElement {
         ? html`<p class="meta">${this.fileCount} files in response</p>`
         : nothing}
 
-      <table>
-        <thead>
-          <tr>
-            <th>Field</th>
-            <th><code>.value</code></th>
-            <th><code>.values</code></th>
-            <th><code>.rawValue</code></th>
-          </tr>
-        </thead>
-        <tbody>
-          ${FIELDS.map(field => {
-            const parsed = field.get(metadata);
-            if (!parsed) return nothing;
-            return html`
-              <tr>
-                <td><code>${field.label}</code></td>
-                <td>${display(parsed.value)}</td>
-                <td>${display(parsed.values)}</td>
-                <td class="raw">${display(parsed.rawValue)}</td>
-              </tr>
-            `;
-          })}
-        </tbody>
-      </table>
+      <div class="toolbar">
+        <label class="field">
+          <span>Filter fields (comma separated)</span>
+          <input
+            type="search"
+            .value=${this.query}
+            @input=${this.onQueryInput}
+            placeholder="e.g. aspect, tuner, scandate"
+          />
+        </label>
+        <label class="toggle">
+          <input
+            type="checkbox"
+            .checked=${this.showUnset}
+            @change=${this.onShowUnsetChange}
+          />
+          <span>Show unset fields</span>
+        </label>
+      </div>
+
+      ${this.renderTable(metadata)} ${this.renderUnmodeled()}
+    `;
+  }
+
+  /**
+   * The fields to show: every modeled field, minus the ones this item leaves
+   * unset (unless asked for) and the ones the filter excludes.
+   */
+  private visibleFields(metadata: Metadata): string[] {
+    const terms = filterTerms(this.query);
+    return MODELED_FIELDS.filter(name => {
+      if (!matchesFilter(name, terms)) return false;
+      return this.showUnset || fieldValue(metadata, name) !== undefined;
+    });
+  }
+
+  private renderTable(metadata: Metadata) {
+    const fields = this.visibleFields(metadata);
+    const setCount = MODELED_FIELDS.filter(
+      name => fieldValue(metadata, name) !== undefined
+    ).length;
+
+    return html`
+      <p class="meta">
+        Showing ${fields.length} of ${MODELED_FIELDS.length} modeled fields.
+        ${setCount} set on this item.
+      </p>
+      ${fields.length
+        ? html`
+            <table>
+              <thead>
+                <tr>
+                  <th>Field</th>
+                  <th><code>.value</code></th>
+                  <th><code>.values</code></th>
+                  <th><code>.rawValue</code></th>
+                </tr>
+              </thead>
+              <tbody>
+                ${fields.map(name => this.renderRow(metadata, name))}
+              </tbody>
+            </table>
+          `
+        : html`<p class="meta">No field names match that filter.</p>`}
+    `;
+  }
+
+  private renderRow(metadata: Metadata, name: string) {
+    const value = fieldValue(metadata, name);
+    // `identifier` is a plain string rather than a parsed field, so it has a
+    // value but no `.values` / `.rawValue` to show.
+    const cells = isMetadataField(value)
+      ? [display(value.value), display(value.values), display(value.rawValue)]
+      : [display(value), display(undefined), display(undefined)];
+
+    return html`
+      <tr class=${value === undefined ? 'unset' : ''}>
+        <td><code>${name}</code></td>
+        <td>${cells[0]}</td>
+        <td>${cells[1]}</td>
+        <td class="raw">${cells[2]}</td>
+      </tr>
+    `;
+  }
+
+  /**
+   * Raw keys the model doesn't read, so a field missing from the table above
+   * reads as a gap in the model rather than a gap in this demo.
+   */
+  private renderUnmodeled() {
+    if (!this.unmodeledKeys.length) return nothing;
+    const terms = filterTerms(this.query);
+    const keys = this.unmodeledKeys.filter(key => matchesFilter(key, terms));
+
+    return html`
+      <details class="unmodeled">
+        <summary>
+          ${keys.length === this.unmodeledKeys.length
+            ? this.unmodeledKeys.length
+            : `${keys.length} of ${this.unmodeledKeys.length}`}
+          raw keys the model doesn't expose
+        </summary>
+        ${keys.length
+          ? html`<p class="keys">
+              ${keys.map(key => html`<code>${key}</code>`)}
+            </p>`
+          : html`<p class="meta">No unmodeled keys match that filter.</p>`}
+      </details>
     `;
   }
 
   private onIdentifierInput(event: Event): void {
     this.identifier = (event.currentTarget as HTMLInputElement).value;
+  }
+
+  private onQueryInput(event: Event): void {
+    this.query = (event.currentTarget as HTMLInputElement).value;
+    this.syncUrl();
+  }
+
+  /**
+   * Mirrors the loaded item and the field filter into the URL, so the address bar
+   * is always a link to what's on screen. Blank values drop out of the query
+   * string rather than sitting there empty.
+   */
+  private syncUrl(): void {
+    const url = new URL(window.location.href);
+    const params: Record<string, string> = {
+      [IDENTIFIER_PARAM]: this.identifier,
+      // The canonical term list rather than the raw text, so the shared link
+      // stays tidy however the filter was typed.
+      [FILTER_PARAM]: filterTerms(this.query).join(',')
+    };
+    for (const [name, value] of Object.entries(params)) {
+      if (value.trim()) url.searchParams.set(name, value.trim());
+      else url.searchParams.delete(name);
+    }
+    // Commas are legal unencoded in a query string and a multi-field filter
+    // reads far better in a shared link, so undo the percent-encoding.
+    const search = url.search.replace(/%2C/g, ',');
+    window.history.replaceState(
+      {},
+      '',
+      `${url.origin}${url.pathname}${search}`
+    );
+  }
+
+  private onShowUnsetChange(event: Event): void {
+    this.showUnset = (event.currentTarget as HTMLInputElement).checked;
   }
 
   private onSubmit(event: Event): void {
@@ -364,6 +535,55 @@ export class AppRoot extends LitElement {
       color: #555;
       font-size: 0.85rem;
       margin-top: 0;
+    }
+
+    .toolbar {
+      display: flex;
+      align-items: flex-end;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin: 0.75rem 0;
+    }
+
+    .toggle {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.85rem;
+      white-space: nowrap;
+    }
+
+    .toggle input {
+      width: auto;
+    }
+
+    tr.unset td {
+      color: #999;
+    }
+
+    .unmodeled {
+      margin-top: 1rem;
+    }
+
+    .unmodeled summary {
+      cursor: pointer;
+      font-size: 0.85rem;
+      color: #555;
+    }
+
+    .keys {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin: 0.5rem 0 0;
+    }
+
+    .keys code {
+      background: #f0f0f0;
+      border: 1px solid #ddd;
+      border-radius: 3px;
+      padding: 0.1rem 0.3rem;
+      font-size: 0.8rem;
     }
 
     table {
