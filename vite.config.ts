@@ -6,6 +6,9 @@ export default defineConfig({
   base: './',
   root: resolve(__dirname, './demo'),
   build: {
+    // the demo labels each row with the class that parsed it, read off the
+    // constructor, so class names have to survive the build
+    minify: false,
     /**
      * This is the directory where the built files will be placed
      * that we upload to GitHub Pages.
