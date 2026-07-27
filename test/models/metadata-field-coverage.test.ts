@@ -314,10 +314,15 @@ describe('Metadata field parsing', () => {
       firstfiledate: '20201012200902',
       sponsordate: '20221130'
     });
-    expect(metadata.firstfiledate?.value?.toISOString()).to.equal(
-      '2020-10-13T03:09:02.000Z'
+
+    // A compact timestamp carries no zone, so it parses as local time and the
+    // expectation is built the same way to stay runner-independent.
+    expect(metadata.firstfiledate?.value?.getTime()).to.equal(
+      new Date(2020, 9, 12, 20, 9, 2).getTime()
     );
-    expect(metadata.sponsordate?.value?.getUTCFullYear()).to.equal(2022);
+    expect(metadata.sponsordate?.value?.getTime()).to.equal(
+      new Date(2022, 10, 30).getTime()
+    );
   });
 
   it('parses yes/no values into booleans', () => {
@@ -361,7 +366,10 @@ describe('Metadata field parsing', () => {
     ]);
     expect(metadata.collection_added?.value).to.equal('archiveitpartners');
     expect(metadata.updatedate?.values.length).to.equal(2);
-    expect(metadata.updatedate?.value?.getUTCFullYear()).to.equal(2011);
+    // no zone on either timestamp, so both sides are local time
+    expect(metadata.updatedate?.value?.getTime()).to.equal(
+      new Date(2011, 6, 17, 18, 38, 45).getTime()
+    );
   });
 
   it('reads the hyphenated keys the API returns', () => {
@@ -375,7 +383,10 @@ describe('Metadata field parsing', () => {
     expect(metadata.identifier_ark?.value).to.equal('ark:/13960/t1bk6nd8d');
     expect(metadata.bookreader_defaults?.value).to.equal('mode/1up');
     expect(metadata.archiveit_collection_id?.value).to.equal(10363);
-    expect(metadata.date_case_filed?.value?.getUTCFullYear()).to.equal(2000);
+    // the point here is that the hyphenated key is read at all, so assert the
+    // raw value rather than an instant that depends on the runner's zone
+    expect(metadata.date_case_filed?.rawValue).to.equal('2000-08-23');
+    expect(metadata.date_case_filed?.value).to.be.instanceOf(Date);
   });
 
   it('keeps the raw value when a number has leading zeros', () => {
