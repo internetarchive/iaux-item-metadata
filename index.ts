@@ -14,6 +14,11 @@ export {
 export type { AspectRatio } from './src/models/metadata-fields/field-types/aspect-ratio';
 export { BooleanField } from './src/models/metadata-fields/field-types/boolean';
 export { ByteField } from './src/models/metadata-fields/field-types/byte';
+export {
+  CurationField,
+  CurationParser
+} from './src/models/metadata-fields/field-types/curation';
+export type { Curation } from './src/models/metadata-fields/field-types/curation';
 export { DateField } from './src/models/metadata-fields/field-types/date';
 export { DurationField } from './src/models/metadata-fields/field-types/duration';
 export {
@@ -22,6 +27,7 @@ export {
 } from './src/models/metadata-fields/field-types/enum';
 export {
   ListField,
+  LineListField,
   NumberListField,
   StringListField
 } from './src/models/metadata-fields/field-types/list';

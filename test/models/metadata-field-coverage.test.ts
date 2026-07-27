@@ -37,7 +37,8 @@ const RAW: Record<string, MetadataRawValue> = {
   court: 'gasb',
   crawler: 'Heritrix',
   crawljob: 'tiktok',
-  curation: '[curator]validator@archive.org[/curator][date]20201123141634',
+  curation:
+    '[curator]validator@archive.org[/curator][date]20201123141634[/date][comment]checked for malware[/comment]',
   'dari-title': 'یک مجاهد سر مجاهد دیگر را می شوید.',
   'dari-title-romanized': "Yak Mujāhid  sar-'i Muj-'i digar-'i rā mishuyand.",
   'date-case-filed': '2000-08-23',
@@ -72,7 +73,7 @@ const RAW: Record<string, MetadataRawValue> = {
   license: 'https://creativecommons.org/licenses/by/4.0/legalcode',
   mature_content: 'No',
   md5: '0fc23e3f0fb2e6f720a35995909a95ed',
-  md5s: '1ddf028fde2ee3bdbc220ddea709aeab *Drunken Hearts 2012-06-02f',
+  md5s: '1ddf028fde2ee3bdbc220ddea709aeab *Drunken Hearts 2012-06-02flac16.md5\nce5725decb7633fbb666d8bd457c2a60 *Guster2003-07-02d1t007.shn',
   medium: '35mmb/wnegative',
   metadata_operator: 'associate-jercyl-tradio@archive.org',
   metasource_catalog: 'openlibrary',
@@ -387,6 +388,53 @@ describe('Metadata field parsing', () => {
     // raw value rather than an instant that depends on the runner's zone
     expect(metadata.date_case_filed?.rawValue).to.equal('2000-08-23');
     expect(metadata.date_case_filed?.value).to.be.instanceOf(Date);
+  });
+
+  it('parses the curation note into its parts', () => {
+    const metadata = new Metadata({
+      identifier: 'foo',
+      curation:
+        '[curator]validator@archive.org[/curator][date]20201123141634[/date][comment]checked for malware[/comment]'
+    });
+    expect(metadata.curation?.value?.curator).to.equal('validator@archive.org');
+    expect(metadata.curation?.value?.comment).to.equal('checked for malware');
+    expect(metadata.curation?.value?.date?.getTime()).to.equal(
+      new Date(2020, 10, 23, 14, 16, 34).getTime()
+    );
+  });
+
+  it('splits md5s on the newline, one checksum entry per line', () => {
+    const metadata = new Metadata({
+      identifier: 'foo',
+      md5s: 'aaa *first.flac\nbbb *second.flac'
+    });
+    expect(metadata.md5s?.values).to.deep.equal([
+      'aaa *first.flac',
+      'bbb *second.flac'
+    ]);
+  });
+
+  it('splits the semicolon-separated fee and operator fields', () => {
+    const metadata = new Metadata({
+      identifier: 'foo',
+      scanfee: '300;10;200',
+      republisher_operator: 'a@archive.org;b@archive.org'
+    });
+    expect(metadata.scanfee?.values).to.deep.equal([300, 10, 200]);
+    expect(metadata.republisher_operator?.values).to.deep.equal([
+      'a@archive.org',
+      'b@archive.org'
+    ]);
+  });
+
+  it('parses the files.xml timestamp', () => {
+    const metadata = new Metadata({
+      identifier: 'foo',
+      filesxml: 'Wed Mar 23 3:18:56 UTC 2011'
+    });
+    expect(metadata.filesxml?.value?.getTime()).to.equal(
+      Date.UTC(2011, 2, 23, 3, 18, 56)
+    );
   });
 
   it('keeps the raw value when a number has leading zeros', () => {

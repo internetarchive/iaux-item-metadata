@@ -9,8 +9,10 @@ import { ByteField } from './metadata-fields/field-types/byte';
 import { MediaTypeField } from './metadata-fields/field-types/mediatype';
 import {
   StringListField,
-  NumberListField
+  NumberListField,
+  LineListField
 } from './metadata-fields/field-types/list';
+import { CurationField } from './metadata-fields/field-types/curation';
 import { EnumField, EnumParser } from './metadata-fields/field-types/enum';
 import { AspectRatioField } from './metadata-fields/field-types/aspect-ratio';
 import { UtcOffsetField } from './metadata-fields/field-types/utc-offset';
@@ -156,8 +158,12 @@ export class Metadata {
     return this.field(StringField, 'crawljob');
   }
 
-  @Memoize() get curation(): StringField | undefined {
-    return this.field(StringField, 'curation');
+  /**
+   * The curation note, parsed from its bracketed tags into a curator, date,
+   * comment, and state.
+   */
+  @Memoize() get curation(): CurationField | undefined {
+    return this.field(CurationField, 'curation');
   }
 
   @Memoize() get dari_title(): StringField | undefined {
@@ -204,8 +210,9 @@ export class Metadata {
     return this.field(DateField, 'external_metadata_update');
   }
 
-  @Memoize() get filesxml(): StringField | undefined {
-    return this.field(StringField, 'filesxml');
+  /** When the item's `files.xml` was written, e.g. `"Wed Mar 23 3:18:56 UTC 2011"`. */
+  @Memoize() get filesxml(): DateField | undefined {
+    return this.field(DateField, 'filesxml');
   }
 
   /** Compact `YYYYMMDD[HHMMSS]` timestamp. */
@@ -536,8 +543,9 @@ export class Metadata {
     return this.field(StringField, 'md5');
   }
 
-  @Memoize() get md5s(): StringField | undefined {
-    return this.field(StringField, 'md5s');
+  /** One checksum entry per line, e.g. `<md5> *<file>` or `<file>:<md5>`. */
+  @Memoize() get md5s(): LineListField | undefined {
+    return this.field(LineListField, 'md5s');
   }
 
   @Memoize() get medium(): StringField | undefined {
@@ -802,8 +810,9 @@ export class Metadata {
     return this.field(DateField, 'republisher_date');
   }
 
-  @Memoize() get republisher_operator(): StringField | undefined {
-    return this.field(StringField, 'republisher_operator');
+  /** One or more operators, semicolon-separated when there are several. */
+  @Memoize() get republisher_operator(): StringListField | undefined {
+    return this.field(StringListField, 'republisher_operator');
   }
 
   @Memoize() get republisher_time(): NumberField | undefined {
@@ -863,8 +872,9 @@ export class Metadata {
     return this.field(DateField, 'scandate');
   }
 
-  @Memoize() get scanfee(): StringField | undefined {
-    return this.field(StringField, 'scanfee');
+  /** Semicolon-separated fee components, e.g. `"300;10;200"`. */
+  @Memoize() get scanfee(): NumberListField | undefined {
+    return this.field(NumberListField, 'scanfee');
   }
 
   @Memoize() get scanner(): StringField | undefined {
