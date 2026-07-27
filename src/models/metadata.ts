@@ -286,6 +286,12 @@ export class Metadata {
     return this.field(BooleanField, 'hidden');
   }
 
+  /**
+   * The runtime as it was originally written, before being normalized into
+   * {@link runtime}. Free-form prose like `"1.8 Hours"` or `"33 minutes"`, so
+   * it stays a string: `DurationParser` takes the leading number and drops the
+   * unit, reading `"1.8 Hours"` as 1.8 seconds. Read `runtime` for a duration.
+   */
   @Memoize() get ia_orig__runtime(): StringField | undefined {
     return this.field(StringField, 'ia_orig__runtime');
   }
