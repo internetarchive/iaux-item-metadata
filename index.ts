@@ -15,6 +15,11 @@ export type { AspectRatio } from './src/models/metadata-fields/field-types/aspec
 export { BooleanField } from './src/models/metadata-fields/field-types/boolean';
 export { ByteField } from './src/models/metadata-fields/field-types/byte';
 export {
+  ChecksumField,
+  ChecksumParser
+} from './src/models/metadata-fields/field-types/checksum';
+export type { Checksum } from './src/models/metadata-fields/field-types/checksum';
+export {
   CurationField,
   CurationParser
 } from './src/models/metadata-fields/field-types/curation';
@@ -27,7 +32,6 @@ export {
 } from './src/models/metadata-fields/field-types/enum';
 export {
   ListField,
-  LineListField,
   NumberListField,
   StringListField
 } from './src/models/metadata-fields/field-types/list';

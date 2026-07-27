@@ -403,14 +403,16 @@ describe('Metadata field parsing', () => {
     );
   });
 
-  it('splits md5s on the newline, one checksum entry per line', () => {
+  it('parses md5s into a file and digest per entry', () => {
     const metadata = new Metadata({
       identifier: 'foo',
-      md5s: 'aaa *first.flac\nbbb *second.flac'
+      md5s:
+        '6a78e6865622bd85f43c7ae0c392feed *first.flac\n' +
+        'second.flac:eecaebe7289ed7b05d19024f31249f89'
     });
     expect(metadata.md5s?.values).to.deep.equal([
-      'aaa *first.flac',
-      'bbb *second.flac'
+      { file: 'first.flac', md5: '6a78e6865622bd85f43c7ae0c392feed' },
+      { file: 'second.flac', md5: 'eecaebe7289ed7b05d19024f31249f89' }
     ]);
   });
 

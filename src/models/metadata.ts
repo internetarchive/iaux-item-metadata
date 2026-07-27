@@ -9,9 +9,9 @@ import { ByteField } from './metadata-fields/field-types/byte';
 import { MediaTypeField } from './metadata-fields/field-types/mediatype';
 import {
   StringListField,
-  NumberListField,
-  LineListField
+  NumberListField
 } from './metadata-fields/field-types/list';
+import { ChecksumField } from './metadata-fields/field-types/checksum';
 import { CurationField } from './metadata-fields/field-types/curation';
 import { EnumField, EnumParser } from './metadata-fields/field-types/enum';
 import { AspectRatioField } from './metadata-fields/field-types/aspect-ratio';
@@ -543,9 +543,12 @@ export class Metadata {
     return this.field(StringField, 'md5');
   }
 
-  /** One checksum entry per line, e.g. `<md5> *<file>` or `<file>:<md5>`. */
-  @Memoize() get md5s(): LineListField | undefined {
-    return this.field(LineListField, 'md5s');
+  /**
+   * The item's checksum listing, one file and digest per entry. Parses either
+   * the `<md5> *<file>` or `<file>:<md5>` layout.
+   */
+  @Memoize() get md5s(): ChecksumField | undefined {
+    return this.field(ChecksumField, 'md5s');
   }
 
   @Memoize() get medium(): StringField | undefined {

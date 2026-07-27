@@ -42,17 +42,3 @@ export class NumberListField extends ListField<number, ListParser<number>> {
     super(rawValue, parser);
   }
 }
-
-/**
- * The LineListField handles a list of strings held one per line, for fields
- * like `md5s` whose entries contain commas and semicolons of their own and so
- * can only be split on the newline.
- */
-export class LineListField extends ListField<string, ListParser<string>> {
-  constructor(rawValue: MetadataRawValue) {
-    const parser = new ListParser<string>(StringParser.shared, {
-      separators: ['\n']
-    });
-    super(rawValue, parser);
-  }
-}
