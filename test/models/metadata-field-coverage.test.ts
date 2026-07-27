@@ -347,6 +347,16 @@ describe('Metadata field parsing', () => {
     expect(metadata.noarchivetorrent?.value).to.equal(false);
   });
 
+  it('parses the 0/1 has_mp3 flag into a boolean', () => {
+    expect(
+      new Metadata({ identifier: 'foo', has_mp3: '0' }).has_mp3?.value
+    ).to.equal(false);
+
+    const set = new Metadata({ identifier: 'foo', has_mp3: '1' });
+    expect(set.has_mp3?.value).to.equal(true);
+    expect(set.has_mp3?.rawValue).to.equal('1');
+  });
+
   it('parses byte counts', () => {
     const metadata = new Metadata({
       identifier: 'foo',

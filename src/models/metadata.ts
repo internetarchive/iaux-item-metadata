@@ -240,8 +240,9 @@ export class Metadata {
     return this.field(StringField, 'guid');
   }
 
-  @Memoize() get has_mp3(): NumberField | undefined {
-    return this.field(NumberField, 'has_mp3');
+  /** A flag, spelled `0` or `1` in the API. */
+  @Memoize() get has_mp3(): BooleanField | undefined {
+    return this.field(BooleanField, 'has_mp3');
   }
 
   @Memoize() get height(): NumberField | undefined {
