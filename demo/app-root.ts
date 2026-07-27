@@ -35,6 +35,18 @@ function isMetadataField(
 }
 
 /**
+ * The field class that parsed a value, e.g. `DateField`. Read off the
+ * constructor rather than a lookup table so a new field type names itself,
+ * which is why the demo build leaves class names unminified.
+ */
+function fieldTypeName(value: unknown): string {
+  if (value === undefined) return '—';
+  if (isMetadataField(value)) return value.constructor?.name ?? 'unknown';
+  // `identifier` is handed back as a plain string
+  return typeof value;
+}
+
+/**
  * The raw keys the model reads, collected by handing `Metadata` a Proxy over the
  * raw response and then touching every field. Comparing getter names to raw keys
  * would miss the cases that matter here: keys that differ from their getter
@@ -326,19 +338,22 @@ export class AppRoot extends LitElement {
       </p>
       ${fields.length
         ? html`
-            <table>
-              <thead>
-                <tr>
-                  <th>Field</th>
-                  <th><code>.value</code></th>
-                  <th><code>.values</code></th>
-                  <th><code>.rawValue</code></th>
-                </tr>
-              </thead>
-              <tbody>
-                ${fields.map(name => this.renderRow(metadata, name))}
-              </tbody>
-            </table>
+            <div class="table-scroll">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Field</th>
+                    <th>Parsed as</th>
+                    <th><code>.value</code></th>
+                    <th><code>.values</code></th>
+                    <th><code>.rawValue</code></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${fields.map(name => this.renderRow(metadata, name))}
+                </tbody>
+              </table>
+            </div>
           `
         : html`<p class="meta">No field names match that filter.</p>`}
     `;
@@ -355,6 +370,7 @@ export class AppRoot extends LitElement {
     return html`
       <tr class=${value === undefined ? 'unset' : ''}>
         <td><code>${name}</code></td>
+        <td class="type">${fieldTypeName(value)}</td>
         <td>${cells[0]}</td>
         <td>${cells[1]}</td>
         <td class="raw">${cells[2]}</td>
@@ -441,11 +457,24 @@ export class AppRoot extends LitElement {
   static styles = css`
     :host {
       display: block;
-      max-width: 60rem;
+      /* wide enough for the structured values, which run long as JSON */
+      max-width: 110rem;
       margin: 0 auto;
       padding: 1rem;
       color: #222;
       line-height: 1.4;
+    }
+
+    /* the prose reads badly at the full table width */
+    h1,
+    :host > p {
+      max-width: 60rem;
+    }
+
+    /* identifiers are long unbroken tokens and will push the page sideways */
+    h2,
+    .examples button {
+      overflow-wrap: anywhere;
     }
 
     h1 {
@@ -586,10 +615,28 @@ export class AppRoot extends LitElement {
       font-size: 0.8rem;
     }
 
+    /* keep a wide table inside its own scroller rather than stretching the page */
+    .table-scroll {
+      overflow-x: auto;
+      max-width: 100%;
+    }
+
     table {
       border-collapse: collapse;
       width: 100%;
       font-size: 0.9rem;
+    }
+
+    td.type {
+      color: #555;
+      font-family: monospace;
+      font-size: 0.8rem;
+      white-space: nowrap;
+    }
+
+    /* the field name and its type are the anchors, so keep them intact */
+    tbody td:first-child {
+      white-space: nowrap;
     }
 
     th,
