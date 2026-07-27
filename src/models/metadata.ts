@@ -7,8 +7,14 @@ import { StringField } from './metadata-fields/field-types/string';
 import { PageProgressionField } from './metadata-fields/field-types/page-progression';
 import { ByteField } from './metadata-fields/field-types/byte';
 import { MediaTypeField } from './metadata-fields/field-types/mediatype';
-import { StringListField } from './metadata-fields/field-types/list';
+import {
+  StringListField,
+  NumberListField
+} from './metadata-fields/field-types/list';
 import { EnumField, EnumParser } from './metadata-fields/field-types/enum';
+import { AspectRatioField } from './metadata-fields/field-types/aspect-ratio';
+import { UtcOffsetField } from './metadata-fields/field-types/utc-offset';
+import { TunerField } from './metadata-fields/field-types/tuner';
 import { MetadataRawValue } from './metadata-fields/metadata-field';
 import { mapField } from './map-field';
 
@@ -19,6 +25,14 @@ const reviewsAllowedParser = new EnumParser<ReviewsAllowed>([
   'none',
   'frozen'
 ]);
+
+/** Allowed values for the `sound` item metadata field. */
+export type Sound = 'sound' | 'silent';
+const soundParser = new EnumParser<Sound>(['sound', 'silent']);
+
+/** Allowed values for the `color` item metadata field. */
+export type Color = 'color' | 'b&w';
+const colorParser = new EnumParser<Color>(['color', 'b&w']);
 
 /**
  * Metadata is an expansive model that describes an Item.
@@ -53,8 +67,20 @@ export class Metadata {
     return this.rawMetadata.identifier;
   }
 
+  @Memoize() get access_restricted_item(): BooleanField | undefined {
+    return this.field(BooleanField, 'access-restricted-item');
+  }
+
   @Memoize() get addeddate(): DateField | undefined {
     return this.field(DateField, 'addeddate');
+  }
+
+  /**
+   * The display aspect ratio, e.g. `"4:3"`, parsed into width, height, and a
+   * decimal ratio.
+   */
+  @Memoize() get aspect_ratio(): AspectRatioField | undefined {
+    return this.field(AspectRatioField, 'aspect_ratio');
   }
 
   @Memoize() get audio_codec(): StringField | undefined {
@@ -67,6 +93,22 @@ export class Metadata {
 
   @Memoize() get avg_rating(): NumberField | undefined {
     return this.field(NumberField, 'avg_rating');
+  }
+
+  @Memoize() get backup_location(): StringField | undefined {
+    return this.field(StringField, 'backup_location');
+  }
+
+  @Memoize() get ccnum(): StringField | undefined {
+    return this.field(StringField, 'ccnum');
+  }
+
+  /**
+   * Whether the broadcast included closed captioning. The raw `"yes"`/`"no"`
+   * value is parsed to a boolean.
+   */
+  @Memoize() get closed_captioning(): BooleanField | undefined {
+    return this.field(BooleanField, 'closed_captioning');
   }
 
   /**
@@ -104,6 +146,14 @@ export class Metadata {
    */
   @Memoize() get collection_size(): ByteField | undefined {
     return this.field(ByteField, 'collection_size');
+  }
+
+  @Memoize() get color(): EnumField<Color> | undefined {
+    return mapField(
+      this.rawMetadata,
+      raw => new EnumField<Color>(raw, colorParser),
+      'color'
+    );
   }
 
   @Memoize() get contact(): StringField | undefined {
@@ -180,6 +230,18 @@ export class Metadata {
     return this.field(NumberField, 'files_count');
   }
 
+  @Memoize() get frames_per_second(): NumberField | undefined {
+    return this.field(NumberField, 'frames_per_second');
+  }
+
+  @Memoize() get identifier_access(): StringField | undefined {
+    return this.field(StringField, 'identifier-access');
+  }
+
+  @Memoize() get imagecount(): NumberField | undefined {
+    return this.field(NumberField, 'imagecount');
+  }
+
   @Memoize() get indexdate(): DateField | undefined {
     return this.field(DateField, 'indexdate');
   }
@@ -242,6 +304,14 @@ export class Metadata {
     return this.field(MediaTypeField, 'mediatype');
   }
 
+  @Memoize() get mpeg_program(): NumberField | undefined {
+    return this.field(NumberField, 'mpeg_program');
+  }
+
+  @Memoize() get next_item(): StringField | undefined {
+    return this.field(StringField, 'next_item');
+  }
+
   @Memoize() get noindex(): BooleanField | undefined {
     return this.field(BooleanField, 'noindex');
   }
@@ -292,6 +362,14 @@ export class Metadata {
     return this.field(NumberField, 'ppi');
   }
 
+  @Memoize() get previous_item(): StringField | undefined {
+    return this.field(StringField, 'previous_item');
+  }
+
+  @Memoize() get program(): StringField | undefined {
+    return this.field(StringField, 'program');
+  }
+
   @Memoize() get publicdate(): DateField | undefined {
     return this.field(DateField, 'publicdate');
   }
@@ -329,8 +407,20 @@ export class Metadata {
     return this.field(DurationField, 'runtime');
   }
 
+  /**
+   * The scan/capture date. Parses compact `YYYYMMDD[HHMMSS]` timestamps in
+   * addition to standard date strings.
+   */
+  @Memoize() get scandate(): DateField | undefined {
+    return this.field(DateField, 'scandate');
+  }
+
   @Memoize() get scanner(): StringField | undefined {
     return this.field(StringField, 'scanner');
+  }
+
+  @Memoize() get scanningcenter(): StringField | undefined {
+    return this.field(StringField, 'scanningcenter');
   }
 
   @Memoize() get segments(): StringField | undefined {
@@ -341,8 +431,24 @@ export class Metadata {
     return this.field(StringField, 'shotlist');
   }
 
+  @Memoize() get sound(): EnumField<Sound> | undefined {
+    return mapField(
+      this.rawMetadata,
+      raw => new EnumField<Sound>(raw, soundParser),
+      'sound'
+    );
+  }
+
   @Memoize() get source(): StringField | undefined {
     return this.field(StringField, 'source');
+  }
+
+  @Memoize() get source_pixel_height(): NumberField | undefined {
+    return this.field(NumberField, 'source_pixel_height');
+  }
+
+  @Memoize() get source_pixel_width(): NumberField | undefined {
+    return this.field(NumberField, 'source_pixel_width');
   }
 
   @Memoize() get sponsor(): StringField | undefined {
@@ -357,6 +463,10 @@ export class Metadata {
     return this.field(DateField, 'start_time');
   }
 
+  @Memoize() get station_name(): StringField | undefined {
+    return this.field(StringField, 'station_name');
+  }
+
   @Memoize() get stop_time(): DateField | undefined {
     return this.field(DateField, 'stop_time');
   }
@@ -367,6 +477,14 @@ export class Metadata {
 
   @Memoize() get taper(): StringField | undefined {
     return this.field(StringField, 'taper');
+  }
+
+  @Memoize() get thumbs(): NumberListField | undefined {
+    return this.field(NumberListField, 'thumbs');
+  }
+
+  @Memoize() get times(): NumberListField | undefined {
+    return this.field(NumberListField, 'times');
   }
 
   @Memoize() get title(): StringField | undefined {
@@ -385,6 +503,14 @@ export class Metadata {
     return this.field(NumberField, 'track');
   }
 
+  /**
+   * The capture tuner setting. Parses the `"Channel <n> (<freq> MHz)"` form
+   * into channel and frequency; other formats expose only the raw value.
+   */
+  @Memoize() get tuner(): TunerField | undefined {
+    return this.field(TunerField, 'tuner');
+  }
+
   @Memoize() get type(): StringField | undefined {
     return this.field(StringField, 'type');
   }
@@ -393,12 +519,20 @@ export class Metadata {
     return this.field(StringField, 'uploader');
   }
 
-  @Memoize() get utc_offset(): NumberField | undefined {
-    return this.field(NumberField, 'utc_offset');
+  /**
+   * The UTC offset encoded as `±HHMM` (e.g. `"-800"`), parsed into hours,
+   * minutes, and total signed minutes.
+   */
+  @Memoize() get utc_offset(): UtcOffsetField | undefined {
+    return this.field(UtcOffsetField, 'utc_offset');
   }
 
   @Memoize() get venue(): StringField | undefined {
     return this.field(StringField, 'venue');
+  }
+
+  @Memoize() get video_codec(): StringField | undefined {
+    return this.field(StringField, 'video_codec');
   }
 
   @Memoize() get volume(): StringField | undefined {

@@ -64,7 +64,8 @@ const EXAMPLES = [
   'nasa',
   'goody',
   'eventsounds_pack',
-  'womeningovernmen0000jame'
+  'womeningovernmen0000jame',
+  'KGO_20101106_063500_Nightline'
 ];
 
 /**
