@@ -1,6 +1,2745 @@
-(function(){let e=document.createElement(`link`).relList;if(e&&e.supports&&e.supports(`modulepreload`))return;for(let e of document.querySelectorAll(`link[rel="modulepreload"]`))n(e);new MutationObserver(e=>{for(let t of e)if(t.type===`childList`)for(let e of t.addedNodes)e.tagName===`LINK`&&e.rel===`modulepreload`&&n(e)}).observe(document,{childList:!0,subtree:!0});function t(e){let t={};return e.integrity&&(t.integrity=e.integrity),e.referrerPolicy&&(t.referrerPolicy=e.referrerPolicy),e.crossOrigin===`use-credentials`?t.credentials=`include`:e.crossOrigin===`anonymous`?t.credentials=`omit`:t.credentials=`same-origin`,t}function n(e){if(e.ep)return;e.ep=!0;let n=t(e);fetch(e.href,n)}})();function e(e,t,n,r){var i=arguments.length,a=i<3?t:r===null?r=Object.getOwnPropertyDescriptor(t,n):r,o;if(typeof Reflect==`object`&&typeof Reflect.decorate==`function`)a=Reflect.decorate(e,t,n,r);else for(var s=e.length-1;s>=0;s--)(o=e[s])&&(a=(i<3?o(a):i>3?o(t,n,a):o(t,n))||a);return i>3&&a&&Object.defineProperty(t,n,a),a}var t=globalThis,n=t.ShadowRoot&&(t.ShadyCSS===void 0||t.ShadyCSS.nativeShadow)&&`adoptedStyleSheets`in Document.prototype&&`replace`in CSSStyleSheet.prototype,r=Symbol(),i=new WeakMap,a=class{constructor(e,t,n){if(this._$cssResult$=!0,n!==r)throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");this.cssText=e,this.t=t}get styleSheet(){let e=this.o,t=this.t;if(n&&e===void 0){let n=t!==void 0&&t.length===1;n&&(e=i.get(t)),e===void 0&&((this.o=e=new CSSStyleSheet).replaceSync(this.cssText),n&&i.set(t,e))}return e}toString(){return this.cssText}},o=e=>new a(typeof e==`string`?e:e+``,void 0,r),s=(e,...t)=>new a(e.length===1?e[0]:t.reduce((t,n,r)=>t+(e=>{if(!0===e._$cssResult$)return e.cssText;if(typeof e==`number`)return e;throw Error(`Value passed to 'css' function must be a 'css' function result: `+e+`. Use 'unsafeCSS' to pass non-literal values, but take care to ensure page security.`)})(n)+e[r+1],e[0]),e,r),c=(e,r)=>{if(n)e.adoptedStyleSheets=r.map(e=>e instanceof CSSStyleSheet?e:e.styleSheet);else for(let n of r){let r=document.createElement(`style`),i=t.litNonce;i!==void 0&&r.setAttribute(`nonce`,i),r.textContent=n.cssText,e.appendChild(r)}},l=n?e=>e:e=>e instanceof CSSStyleSheet?(e=>{let t=``;for(let n of e.cssRules)t+=n.cssText;return o(t)})(e):e,{is:u,defineProperty:ee,getOwnPropertyDescriptor:te,getOwnPropertyNames:ne,getOwnPropertySymbols:re,getPrototypeOf:ie}=Object,d=globalThis,ae=d.trustedTypes,oe=ae?ae.emptyScript:``,se=d.reactiveElementPolyfillSupport,f=(e,t)=>e,p={toAttribute(e,t){switch(t){case Boolean:e=e?oe:null;break;case Object:case Array:e=e==null?e:JSON.stringify(e)}return e},fromAttribute(e,t){let n=e;switch(t){case Boolean:n=e!==null;break;case Number:n=e===null?null:Number(e);break;case Object:case Array:try{n=JSON.parse(e)}catch{n=null}}return n}},ce=(e,t)=>!u(e,t),le={attribute:!0,type:String,converter:p,reflect:!1,useDefault:!1,hasChanged:ce};Symbol.metadata??=Symbol(`metadata`),d.litPropertyMetadata??=new WeakMap;var m=class extends HTMLElement{static addInitializer(e){this._$Ei(),(this.l??=[]).push(e)}static get observedAttributes(){return this.finalize(),this._$Eh&&[...this._$Eh.keys()]}static createProperty(e,t=le){if(t.state&&(t.attribute=!1),this._$Ei(),this.prototype.hasOwnProperty(e)&&((t=Object.create(t)).wrapped=!0),this.elementProperties.set(e,t),!t.noAccessor){let n=Symbol(),r=this.getPropertyDescriptor(e,n,t);r!==void 0&&ee(this.prototype,e,r)}}static getPropertyDescriptor(e,t,n){let{get:r,set:i}=te(this.prototype,e)??{get(){return this[t]},set(e){this[t]=e}};return{get:r,set(t){let a=r?.call(this);i?.call(this,t),this.requestUpdate(e,a,n)},configurable:!0,enumerable:!0}}static getPropertyOptions(e){return this.elementProperties.get(e)??le}static _$Ei(){if(this.hasOwnProperty(f(`elementProperties`)))return;let e=ie(this);e.finalize(),e.l!==void 0&&(this.l=[...e.l]),this.elementProperties=new Map(e.elementProperties)}static finalize(){if(this.hasOwnProperty(f(`finalized`)))return;if(this.finalized=!0,this._$Ei(),this.hasOwnProperty(f(`properties`))){let e=this.properties,t=[...ne(e),...re(e)];for(let n of t)this.createProperty(n,e[n])}let e=this[Symbol.metadata];if(e!==null){let t=litPropertyMetadata.get(e);if(t!==void 0)for(let[e,n]of t)this.elementProperties.set(e,n)}this._$Eh=new Map;for(let[e,t]of this.elementProperties){let n=this._$Eu(e,t);n!==void 0&&this._$Eh.set(n,e)}this.elementStyles=this.finalizeStyles(this.styles)}static finalizeStyles(e){let t=[];if(Array.isArray(e)){let n=new Set(e.flat(1/0).reverse());for(let e of n)t.unshift(l(e))}else e!==void 0&&t.push(l(e));return t}static _$Eu(e,t){let n=t.attribute;return!1===n?void 0:typeof n==`string`?n:typeof e==`string`?e.toLowerCase():void 0}constructor(){super(),this._$Ep=void 0,this.isUpdatePending=!1,this.hasUpdated=!1,this._$Em=null,this._$Ev()}_$Ev(){this._$ES=new Promise(e=>this.enableUpdating=e),this._$AL=new Map,this._$E_(),this.requestUpdate(),this.constructor.l?.forEach(e=>e(this))}addController(e){(this._$EO??=new Set).add(e),this.renderRoot!==void 0&&this.isConnected&&e.hostConnected?.()}removeController(e){this._$EO?.delete(e)}_$E_(){let e=new Map,t=this.constructor.elementProperties;for(let n of t.keys())this.hasOwnProperty(n)&&(e.set(n,this[n]),delete this[n]);e.size>0&&(this._$Ep=e)}createRenderRoot(){let e=this.shadowRoot??this.attachShadow(this.constructor.shadowRootOptions);return c(e,this.constructor.elementStyles),e}connectedCallback(){this.renderRoot??=this.createRenderRoot(),this.enableUpdating(!0),this._$EO?.forEach(e=>e.hostConnected?.())}enableUpdating(e){}disconnectedCallback(){this._$EO?.forEach(e=>e.hostDisconnected?.())}attributeChangedCallback(e,t,n){this._$AK(e,n)}_$ET(e,t){let n=this.constructor.elementProperties.get(e),r=this.constructor._$Eu(e,n);if(r!==void 0&&!0===n.reflect){let i=(n.converter?.toAttribute===void 0?p:n.converter).toAttribute(t,n.type);this._$Em=e,i==null?this.removeAttribute(r):this.setAttribute(r,i),this._$Em=null}}_$AK(e,t){let n=this.constructor,r=n._$Eh.get(e);if(r!==void 0&&this._$Em!==r){let e=n.getPropertyOptions(r),i=typeof e.converter==`function`?{fromAttribute:e.converter}:e.converter?.fromAttribute===void 0?p:e.converter;this._$Em=r;let a=i.fromAttribute(t,e.type);this[r]=a??this._$Ej?.get(r)??a,this._$Em=null}}requestUpdate(e,t,n,r=!1,i){if(e!==void 0){let a=this.constructor;if(!1===r&&(i=this[e]),n??=a.getPropertyOptions(e),!((n.hasChanged??ce)(i,t)||n.useDefault&&n.reflect&&i===this._$Ej?.get(e)&&!this.hasAttribute(a._$Eu(e,n))))return;this.C(e,t,n)}!1===this.isUpdatePending&&(this._$ES=this._$EP())}C(e,t,{useDefault:n,reflect:r,wrapped:i},a){n&&!(this._$Ej??=new Map).has(e)&&(this._$Ej.set(e,a??t??this[e]),!0!==i||a!==void 0)||(this._$AL.has(e)||(this.hasUpdated||n||(t=void 0),this._$AL.set(e,t)),!0===r&&this._$Em!==e&&(this._$Eq??=new Set).add(e))}async _$EP(){this.isUpdatePending=!0;try{await this._$ES}catch(e){Promise.reject(e)}let e=this.scheduleUpdate();return e!=null&&await e,!this.isUpdatePending}scheduleUpdate(){return this.performUpdate()}performUpdate(){if(!this.isUpdatePending)return;if(!this.hasUpdated){if(this.renderRoot??=this.createRenderRoot(),this._$Ep){for(let[e,t]of this._$Ep)this[e]=t;this._$Ep=void 0}let e=this.constructor.elementProperties;if(e.size>0)for(let[t,n]of e){let{wrapped:e}=n,r=this[t];!0!==e||this._$AL.has(t)||r===void 0||this.C(t,void 0,n,r)}}let e=!1,t=this._$AL;try{e=this.shouldUpdate(t),e?(this.willUpdate(t),this._$EO?.forEach(e=>e.hostUpdate?.()),this.update(t)):this._$EM()}catch(t){throw e=!1,this._$EM(),t}e&&this._$AE(t)}willUpdate(e){}_$AE(e){this._$EO?.forEach(e=>e.hostUpdated?.()),this.hasUpdated||(this.hasUpdated=!0,this.firstUpdated(e)),this.updated(e)}_$EM(){this._$AL=new Map,this.isUpdatePending=!1}get updateComplete(){return this.getUpdateComplete()}getUpdateComplete(){return this._$ES}shouldUpdate(e){return!0}update(e){this._$Eq&&=this._$Eq.forEach(e=>this._$ET(e,this[e])),this._$EM()}updated(e){}firstUpdated(e){}};m.elementStyles=[],m.shadowRootOptions={mode:`open`},m[f(`elementProperties`)]=new Map,m[f(`finalized`)]=new Map,se?.({ReactiveElement:m}),(d.reactiveElementVersions??=[]).push(`2.1.2`);var ue=globalThis,de=e=>e,h=ue.trustedTypes,fe=h?h.createPolicy(`lit-html`,{createHTML:e=>e}):void 0,pe=`$lit$`,g=`lit$${Math.random().toFixed(9).slice(2)}$`,me=`?`+g,he=`<${me}>`,_=document,v=()=>_.createComment(``),y=e=>e===null||typeof e!=`object`&&typeof e!=`function`,ge=Array.isArray,_e=e=>ge(e)||typeof e?.[Symbol.iterator]==`function`,ve=`[ 	
-\f\r]`,b=/<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g,ye=/-->/g,be=/>/g,x=RegExp(`>|${ve}(?:([^\\s"'>=/]+)(${ve}*=${ve}*(?:[^ \t\n\f\r"'\`<>=]|("|')|))|$)`,`g`),xe=/'/g,Se=/"/g,Ce=/^(?:script|style|textarea|title)$/i,S=(e=>(t,...n)=>({_$litType$:e,strings:t,values:n}))(1),C=Symbol.for(`lit-noChange`),w=Symbol.for(`lit-nothing`),we=new WeakMap,T=_.createTreeWalker(_,129);function Te(e,t){if(!ge(e)||!e.hasOwnProperty(`raw`))throw Error(`invalid template strings array`);return fe===void 0?t:fe.createHTML(t)}var Ee=(e,t)=>{let n=e.length-1,r=[],i,a=t===2?`<svg>`:t===3?`<math>`:``,o=b;for(let t=0;t<n;t++){let n=e[t],s,c,l=-1,u=0;for(;u<n.length&&(o.lastIndex=u,c=o.exec(n),c!==null);)u=o.lastIndex,o===b?c[1]===`!--`?o=ye:c[1]===void 0?c[2]===void 0?c[3]!==void 0&&(o=x):(Ce.test(c[2])&&(i=RegExp(`</`+c[2],`g`)),o=x):o=be:o===x?c[0]===`>`?(o=i??b,l=-1):c[1]===void 0?l=-2:(l=o.lastIndex-c[2].length,s=c[1],o=c[3]===void 0?x:c[3]===`"`?Se:xe):o===Se||o===xe?o=x:o===ye||o===be?o=b:(o=x,i=void 0);let ee=o===x&&e[t+1].startsWith(`/>`)?` `:``;a+=o===b?n+he:l>=0?(r.push(s),n.slice(0,l)+pe+n.slice(l)+g+ee):n+g+(l===-2?t:ee)}return[Te(e,a+(e[n]||`<?>`)+(t===2?`</svg>`:t===3?`</math>`:``)),r]},De=class e{constructor({strings:t,_$litType$:n},r){let i;this.parts=[];let a=0,o=0,s=t.length-1,c=this.parts,[l,u]=Ee(t,n);if(this.el=e.createElement(l,r),T.currentNode=this.el.content,n===2||n===3){let e=this.el.content.firstChild;e.replaceWith(...e.childNodes)}for(;(i=T.nextNode())!==null&&c.length<s;){if(i.nodeType===1){if(i.hasAttributes())for(let e of i.getAttributeNames())if(e.endsWith(pe)){let t=u[o++],n=i.getAttribute(e).split(g),r=/([.?@])?(.*)/.exec(t);c.push({type:1,index:a,name:r[2],strings:n,ctor:r[1]===`.`?Ae:r[1]===`?`?je:r[1]===`@`?Me:D}),i.removeAttribute(e)}else e.startsWith(g)&&(c.push({type:6,index:a}),i.removeAttribute(e));if(Ce.test(i.tagName)){let e=i.textContent.split(g),t=e.length-1;if(t>0){i.textContent=h?h.emptyScript:``;for(let n=0;n<t;n++)i.append(e[n],v()),T.nextNode(),c.push({type:2,index:++a});i.append(e[t],v())}}}else if(i.nodeType===8)if(i.data===me)c.push({type:2,index:a});else{let e=-1;for(;(e=i.data.indexOf(g,e+1))!==-1;)c.push({type:7,index:a}),e+=g.length-1}a++}}static createElement(e,t){let n=_.createElement(`template`);return n.innerHTML=e,n}};function E(e,t,n=e,r){if(t===C)return t;let i=r===void 0?n._$Cl:n._$Co?.[r],a=y(t)?void 0:t._$litDirective$;return i?.constructor!==a&&(i?._$AO?.(!1),a===void 0?i=void 0:(i=new a(e),i._$AT(e,n,r)),r===void 0?n._$Cl=i:(n._$Co??=[])[r]=i),i!==void 0&&(t=E(e,i._$AS(e,t.values),i,r)),t}var Oe=class{constructor(e,t){this._$AV=[],this._$AN=void 0,this._$AD=e,this._$AM=t}get parentNode(){return this._$AM.parentNode}get _$AU(){return this._$AM._$AU}u(e){let{el:{content:t},parts:n}=this._$AD,r=(e?.creationScope??_).importNode(t,!0);T.currentNode=r;let i=T.nextNode(),a=0,o=0,s=n[0];for(;s!==void 0;){if(a===s.index){let t;s.type===2?t=new ke(i,i.nextSibling,this,e):s.type===1?t=new s.ctor(i,s.name,s.strings,this,e):s.type===6&&(t=new Ne(i,this,e)),this._$AV.push(t),s=n[++o]}a!==s?.index&&(i=T.nextNode(),a++)}return T.currentNode=_,r}p(e){let t=0;for(let n of this._$AV)n!==void 0&&(n.strings===void 0?n._$AI(e[t]):(n._$AI(e,n,t),t+=n.strings.length-2)),t++}},ke=class e{get _$AU(){return this._$AM?._$AU??this._$Cv}constructor(e,t,n,r){this.type=2,this._$AH=w,this._$AN=void 0,this._$AA=e,this._$AB=t,this._$AM=n,this.options=r,this._$Cv=r?.isConnected??!0}get parentNode(){let e=this._$AA.parentNode,t=this._$AM;return t!==void 0&&e?.nodeType===11&&(e=t.parentNode),e}get startNode(){return this._$AA}get endNode(){return this._$AB}_$AI(e,t=this){e=E(this,e,t),y(e)?e===w||e==null||e===``?(this._$AH!==w&&this._$AR(),this._$AH=w):e!==this._$AH&&e!==C&&this._(e):e._$litType$===void 0?e.nodeType===void 0?_e(e)?this.k(e):this._(e):this.T(e):this.$(e)}O(e){return this._$AA.parentNode.insertBefore(e,this._$AB)}T(e){this._$AH!==e&&(this._$AR(),this._$AH=this.O(e))}_(e){this._$AH!==w&&y(this._$AH)?this._$AA.nextSibling.data=e:this.T(_.createTextNode(e)),this._$AH=e}$(e){let{values:t,_$litType$:n}=e,r=typeof n==`number`?this._$AC(e):(n.el===void 0&&(n.el=De.createElement(Te(n.h,n.h[0]),this.options)),n);if(this._$AH?._$AD===r)this._$AH.p(t);else{let e=new Oe(r,this),n=e.u(this.options);e.p(t),this.T(n),this._$AH=e}}_$AC(e){let t=we.get(e.strings);return t===void 0&&we.set(e.strings,t=new De(e)),t}k(t){ge(this._$AH)||(this._$AH=[],this._$AR());let n=this._$AH,r,i=0;for(let a of t)i===n.length?n.push(r=new e(this.O(v()),this.O(v()),this,this.options)):r=n[i],r._$AI(a),i++;i<n.length&&(this._$AR(r&&r._$AB.nextSibling,i),n.length=i)}_$AR(e=this._$AA.nextSibling,t){for(this._$AP?.(!1,!0,t);e!==this._$AB;){let t=de(e).nextSibling;de(e).remove(),e=t}}setConnected(e){this._$AM===void 0&&(this._$Cv=e,this._$AP?.(e))}},D=class{get tagName(){return this.element.tagName}get _$AU(){return this._$AM._$AU}constructor(e,t,n,r,i){this.type=1,this._$AH=w,this._$AN=void 0,this.element=e,this.name=t,this._$AM=r,this.options=i,n.length>2||n[0]!==``||n[1]!==``?(this._$AH=Array(n.length-1).fill(new String),this.strings=n):this._$AH=w}_$AI(e,t=this,n,r){let i=this.strings,a=!1;if(i===void 0)e=E(this,e,t,0),a=!y(e)||e!==this._$AH&&e!==C,a&&(this._$AH=e);else{let r=e,o,s;for(e=i[0],o=0;o<i.length-1;o++)s=E(this,r[n+o],t,o),s===C&&(s=this._$AH[o]),a||=!y(s)||s!==this._$AH[o],s===w?e=w:e!==w&&(e+=(s??``)+i[o+1]),this._$AH[o]=s}a&&!r&&this.j(e)}j(e){e===w?this.element.removeAttribute(this.name):this.element.setAttribute(this.name,e??``)}},Ae=class extends D{constructor(){super(...arguments),this.type=3}j(e){this.element[this.name]=e===w?void 0:e}},je=class extends D{constructor(){super(...arguments),this.type=4}j(e){this.element.toggleAttribute(this.name,!!e&&e!==w)}},Me=class extends D{constructor(e,t,n,r,i){super(e,t,n,r,i),this.type=5}_$AI(e,t=this){if((e=E(this,e,t,0)??w)===C)return;let n=this._$AH,r=e===w&&n!==w||e.capture!==n.capture||e.once!==n.once||e.passive!==n.passive,i=e!==w&&(n===w||r);r&&this.element.removeEventListener(this.name,this,n),i&&this.element.addEventListener(this.name,this,e),this._$AH=e}handleEvent(e){typeof this._$AH==`function`?this._$AH.call(this.options?.host??this.element,e):this._$AH.handleEvent(e)}},Ne=class{constructor(e,t,n){this.element=e,this.type=6,this._$AN=void 0,this._$AM=t,this.options=n}get _$AU(){return this._$AM._$AU}_$AI(e){E(this,e)}},Pe=ue.litHtmlPolyfillSupport;Pe?.(De,ke),(ue.litHtmlVersions??=[]).push(`3.3.3`);var Fe=(e,t,n)=>{let r=n?.renderBefore??t,i=r._$litPart$;if(i===void 0){let e=n?.renderBefore??null;r._$litPart$=i=new ke(t.insertBefore(v(),e),e,void 0,n??{})}return i._$AI(e),i},Ie=globalThis,O=class extends m{constructor(){super(...arguments),this.renderOptions={host:this},this._$Do=void 0}createRenderRoot(){let e=super.createRenderRoot();return this.renderOptions.renderBefore??=e.firstChild,e}update(e){let t=this.render();this.hasUpdated||(this.renderOptions.isConnected=this.isConnected),super.update(e),this._$Do=Fe(t,this.renderRoot,this.renderOptions)}connectedCallback(){super.connectedCallback(),this._$Do?.setConnected(!0)}disconnectedCallback(){super.disconnectedCallback(),this._$Do?.setConnected(!1)}render(){return C}};O._$litElement$=!0,O.finalized=!0,Ie.litElementHydrateSupport?.({LitElement:O});var Le=Ie.litElementPolyfillSupport;Le?.({LitElement:O}),(Ie.litElementVersions??=[]).push(`4.2.2`);var Re=e=>(t,n)=>{n===void 0?customElements.define(e,t):n.addInitializer(()=>{customElements.define(e,t)})},ze={attribute:!0,type:String,converter:p,reflect:!1,hasChanged:ce},Be=(e=ze,t,n)=>{let{kind:r,metadata:i}=n,a=globalThis.litPropertyMetadata.get(i);if(a===void 0&&globalThis.litPropertyMetadata.set(i,a=new Map),r===`setter`&&((e=Object.create(e)).wrapped=!0),a.set(n.name,e),r===`accessor`){let{name:r}=n;return{set(n){let i=t.get.call(this);t.set.call(this,n),this.requestUpdate(r,i,e,!0,n)},init(t){return t!==void 0&&this.C(r,void 0,e,t),t}}}if(r===`setter`){let{name:r}=n;return function(n){let i=this[r];t.call(this,n),this.requestUpdate(r,i,e,!0,n)}}throw Error(`Unsupported decorator location: `+r)};function Ve(e){return(t,n)=>typeof n==`object`?Be(e,t,n):((e,t,n)=>{let r=t.hasOwnProperty(n);return t.constructor.createProperty(n,e),r?Object.getOwnPropertyDescriptor(t,n):void 0})(e,t,n)}function k(e){return Ve({...e,state:!0,attribute:!1})}function A(e){let t,n,r;return typeof e==`object`?(t=e.hashFunction,n=e.expiring,r=e.tags):t=e,(e,i,a)=>{if(a.value!=null)a.value=Ue(a.value,t,n,r);else if(a.get!=null)a.get=Ue(a.get,t,n,r);else throw`Only put a Memoize() decorator on a method or get accessor.`}}var He=new Map;function Ue(e,t,n=0,r){let i=Symbol(`__memoized_map__`);return function(...a){let o;this.hasOwnProperty(i)||Object.defineProperty(this,i,{configurable:!1,enumerable:!1,writable:!1,value:new Map});let s=this[i];if(Array.isArray(r))for(let e of r)He.has(e)?He.get(e).push(s):He.set(e,[s]);if(t||a.length>0||n>0){let r;r=t===!0?a.map(e=>e.toString()).join(`!`):t?t.apply(this,a):a[0];let i=`${r}__timestamp`,c=!1;if(n>0)if(!s.has(i))c=!0;else{let e=s.get(i);c=Date.now()-e>n}s.has(r)&&!c?o=s.get(r):(o=e.apply(this,a),s.set(r,o),n>0&&s.set(i,Date.now()))}else{let t=this;s.has(t)?o=s.get(t):(o=e.apply(this,a),s.set(t,o))}return o}}var j=class{parseValue(e){if(typeof e==`string`){let t=e.trim().toLowerCase();if(t===`false`||t===`0`||t===`no`)return!1;if(t===`true`||t===`1`||t===`yes`)return!0}return!!e}};j.shared=new j;var M=class{parseValue(e){if(typeof e==`number`)return e;if(typeof e==`boolean`)return;let t=parseFloat(e);if(!Number.isNaN(t))return t}};M.shared=new M;var N=class{parseValue(e){return M.shared.parseValue(e)}};N.shared=new N;var P=class{parseValue(e){return this.parseCompactDate(e)||this.parseJSDate(e)||this.parseBracketDate(e)}parseCompactDate(e){if(typeof e!=`string`)return;let t=e.trim().match(/^(\d{4})(\d{2})(\d{2})(?:(\d{2})(\d{2})(\d{2}))?$/);if(!t)return;let[,n,r,i,a=`00`,o=`00`,s=`00`]=t,c=new Date(`${n}-${r}-${i}T${a}:${o}:${s}`);return Number.isNaN(c.getTime())?void 0:c}parseBracketDate(e){if(typeof e!=`string`)return;let t=e.match(/\[([0-9]{4})\]/);if(!(!t||t.length<2))return this.parseJSDate(t[1])}parseJSDate(e){if(typeof e!=`string`)return;let t=e;t.match(/^[0-9]{4}-[0-9]{2}-[0-9]{2}\s{1}[0-9]{2}:[0-9]{2}:[0-9]{2}$/)&&(t=t.replace(` `,`T`));let n=Date.parse(t);if(Number.isNaN(n))return;let r=new Date(t);return(t.match(/^[0-9]{4}$/)||t.match(/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/))&&(r=new Date(r.getTime()+r.getTimezoneOffset()*1e3*60)),r}};P.shared=new P;var F=class{parseValue(e){if(typeof e==`number`)return e;if(typeof e==`boolean`)return;let t=e.split(`:`),n;return n=t.length===1?this.parseNumberFormat(t[0]):this.parseColonSeparatedFormat(t),n}parseNumberFormat(e){let t=parseFloat(e);return Number.isNaN(t)&&(t=void 0),t}parseColonSeparatedFormat(e){let t=!1,n=e.map((n,r)=>{let i=parseFloat(n);if(Number.isNaN(i))return t=!0,0;let a=60**(e.length-1-r);return i*Math.floor(a)}).reduce((e,t)=>e+t,0);return t?void 0:n}};F.shared=new F;var We=class{parseValue(e){if(typeof e==`string`)return e}};We.shared=new We;var Ge=class{constructor(e,t){this.separators=[`;`,`,`],this.parser=e,t&&t.separators&&(this.separators=t.separators)}parseValue(e){let t=String(e),n=[];for(let e of this.separators)if(n=t.split(e),n.length>1)break;return this.parseListValues(n)}parseListValues(e){let t=e.map(e=>e.trim()).map(e=>this.parser.parseValue(e)),n=[];return t.forEach(e=>{e!==void 0&&n.push(e)}),n}},Ke=class{parseValue(e){if(typeof e==`string`)return e}};Ke.shared=new Ke;var I=class{parseValue(e){return String(e)}};I.shared=new I;function L(e,t,...n){for(let r of n){let n=e[r];if(n!=null)return t(n)}}function R(e,t,...n){return L(e,e=>t(e),...n)}var z=class{get name(){return this.rawValue.name}get source(){return this.rawValue.source}get btih(){return this.rawValue.btih}get md5(){return this.rawValue.md5}get format(){return this.rawValue.format}get mtime(){if(this.rawValue.mtime==null)return;let e=M.shared.parseValue(this.rawValue.mtime);if(e)return new Date(e*1e3)}get crc32(){return this.rawValue.crc32}get sha1(){return this.rawValue.sha1}get original(){return this.rawValue.original}get size(){return R(this.rawValue,e=>N.shared.parseValue(e),`size`)}get title(){return this.rawValue.title}get length(){return R(this.rawValue,e=>F.shared.parseValue(e),`length`)}get height(){return R(this.rawValue,e=>M.shared.parseValue(e),`height`)}get width(){return R(this.rawValue,e=>M.shared.parseValue(e),`width`)}get track(){return R(this.rawValue,e=>M.shared.parseValue(e),`track`)}get external_identifier(){return this.rawValue.external_identifier}get creator(){return this.rawValue.creator}get album(){return this.rawValue.album}get bitrate(){return R(this.rawValue,e=>M.shared.parseValue(e),`bitrate`)}get private(){return R(this.rawValue,e=>j.shared.parseValue(e),`private`)}constructor(e={}){this.rawValue=e}};e([A()],z.prototype,`mtime`,null),e([A()],z.prototype,`size`,null),e([A()],z.prototype,`length`,null),e([A()],z.prototype,`height`,null),e([A()],z.prototype,`width`,null),e([A()],z.prototype,`track`,null),e([A()],z.prototype,`bitrate`,null),e([A()],z.prototype,`private`,null);var B=class{get values(){return this.parseRawValue()}get value(){return this.values[0]}constructor(e,t){this.parser=e,this.rawValue=t}parseRawValue(){let e=Array.isArray(this.rawValue)?this.rawValue:[this.rawValue],t=[];return e.forEach(e=>{let n=this.parser.parseValue(e);Array.isArray(n)?t.push(...n):n!==void 0&&t.push(n)}),t}};e([A()],B.prototype,`values`,null),e([A()],B.prototype,`value`,null);var V=class extends B{constructor(e){super(j.shared,e)}},H=class extends B{constructor(e){super(P.shared,e)}},qe=class extends B{constructor(e){super(F.shared,e)}},U=class extends B{constructor(e){super(M.shared,e)}},W=class extends B{constructor(e){super(I.shared,e)}},G=class{constructor(e){this.allowed=e}parseValue(e){return typeof e==`string`&&this.allowed.includes(e)?e:void 0}},K=class extends B{constructor(e,t){super(t,e)}},Je=new G([`rl`,`lr`]),Ye=class extends K{constructor(e){super(e,Je)}},q=class extends B{constructor(e){super(N.shared,e)}},Xe=new G([`account`,`audio`,`collection`,`data`,`etree`,`image`,`movies`,`search`,`software`,`texts`,`web`]),Ze=class extends K{constructor(e){super(e,Xe)}},Qe=class extends B{constructor(e,t){super(t,e)}},$e=class extends Qe{constructor(e){let t=new Ge(I.shared);super(e,t)}},et=class extends Qe{constructor(e){let t=new Ge(M.shared);super(e,t)}},tt=/^([0-9a-f]{32})\s+\*?(.+)$/i,nt=/^(.+):([0-9a-f]{32})$/i;function rt(e){let t=e.match(tt);if(t)return{file:t[2].trim(),md5:t[1].toLowerCase()};let n=e.match(nt);if(n)return{file:n[1].trim(),md5:n[2].toLowerCase()}}var it=class{parseValue(e){if(typeof e!=`string`)return;let t=e.split(`
-`).map(e=>e.trim()).filter(Boolean).map(rt).filter(e=>e!==void 0);return t.length?t:void 0}};it.shared=new it;var at=class extends B{constructor(e){super(it.shared,e)}};function J(e,t){return(e.match(RegExp(`\\[${t}\\]([\\s\\S]*?)\\[/${t}\\]`,`i`))?.[1])?.trim()||void 0}var ot=class{parseValue(e){if(typeof e!=`string`)return;let t=J(e,`curator`),n=J(e,`date`),r=J(e,`comment`),i=J(e,`state`);if(!(!t&&!n&&!r&&!i))return{curator:t,date:n?P.shared.parseValue(n):void 0,comment:r,state:i}}};ot.shared=new ot;var st=class extends B{constructor(e){super(ot.shared,e)}},ct=class{parseValue(e){if(typeof e!=`string`)return;let t=e.match(/^\s*(\d+(?:\.\d+)?)\s*[:/x]\s*(\d+(?:\.\d+)?)\s*$/i);if(!t)return;let n=parseFloat(t[1]),r=parseFloat(t[2]);if(r)return{width:n,height:r,decimal:n/r}}};ct.shared=new ct;var lt=class extends B{constructor(e){super(ct.shared,e)}},ut=class{parseValue(e){let t=String(e).trim().match(/^([+-]?)(\d{1,2}):?(\d{2})$/);if(!t)return;let n=t[1]===`-`?-1:1,r=parseInt(t[2],10),i=parseInt(t[3],10);return{hours:n*r,minutes:i,totalMinutes:n*(r*60+i)}}};ut.shared=new ut;var dt=class extends B{constructor(e){super(ut.shared,e)}},ft=class{parseValue(e){if(typeof e!=`string`)return;let t=e.match(/Channel\s+(\d+)(?:\s*\(\s*([\d.]+)\s*MHz\s*\))?/i);if(t)return{channel:parseInt(t[1],10),frequencyMhz:t[2]?parseFloat(t[2]):void 0}}};ft.shared=new ft;var pt=class extends B{constructor(e){super(ft.shared,e)}},mt=new G([`true`,`none`,`frozen`]),ht=new G([`sound`,`silent`]),gt=new G([`color`,`b&w`]),_t=new G([`mode/1up`,`mode/2up`,`mode/thumb`]),Y=class{get access(){return this.field(W,`access`)}get adder(){return this.field(W,`adder`)}get amrc_id(){return this.field(W,`amrc-id`)}get archiveit_account_id(){return this.field(U,`archiveit-account-id`)}get archiveit_account_organization_name(){return this.field(W,`archiveit-account-organization-name`)}get archiveit_collection_id(){return this.field(U,`archiveit-collection-id`)}get archiveit_collection_name(){return this.field(W,`archiveit-collection-name`)}get archiveit_job_type(){return this.field(W,`archiveit-job-type`)}get audit_time_minutes(){return this.field(U,`audit_time_minutes`)}get auditor(){return this.field(W,`auditor`)}get author(){return this.field(W,`author`)}get autocrop_version(){return this.field(W,`autocrop_version`)}get bookplateleaf(){return this.field(U,`bookplateleaf`)}get bookreader_defaults(){return L(this.rawMetadata,e=>new K(e,_t),`bookreader-defaults`)}get boxid(){return this.field(W,`boxid`)}get camera(){return this.field(W,`camera`)}get cameraman(){return this.field(W,`cameraman`)}get canister(){return this.field(W,`canister`)}get case_name(){return this.field(W,`case-name`)}get col_number(){return this.field(W,`col_number`)}get collection_added(){return this.field(W,`collection_added`)}get collection_library(){return this.field(W,`collection-library`)}get collection_set(){return this.field(W,`collection_set`)}get copyright_holder(){return this.field(W,`copyright_holder`)}get court(){return this.field(W,`court`)}get crawler(){return this.field(W,`crawler`)}get crawljob(){return this.field(W,`crawljob`)}get curation(){return this.field(st,`curation`)}get dari_title(){return this.field(W,`dari-title`)}get dari_title_romanized(){return this.field(W,`dari-title-romanized`,`dari-romanized-title`)}get date_case_filed(){return this.field(H,`date-case-filed`)}get date_case_terminated(){return this.field(H,`date-case-terminated`)}get date_created(){return this.field(H,`date_created`)}get date_last_filing(){return this.field(H,`date-last-filing`)}get derive_submittime(){return this.field(H,`derive_submittime`)}get derive_version(){return this.field(W,`derive_version`)}get discs(){return this.field(U,`discs`)}get docket_num(){return this.field(W,`docket-num`)}get external_metadata_update(){return this.field(H,`external_metadata_update`)}get fail_reasons(){return this.field(W,`fail-reasons`)}get filesxml(){return this.field(H,`filesxml`)}get firstfiledate(){return this.field(H,`firstfiledate`)}get firstfileserial(){return this.field(U,`firstfileserial`)}get foldoutcount(){return this.field(U,`foldoutcount`)}get format(){return this.field(W,`format`)}get geo_restricted(){return this.field(W,`geo_restricted`)}get guid(){return this.field(W,`guid`)}get has_mp3(){return this.field(V,`has_mp3`)}get height(){return this.field(U,`height`)}get hidden(){return this.field(V,`hidden`)}get ia_orig__runtime(){return this.field(W,`ia_orig__runtime`)}get identifier(){return this.rawMetadata.identifier}get access_restricted_item(){return this.field(V,`access-restricted-item`)}get addeddate(){return this.field(H,`addeddate`)}get aspect_ratio(){return this.field(lt,`aspect_ratio`)}get audio_codec(){return this.field(W,`audio_codec`)}get audio_sample_rate(){return this.field(U,`audio_sample_rate`)}get avg_rating(){return this.field(U,`avg_rating`)}get backup_location(){return this.field(W,`backup_location`)}get ccnum(){return this.field(W,`ccnum`)}get closed_captioning(){return this.field(V,`closed_captioning`)}get collection(){return this.field(W,`collection`)}get collections_raw(){return this.field(W,`collections_raw`)}get collection_size(){return this.field(q,`collection_size`)}get color(){return L(this.rawMetadata,e=>new K(e,gt),`color`)}get contact(){return this.field(W,`contact`)}get contributor(){return this.field(W,`contributor`)}get coverage(){return this.field(W,`coverage`)}get creator(){return this.field(W,`creator`)}get creator_alt_script(){return this.field(W,`creator-alt-script`)}get credits(){return this.field(W,`credits`)}get collection_layout(){return this.field(W,`collection_layout`)}get date(){return this.field(H,`date`)}get description(){return this.field(W,`description`)}get downloads(){return this.field(U,`downloads`)}get duration(){return this.field(qe,`duration`)}get external_identifier(){return this.field(W,`external-identifier`)}get external_link(){return this.field(W,`external-link`)}get files_count(){return this.field(U,`files_count`)}get frames_per_second(){return this.field(U,`frames_per_second`)}get identifier_access(){return this.field(W,`identifier-access`)}get identifier_ark(){return this.field(W,`identifier-ark`)}get identifier_bib(){return this.field(W,`identifier-bib`)}get image_count(){return this.field(U,`image_count`)}get imagecount(){return this.field(U,`imagecount`)}get indexdate(){return this.field(H,`indexdate`)}get invoice(){return this.field(U,`invoice`)}get isbn(){return this.field(W,`isbn`)}get issue(){return this.field(W,`issue`)}get issue_count(){return this.field(U,`issue_count`)}get issue_page_count(){return this.field(U,`issue_page_count`)}get item_count(){return this.field(U,`item_count`)}get item_size(){return this.field(q,`item_size`)}get language(){return this.field(W,`language`)}get lastdate(){return this.field(H,`lastdate`)}get lastfiledate(){return this.field(H,`lastfiledate`)}get lastfileserial(){return this.field(U,`lastfileserial`)}get length(){return this.field(qe,`length`)}get license(){return this.field(W,`license`)}get licenseurl(){return this.field(W,`licenseurl`)}get lineage(){return this.field(W,`lineage`)}get mature_content(){return this.field(V,`mature_content`)}get md5(){return this.field(W,`md5`)}get md5contents(){return this.field(at,`md5contents`)}get md5s(){return this.field(at,`md5s`)}get medium(){return this.field(W,`medium`)}get metadata_operator(){return this.field(W,`metadata_operator`)}get metasource_catalog(){return this.field(W,`metasource_catalog`)}get monochromatic(){return this.field(V,`monochromatic`)}get month(){return this.field(U,`month`)}get mediatype(){return this.field(Ze,`mediatype`)}get mpeg_program(){return this.field(U,`mpeg_program`)}get next_item(){return this.field(W,`next_item`)}get noarchivetorrent(){return this.field(V,`noarchivetorrent`)}get noindex(){return this.field(V,`noindex`)}get notes(){return this.field(W,`notes`)}get num_favorites(){return this.field(U,`num_favorites`)}get num_reviews(){return this.field(U,`num_reviews`)}get numeric_id(){return this.field(U,`numeric_id`)}get numwarcs(){return this.field(U,`numwarcs`)}get ocr(){return this.field(W,`ocr`)}get ocr_autonomous(){return this.field(V,`ocr_autonomous`)}get ocr_detected_lang(){return this.field(W,`ocr_detected_lang`)}get ocr_detected_lang_conf(){return this.field(U,`ocr_detected_lang_conf`)}get ocr_detected_script(){return this.field(W,`ocr_detected_script`)}get ocr_detected_script_conf(){return this.field(U,`ocr_detected_script_conf`)}get ocr_invalid_language(){return this.field(W,`ocr_invalid_language`)}get ocr_module_version(){return this.field(W,`ocr_module_version`)}get ocr_parameters(){return this.field(W,`ocr_parameters`)}get old_pallet(){return this.field(W,`old_pallet`)}get openlibrary_edition(){return this.field(W,`openlibrary_edition`)}get openlibrary_work(){return this.field(W,`openlibrary_work`)}get operator(){return this.field(W,`operator`)}get originalurl(){return this.field(W,`originalurl`)}get osf_category(){return this.field(W,`osf_category`)}get osf_project(){return this.field(W,`osf_project`)}get osf_registration_doi(){return this.field(W,`osf_registration_doi`)}get osf_registration_schema(){return this.field(W,`osf_registration_schema`)}get osf_registry(){return this.field(W,`osf_registry`)}get osf_subjects(){return this.field(W,`osf_subjects`)}get osf_tags(){return this.field(W,`osf_tags`)}get output_time_minutes(){return this.field(U,`output_time_minutes`)}get pacer_case_num(){return this.field(U,`pacer-case-num`)}get packaging_time_minutes(){return this.field(U,`packaging_time_minutes`)}get page_number_confidence(){return this.field(U,`page_number_confidence`)}get page_number_module_version(){return this.field(W,`page_number_module_version`)}get page_progression(){return this.field(Ye,`page-progression`,`page_progression`)}get paginated(){return this.field(V,`paginated`)}get parse_date(){return this.field(H,`parse_date`)}get parse_state(){return this.field(W,`parse_state`)}get partner(){return this.field(W,`partner`)}get pashto_title(){return this.field(W,`pashto-title`)}get pashto_title_romanized(){return this.field(W,`pashto-title-romanized`,`romanized-pashto-title`)}get pdf_degraded(){return this.field(W,`pdf_degraded`)}get pdf_module_version(){return this.field(W,`pdf_module_version`)}get pick(){return this.field(U,`pick`)}get podcastindexid(){return this.field(U,`podcastindexid`)}get post_text(){return this.field(W,`post_text`)}get ppi(){return this.field(U,`ppi`)}get previous_item(){return this.field(W,`previous_item`)}get program(){return this.field(W,`program`)}get publicdate(){return this.field(H,`publicdate`)}get publisher(){return this.field(W,`publisher`)}get political_religious_party(){return this.field(W,`political-religious-party`)}get rcs_key(){return this.field(U,`rcs_key`)}get repub_state(){return this.field(U,`repub_state`)}get republisher_date(){return this.field(H,`republisher_date`)}get republisher_operator(){return this.field($e,`republisher_operator`)}get republisher_time(){return this.field(U,`republisher_time`)}get reviewdate(){return this.field(H,`reviewdate`)}get reviews_allowed(){return L(this.rawMetadata,e=>new K(e,mt),`reviews-allowed`)}get ribbon_state(){return this.field(W,`ribbon_state`)}get ribbon_state_modify_date(){return this.field(H,`ribbon_state_modify_date`)}get rights(){return this.field(W,`rights`)}get rights_holder(){return this.field(W,`rights-holder`,`rights_holder`)}get rssfeed(){return this.field(W,`rssfeed`)}get runtime(){return this.field(qe,`runtime`)}get scan_time_minutes(){return this.field(U,`scan_time_minutes`)}get scandate(){return this.field(H,`scandate`)}get scanfee(){return this.field(et,`scanfee`)}get scanner(){return this.field(W,`scanner`)}get scanner_operator(){return this.field(W,`scanner_operator`)}get scanningcenter(){return this.field(W,`scanningcenter`)}get scribe3_search_catalog(){return this.field(W,`scribe3_search_catalog`)}get scribe3_search_id(){return this.field(W,`scribe3_search_id`)}get segments(){return this.field(W,`segments`)}get sessionid(){return this.field(W,`sessionid`)}get shndiscs(){return this.field(U,`shndiscs`)}get shotlist(){return this.field(W,`shotlist`)}get signal_path(){return this.field(W,`signal-path`)}get size(){return this.field(q,`size`)}get sizehint(){return this.field(q,`sizehint`)}get software_version(){return this.field(W,`software_version`)}get sort_order(){return this.field(W,`sort_order`)}get sound(){return L(this.rawMetadata,e=>new K(e,ht),`sound`)}get soundcreator(){return this.field(W,`soundcreator`)}get soundtitle(){return this.field(W,`soundtitle`)}get source(){return this.field(W,`source`)}get source_pixel_height(){return this.field(U,`source_pixel_height`)}get source_pixel_width(){return this.field(U,`source_pixel_width`)}get source_url(){return this.field(W,`source_url`)}get sponsor(){return this.field(W,`sponsor`)}get sponsordate(){return this.field(H,`sponsordate`)}get start_localtime(){return this.field(H,`start_localtime`)}get start_time(){return this.field(H,`start_time`)}get station_name(){return this.field(W,`station_name`)}get stop_time(){return this.field(H,`stop_time`)}get subject(){return this.field($e,`subject`)}get taper(){return this.field(W,`taper`)}get thumbs(){return this.field(et,`thumbs`)}get times(){return this.field(et,`times`)}get title(){return this.field(W,`title`)}get title_alt_script(){return this.field(W,`title-alt-script`)}get transferer(){return this.field(W,`transferer`)}get track(){return this.field(U,`track`)}get tts_version(){return this.field(W,`tts_version`)}get tuner(){return this.field(pt,`tuner`)}get type(){return this.field(W,`type`)}get updatedate(){return this.field(H,`updatedate`)}get updater(){return this.field(W,`updater`)}get uploader(){return this.field(W,`uploader`)}get uploadsoftware(){return this.field(W,`uploadsoftware`)}get utc_offset(){return this.field(dt,`utc_offset`)}get venue(){return this.field(W,`venue`)}get video_codec(){return this.field(W,`video_codec`)}get volume(){return this.field(W,`volume`)}get website(){return this.field(W,`website`)}get week(){return this.field(U,`week`)}get width(){return this.field(U,`width`)}get year(){return this.field(U,`year`)}field(e,...t){return L(this.rawMetadata,t=>new e(t),...t)}constructor(e={}){this.rawMetadata=e}};e([A()],Y.prototype,`access`,null),e([A()],Y.prototype,`adder`,null),e([A()],Y.prototype,`amrc_id`,null),e([A()],Y.prototype,`archiveit_account_id`,null),e([A()],Y.prototype,`archiveit_account_organization_name`,null),e([A()],Y.prototype,`archiveit_collection_id`,null),e([A()],Y.prototype,`archiveit_collection_name`,null),e([A()],Y.prototype,`archiveit_job_type`,null),e([A()],Y.prototype,`audit_time_minutes`,null),e([A()],Y.prototype,`auditor`,null),e([A()],Y.prototype,`author`,null),e([A()],Y.prototype,`autocrop_version`,null),e([A()],Y.prototype,`bookplateleaf`,null),e([A()],Y.prototype,`bookreader_defaults`,null),e([A()],Y.prototype,`boxid`,null),e([A()],Y.prototype,`camera`,null),e([A()],Y.prototype,`cameraman`,null),e([A()],Y.prototype,`canister`,null),e([A()],Y.prototype,`case_name`,null),e([A()],Y.prototype,`col_number`,null),e([A()],Y.prototype,`collection_added`,null),e([A()],Y.prototype,`collection_library`,null),e([A()],Y.prototype,`collection_set`,null),e([A()],Y.prototype,`copyright_holder`,null),e([A()],Y.prototype,`court`,null),e([A()],Y.prototype,`crawler`,null),e([A()],Y.prototype,`crawljob`,null),e([A()],Y.prototype,`curation`,null),e([A()],Y.prototype,`dari_title`,null),e([A()],Y.prototype,`dari_title_romanized`,null),e([A()],Y.prototype,`date_case_filed`,null),e([A()],Y.prototype,`date_case_terminated`,null),e([A()],Y.prototype,`date_created`,null),e([A()],Y.prototype,`date_last_filing`,null),e([A()],Y.prototype,`derive_submittime`,null),e([A()],Y.prototype,`derive_version`,null),e([A()],Y.prototype,`discs`,null),e([A()],Y.prototype,`docket_num`,null),e([A()],Y.prototype,`external_metadata_update`,null),e([A()],Y.prototype,`fail_reasons`,null),e([A()],Y.prototype,`filesxml`,null),e([A()],Y.prototype,`firstfiledate`,null),e([A()],Y.prototype,`firstfileserial`,null),e([A()],Y.prototype,`foldoutcount`,null),e([A()],Y.prototype,`format`,null),e([A()],Y.prototype,`geo_restricted`,null),e([A()],Y.prototype,`guid`,null),e([A()],Y.prototype,`has_mp3`,null),e([A()],Y.prototype,`height`,null),e([A()],Y.prototype,`hidden`,null),e([A()],Y.prototype,`ia_orig__runtime`,null),e([A()],Y.prototype,`access_restricted_item`,null),e([A()],Y.prototype,`addeddate`,null),e([A()],Y.prototype,`aspect_ratio`,null),e([A()],Y.prototype,`audio_codec`,null),e([A()],Y.prototype,`audio_sample_rate`,null),e([A()],Y.prototype,`avg_rating`,null),e([A()],Y.prototype,`backup_location`,null),e([A()],Y.prototype,`ccnum`,null),e([A()],Y.prototype,`closed_captioning`,null),e([A()],Y.prototype,`collection`,null),e([A()],Y.prototype,`collections_raw`,null),e([A()],Y.prototype,`collection_size`,null),e([A()],Y.prototype,`color`,null),e([A()],Y.prototype,`contact`,null),e([A()],Y.prototype,`contributor`,null),e([A()],Y.prototype,`coverage`,null),e([A()],Y.prototype,`creator`,null),e([A()],Y.prototype,`creator_alt_script`,null),e([A()],Y.prototype,`credits`,null),e([A()],Y.prototype,`collection_layout`,null),e([A()],Y.prototype,`date`,null),e([A()],Y.prototype,`description`,null),e([A()],Y.prototype,`downloads`,null),e([A()],Y.prototype,`duration`,null),e([A()],Y.prototype,`external_identifier`,null),e([A()],Y.prototype,`external_link`,null),e([A()],Y.prototype,`files_count`,null),e([A()],Y.prototype,`frames_per_second`,null),e([A()],Y.prototype,`identifier_access`,null),e([A()],Y.prototype,`identifier_ark`,null),e([A()],Y.prototype,`identifier_bib`,null),e([A()],Y.prototype,`image_count`,null),e([A()],Y.prototype,`imagecount`,null),e([A()],Y.prototype,`indexdate`,null),e([A()],Y.prototype,`invoice`,null),e([A()],Y.prototype,`isbn`,null),e([A()],Y.prototype,`issue`,null),e([A()],Y.prototype,`issue_count`,null),e([A()],Y.prototype,`issue_page_count`,null),e([A()],Y.prototype,`item_count`,null),e([A()],Y.prototype,`item_size`,null),e([A()],Y.prototype,`language`,null),e([A()],Y.prototype,`lastdate`,null),e([A()],Y.prototype,`lastfiledate`,null),e([A()],Y.prototype,`lastfileserial`,null),e([A()],Y.prototype,`length`,null),e([A()],Y.prototype,`license`,null),e([A()],Y.prototype,`licenseurl`,null),e([A()],Y.prototype,`lineage`,null),e([A()],Y.prototype,`mature_content`,null),e([A()],Y.prototype,`md5`,null),e([A()],Y.prototype,`md5contents`,null),e([A()],Y.prototype,`md5s`,null),e([A()],Y.prototype,`medium`,null),e([A()],Y.prototype,`metadata_operator`,null),e([A()],Y.prototype,`metasource_catalog`,null),e([A()],Y.prototype,`monochromatic`,null),e([A()],Y.prototype,`month`,null),e([A()],Y.prototype,`mediatype`,null),e([A()],Y.prototype,`mpeg_program`,null),e([A()],Y.prototype,`next_item`,null),e([A()],Y.prototype,`noarchivetorrent`,null),e([A()],Y.prototype,`noindex`,null),e([A()],Y.prototype,`notes`,null),e([A()],Y.prototype,`num_favorites`,null),e([A()],Y.prototype,`num_reviews`,null),e([A()],Y.prototype,`numeric_id`,null),e([A()],Y.prototype,`numwarcs`,null),e([A()],Y.prototype,`ocr`,null),e([A()],Y.prototype,`ocr_autonomous`,null),e([A()],Y.prototype,`ocr_detected_lang`,null),e([A()],Y.prototype,`ocr_detected_lang_conf`,null),e([A()],Y.prototype,`ocr_detected_script`,null),e([A()],Y.prototype,`ocr_detected_script_conf`,null),e([A()],Y.prototype,`ocr_invalid_language`,null),e([A()],Y.prototype,`ocr_module_version`,null),e([A()],Y.prototype,`ocr_parameters`,null),e([A()],Y.prototype,`old_pallet`,null),e([A()],Y.prototype,`openlibrary_edition`,null),e([A()],Y.prototype,`openlibrary_work`,null),e([A()],Y.prototype,`operator`,null),e([A()],Y.prototype,`originalurl`,null),e([A()],Y.prototype,`osf_category`,null),e([A()],Y.prototype,`osf_project`,null),e([A()],Y.prototype,`osf_registration_doi`,null),e([A()],Y.prototype,`osf_registration_schema`,null),e([A()],Y.prototype,`osf_registry`,null),e([A()],Y.prototype,`osf_subjects`,null),e([A()],Y.prototype,`osf_tags`,null),e([A()],Y.prototype,`output_time_minutes`,null),e([A()],Y.prototype,`pacer_case_num`,null),e([A()],Y.prototype,`packaging_time_minutes`,null),e([A()],Y.prototype,`page_number_confidence`,null),e([A()],Y.prototype,`page_number_module_version`,null),e([A()],Y.prototype,`page_progression`,null),e([A()],Y.prototype,`paginated`,null),e([A()],Y.prototype,`parse_date`,null),e([A()],Y.prototype,`parse_state`,null),e([A()],Y.prototype,`partner`,null),e([A()],Y.prototype,`pashto_title`,null),e([A()],Y.prototype,`pashto_title_romanized`,null),e([A()],Y.prototype,`pdf_degraded`,null),e([A()],Y.prototype,`pdf_module_version`,null),e([A()],Y.prototype,`pick`,null),e([A()],Y.prototype,`podcastindexid`,null),e([A()],Y.prototype,`post_text`,null),e([A()],Y.prototype,`ppi`,null),e([A()],Y.prototype,`previous_item`,null),e([A()],Y.prototype,`program`,null),e([A()],Y.prototype,`publicdate`,null),e([A()],Y.prototype,`publisher`,null),e([A()],Y.prototype,`political_religious_party`,null),e([A()],Y.prototype,`rcs_key`,null),e([A()],Y.prototype,`repub_state`,null),e([A()],Y.prototype,`republisher_date`,null),e([A()],Y.prototype,`republisher_operator`,null),e([A()],Y.prototype,`republisher_time`,null),e([A()],Y.prototype,`reviewdate`,null),e([A()],Y.prototype,`reviews_allowed`,null),e([A()],Y.prototype,`ribbon_state`,null),e([A()],Y.prototype,`ribbon_state_modify_date`,null),e([A()],Y.prototype,`rights`,null),e([A()],Y.prototype,`rights_holder`,null),e([A()],Y.prototype,`rssfeed`,null),e([A()],Y.prototype,`runtime`,null),e([A()],Y.prototype,`scan_time_minutes`,null),e([A()],Y.prototype,`scandate`,null),e([A()],Y.prototype,`scanfee`,null),e([A()],Y.prototype,`scanner`,null),e([A()],Y.prototype,`scanner_operator`,null),e([A()],Y.prototype,`scanningcenter`,null),e([A()],Y.prototype,`scribe3_search_catalog`,null),e([A()],Y.prototype,`scribe3_search_id`,null),e([A()],Y.prototype,`segments`,null),e([A()],Y.prototype,`sessionid`,null),e([A()],Y.prototype,`shndiscs`,null),e([A()],Y.prototype,`shotlist`,null),e([A()],Y.prototype,`signal_path`,null),e([A()],Y.prototype,`size`,null),e([A()],Y.prototype,`sizehint`,null),e([A()],Y.prototype,`software_version`,null),e([A()],Y.prototype,`sort_order`,null),e([A()],Y.prototype,`sound`,null),e([A()],Y.prototype,`soundcreator`,null),e([A()],Y.prototype,`soundtitle`,null),e([A()],Y.prototype,`source`,null),e([A()],Y.prototype,`source_pixel_height`,null),e([A()],Y.prototype,`source_pixel_width`,null),e([A()],Y.prototype,`source_url`,null),e([A()],Y.prototype,`sponsor`,null),e([A()],Y.prototype,`sponsordate`,null),e([A()],Y.prototype,`start_localtime`,null),e([A()],Y.prototype,`start_time`,null),e([A()],Y.prototype,`station_name`,null),e([A()],Y.prototype,`stop_time`,null),e([A()],Y.prototype,`subject`,null),e([A()],Y.prototype,`taper`,null),e([A()],Y.prototype,`thumbs`,null),e([A()],Y.prototype,`times`,null),e([A()],Y.prototype,`title`,null),e([A()],Y.prototype,`title_alt_script`,null),e([A()],Y.prototype,`transferer`,null),e([A()],Y.prototype,`track`,null),e([A()],Y.prototype,`tts_version`,null),e([A()],Y.prototype,`tuner`,null),e([A()],Y.prototype,`type`,null),e([A()],Y.prototype,`updatedate`,null),e([A()],Y.prototype,`updater`,null),e([A()],Y.prototype,`uploader`,null),e([A()],Y.prototype,`uploadsoftware`,null),e([A()],Y.prototype,`utc_offset`,null),e([A()],Y.prototype,`venue`,null),e([A()],Y.prototype,`video_codec`,null),e([A()],Y.prototype,`volume`,null),e([A()],Y.prototype,`website`,null),e([A()],Y.prototype,`week`,null),e([A()],Y.prototype,`width`,null),e([A()],Y.prototype,`year`,null);var vt=class{get reviewbody(){return this.rawValue.reviewbody}get reviewtitle(){return this.rawValue.reviewtitle}get reviewer(){return this.rawValue.reviewer}get reviewer_itemname(){return this.rawValue.reviewer_itemname}get reviewdate(){return R(this.rawValue,e=>P.shared.parseValue(e),`reviewdate`)}get createdate(){return R(this.rawValue,e=>P.shared.parseValue(e),`createdate`)}get stars(){return R(this.rawValue,e=>M.shared.parseValue(e),`stars`)}constructor(e={}){this.rawValue=e}};e([A()],vt.prototype,`reviewdate`,null),e([A()],vt.prototype,`createdate`,null),e([A()],vt.prototype,`stars`,null);var X=Object.getOwnPropertyNames(Y.prototype).filter(e=>typeof Object.getOwnPropertyDescriptor(Y.prototype,e)?.get==`function`).sort();function Z(e,t){return e[t]}function yt(e){return typeof e==`object`&&!!e&&`rawValue`in e}function bt(e){let t=new Set,n=new Y(new Proxy(e,{get(e,n){return typeof n==`string`&&t.add(n),Reflect.get(e,n)}}));for(let e of X)Z(n,e);return t}var xt=[`gd73-06-10.sbd.hollister.174.sbeok.shnf`,`nasa`,`goody`,`eventsounds_pack`,`womeningovernmen0000jame`,`KGO_20101106_063500_Nightline`],St=`identifier`,Ct=`filter`;function wt(e){return new URLSearchParams(window.location.search).get(e)?.trim()||void 0}function Tt(e){return e.split(`,`).map(e=>e.trim().toLowerCase()).filter(Boolean)}function Et(e,t){if(!t.length)return!0;let n=e.toLowerCase();return t.some(e=>n.includes(e))}function Q(e){return e==null?`—`:e instanceof Date?e.toISOString():Array.isArray(e)?e.length?e.map(Q).join(`, `):`—`:typeof e==`object`?JSON.stringify(e):String(e)}var $=class extends O{constructor(){super(...arguments),this.identifier=wt(St)??xt[0],this.loading=!1,this.unmodeledKeys=[],this.query=wt(Ct)??``,this.showUnset=!1}firstUpdated(){this.loadFromArchive()}async loadFromArchive(){let e=this.identifier.trim();if(!e){this.error=`Enter an archive.org identifier.`;return}this.loading=!0,this.error=void 0;try{let t=await fetch(`https://archive.org/metadata/${encodeURIComponent(e)}`);if(!t.ok)throw Error(`Request failed (${t.status})`);let n=await t.json();if(!n.metadata)throw Error(`No item found for identifier “${e}”.`);this.setMetadata(n.metadata),this.fileCount=n.files?.length,this.syncUrl()}catch(e){this.metadata=void 0,this.fileCount=void 0,this.unmodeledKeys=[],this.error=e instanceof Error?e.message:`Failed to load item.`}finally{this.loading=!1}}setMetadata(e){this.metadata=new Y(e);let t=bt(e);this.unmodeledKeys=Object.keys(e).filter(e=>!t.has(e)).sort()}parseJson(){let e=this.shadowRoot?.querySelector(`textarea`)?.value??``;if(!e.trim()){this.error=`Paste some metadata JSON first.`;return}try{let t=JSON.parse(e),n=t.metadata??t;this.setMetadata(n),this.fileCount=void 0,this.error=void 0}catch{this.error=`Could not parse that as JSON.`}}render(){return S`
+//#region \0vite/modulepreload-polyfill.js
+(function polyfill() {
+	const relList = document.createElement("link").relList;
+	if (relList && relList.supports && relList.supports("modulepreload")) return;
+	for (const link of document.querySelectorAll("link[rel=\"modulepreload\"]")) processPreload(link);
+	new MutationObserver((mutations) => {
+		for (const mutation of mutations) {
+			if (mutation.type !== "childList") continue;
+			for (const node of mutation.addedNodes) if (node.tagName === "LINK" && node.rel === "modulepreload") processPreload(node);
+		}
+	}).observe(document, {
+		childList: true,
+		subtree: true
+	});
+	function getFetchOpts(link) {
+		const fetchOpts = {};
+		if (link.integrity) fetchOpts.integrity = link.integrity;
+		if (link.referrerPolicy) fetchOpts.referrerPolicy = link.referrerPolicy;
+		if (link.crossOrigin === "use-credentials") fetchOpts.credentials = "include";
+		else if (link.crossOrigin === "anonymous") fetchOpts.credentials = "omit";
+		else fetchOpts.credentials = "same-origin";
+		return fetchOpts;
+	}
+	function processPreload(link) {
+		if (link.ep) return;
+		link.ep = true;
+		const fetchOpts = getFetchOpts(link);
+		fetch(link.href, fetchOpts);
+	}
+})();
+//#endregion
+//#region node_modules/tslib/tslib.es6.mjs
+function __decorate(decorators, target, key, desc) {
+	var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+	if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+	else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+	return c > 3 && r && Object.defineProperty(target, key, r), r;
+}
+//#endregion
+//#region node_modules/@lit/reactive-element/css-tag.js
+/**
+* @license
+* Copyright 2019 Google LLC
+* SPDX-License-Identifier: BSD-3-Clause
+*/
+var t$2 = globalThis, e$2 = t$2.ShadowRoot && (void 0 === t$2.ShadyCSS || t$2.ShadyCSS.nativeShadow) && "adoptedStyleSheets" in Document.prototype && "replace" in CSSStyleSheet.prototype, s$2 = Symbol(), o$4 = /* @__PURE__ */ new WeakMap();
+var n$3 = class {
+	constructor(t, e, o) {
+		if (this._$cssResult$ = !0, o !== s$2) throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");
+		this.cssText = t, this.t = e;
+	}
+	get styleSheet() {
+		let t = this.o;
+		const s = this.t;
+		if (e$2 && void 0 === t) {
+			const e = void 0 !== s && 1 === s.length;
+			e && (t = o$4.get(s)), void 0 === t && ((this.o = t = new CSSStyleSheet()).replaceSync(this.cssText), e && o$4.set(s, t));
+		}
+		return t;
+	}
+	toString() {
+		return this.cssText;
+	}
+};
+var r$4 = (t) => new n$3("string" == typeof t ? t : t + "", void 0, s$2), i$3 = (t, ...e) => {
+	return new n$3(1 === t.length ? t[0] : e.reduce((e, s, o) => e + ((t) => {
+		if (!0 === t._$cssResult$) return t.cssText;
+		if ("number" == typeof t) return t;
+		throw Error("Value passed to 'css' function must be a 'css' function result: " + t + ". Use 'unsafeCSS' to pass non-literal values, but take care to ensure page security.");
+	})(s) + t[o + 1], t[0]), t, s$2);
+}, S$1 = (s, o) => {
+	if (e$2) s.adoptedStyleSheets = o.map((t) => t instanceof CSSStyleSheet ? t : t.styleSheet);
+	else for (const e of o) {
+		const o = document.createElement("style"), n = t$2.litNonce;
+		void 0 !== n && o.setAttribute("nonce", n), o.textContent = e.cssText, s.appendChild(o);
+	}
+}, c$2 = e$2 ? (t) => t : (t) => t instanceof CSSStyleSheet ? ((t) => {
+	let e = "";
+	for (const s of t.cssRules) e += s.cssText;
+	return r$4(e);
+})(t) : t;
+//#endregion
+//#region node_modules/@lit/reactive-element/reactive-element.js
+/**
+* @license
+* Copyright 2017 Google LLC
+* SPDX-License-Identifier: BSD-3-Clause
+*/ var { is: i$2, defineProperty: e$1, getOwnPropertyDescriptor: h$1, getOwnPropertyNames: r$3, getOwnPropertySymbols: o$3, getPrototypeOf: n$2 } = Object, a$1 = globalThis, c$1 = a$1.trustedTypes, l$1 = c$1 ? c$1.emptyScript : "", p$1 = a$1.reactiveElementPolyfillSupport, d$1 = (t, s) => t, u$1 = {
+	toAttribute(t, s) {
+		switch (s) {
+			case Boolean:
+				t = t ? l$1 : null;
+				break;
+			case Object:
+			case Array: t = null == t ? t : JSON.stringify(t);
+		}
+		return t;
+	},
+	fromAttribute(t, s) {
+		let i = t;
+		switch (s) {
+			case Boolean:
+				i = null !== t;
+				break;
+			case Number:
+				i = null === t ? null : Number(t);
+				break;
+			case Object:
+			case Array: try {
+				i = JSON.parse(t);
+			} catch (t) {
+				i = null;
+			}
+		}
+		return i;
+	}
+}, f$1 = (t, s) => !i$2(t, s), b$1 = {
+	attribute: !0,
+	type: String,
+	converter: u$1,
+	reflect: !1,
+	useDefault: !1,
+	hasChanged: f$1
+};
+Symbol.metadata ??= Symbol("metadata"), a$1.litPropertyMetadata ??= /* @__PURE__ */ new WeakMap();
+var y$1 = class extends HTMLElement {
+	static addInitializer(t) {
+		this._$Ei(), (this.l ??= []).push(t);
+	}
+	static get observedAttributes() {
+		return this.finalize(), this._$Eh && [...this._$Eh.keys()];
+	}
+	static createProperty(t, s = b$1) {
+		if (s.state && (s.attribute = !1), this._$Ei(), this.prototype.hasOwnProperty(t) && ((s = Object.create(s)).wrapped = !0), this.elementProperties.set(t, s), !s.noAccessor) {
+			const i = Symbol(), h = this.getPropertyDescriptor(t, i, s);
+			void 0 !== h && e$1(this.prototype, t, h);
+		}
+	}
+	static getPropertyDescriptor(t, s, i) {
+		const { get: e, set: r } = h$1(this.prototype, t) ?? {
+			get() {
+				return this[s];
+			},
+			set(t) {
+				this[s] = t;
+			}
+		};
+		return {
+			get: e,
+			set(s) {
+				const h = e?.call(this);
+				r?.call(this, s), this.requestUpdate(t, h, i);
+			},
+			configurable: !0,
+			enumerable: !0
+		};
+	}
+	static getPropertyOptions(t) {
+		return this.elementProperties.get(t) ?? b$1;
+	}
+	static _$Ei() {
+		if (this.hasOwnProperty(d$1("elementProperties"))) return;
+		const t = n$2(this);
+		t.finalize(), void 0 !== t.l && (this.l = [...t.l]), this.elementProperties = new Map(t.elementProperties);
+	}
+	static finalize() {
+		if (this.hasOwnProperty(d$1("finalized"))) return;
+		if (this.finalized = !0, this._$Ei(), this.hasOwnProperty(d$1("properties"))) {
+			const t = this.properties, s = [...r$3(t), ...o$3(t)];
+			for (const i of s) this.createProperty(i, t[i]);
+		}
+		const t = this[Symbol.metadata];
+		if (null !== t) {
+			const s = litPropertyMetadata.get(t);
+			if (void 0 !== s) for (const [t, i] of s) this.elementProperties.set(t, i);
+		}
+		this._$Eh = /* @__PURE__ */ new Map();
+		for (const [t, s] of this.elementProperties) {
+			const i = this._$Eu(t, s);
+			void 0 !== i && this._$Eh.set(i, t);
+		}
+		this.elementStyles = this.finalizeStyles(this.styles);
+	}
+	static finalizeStyles(s) {
+		const i = [];
+		if (Array.isArray(s)) {
+			const e = new Set(s.flat(Infinity).reverse());
+			for (const s of e) i.unshift(c$2(s));
+		} else void 0 !== s && i.push(c$2(s));
+		return i;
+	}
+	static _$Eu(t, s) {
+		const i = s.attribute;
+		return !1 === i ? void 0 : "string" == typeof i ? i : "string" == typeof t ? t.toLowerCase() : void 0;
+	}
+	constructor() {
+		super(), this._$Ep = void 0, this.isUpdatePending = !1, this.hasUpdated = !1, this._$Em = null, this._$Ev();
+	}
+	_$Ev() {
+		this._$ES = new Promise((t) => this.enableUpdating = t), this._$AL = /* @__PURE__ */ new Map(), this._$E_(), this.requestUpdate(), this.constructor.l?.forEach((t) => t(this));
+	}
+	addController(t) {
+		(this._$EO ??= /* @__PURE__ */ new Set()).add(t), void 0 !== this.renderRoot && this.isConnected && t.hostConnected?.();
+	}
+	removeController(t) {
+		this._$EO?.delete(t);
+	}
+	_$E_() {
+		const t = /* @__PURE__ */ new Map(), s = this.constructor.elementProperties;
+		for (const i of s.keys()) this.hasOwnProperty(i) && (t.set(i, this[i]), delete this[i]);
+		t.size > 0 && (this._$Ep = t);
+	}
+	createRenderRoot() {
+		const t = this.shadowRoot ?? this.attachShadow(this.constructor.shadowRootOptions);
+		return S$1(t, this.constructor.elementStyles), t;
+	}
+	connectedCallback() {
+		this.renderRoot ??= this.createRenderRoot(), this.enableUpdating(!0), this._$EO?.forEach((t) => t.hostConnected?.());
+	}
+	enableUpdating(t) {}
+	disconnectedCallback() {
+		this._$EO?.forEach((t) => t.hostDisconnected?.());
+	}
+	attributeChangedCallback(t, s, i) {
+		this._$AK(t, i);
+	}
+	_$ET(t, s) {
+		const i = this.constructor.elementProperties.get(t), e = this.constructor._$Eu(t, i);
+		if (void 0 !== e && !0 === i.reflect) {
+			const h = (void 0 !== i.converter?.toAttribute ? i.converter : u$1).toAttribute(s, i.type);
+			this._$Em = t, null == h ? this.removeAttribute(e) : this.setAttribute(e, h), this._$Em = null;
+		}
+	}
+	_$AK(t, s) {
+		const i = this.constructor, e = i._$Eh.get(t);
+		if (void 0 !== e && this._$Em !== e) {
+			const t = i.getPropertyOptions(e), h = "function" == typeof t.converter ? { fromAttribute: t.converter } : void 0 !== t.converter?.fromAttribute ? t.converter : u$1;
+			this._$Em = e;
+			const r = h.fromAttribute(s, t.type);
+			this[e] = r ?? this._$Ej?.get(e) ?? r, this._$Em = null;
+		}
+	}
+	requestUpdate(t, s, i, e = !1, h) {
+		if (void 0 !== t) {
+			const r = this.constructor;
+			if (!1 === e && (h = this[t]), i ??= r.getPropertyOptions(t), !((i.hasChanged ?? f$1)(h, s) || i.useDefault && i.reflect && h === this._$Ej?.get(t) && !this.hasAttribute(r._$Eu(t, i)))) return;
+			this.C(t, s, i);
+		}
+		!1 === this.isUpdatePending && (this._$ES = this._$EP());
+	}
+	C(t, s, { useDefault: i, reflect: e, wrapped: h }, r) {
+		i && !(this._$Ej ??= /* @__PURE__ */ new Map()).has(t) && (this._$Ej.set(t, r ?? s ?? this[t]), !0 !== h || void 0 !== r) || (this._$AL.has(t) || (this.hasUpdated || i || (s = void 0), this._$AL.set(t, s)), !0 === e && this._$Em !== t && (this._$Eq ??= /* @__PURE__ */ new Set()).add(t));
+	}
+	async _$EP() {
+		this.isUpdatePending = !0;
+		try {
+			await this._$ES;
+		} catch (t) {
+			Promise.reject(t);
+		}
+		const t = this.scheduleUpdate();
+		return null != t && await t, !this.isUpdatePending;
+	}
+	scheduleUpdate() {
+		return this.performUpdate();
+	}
+	performUpdate() {
+		if (!this.isUpdatePending) return;
+		if (!this.hasUpdated) {
+			if (this.renderRoot ??= this.createRenderRoot(), this._$Ep) {
+				for (const [t, s] of this._$Ep) this[t] = s;
+				this._$Ep = void 0;
+			}
+			const t = this.constructor.elementProperties;
+			if (t.size > 0) for (const [s, i] of t) {
+				const { wrapped: t } = i, e = this[s];
+				!0 !== t || this._$AL.has(s) || void 0 === e || this.C(s, void 0, i, e);
+			}
+		}
+		let t = !1;
+		const s = this._$AL;
+		try {
+			t = this.shouldUpdate(s), t ? (this.willUpdate(s), this._$EO?.forEach((t) => t.hostUpdate?.()), this.update(s)) : this._$EM();
+		} catch (s) {
+			throw t = !1, this._$EM(), s;
+		}
+		t && this._$AE(s);
+	}
+	willUpdate(t) {}
+	_$AE(t) {
+		this._$EO?.forEach((t) => t.hostUpdated?.()), this.hasUpdated || (this.hasUpdated = !0, this.firstUpdated(t)), this.updated(t);
+	}
+	_$EM() {
+		this._$AL = /* @__PURE__ */ new Map(), this.isUpdatePending = !1;
+	}
+	get updateComplete() {
+		return this.getUpdateComplete();
+	}
+	getUpdateComplete() {
+		return this._$ES;
+	}
+	shouldUpdate(t) {
+		return !0;
+	}
+	update(t) {
+		this._$Eq &&= this._$Eq.forEach((t) => this._$ET(t, this[t])), this._$EM();
+	}
+	updated(t) {}
+	firstUpdated(t) {}
+};
+y$1.elementStyles = [], y$1.shadowRootOptions = { mode: "open" }, y$1[d$1("elementProperties")] = /* @__PURE__ */ new Map(), y$1[d$1("finalized")] = /* @__PURE__ */ new Map(), p$1?.({ ReactiveElement: y$1 }), (a$1.reactiveElementVersions ??= []).push("2.1.2");
+//#endregion
+//#region node_modules/lit-html/lit-html.js
+/**
+* @license
+* Copyright 2017 Google LLC
+* SPDX-License-Identifier: BSD-3-Clause
+*/
+var t$1 = globalThis, i$1 = (t) => t, s$1 = t$1.trustedTypes, e = s$1 ? s$1.createPolicy("lit-html", { createHTML: (t) => t }) : void 0, h = "$lit$", o$2 = `lit$${Math.random().toFixed(9).slice(2)}$`, n$1 = "?" + o$2, r$2 = `<${n$1}>`, l = document, c = () => l.createComment(""), a = (t) => null === t || "object" != typeof t && "function" != typeof t, u = Array.isArray, d = (t) => u(t) || "function" == typeof t?.[Symbol.iterator], f = "[ 	\n\f\r]", v = /<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g, _ = /-->/g, m = />/g, p = RegExp(`>|${f}(?:([^\\s"'>=/]+)(${f}*=${f}*(?:[^ \t\n\f\r"'\`<>=]|("|')|))|$)`, "g"), g = /'/g, $ = /"/g, y = /^(?:script|style|textarea|title)$/i, x = (t) => (i, ...s) => ({
+	_$litType$: t,
+	strings: i,
+	values: s
+}), b = x(1), E = Symbol.for("lit-noChange"), A = Symbol.for("lit-nothing"), C = /* @__PURE__ */ new WeakMap(), P = l.createTreeWalker(l, 129);
+function V(t, i) {
+	if (!u(t) || !t.hasOwnProperty("raw")) throw Error("invalid template strings array");
+	return void 0 !== e ? e.createHTML(i) : i;
+}
+var N = (t, i) => {
+	const s = t.length - 1, e = [];
+	let n, l = 2 === i ? "<svg>" : 3 === i ? "<math>" : "", c = v;
+	for (let i = 0; i < s; i++) {
+		const s = t[i];
+		let a, u, d = -1, f = 0;
+		for (; f < s.length && (c.lastIndex = f, u = c.exec(s), null !== u);) f = c.lastIndex, c === v ? "!--" === u[1] ? c = _ : void 0 !== u[1] ? c = m : void 0 !== u[2] ? (y.test(u[2]) && (n = RegExp("</" + u[2], "g")), c = p) : void 0 !== u[3] && (c = p) : c === p ? ">" === u[0] ? (c = n ?? v, d = -1) : void 0 === u[1] ? d = -2 : (d = c.lastIndex - u[2].length, a = u[1], c = void 0 === u[3] ? p : "\"" === u[3] ? $ : g) : c === $ || c === g ? c = p : c === _ || c === m ? c = v : (c = p, n = void 0);
+		const x = c === p && t[i + 1].startsWith("/>") ? " " : "";
+		l += c === v ? s + r$2 : d >= 0 ? (e.push(a), s.slice(0, d) + h + s.slice(d) + o$2 + x) : s + o$2 + (-2 === d ? i : x);
+	}
+	return [V(t, l + (t[s] || "<?>") + (2 === i ? "</svg>" : 3 === i ? "</math>" : "")), e];
+};
+var S = class S {
+	constructor({ strings: t, _$litType$: i }, e) {
+		let r;
+		this.parts = [];
+		let l = 0, a = 0;
+		const u = t.length - 1, d = this.parts, [f, v] = N(t, i);
+		if (this.el = S.createElement(f, e), P.currentNode = this.el.content, 2 === i || 3 === i) {
+			const t = this.el.content.firstChild;
+			t.replaceWith(...t.childNodes);
+		}
+		for (; null !== (r = P.nextNode()) && d.length < u;) {
+			if (1 === r.nodeType) {
+				if (r.hasAttributes()) for (const t of r.getAttributeNames()) if (t.endsWith(h)) {
+					const i = v[a++], s = r.getAttribute(t).split(o$2), e = /([.?@])?(.*)/.exec(i);
+					d.push({
+						type: 1,
+						index: l,
+						name: e[2],
+						strings: s,
+						ctor: "." === e[1] ? I : "?" === e[1] ? L : "@" === e[1] ? z : H
+					}), r.removeAttribute(t);
+				} else t.startsWith(o$2) && (d.push({
+					type: 6,
+					index: l
+				}), r.removeAttribute(t));
+				if (y.test(r.tagName)) {
+					const t = r.textContent.split(o$2), i = t.length - 1;
+					if (i > 0) {
+						r.textContent = s$1 ? s$1.emptyScript : "";
+						for (let s = 0; s < i; s++) r.append(t[s], c()), P.nextNode(), d.push({
+							type: 2,
+							index: ++l
+						});
+						r.append(t[i], c());
+					}
+				}
+			} else if (8 === r.nodeType) if (r.data === n$1) d.push({
+				type: 2,
+				index: l
+			});
+			else {
+				let t = -1;
+				for (; -1 !== (t = r.data.indexOf(o$2, t + 1));) d.push({
+					type: 7,
+					index: l
+				}), t += o$2.length - 1;
+			}
+			l++;
+		}
+	}
+	static createElement(t, i) {
+		const s = l.createElement("template");
+		return s.innerHTML = t, s;
+	}
+};
+function M(t, i, s = t, e) {
+	if (i === E) return i;
+	let h = void 0 !== e ? s._$Co?.[e] : s._$Cl;
+	const o = a(i) ? void 0 : i._$litDirective$;
+	return h?.constructor !== o && (h?._$AO?.(!1), void 0 === o ? h = void 0 : (h = new o(t), h._$AT(t, s, e)), void 0 !== e ? (s._$Co ??= [])[e] = h : s._$Cl = h), void 0 !== h && (i = M(t, h._$AS(t, i.values), h, e)), i;
+}
+var R = class {
+	constructor(t, i) {
+		this._$AV = [], this._$AN = void 0, this._$AD = t, this._$AM = i;
+	}
+	get parentNode() {
+		return this._$AM.parentNode;
+	}
+	get _$AU() {
+		return this._$AM._$AU;
+	}
+	u(t) {
+		const { el: { content: i }, parts: s } = this._$AD, e = (t?.creationScope ?? l).importNode(i, !0);
+		P.currentNode = e;
+		let h = P.nextNode(), o = 0, n = 0, r = s[0];
+		for (; void 0 !== r;) {
+			if (o === r.index) {
+				let i;
+				2 === r.type ? i = new k(h, h.nextSibling, this, t) : 1 === r.type ? i = new r.ctor(h, r.name, r.strings, this, t) : 6 === r.type && (i = new Z(h, this, t)), this._$AV.push(i), r = s[++n];
+			}
+			o !== r?.index && (h = P.nextNode(), o++);
+		}
+		return P.currentNode = l, e;
+	}
+	p(t) {
+		let i = 0;
+		for (const s of this._$AV) void 0 !== s && (void 0 !== s.strings ? (s._$AI(t, s, i), i += s.strings.length - 2) : s._$AI(t[i])), i++;
+	}
+};
+var k = class k {
+	get _$AU() {
+		return this._$AM?._$AU ?? this._$Cv;
+	}
+	constructor(t, i, s, e) {
+		this.type = 2, this._$AH = A, this._$AN = void 0, this._$AA = t, this._$AB = i, this._$AM = s, this.options = e, this._$Cv = e?.isConnected ?? !0;
+	}
+	get parentNode() {
+		let t = this._$AA.parentNode;
+		const i = this._$AM;
+		return void 0 !== i && 11 === t?.nodeType && (t = i.parentNode), t;
+	}
+	get startNode() {
+		return this._$AA;
+	}
+	get endNode() {
+		return this._$AB;
+	}
+	_$AI(t, i = this) {
+		t = M(this, t, i), a(t) ? t === A || null == t || "" === t ? (this._$AH !== A && this._$AR(), this._$AH = A) : t !== this._$AH && t !== E && this._(t) : void 0 !== t._$litType$ ? this.$(t) : void 0 !== t.nodeType ? this.T(t) : d(t) ? this.k(t) : this._(t);
+	}
+	O(t) {
+		return this._$AA.parentNode.insertBefore(t, this._$AB);
+	}
+	T(t) {
+		this._$AH !== t && (this._$AR(), this._$AH = this.O(t));
+	}
+	_(t) {
+		this._$AH !== A && a(this._$AH) ? this._$AA.nextSibling.data = t : this.T(l.createTextNode(t)), this._$AH = t;
+	}
+	$(t) {
+		const { values: i, _$litType$: s } = t, e = "number" == typeof s ? this._$AC(t) : (void 0 === s.el && (s.el = S.createElement(V(s.h, s.h[0]), this.options)), s);
+		if (this._$AH?._$AD === e) this._$AH.p(i);
+		else {
+			const t = new R(e, this), s = t.u(this.options);
+			t.p(i), this.T(s), this._$AH = t;
+		}
+	}
+	_$AC(t) {
+		let i = C.get(t.strings);
+		return void 0 === i && C.set(t.strings, i = new S(t)), i;
+	}
+	k(t) {
+		u(this._$AH) || (this._$AH = [], this._$AR());
+		const i = this._$AH;
+		let s, e = 0;
+		for (const h of t) e === i.length ? i.push(s = new k(this.O(c()), this.O(c()), this, this.options)) : s = i[e], s._$AI(h), e++;
+		e < i.length && (this._$AR(s && s._$AB.nextSibling, e), i.length = e);
+	}
+	_$AR(t = this._$AA.nextSibling, s) {
+		for (this._$AP?.(!1, !0, s); t !== this._$AB;) {
+			const s = i$1(t).nextSibling;
+			i$1(t).remove(), t = s;
+		}
+	}
+	setConnected(t) {
+		void 0 === this._$AM && (this._$Cv = t, this._$AP?.(t));
+	}
+};
+var H = class {
+	get tagName() {
+		return this.element.tagName;
+	}
+	get _$AU() {
+		return this._$AM._$AU;
+	}
+	constructor(t, i, s, e, h) {
+		this.type = 1, this._$AH = A, this._$AN = void 0, this.element = t, this.name = i, this._$AM = e, this.options = h, s.length > 2 || "" !== s[0] || "" !== s[1] ? (this._$AH = Array(s.length - 1).fill(/* @__PURE__ */ new String()), this.strings = s) : this._$AH = A;
+	}
+	_$AI(t, i = this, s, e) {
+		const h = this.strings;
+		let o = !1;
+		if (void 0 === h) t = M(this, t, i, 0), o = !a(t) || t !== this._$AH && t !== E, o && (this._$AH = t);
+		else {
+			const e = t;
+			let n, r;
+			for (t = h[0], n = 0; n < h.length - 1; n++) r = M(this, e[s + n], i, n), r === E && (r = this._$AH[n]), o ||= !a(r) || r !== this._$AH[n], r === A ? t = A : t !== A && (t += (r ?? "") + h[n + 1]), this._$AH[n] = r;
+		}
+		o && !e && this.j(t);
+	}
+	j(t) {
+		t === A ? this.element.removeAttribute(this.name) : this.element.setAttribute(this.name, t ?? "");
+	}
+};
+var I = class extends H {
+	constructor() {
+		super(...arguments), this.type = 3;
+	}
+	j(t) {
+		this.element[this.name] = t === A ? void 0 : t;
+	}
+};
+var L = class extends H {
+	constructor() {
+		super(...arguments), this.type = 4;
+	}
+	j(t) {
+		this.element.toggleAttribute(this.name, !!t && t !== A);
+	}
+};
+var z = class extends H {
+	constructor(t, i, s, e, h) {
+		super(t, i, s, e, h), this.type = 5;
+	}
+	_$AI(t, i = this) {
+		if ((t = M(this, t, i, 0) ?? A) === E) return;
+		const s = this._$AH, e = t === A && s !== A || t.capture !== s.capture || t.once !== s.once || t.passive !== s.passive, h = t !== A && (s === A || e);
+		e && this.element.removeEventListener(this.name, this, s), h && this.element.addEventListener(this.name, this, t), this._$AH = t;
+	}
+	handleEvent(t) {
+		"function" == typeof this._$AH ? this._$AH.call(this.options?.host ?? this.element, t) : this._$AH.handleEvent(t);
+	}
+};
+var Z = class {
+	constructor(t, i, s) {
+		this.element = t, this.type = 6, this._$AN = void 0, this._$AM = i, this.options = s;
+	}
+	get _$AU() {
+		return this._$AM._$AU;
+	}
+	_$AI(t) {
+		M(this, t);
+	}
+}, B = t$1.litHtmlPolyfillSupport;
+B?.(S, k), (t$1.litHtmlVersions ??= []).push("3.3.3");
+var D = (t, i, s) => {
+	const e = s?.renderBefore ?? i;
+	let h = e._$litPart$;
+	if (void 0 === h) {
+		const t = s?.renderBefore ?? null;
+		e._$litPart$ = h = new k(i.insertBefore(c(), t), t, void 0, s ?? {});
+	}
+	return h._$AI(t), h;
+};
+//#endregion
+//#region node_modules/lit-element/lit-element.js
+/**
+* @license
+* Copyright 2017 Google LLC
+* SPDX-License-Identifier: BSD-3-Clause
+*/ var s = globalThis;
+var i = class extends y$1 {
+	constructor() {
+		super(...arguments), this.renderOptions = { host: this }, this._$Do = void 0;
+	}
+	createRenderRoot() {
+		const t = super.createRenderRoot();
+		return this.renderOptions.renderBefore ??= t.firstChild, t;
+	}
+	update(t) {
+		const r = this.render();
+		this.hasUpdated || (this.renderOptions.isConnected = this.isConnected), super.update(t), this._$Do = D(r, this.renderRoot, this.renderOptions);
+	}
+	connectedCallback() {
+		super.connectedCallback(), this._$Do?.setConnected(!0);
+	}
+	disconnectedCallback() {
+		super.disconnectedCallback(), this._$Do?.setConnected(!1);
+	}
+	render() {
+		return E;
+	}
+};
+i._$litElement$ = !0, i["finalized"] = !0, s.litElementHydrateSupport?.({ LitElement: i });
+var o$1 = s.litElementPolyfillSupport;
+o$1?.({ LitElement: i });
+(s.litElementVersions ??= []).push("4.2.2");
+//#endregion
+//#region node_modules/@lit/reactive-element/decorators/custom-element.js
+/**
+* @license
+* Copyright 2017 Google LLC
+* SPDX-License-Identifier: BSD-3-Clause
+*/
+var t = (t) => (e, o) => {
+	void 0 !== o ? o.addInitializer(() => {
+		customElements.define(t, e);
+	}) : customElements.define(t, e);
+};
+//#endregion
+//#region node_modules/@lit/reactive-element/decorators/property.js
+/**
+* @license
+* Copyright 2017 Google LLC
+* SPDX-License-Identifier: BSD-3-Clause
+*/ var o = {
+	attribute: !0,
+	type: String,
+	converter: u$1,
+	reflect: !1,
+	hasChanged: f$1
+}, r$1 = (t = o, e, r) => {
+	const { kind: n, metadata: i } = r;
+	let s = globalThis.litPropertyMetadata.get(i);
+	if (void 0 === s && globalThis.litPropertyMetadata.set(i, s = /* @__PURE__ */ new Map()), "setter" === n && ((t = Object.create(t)).wrapped = !0), s.set(r.name, t), "accessor" === n) {
+		const { name: o } = r;
+		return {
+			set(r) {
+				const n = e.get.call(this);
+				e.set.call(this, r), this.requestUpdate(o, n, t, !0, r);
+			},
+			init(e) {
+				return void 0 !== e && this.C(o, void 0, t, e), e;
+			}
+		};
+	}
+	if ("setter" === n) {
+		const { name: o } = r;
+		return function(r) {
+			const n = this[o];
+			e.call(this, r), this.requestUpdate(o, n, t, !0, r);
+		};
+	}
+	throw Error("Unsupported decorator location: " + n);
+};
+function n(t) {
+	return (e, o) => "object" == typeof o ? r$1(t, e, o) : ((t, e, o) => {
+		const r = e.hasOwnProperty(o);
+		return e.constructor.createProperty(o, t), r ? Object.getOwnPropertyDescriptor(e, o) : void 0;
+	})(t, e, o);
+}
+//#endregion
+//#region node_modules/@lit/reactive-element/decorators/state.js
+/**
+* @license
+* Copyright 2017 Google LLC
+* SPDX-License-Identifier: BSD-3-Clause
+*/ function r(r) {
+	return n({
+		...r,
+		state: !0,
+		attribute: !1
+	});
+}
+//#endregion
+//#region node_modules/typescript-memoize/dist/es2015/memoize-decorator.js
+function Memoize(args) {
+	let hashFunction;
+	let duration;
+	let tags;
+	if (typeof args === "object") {
+		hashFunction = args.hashFunction;
+		duration = args.expiring;
+		tags = args.tags;
+	} else hashFunction = args;
+	return (target, propertyKey, descriptor) => {
+		if (descriptor.value != null) descriptor.value = getNewFunction(descriptor.value, hashFunction, duration, tags);
+		else if (descriptor.get != null) descriptor.get = getNewFunction(descriptor.get, hashFunction, duration, tags);
+		else throw "Only put a Memoize() decorator on a method or get accessor.";
+	};
+}
+var clearCacheTagsMap = /* @__PURE__ */ new Map();
+function getNewFunction(originalMethod, hashFunction, duration = 0, tags) {
+	const propMapName = Symbol(`__memoized_map__`);
+	return function(...args) {
+		let returnedValue;
+		if (!this.hasOwnProperty(propMapName)) Object.defineProperty(this, propMapName, {
+			configurable: false,
+			enumerable: false,
+			writable: false,
+			value: /* @__PURE__ */ new Map()
+		});
+		let myMap = this[propMapName];
+		if (Array.isArray(tags)) for (const tag of tags) if (clearCacheTagsMap.has(tag)) clearCacheTagsMap.get(tag).push(myMap);
+		else clearCacheTagsMap.set(tag, [myMap]);
+		if (hashFunction || args.length > 0 || duration > 0) {
+			let hashKey;
+			if (hashFunction === true) hashKey = args.map((a) => a.toString()).join("!");
+			else if (hashFunction) hashKey = hashFunction.apply(this, args);
+			else hashKey = args[0];
+			const timestampKey = `${hashKey}__timestamp`;
+			let isExpired = false;
+			if (duration > 0) if (!myMap.has(timestampKey)) isExpired = true;
+			else {
+				let timestamp = myMap.get(timestampKey);
+				isExpired = Date.now() - timestamp > duration;
+			}
+			if (myMap.has(hashKey) && !isExpired) returnedValue = myMap.get(hashKey);
+			else {
+				returnedValue = originalMethod.apply(this, args);
+				myMap.set(hashKey, returnedValue);
+				if (duration > 0) myMap.set(timestampKey, Date.now());
+			}
+		} else {
+			const hashKey = this;
+			if (myMap.has(hashKey)) returnedValue = myMap.get(hashKey);
+			else {
+				returnedValue = originalMethod.apply(this, args);
+				myMap.set(hashKey, returnedValue);
+			}
+		}
+		return returnedValue;
+	};
+}
+//#endregion
+//#region node_modules/@internetarchive/field-parsers/dist/src/field-types/boolean.js
+var BooleanParser = class {
+	/** @inheritdoc */
+	parseValue(rawValue) {
+		if (typeof rawValue === "string") {
+			const normalized = rawValue.trim().toLowerCase();
+			if (normalized === "false" || normalized === "0" || normalized === "no") return false;
+			if (normalized === "true" || normalized === "1" || normalized === "yes") return true;
+		}
+		return Boolean(rawValue);
+	}
+};
+BooleanParser.shared = new BooleanParser();
+//#endregion
+//#region node_modules/@internetarchive/field-parsers/dist/src/field-types/number.js
+var NumberParser = class {
+	/** @inheritdoc */
+	parseValue(rawValue) {
+		if (typeof rawValue === "number") return rawValue;
+		if (typeof rawValue === "boolean") return void 0;
+		const value = parseFloat(rawValue);
+		if (Number.isNaN(value)) return;
+		return value;
+	}
+};
+NumberParser.shared = new NumberParser();
+//#endregion
+//#region node_modules/@internetarchive/field-parsers/dist/src/field-types/byte.js
+/**
+* The ByteParser is a unit-specific NumberParser
+* that returns a value in bytes
+*
+* @export
+* @class ByteParser
+* @implements {FieldParserInterface<Byte>}
+*/
+var ByteParser = class {
+	/** @inheritdoc */
+	parseValue(rawValue) {
+		return NumberParser.shared.parseValue(rawValue);
+	}
+};
+ByteParser.shared = new ByteParser();
+//#endregion
+//#region node_modules/@internetarchive/field-parsers/dist/src/field-types/date.js
+var DateParser = class {
+	/** @inheritdoc */
+	parseValue(rawValue) {
+		return this.parseCompactDate(rawValue) || this.parseJSDate(rawValue) || this.parseBracketDate(rawValue);
+	}
+	parseCompactDate(rawValue) {
+		if (typeof rawValue !== "string") return void 0;
+		const match = rawValue.trim().match(/^(\d{4})(\d{2})(\d{2})(?:(\d{2})(\d{2})(\d{2}))?$/);
+		if (!match) return void 0;
+		const [, year, month, day, hour = "00", minute = "00", second = "00"] = match;
+		const date = /* @__PURE__ */ new Date(`${year}-${month}-${day}T${hour}:${minute}:${second}`);
+		return Number.isNaN(date.getTime()) ? void 0 : date;
+	}
+	parseBracketDate(rawValue) {
+		if (typeof rawValue !== "string") return void 0;
+		const yearMatch = rawValue.match(/\[([0-9]{4})\]/);
+		if (!yearMatch || yearMatch.length < 2) return;
+		return this.parseJSDate(yearMatch[1]);
+	}
+	parseJSDate(rawValue) {
+		if (typeof rawValue !== "string") return void 0;
+		let parsedValue = rawValue;
+		if (parsedValue.match(/^[0-9]{4}-[0-9]{2}-[0-9]{2}\s{1}[0-9]{2}:[0-9]{2}:[0-9]{2}$/)) parsedValue = parsedValue.replace(" ", "T");
+		const parsed = Date.parse(parsedValue);
+		if (Number.isNaN(parsed)) return;
+		let date = new Date(parsedValue);
+		if (parsedValue.match(/^[0-9]{4}$/) || parsedValue.match(/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/)) date = new Date(date.getTime() + date.getTimezoneOffset() * 1e3 * 60);
+		return date;
+	}
+};
+DateParser.shared = new DateParser();
+//#endregion
+//#region node_modules/@internetarchive/field-parsers/dist/src/field-types/duration.js
+/**
+* Parses duration format to a `Duration` (number of seconds with decimal)
+*
+* Can parse hh:mm:ss.ms, hh:mm:ss, mm:ss, mm:ss.ms, and s.ms formats
+*/
+var DurationParser = class {
+	/** @inheritdoc */
+	parseValue(rawValue) {
+		if (typeof rawValue === "number") return rawValue;
+		if (typeof rawValue === "boolean") return void 0;
+		const componentArray = rawValue.split(":");
+		let seconds;
+		if (componentArray.length === 1) seconds = this.parseNumberFormat(componentArray[0]);
+		else seconds = this.parseColonSeparatedFormat(componentArray);
+		return seconds;
+	}
+	/**
+	* Parse sss.ms format
+	*
+	* @param rawValue
+	* @returns
+	*/
+	parseNumberFormat(rawValue) {
+		let seconds = parseFloat(rawValue);
+		if (Number.isNaN(seconds)) seconds = void 0;
+		return seconds;
+	}
+	/**
+	* Parse hh:mm:ss.ms format
+	*
+	* @param componentArray
+	* @returns
+	*/
+	parseColonSeparatedFormat(componentArray) {
+		let hasNaNComponent = false;
+		const parsedValue = componentArray.map((element, index) => {
+			const componentValue = parseFloat(element);
+			if (Number.isNaN(componentValue)) {
+				hasNaNComponent = true;
+				return 0;
+			}
+			const multiplier = 60 ** (componentArray.length - 1 - index);
+			return componentValue * Math.floor(multiplier);
+		}).reduce((a, b) => a + b, 0);
+		return hasNaNComponent ? void 0 : parsedValue;
+	}
+};
+DurationParser.shared = new DurationParser();
+//#endregion
+//#region node_modules/@internetarchive/field-parsers/dist/src/field-types/mediatype.js
+/**
+* @deprecated Use `MediaTypeField` from `@internetarchive/iaux-item-metadata`,
+* which validates the value against the allowed set instead of casting.
+*/
+var MediaTypeParser = class {
+	/** @inheritdoc */
+	parseValue(rawValue) {
+		if (typeof rawValue !== "string") return void 0;
+		return rawValue;
+	}
+};
+MediaTypeParser.shared = new MediaTypeParser();
+//#endregion
+//#region node_modules/@internetarchive/field-parsers/dist/src/field-types/list.js
+var ListParser = class {
+	constructor(parser, options) {
+		this.separators = [";", ","];
+		this.parser = parser;
+		if (options && options.separators) this.separators = options.separators;
+	}
+	/** @inheritdoc */
+	parseValue(rawValue) {
+		const stringifiedValue = String(rawValue);
+		let results = [];
+		for (const separator of this.separators) {
+			results = stringifiedValue.split(separator);
+			if (results.length > 1) break;
+		}
+		return this.parseListValues(results);
+	}
+	parseListValues(rawValues) {
+		const parsed = rawValues.map((s) => s.trim()).map((rawValue) => this.parser.parseValue(rawValue));
+		const result = [];
+		parsed.forEach((p) => {
+			if (p !== void 0) result.push(p);
+		});
+		return result;
+	}
+};
+//#endregion
+//#region node_modules/@internetarchive/field-parsers/dist/src/field-types/page-progression.js
+/**
+* @deprecated Use `PageProgressionField` from
+* `@internetarchive/iaux-item-metadata`, which validates the value against the
+* allowed set instead of casting.
+*/
+var PageProgressionParser = class {
+	/** @inheritdoc */
+	parseValue(rawValue) {
+		if (typeof rawValue !== "string") return void 0;
+		return rawValue;
+	}
+};
+PageProgressionParser.shared = new PageProgressionParser();
+//#endregion
+//#region node_modules/@internetarchive/field-parsers/dist/src/field-types/string.js
+var StringParser = class {
+	/** @inheritdoc */
+	parseValue(rawValue) {
+		return String(rawValue);
+	}
+};
+StringParser.shared = new StringParser();
+//#endregion
+//#region dist/src/models/map-field.js
+/**
+* Returns `make(value)` for the first of `keys` whose raw value is present in
+* `raw`, or `undefined` if none are set. `make` runs only on a present value,
+* so it never sees `null`/`undefined`. Later keys act as fallbacks, for values
+* that arrive under more than one name.
+*
+* @param raw The raw record to read from
+* @param make Builds the result from a present raw value
+* @param keys The key(s) to read, in priority order
+*/
+function mapField(raw, make, ...keys) {
+	for (const key of keys) {
+		const value = raw[key];
+		if (value != null) return make(value);
+	}
+}
+//#endregion
+//#region dist/src/models/parse-field.js
+/**
+* Maps the first present of `keys` through a field parser, or returns
+* `undefined` if none are set. A thin wrapper over {@link mapField} for fields
+* whose value is a scalar parsed by a `FieldParser` (as opposed to a value
+* wrapped in a `MetadataField` class).
+*
+* @param raw The raw record to read from
+* @param parse Parses a present raw value (e.g. `v => DateParser.shared.parseValue(v)`)
+* @param keys The key(s) to read, in priority order
+*/
+function parseField(raw, parse, ...keys) {
+	return mapField(raw, (value) => parse(value), ...keys);
+}
+//#endregion
+//#region dist/src/models/file.js
+/**
+* This represents an Internet Archive File
+*
+* @export
+* @class File
+*/
+var File = class {
+	get name() {
+		return this.rawValue.name;
+	}
+	get source() {
+		return this.rawValue.source;
+	}
+	get btih() {
+		return this.rawValue.btih;
+	}
+	get md5() {
+		return this.rawValue.md5;
+	}
+	get format() {
+		return this.rawValue.format;
+	}
+	get mtime() {
+		if (this.rawValue.mtime == null) return;
+		const numberValue = NumberParser.shared.parseValue(this.rawValue.mtime);
+		if (numberValue) return /* @__PURE__ */ new Date(numberValue * 1e3);
+	}
+	get crc32() {
+		return this.rawValue.crc32;
+	}
+	get sha1() {
+		return this.rawValue.sha1;
+	}
+	get original() {
+		return this.rawValue.original;
+	}
+	get size() {
+		return parseField(this.rawValue, (v) => ByteParser.shared.parseValue(v), "size");
+	}
+	get title() {
+		return this.rawValue.title;
+	}
+	get length() {
+		return parseField(this.rawValue, (v) => DurationParser.shared.parseValue(v), "length");
+	}
+	get height() {
+		return parseField(this.rawValue, (v) => NumberParser.shared.parseValue(v), "height");
+	}
+	get width() {
+		return parseField(this.rawValue, (v) => NumberParser.shared.parseValue(v), "width");
+	}
+	get track() {
+		return parseField(this.rawValue, (v) => NumberParser.shared.parseValue(v), "track");
+	}
+	get external_identifier() {
+		return this.rawValue.external_identifier;
+	}
+	get creator() {
+		return this.rawValue.creator;
+	}
+	get album() {
+		return this.rawValue.album;
+	}
+	get bitrate() {
+		return parseField(this.rawValue, (v) => NumberParser.shared.parseValue(v), "bitrate");
+	}
+	get private() {
+		return parseField(this.rawValue, (v) => BooleanParser.shared.parseValue(v), "private");
+	}
+	constructor(json = {}) {
+		this.rawValue = json;
+	}
+};
+__decorate([Memoize()], File.prototype, "mtime", null);
+__decorate([Memoize()], File.prototype, "size", null);
+__decorate([Memoize()], File.prototype, "length", null);
+__decorate([Memoize()], File.prototype, "height", null);
+__decorate([Memoize()], File.prototype, "width", null);
+__decorate([Memoize()], File.prototype, "track", null);
+__decorate([Memoize()], File.prototype, "bitrate", null);
+__decorate([Memoize()], File.prototype, "private", null);
+//#endregion
+//#region dist/src/models/metadata-fields/metadata-field.js
+/**
+* The MetadataField is responsible for three things:
+* 1. Take in some raw data (strings, arrays, numbers, etc)
+* 2. Normalize the input to an array of the input,
+*    ie. [string, string], [number, number], [Date, Date], etc
+* 3. Cast the values to their expected `Type`
+*
+* This class gets instiated with a `Type` and a parser of that type. For instance, the
+* `DateField` is a subclass of `MetadataField` with a `Type` of `Date` and a `DateParser`.
+*
+* When using a `DateField`, you can pass it a string date and it will cast it to a javascript Date,
+* ie:
+*
+* ```
+* const dateField = new DateField('2020-02-13')
+* dateField.value = Date(2020-02-13) // native javascript Date object
+* dateField.values = [Date(2020-02-13)] // the normalized array of values
+* dateField.rawValue = '2020-02-13' // the raw string that was passed in
+* ```
+*
+* @class MetadataField
+* @template Type The type of metadata this is (string, number, Date, etc)
+* @template FieldParserInterfaceType The parser for that type (StringParser, NumberParser, etc)
+*/
+var MetadataField = class {
+	/** @inheritdoc */
+	get values() {
+		return this.parseRawValue();
+	}
+	/** @inheritdoc */
+	get value() {
+		return this.values[0];
+	}
+	constructor(parser, rawValue) {
+		this.parser = parser;
+		this.rawValue = rawValue;
+	}
+	parseRawValue() {
+		const rawValues = Array.isArray(this.rawValue) ? this.rawValue : [this.rawValue];
+		const values = [];
+		rawValues.forEach((value) => {
+			const parsed = this.parser.parseValue(value);
+			if (Array.isArray(parsed)) values.push(...parsed);
+			else if (parsed !== void 0) values.push(parsed);
+		});
+		return values;
+	}
+};
+__decorate([Memoize()], MetadataField.prototype, "values", null);
+__decorate([Memoize()], MetadataField.prototype, "value", null);
+//#endregion
+//#region dist/src/models/metadata-fields/field-types/boolean.js
+var BooleanField = class extends MetadataField {
+	constructor(rawValue) {
+		super(BooleanParser.shared, rawValue);
+	}
+};
+//#endregion
+//#region dist/src/models/metadata-fields/field-types/date.js
+var DateField = class extends MetadataField {
+	constructor(rawValue) {
+		super(DateParser.shared, rawValue);
+	}
+};
+//#endregion
+//#region dist/src/models/metadata-fields/field-types/duration.js
+/**
+* The DurationField parses different duration formats
+* and returns a `Duration`, which is a number in seconds
+* with decimals.
+*
+* @export
+* @class DurationField
+* @extends {MetadataField<Duration, DurationParser>}
+*/
+var DurationField = class extends MetadataField {
+	constructor(rawValue) {
+		super(DurationParser.shared, rawValue);
+	}
+};
+//#endregion
+//#region dist/src/models/metadata-fields/field-types/number.js
+var NumberField = class extends MetadataField {
+	constructor(rawValue) {
+		super(NumberParser.shared, rawValue);
+	}
+};
+//#endregion
+//#region dist/src/models/metadata-fields/field-types/string.js
+var StringField = class extends MetadataField {
+	constructor(rawValue) {
+		super(StringParser.shared, rawValue);
+	}
+};
+//#endregion
+//#region dist/src/models/metadata-fields/field-types/enum.js
+/**
+* Parses a raw value against a fixed set of allowed string literals.
+*
+* Unlike the plain `StringParser`, this validates at runtime: any value not in
+* the `allowed` set is rejected (returns `undefined`), so the parsed `value` and
+* the field's TypeScript type stay in agreement.
+*
+* @class EnumParser
+* @template T The union of allowed string literals (e.g. `'rl' | 'lr'`)
+*/
+var EnumParser = class {
+	constructor(allowed) {
+		this.allowed = allowed;
+	}
+	parseValue(rawValue) {
+		return typeof rawValue === "string" && this.allowed.includes(rawValue) ? rawValue : void 0;
+	}
+};
+/**
+* A field whose value is restricted to a fixed set of allowed string literals.
+*
+* Pass a (typically module-level, shared) `EnumParser` so the allowed set is
+* defined once:
+*
+* ```
+* const colorParser = new EnumParser<'red' | 'green' | 'blue'>(['red', 'green', 'blue']);
+* const field = new EnumField('green', colorParser);
+* field.value // 'green'  (typed as 'red' | 'green' | 'blue' | undefined)
+* ```
+*
+* @class EnumField
+* @template T The union of allowed string literals
+*/
+var EnumField = class extends MetadataField {
+	constructor(rawValue, parser) {
+		super(parser, rawValue);
+	}
+};
+//#endregion
+//#region dist/src/models/metadata-fields/field-types/page-progression.js
+var pageProgressionParser = new EnumParser(["rl", "lr"]);
+/**
+* A field whose value is restricted to the allowed `page_progression` values.
+*
+* Backed by an {@link EnumParser}, so a raw value outside the allowed set is
+* rejected: `value` is `undefined` while `rawValue` keeps the original input.
+*/
+var PageProgressionField = class extends EnumField {
+	constructor(rawValue) {
+		super(rawValue, pageProgressionParser);
+	}
+};
+//#endregion
+//#region dist/src/models/metadata-fields/field-types/byte.js
+/**
+* ByteField is a unit-specific number field that
+* returns a value in bytes
+*
+* @export
+* @class ByteField
+* @extends {MetadataField<Byte, ByteParser>}
+*/
+var ByteField = class extends MetadataField {
+	constructor(rawValue) {
+		super(ByteParser.shared, rawValue);
+	}
+};
+//#endregion
+//#region dist/src/models/metadata-fields/field-types/mediatype.js
+var mediaTypeParser = new EnumParser([
+	"account",
+	"audio",
+	"collection",
+	"data",
+	"etree",
+	"image",
+	"movies",
+	"search",
+	"software",
+	"texts",
+	"web"
+]);
+/**
+* A field whose value is restricted to the allowed `mediatype` values.
+*
+* Backed by an {@link EnumParser}, so a raw value outside the allowed set is
+* rejected: `value` is `undefined` while `rawValue` keeps the original input.
+*/
+var MediaTypeField = class extends EnumField {
+	constructor(rawValue) {
+		super(rawValue, mediaTypeParser);
+	}
+};
+//#endregion
+//#region dist/src/models/metadata-fields/field-types/list.js
+/**
+* The ListField handles parsing of a list of values.
+*
+* Certain fields in the metadata, like `subject` typically have a
+* comma or semicolon-separated list of values. The `ListField`
+* parses the list values independently and aggregates them into
+* the main `.values` array.
+*/
+var ListField = class extends MetadataField {
+	constructor(rawValue, parser) {
+		super(parser, rawValue);
+	}
+};
+/**
+* The StringListField handles parsing of a list of strings.
+*/
+var StringListField = class extends ListField {
+	constructor(rawValue) {
+		const parser = new ListParser(StringParser.shared);
+		super(rawValue, parser);
+	}
+};
+/**
+* The NumberListField handles parsing of a list of numbers.
+*/
+var NumberListField = class extends ListField {
+	constructor(rawValue) {
+		const parser = new ListParser(NumberParser.shared);
+		super(rawValue, parser);
+	}
+};
+//#endregion
+//#region dist/src/models/metadata-fields/field-types/checksum.js
+/** `<md5> *<file>`, the md5sum output format. */
+var HASH_FIRST = /^([0-9a-f]{32})\s+\*?(.+)$/i;
+/** `<file>:<md5>`, the other form seen in the wild. */
+var FILE_FIRST = /^(.+):([0-9a-f]{32})$/i;
+/** Reads one line of a checksum listing, in either layout. */
+function parseLine(line) {
+	const hashFirst = line.match(HASH_FIRST);
+	if (hashFirst) return {
+		file: hashFirst[2].trim(),
+		md5: hashFirst[1].toLowerCase()
+	};
+	const fileFirst = line.match(FILE_FIRST);
+	if (fileFirst) return {
+		file: fileFirst[1].trim(),
+		md5: fileFirst[2].toLowerCase()
+	};
+}
+/**
+* Parses a newline-delimited checksum listing into one {@link Checksum} per
+* line, accepting either the `<md5> *<file>` or `<file>:<md5>` layout.
+*
+* Lines in neither layout are dropped, and a value with no usable line at all
+* is rejected (returns `undefined`) rather than reported as an empty listing.
+* That matters because the field is sometimes filled with something else
+* entirely, such as a track listing, and the raw value stays on the field for
+* anyone who needs to look.
+*
+* @class ChecksumParser
+*/
+var ChecksumParser = class {
+	parseValue(rawValue) {
+		if (typeof rawValue !== "string") return void 0;
+		const checksums = rawValue.split("\n").map((line) => line.trim()).filter(Boolean).map(parseLine).filter((entry) => entry !== void 0);
+		return checksums.length ? checksums : void 0;
+	}
+};
+ChecksumParser.shared = new ChecksumParser();
+/**
+* A field whose values are the {@link Checksum} entries of a checksum listing.
+*
+* @class ChecksumField
+*/
+var ChecksumField = class extends MetadataField {
+	constructor(rawValue) {
+		super(ChecksumParser.shared, rawValue);
+	}
+};
+//#endregion
+//#region dist/src/models/metadata-fields/field-types/curation.js
+/** Reads the contents of one `[tag]…[/tag]` pair. */
+function tagContents(rawValue, tag) {
+	var _a;
+	const match = rawValue.match(new RegExp(`\\[${tag}\\]([\\s\\S]*?)\\[/${tag}\\]`, "i"));
+	const contents = (_a = match === null || match === void 0 ? void 0 : match[1]) === null || _a === void 0 ? void 0 : _a.trim();
+	return contents ? contents : void 0;
+}
+/**
+* Parses the bracketed curation tags. Values carrying none of the known tags
+* are rejected (returns `undefined`) so the raw string stays available on the
+* field rather than being reported as an empty note.
+*
+* @class CurationParser
+*/
+var CurationParser = class {
+	parseValue(rawValue) {
+		if (typeof rawValue !== "string") return void 0;
+		const curator = tagContents(rawValue, "curator");
+		const rawDate = tagContents(rawValue, "date");
+		const comment = tagContents(rawValue, "comment");
+		const state = tagContents(rawValue, "state");
+		if (!curator && !rawDate && !comment && !state) return void 0;
+		return {
+			curator,
+			date: rawDate ? DateParser.shared.parseValue(rawDate) : void 0,
+			comment,
+			state
+		};
+	}
+};
+CurationParser.shared = new CurationParser();
+/**
+* A field whose value is a parsed {@link Curation}.
+*
+* @class CurationField
+*/
+var CurationField = class extends MetadataField {
+	constructor(rawValue) {
+		super(CurationParser.shared, rawValue);
+	}
+};
+//#endregion
+//#region dist/src/models/metadata-fields/field-types/aspect-ratio.js
+/**
+* Parses an aspect ratio expressed as two numbers separated by `:`, `/`, or `x`
+* (e.g. `"4:3"`, `"16/9"`, `"16x9"`). Any value that does not match this grammar,
+* or that has a zero height, is rejected (returns `undefined`).
+*
+* @class AspectRatioParser
+*/
+var AspectRatioParser = class {
+	parseValue(rawValue) {
+		if (typeof rawValue !== "string") return void 0;
+		const match = rawValue.match(/^\s*(\d+(?:\.\d+)?)\s*[:/x]\s*(\d+(?:\.\d+)?)\s*$/i);
+		if (!match) return void 0;
+		const width = parseFloat(match[1]);
+		const height = parseFloat(match[2]);
+		if (!height) return void 0;
+		return {
+			width,
+			height,
+			decimal: width / height
+		};
+	}
+};
+AspectRatioParser.shared = new AspectRatioParser();
+/**
+* A field whose value is a parsed {@link AspectRatio}.
+*
+* @class AspectRatioField
+*/
+var AspectRatioField = class extends MetadataField {
+	constructor(rawValue) {
+		super(AspectRatioParser.shared, rawValue);
+	}
+};
+//#endregion
+//#region dist/src/models/metadata-fields/field-types/utc-offset.js
+/**
+* Parses a `±HHMM` UTC offset (an optional sign, one or two hour digits, and
+* exactly two minute digits, with an optional `:` separator). Values that do
+* not match this grammar are rejected (returns `undefined`).
+*
+* @class UtcOffsetParser
+*/
+var UtcOffsetParser = class {
+	parseValue(rawValue) {
+		const match = String(rawValue).trim().match(/^([+-]?)(\d{1,2}):?(\d{2})$/);
+		if (!match) return void 0;
+		const sign = match[1] === "-" ? -1 : 1;
+		const hours = parseInt(match[2], 10);
+		const minutes = parseInt(match[3], 10);
+		return {
+			hours: sign * hours,
+			minutes,
+			totalMinutes: sign * (hours * 60 + minutes)
+		};
+	}
+};
+UtcOffsetParser.shared = new UtcOffsetParser();
+/**
+* A field whose value is a parsed {@link UtcOffset}.
+*
+* @class UtcOffsetField
+*/
+var UtcOffsetField = class extends MetadataField {
+	constructor(rawValue) {
+		super(UtcOffsetParser.shared, rawValue);
+	}
+};
+//#endregion
+//#region dist/src/models/metadata-fields/field-types/tuner.js
+/**
+* Parses a tuner string of the form `Channel <n>` with an optional
+* `(<freq> MHz)` suffix. Values without a recognizable channel are rejected
+* (returns `undefined`).
+*
+* @class TunerParser
+*/
+var TunerParser = class {
+	parseValue(rawValue) {
+		if (typeof rawValue !== "string") return void 0;
+		const match = rawValue.match(/Channel\s+(\d+)(?:\s*\(\s*([\d.]+)\s*MHz\s*\))?/i);
+		if (!match) return void 0;
+		return {
+			channel: parseInt(match[1], 10),
+			frequencyMhz: match[2] ? parseFloat(match[2]) : void 0
+		};
+	}
+};
+TunerParser.shared = new TunerParser();
+/**
+* A field whose value is a parsed {@link Tuner}.
+*
+* @class TunerField
+*/
+var TunerField = class extends MetadataField {
+	constructor(rawValue) {
+		super(TunerParser.shared, rawValue);
+	}
+};
+//#endregion
+//#region dist/src/models/metadata.js
+var reviewsAllowedParser = new EnumParser([
+	"true",
+	"none",
+	"frozen"
+]);
+var soundParser = new EnumParser(["sound", "silent"]);
+var colorParser = new EnumParser(["color", "b&w"]);
+var bookReaderDefaultsParser = new EnumParser([
+	"mode/1up",
+	"mode/2up",
+	"mode/thumb"
+]);
+/**
+* Metadata is an expansive model that describes an Item.
+*
+* The fields in here get casted to their respective field types. See `metadata-fields/field-type`.
+*
+* Add additional fields as needed.
+*
+* @export
+* @class Metadata
+*/
+var Metadata = class {
+	get access() {
+		return this.field(StringField, "access");
+	}
+	get adder() {
+		return this.field(StringField, "adder");
+	}
+	get amrc_id() {
+		return this.field(StringField, "amrc-id");
+	}
+	get archiveit_account_id() {
+		return this.field(NumberField, "archiveit-account-id");
+	}
+	get archiveit_account_organization_name() {
+		return this.field(StringField, "archiveit-account-organization-name");
+	}
+	get archiveit_collection_id() {
+		return this.field(NumberField, "archiveit-collection-id");
+	}
+	get archiveit_collection_name() {
+		return this.field(StringField, "archiveit-collection-name");
+	}
+	get archiveit_job_type() {
+		return this.field(StringField, "archiveit-job-type");
+	}
+	get audit_time_minutes() {
+		return this.field(NumberField, "audit_time_minutes");
+	}
+	get auditor() {
+		return this.field(StringField, "auditor");
+	}
+	get author() {
+		return this.field(StringField, "author");
+	}
+	get autocrop_version() {
+		return this.field(StringField, "autocrop_version");
+	}
+	get bookplateleaf() {
+		return this.field(NumberField, "bookplateleaf");
+	}
+	/** The BookReader view an item opens in. */
+	get bookreader_defaults() {
+		return mapField(this.rawMetadata, (raw) => new EnumField(raw, bookReaderDefaultsParser), "bookreader-defaults");
+	}
+	get boxid() {
+		return this.field(StringField, "boxid");
+	}
+	get camera() {
+		return this.field(StringField, "camera");
+	}
+	get cameraman() {
+		return this.field(StringField, "cameraman");
+	}
+	get canister() {
+		return this.field(StringField, "canister");
+	}
+	get case_name() {
+		return this.field(StringField, "case-name");
+	}
+	get col_number() {
+		return this.field(StringField, "col_number");
+	}
+	/** Repeatable, so it arrives as an array of collection names. */
+	get collection_added() {
+		return this.field(StringField, "collection_added");
+	}
+	get collection_library() {
+		return this.field(StringField, "collection-library");
+	}
+	get collection_set() {
+		return this.field(StringField, "collection_set");
+	}
+	get copyright_holder() {
+		return this.field(StringField, "copyright_holder");
+	}
+	get court() {
+		return this.field(StringField, "court");
+	}
+	get crawler() {
+		return this.field(StringField, "crawler");
+	}
+	get crawljob() {
+		return this.field(StringField, "crawljob");
+	}
+	/**
+	* The curation note, parsed from its bracketed tags into a curator, date,
+	* comment, and state.
+	*/
+	get curation() {
+		return this.field(CurationField, "curation");
+	}
+	get dari_title() {
+		return this.field(StringField, "dari-title");
+	}
+	/** Sent under either key ordering. */
+	get dari_title_romanized() {
+		return this.field(StringField, "dari-title-romanized", "dari-romanized-title");
+	}
+	get date_case_filed() {
+		return this.field(DateField, "date-case-filed");
+	}
+	get date_case_terminated() {
+		return this.field(DateField, "date-case-terminated");
+	}
+	get date_created() {
+		return this.field(DateField, "date_created");
+	}
+	get date_last_filing() {
+		return this.field(DateField, "date-last-filing");
+	}
+	get derive_submittime() {
+		return this.field(DateField, "derive_submittime");
+	}
+	get derive_version() {
+		return this.field(StringField, "derive_version");
+	}
+	get discs() {
+		return this.field(NumberField, "discs");
+	}
+	get docket_num() {
+		return this.field(StringField, "docket-num");
+	}
+	get external_metadata_update() {
+		return this.field(DateField, "external_metadata_update");
+	}
+	get fail_reasons() {
+		return this.field(StringField, "fail-reasons");
+	}
+	/** When the item's `files.xml` was written, e.g. `"Wed Mar 23 3:18:56 UTC 2011"`. */
+	get filesxml() {
+		return this.field(DateField, "filesxml");
+	}
+	/** Compact `YYYYMMDD[HHMMSS]` timestamp. */
+	get firstfiledate() {
+		return this.field(DateField, "firstfiledate");
+	}
+	get firstfileserial() {
+		return this.field(NumberField, "firstfileserial");
+	}
+	get foldoutcount() {
+		return this.field(NumberField, "foldoutcount");
+	}
+	get format() {
+		return this.field(StringField, "format");
+	}
+	get geo_restricted() {
+		return this.field(StringField, "geo_restricted");
+	}
+	get guid() {
+		return this.field(StringField, "guid");
+	}
+	/** A flag, spelled `0` or `1` in the API. */
+	get has_mp3() {
+		return this.field(BooleanField, "has_mp3");
+	}
+	get height() {
+		return this.field(NumberField, "height");
+	}
+	get hidden() {
+		return this.field(BooleanField, "hidden");
+	}
+	/**
+	* The runtime as it was originally written, before being normalized into
+	* {@link runtime}. Free-form prose like `"1.8 Hours"` or `"33 minutes"`, so
+	* it stays a string: `DurationParser` takes the leading number and drops the
+	* unit, reading `"1.8 Hours"` as 1.8 seconds. Read `runtime` for a duration.
+	*/
+	get ia_orig__runtime() {
+		return this.field(StringField, "ia_orig__runtime");
+	}
+	/**
+	* The item identifier.
+	*
+	* _Note_ This is a plain string instead of a `MetadataField` since it
+	* will only ever be a string and not an array.
+	*
+	* @type {string}
+	* @memberof Metadata
+	*/
+	get identifier() {
+		return this.rawMetadata.identifier;
+	}
+	get access_restricted_item() {
+		return this.field(BooleanField, "access-restricted-item");
+	}
+	get addeddate() {
+		return this.field(DateField, "addeddate");
+	}
+	/**
+	* The display aspect ratio, e.g. `"4:3"`, parsed into width, height, and a
+	* decimal ratio.
+	*/
+	get aspect_ratio() {
+		return this.field(AspectRatioField, "aspect_ratio");
+	}
+	get audio_codec() {
+		return this.field(StringField, "audio_codec");
+	}
+	get audio_sample_rate() {
+		return this.field(NumberField, "audio_sample_rate");
+	}
+	get avg_rating() {
+		return this.field(NumberField, "avg_rating");
+	}
+	get backup_location() {
+		return this.field(StringField, "backup_location");
+	}
+	get ccnum() {
+		return this.field(StringField, "ccnum");
+	}
+	/**
+	* Whether the broadcast included closed captioning. The raw `"yes"`/`"no"`
+	* value is parsed to a boolean.
+	*/
+	get closed_captioning() {
+		return this.field(BooleanField, "closed_captioning");
+	}
+	/**
+	* All of the collections that an Item is in, including
+	* all of the side-loaded collections from the ListAPI
+	* and SimpleListsAPI like `fav-*`
+	*
+	* @type {StringField}
+	* @memberof Metadata
+	*/
+	get collection() {
+		return this.field(StringField, "collection");
+	}
+	/**
+	* The "natural" collections for an item before augmentation
+	* by side-loaded collections like ListsAPI and SimpleLists
+	*
+	* The `collection` field above includes things like all of
+	* the `fav-*` collections, whereas this is only the collections
+	* that have been directly added in the hierarchy.
+	*
+	* @type {StringField}
+	* @memberof Metadata
+	*/
+	get collections_raw() {
+		return this.field(StringField, "collections_raw");
+	}
+	/**
+	* The size of a collection in bytes
+	*
+	* @type {ByteField}
+	* @memberof Metadata
+	*/
+	get collection_size() {
+		return this.field(ByteField, "collection_size");
+	}
+	get color() {
+		return mapField(this.rawMetadata, (raw) => new EnumField(raw, colorParser), "color");
+	}
+	get contact() {
+		return this.field(StringField, "contact");
+	}
+	get contributor() {
+		return this.field(StringField, "contributor");
+	}
+	get coverage() {
+		return this.field(StringField, "coverage");
+	}
+	get creator() {
+		return this.field(StringField, "creator");
+	}
+	get creator_alt_script() {
+		return this.field(StringField, "creator-alt-script");
+	}
+	get credits() {
+		return this.field(StringField, "credits");
+	}
+	get collection_layout() {
+		return this.field(StringField, "collection_layout");
+	}
+	get date() {
+		return this.field(DateField, "date");
+	}
+	get description() {
+		return this.field(StringField, "description");
+	}
+	/**
+	* All time download count
+	*
+	* @type {NumberField}
+	* @memberof Metadata
+	*/
+	get downloads() {
+		return this.field(NumberField, "downloads");
+	}
+	/**
+	* The item duration in seconds
+	*
+	* @type {DurationField}
+	* @memberof Metadata
+	*/
+	get duration() {
+		return this.field(DurationField, "duration");
+	}
+	get external_identifier() {
+		return this.field(StringField, "external-identifier");
+	}
+	get external_link() {
+		return this.field(StringField, "external-link");
+	}
+	/**
+	* The number of files in an item
+	*
+	* @type {NumberField}
+	* @memberof Metadata
+	*/
+	get files_count() {
+		return this.field(NumberField, "files_count");
+	}
+	get frames_per_second() {
+		return this.field(NumberField, "frames_per_second");
+	}
+	get identifier_access() {
+		return this.field(StringField, "identifier-access");
+	}
+	get identifier_ark() {
+		return this.field(StringField, "identifier-ark");
+	}
+	get identifier_bib() {
+		return this.field(StringField, "identifier-bib");
+	}
+	get image_count() {
+		return this.field(NumberField, "image_count");
+	}
+	get imagecount() {
+		return this.field(NumberField, "imagecount");
+	}
+	get indexdate() {
+		return this.field(DateField, "indexdate");
+	}
+	get invoice() {
+		return this.field(NumberField, "invoice");
+	}
+	get isbn() {
+		return this.field(StringField, "isbn");
+	}
+	get issue() {
+		return this.field(StringField, "issue");
+	}
+	get issue_count() {
+		return this.field(NumberField, "issue_count");
+	}
+	get issue_page_count() {
+		return this.field(NumberField, "issue_page_count");
+	}
+	/**
+	* For collections, the number of items in the collection
+	*
+	* @type {NumberField}
+	* @memberof Metadata
+	*/
+	get item_count() {
+		return this.field(NumberField, "item_count");
+	}
+	/**
+	* The size of the item in bytes
+	*
+	* @type {NumberField}
+	* @memberof Metadata
+	*/
+	get item_size() {
+		return this.field(ByteField, "item_size");
+	}
+	get language() {
+		return this.field(StringField, "language");
+	}
+	/** Compact `YYYYMMDD[HHMMSS]` timestamp. */
+	get lastdate() {
+		return this.field(DateField, "lastdate");
+	}
+	/** Compact `YYYYMMDD[HHMMSS]` timestamp. */
+	get lastfiledate() {
+		return this.field(DateField, "lastfiledate");
+	}
+	get lastfileserial() {
+		return this.field(NumberField, "lastfileserial");
+	}
+	get length() {
+		return this.field(DurationField, "length");
+	}
+	get license() {
+		return this.field(StringField, "license");
+	}
+	get licenseurl() {
+		return this.field(StringField, "licenseurl");
+	}
+	get lineage() {
+		return this.field(StringField, "lineage");
+	}
+	/** Spelled `yes`/`no` in the API. */
+	get mature_content() {
+		return this.field(BooleanField, "mature_content");
+	}
+	get md5() {
+		return this.field(StringField, "md5");
+	}
+	/** A checksum listing, in the same layouts as `md5s`. */
+	get md5contents() {
+		return this.field(ChecksumField, "md5contents");
+	}
+	/**
+	* The item's checksum listing, one file and digest per entry. Parses either
+	* the `<md5> *<file>` or `<file>:<md5>` layout.
+	*/
+	get md5s() {
+		return this.field(ChecksumField, "md5s");
+	}
+	get medium() {
+		return this.field(StringField, "medium");
+	}
+	get metadata_operator() {
+		return this.field(StringField, "metadata_operator");
+	}
+	get metasource_catalog() {
+		return this.field(StringField, "metasource_catalog");
+	}
+	/** Spelled `yes`/`no` in the API. */
+	get monochromatic() {
+		return this.field(BooleanField, "monochromatic");
+	}
+	/**
+	* The number of downloads in the last month
+	*
+	* @type {NumberField}
+	* @memberof Metadata
+	*/
+	get month() {
+		return this.field(NumberField, "month");
+	}
+	get mediatype() {
+		return this.field(MediaTypeField, "mediatype");
+	}
+	get mpeg_program() {
+		return this.field(NumberField, "mpeg_program");
+	}
+	get next_item() {
+		return this.field(StringField, "next_item");
+	}
+	get noarchivetorrent() {
+		return this.field(BooleanField, "noarchivetorrent");
+	}
+	get noindex() {
+		return this.field(BooleanField, "noindex");
+	}
+	get notes() {
+		return this.field(StringField, "notes");
+	}
+	/**
+	* The number of users that have favorited the item
+	*
+	* @type {NumberField}
+	* @memberof Metadata
+	*/
+	get num_favorites() {
+		return this.field(NumberField, "num_favorites");
+	}
+	get num_reviews() {
+		return this.field(NumberField, "num_reviews");
+	}
+	get numeric_id() {
+		return this.field(NumberField, "numeric_id");
+	}
+	get numwarcs() {
+		return this.field(NumberField, "numwarcs");
+	}
+	get ocr() {
+		return this.field(StringField, "ocr");
+	}
+	get ocr_autonomous() {
+		return this.field(BooleanField, "ocr_autonomous");
+	}
+	get ocr_detected_lang() {
+		return this.field(StringField, "ocr_detected_lang");
+	}
+	get ocr_detected_lang_conf() {
+		return this.field(NumberField, "ocr_detected_lang_conf");
+	}
+	get ocr_detected_script() {
+		return this.field(StringField, "ocr_detected_script");
+	}
+	get ocr_detected_script_conf() {
+		return this.field(NumberField, "ocr_detected_script_conf");
+	}
+	get ocr_invalid_language() {
+		return this.field(StringField, "ocr_invalid_language");
+	}
+	get ocr_module_version() {
+		return this.field(StringField, "ocr_module_version");
+	}
+	get ocr_parameters() {
+		return this.field(StringField, "ocr_parameters");
+	}
+	get old_pallet() {
+		return this.field(StringField, "old_pallet");
+	}
+	get openlibrary_edition() {
+		return this.field(StringField, "openlibrary_edition");
+	}
+	get openlibrary_work() {
+		return this.field(StringField, "openlibrary_work");
+	}
+	get operator() {
+		return this.field(StringField, "operator");
+	}
+	get originalurl() {
+		return this.field(StringField, "originalurl");
+	}
+	get osf_category() {
+		return this.field(StringField, "osf_category");
+	}
+	get osf_project() {
+		return this.field(StringField, "osf_project");
+	}
+	get osf_registration_doi() {
+		return this.field(StringField, "osf_registration_doi");
+	}
+	get osf_registration_schema() {
+		return this.field(StringField, "osf_registration_schema");
+	}
+	get osf_registry() {
+		return this.field(StringField, "osf_registry");
+	}
+	get osf_subjects() {
+		return this.field(StringField, "osf_subjects");
+	}
+	get osf_tags() {
+		return this.field(StringField, "osf_tags");
+	}
+	get output_time_minutes() {
+		return this.field(NumberField, "output_time_minutes");
+	}
+	get pacer_case_num() {
+		return this.field(NumberField, "pacer-case-num");
+	}
+	get packaging_time_minutes() {
+		return this.field(NumberField, "packaging_time_minutes");
+	}
+	get page_number_confidence() {
+		return this.field(NumberField, "page_number_confidence");
+	}
+	get page_number_module_version() {
+		return this.field(StringField, "page_number_module_version");
+	}
+	/**
+	* The reading direction. The API spells this `page-progression`; the
+	* underscored spelling is accepted as a fallback.
+	*/
+	get page_progression() {
+		return this.field(PageProgressionField, "page-progression", "page_progression");
+	}
+	get paginated() {
+		return this.field(BooleanField, "paginated");
+	}
+	get parse_date() {
+		return this.field(DateField, "parse_date");
+	}
+	get parse_state() {
+		return this.field(StringField, "parse_state");
+	}
+	get partner() {
+		return this.field(StringField, "partner");
+	}
+	get pashto_title() {
+		return this.field(StringField, "pashto-title");
+	}
+	/** Sent under either key ordering. */
+	get pashto_title_romanized() {
+		return this.field(StringField, "pashto-title-romanized", "romanized-pashto-title");
+	}
+	get pdf_degraded() {
+		return this.field(StringField, "pdf_degraded");
+	}
+	get pdf_module_version() {
+		return this.field(StringField, "pdf_module_version");
+	}
+	get pick() {
+		return this.field(NumberField, "pick");
+	}
+	get podcastindexid() {
+		return this.field(NumberField, "podcastindexid");
+	}
+	get post_text() {
+		return this.field(StringField, "post_text");
+	}
+	get ppi() {
+		return this.field(NumberField, "ppi");
+	}
+	get previous_item() {
+		return this.field(StringField, "previous_item");
+	}
+	get program() {
+		return this.field(StringField, "program");
+	}
+	get publicdate() {
+		return this.field(DateField, "publicdate");
+	}
+	get publisher() {
+		return this.field(StringField, "publisher");
+	}
+	get political_religious_party() {
+		return this.field(StringField, "political-religious-party");
+	}
+	get rcs_key() {
+		return this.field(NumberField, "rcs_key");
+	}
+	get repub_state() {
+		return this.field(NumberField, "repub_state");
+	}
+	/** Compact `YYYYMMDD[HHMMSS]` timestamp. */
+	get republisher_date() {
+		return this.field(DateField, "republisher_date");
+	}
+	/** One or more operators, semicolon-separated when there are several. */
+	get republisher_operator() {
+		return this.field(StringListField, "republisher_operator");
+	}
+	get republisher_time() {
+		return this.field(NumberField, "republisher_time");
+	}
+	get reviewdate() {
+		return this.field(DateField, "reviewdate");
+	}
+	/**
+	* Whether reviews may be added to this item. One of `true` (enabled),
+	* `none` (disabled), or `frozen` (existing reviews shown, no new ones).
+	* Absent for most items, which means reviews are enabled.
+	*/
+	get reviews_allowed() {
+		return mapField(this.rawMetadata, (raw) => new EnumField(raw, reviewsAllowedParser), "reviews-allowed");
+	}
+	get ribbon_state() {
+		return this.field(StringField, "ribbon_state");
+	}
+	get ribbon_state_modify_date() {
+		return this.field(DateField, "ribbon_state_modify_date");
+	}
+	get rights() {
+		return this.field(StringField, "rights");
+	}
+	get rights_holder() {
+		return this.field(StringField, "rights-holder", "rights_holder");
+	}
+	get rssfeed() {
+		return this.field(StringField, "rssfeed");
+	}
+	get runtime() {
+		return this.field(DurationField, "runtime");
+	}
+	get scan_time_minutes() {
+		return this.field(NumberField, "scan_time_minutes");
+	}
+	/**
+	* The scan/capture date. Parses compact `YYYYMMDD[HHMMSS]` timestamps in
+	* addition to standard date strings.
+	*/
+	get scandate() {
+		return this.field(DateField, "scandate");
+	}
+	/** Semicolon-separated fee components, e.g. `"300;10;200"`. */
+	get scanfee() {
+		return this.field(NumberListField, "scanfee");
+	}
+	get scanner() {
+		return this.field(StringField, "scanner");
+	}
+	get scanner_operator() {
+		return this.field(StringField, "scanner_operator");
+	}
+	get scanningcenter() {
+		return this.field(StringField, "scanningcenter");
+	}
+	get scribe3_search_catalog() {
+		return this.field(StringField, "scribe3_search_catalog");
+	}
+	get scribe3_search_id() {
+		return this.field(StringField, "scribe3_search_id");
+	}
+	get segments() {
+		return this.field(StringField, "segments");
+	}
+	get sessionid() {
+		return this.field(StringField, "sessionid");
+	}
+	get shndiscs() {
+		return this.field(NumberField, "shndiscs");
+	}
+	get shotlist() {
+		return this.field(StringField, "shotlist");
+	}
+	get signal_path() {
+		return this.field(StringField, "signal-path");
+	}
+	/** A byte count. */
+	get size() {
+		return this.field(ByteField, "size");
+	}
+	/** A byte count. */
+	get sizehint() {
+		return this.field(ByteField, "sizehint");
+	}
+	get software_version() {
+		return this.field(StringField, "software_version");
+	}
+	get sort_order() {
+		return this.field(StringField, "sort_order");
+	}
+	get sound() {
+		return mapField(this.rawMetadata, (raw) => new EnumField(raw, soundParser), "sound");
+	}
+	get soundcreator() {
+		return this.field(StringField, "soundcreator");
+	}
+	get soundtitle() {
+		return this.field(StringField, "soundtitle");
+	}
+	get source() {
+		return this.field(StringField, "source");
+	}
+	get source_pixel_height() {
+		return this.field(NumberField, "source_pixel_height");
+	}
+	get source_pixel_width() {
+		return this.field(NumberField, "source_pixel_width");
+	}
+	get source_url() {
+		return this.field(StringField, "source_url");
+	}
+	get sponsor() {
+		return this.field(StringField, "sponsor");
+	}
+	/** Compact `YYYYMMDD[HHMMSS]` timestamp. */
+	get sponsordate() {
+		return this.field(DateField, "sponsordate");
+	}
+	get start_localtime() {
+		return this.field(DateField, "start_localtime");
+	}
+	get start_time() {
+		return this.field(DateField, "start_time");
+	}
+	get station_name() {
+		return this.field(StringField, "station_name");
+	}
+	get stop_time() {
+		return this.field(DateField, "stop_time");
+	}
+	get subject() {
+		return this.field(StringListField, "subject");
+	}
+	get taper() {
+		return this.field(StringField, "taper");
+	}
+	get thumbs() {
+		return this.field(NumberListField, "thumbs");
+	}
+	get times() {
+		return this.field(NumberListField, "times");
+	}
+	get title() {
+		return this.field(StringField, "title");
+	}
+	get title_alt_script() {
+		return this.field(StringField, "title-alt-script");
+	}
+	get transferer() {
+		return this.field(StringField, "transferer");
+	}
+	get track() {
+		return this.field(NumberField, "track");
+	}
+	get tts_version() {
+		return this.field(StringField, "tts_version");
+	}
+	/**
+	* The capture tuner setting. Parses the `"Channel <n> (<freq> MHz)"` form
+	* into channel and frequency; other formats expose only the raw value.
+	*/
+	get tuner() {
+		return this.field(TunerField, "tuner");
+	}
+	get type() {
+		return this.field(StringField, "type");
+	}
+	get updatedate() {
+		return this.field(DateField, "updatedate");
+	}
+	/** Repeatable, so it arrives as an array of account names. */
+	get updater() {
+		return this.field(StringField, "updater");
+	}
+	get uploader() {
+		return this.field(StringField, "uploader");
+	}
+	get uploadsoftware() {
+		return this.field(StringField, "uploadsoftware");
+	}
+	/**
+	* The UTC offset encoded as `±HHMM` (e.g. `"-800"`), parsed into hours,
+	* minutes, and total signed minutes.
+	*/
+	get utc_offset() {
+		return this.field(UtcOffsetField, "utc_offset");
+	}
+	get venue() {
+		return this.field(StringField, "venue");
+	}
+	get video_codec() {
+		return this.field(StringField, "video_codec");
+	}
+	get volume() {
+		return this.field(StringField, "volume");
+	}
+	get website() {
+		return this.field(StringField, "website");
+	}
+	/**
+	* The number of downloads in the last week
+	*
+	* @type {NumberField}
+	* @memberof Metadata
+	*/
+	get week() {
+		return this.field(NumberField, "week");
+	}
+	get width() {
+		return this.field(NumberField, "width");
+	}
+	get year() {
+		return this.field(NumberField, "year");
+	}
+	/**
+	* Builds a field from the first of `keys` whose raw value is present,
+	* or `undefined` if none are set. Later keys act as fallbacks, for fields
+	* that arrive under more than one name.
+	*
+	* For fields whose class needs more than the raw value (e.g. an `EnumField`
+	* needs its parser), call {@link mapField} directly with a factory.
+	*
+	* @param Ctor A field class taking a single raw value (`DateField`, `StringField`, etc.)
+	* @param keys The raw metadata key(s) to read, in priority order
+	*/
+	field(Ctor, ...keys) {
+		return mapField(this.rawMetadata, (raw) => new Ctor(raw), ...keys);
+	}
+	constructor(json = {}) {
+		this.rawMetadata = json;
+	}
+};
+__decorate([Memoize()], Metadata.prototype, "access", null);
+__decorate([Memoize()], Metadata.prototype, "adder", null);
+__decorate([Memoize()], Metadata.prototype, "amrc_id", null);
+__decorate([Memoize()], Metadata.prototype, "archiveit_account_id", null);
+__decorate([Memoize()], Metadata.prototype, "archiveit_account_organization_name", null);
+__decorate([Memoize()], Metadata.prototype, "archiveit_collection_id", null);
+__decorate([Memoize()], Metadata.prototype, "archiveit_collection_name", null);
+__decorate([Memoize()], Metadata.prototype, "archiveit_job_type", null);
+__decorate([Memoize()], Metadata.prototype, "audit_time_minutes", null);
+__decorate([Memoize()], Metadata.prototype, "auditor", null);
+__decorate([Memoize()], Metadata.prototype, "author", null);
+__decorate([Memoize()], Metadata.prototype, "autocrop_version", null);
+__decorate([Memoize()], Metadata.prototype, "bookplateleaf", null);
+__decorate([Memoize()], Metadata.prototype, "bookreader_defaults", null);
+__decorate([Memoize()], Metadata.prototype, "boxid", null);
+__decorate([Memoize()], Metadata.prototype, "camera", null);
+__decorate([Memoize()], Metadata.prototype, "cameraman", null);
+__decorate([Memoize()], Metadata.prototype, "canister", null);
+__decorate([Memoize()], Metadata.prototype, "case_name", null);
+__decorate([Memoize()], Metadata.prototype, "col_number", null);
+__decorate([Memoize()], Metadata.prototype, "collection_added", null);
+__decorate([Memoize()], Metadata.prototype, "collection_library", null);
+__decorate([Memoize()], Metadata.prototype, "collection_set", null);
+__decorate([Memoize()], Metadata.prototype, "copyright_holder", null);
+__decorate([Memoize()], Metadata.prototype, "court", null);
+__decorate([Memoize()], Metadata.prototype, "crawler", null);
+__decorate([Memoize()], Metadata.prototype, "crawljob", null);
+__decorate([Memoize()], Metadata.prototype, "curation", null);
+__decorate([Memoize()], Metadata.prototype, "dari_title", null);
+__decorate([Memoize()], Metadata.prototype, "dari_title_romanized", null);
+__decorate([Memoize()], Metadata.prototype, "date_case_filed", null);
+__decorate([Memoize()], Metadata.prototype, "date_case_terminated", null);
+__decorate([Memoize()], Metadata.prototype, "date_created", null);
+__decorate([Memoize()], Metadata.prototype, "date_last_filing", null);
+__decorate([Memoize()], Metadata.prototype, "derive_submittime", null);
+__decorate([Memoize()], Metadata.prototype, "derive_version", null);
+__decorate([Memoize()], Metadata.prototype, "discs", null);
+__decorate([Memoize()], Metadata.prototype, "docket_num", null);
+__decorate([Memoize()], Metadata.prototype, "external_metadata_update", null);
+__decorate([Memoize()], Metadata.prototype, "fail_reasons", null);
+__decorate([Memoize()], Metadata.prototype, "filesxml", null);
+__decorate([Memoize()], Metadata.prototype, "firstfiledate", null);
+__decorate([Memoize()], Metadata.prototype, "firstfileserial", null);
+__decorate([Memoize()], Metadata.prototype, "foldoutcount", null);
+__decorate([Memoize()], Metadata.prototype, "format", null);
+__decorate([Memoize()], Metadata.prototype, "geo_restricted", null);
+__decorate([Memoize()], Metadata.prototype, "guid", null);
+__decorate([Memoize()], Metadata.prototype, "has_mp3", null);
+__decorate([Memoize()], Metadata.prototype, "height", null);
+__decorate([Memoize()], Metadata.prototype, "hidden", null);
+__decorate([Memoize()], Metadata.prototype, "ia_orig__runtime", null);
+__decorate([Memoize()], Metadata.prototype, "access_restricted_item", null);
+__decorate([Memoize()], Metadata.prototype, "addeddate", null);
+__decorate([Memoize()], Metadata.prototype, "aspect_ratio", null);
+__decorate([Memoize()], Metadata.prototype, "audio_codec", null);
+__decorate([Memoize()], Metadata.prototype, "audio_sample_rate", null);
+__decorate([Memoize()], Metadata.prototype, "avg_rating", null);
+__decorate([Memoize()], Metadata.prototype, "backup_location", null);
+__decorate([Memoize()], Metadata.prototype, "ccnum", null);
+__decorate([Memoize()], Metadata.prototype, "closed_captioning", null);
+__decorate([Memoize()], Metadata.prototype, "collection", null);
+__decorate([Memoize()], Metadata.prototype, "collections_raw", null);
+__decorate([Memoize()], Metadata.prototype, "collection_size", null);
+__decorate([Memoize()], Metadata.prototype, "color", null);
+__decorate([Memoize()], Metadata.prototype, "contact", null);
+__decorate([Memoize()], Metadata.prototype, "contributor", null);
+__decorate([Memoize()], Metadata.prototype, "coverage", null);
+__decorate([Memoize()], Metadata.prototype, "creator", null);
+__decorate([Memoize()], Metadata.prototype, "creator_alt_script", null);
+__decorate([Memoize()], Metadata.prototype, "credits", null);
+__decorate([Memoize()], Metadata.prototype, "collection_layout", null);
+__decorate([Memoize()], Metadata.prototype, "date", null);
+__decorate([Memoize()], Metadata.prototype, "description", null);
+__decorate([Memoize()], Metadata.prototype, "downloads", null);
+__decorate([Memoize()], Metadata.prototype, "duration", null);
+__decorate([Memoize()], Metadata.prototype, "external_identifier", null);
+__decorate([Memoize()], Metadata.prototype, "external_link", null);
+__decorate([Memoize()], Metadata.prototype, "files_count", null);
+__decorate([Memoize()], Metadata.prototype, "frames_per_second", null);
+__decorate([Memoize()], Metadata.prototype, "identifier_access", null);
+__decorate([Memoize()], Metadata.prototype, "identifier_ark", null);
+__decorate([Memoize()], Metadata.prototype, "identifier_bib", null);
+__decorate([Memoize()], Metadata.prototype, "image_count", null);
+__decorate([Memoize()], Metadata.prototype, "imagecount", null);
+__decorate([Memoize()], Metadata.prototype, "indexdate", null);
+__decorate([Memoize()], Metadata.prototype, "invoice", null);
+__decorate([Memoize()], Metadata.prototype, "isbn", null);
+__decorate([Memoize()], Metadata.prototype, "issue", null);
+__decorate([Memoize()], Metadata.prototype, "issue_count", null);
+__decorate([Memoize()], Metadata.prototype, "issue_page_count", null);
+__decorate([Memoize()], Metadata.prototype, "item_count", null);
+__decorate([Memoize()], Metadata.prototype, "item_size", null);
+__decorate([Memoize()], Metadata.prototype, "language", null);
+__decorate([Memoize()], Metadata.prototype, "lastdate", null);
+__decorate([Memoize()], Metadata.prototype, "lastfiledate", null);
+__decorate([Memoize()], Metadata.prototype, "lastfileserial", null);
+__decorate([Memoize()], Metadata.prototype, "length", null);
+__decorate([Memoize()], Metadata.prototype, "license", null);
+__decorate([Memoize()], Metadata.prototype, "licenseurl", null);
+__decorate([Memoize()], Metadata.prototype, "lineage", null);
+__decorate([Memoize()], Metadata.prototype, "mature_content", null);
+__decorate([Memoize()], Metadata.prototype, "md5", null);
+__decorate([Memoize()], Metadata.prototype, "md5contents", null);
+__decorate([Memoize()], Metadata.prototype, "md5s", null);
+__decorate([Memoize()], Metadata.prototype, "medium", null);
+__decorate([Memoize()], Metadata.prototype, "metadata_operator", null);
+__decorate([Memoize()], Metadata.prototype, "metasource_catalog", null);
+__decorate([Memoize()], Metadata.prototype, "monochromatic", null);
+__decorate([Memoize()], Metadata.prototype, "month", null);
+__decorate([Memoize()], Metadata.prototype, "mediatype", null);
+__decorate([Memoize()], Metadata.prototype, "mpeg_program", null);
+__decorate([Memoize()], Metadata.prototype, "next_item", null);
+__decorate([Memoize()], Metadata.prototype, "noarchivetorrent", null);
+__decorate([Memoize()], Metadata.prototype, "noindex", null);
+__decorate([Memoize()], Metadata.prototype, "notes", null);
+__decorate([Memoize()], Metadata.prototype, "num_favorites", null);
+__decorate([Memoize()], Metadata.prototype, "num_reviews", null);
+__decorate([Memoize()], Metadata.prototype, "numeric_id", null);
+__decorate([Memoize()], Metadata.prototype, "numwarcs", null);
+__decorate([Memoize()], Metadata.prototype, "ocr", null);
+__decorate([Memoize()], Metadata.prototype, "ocr_autonomous", null);
+__decorate([Memoize()], Metadata.prototype, "ocr_detected_lang", null);
+__decorate([Memoize()], Metadata.prototype, "ocr_detected_lang_conf", null);
+__decorate([Memoize()], Metadata.prototype, "ocr_detected_script", null);
+__decorate([Memoize()], Metadata.prototype, "ocr_detected_script_conf", null);
+__decorate([Memoize()], Metadata.prototype, "ocr_invalid_language", null);
+__decorate([Memoize()], Metadata.prototype, "ocr_module_version", null);
+__decorate([Memoize()], Metadata.prototype, "ocr_parameters", null);
+__decorate([Memoize()], Metadata.prototype, "old_pallet", null);
+__decorate([Memoize()], Metadata.prototype, "openlibrary_edition", null);
+__decorate([Memoize()], Metadata.prototype, "openlibrary_work", null);
+__decorate([Memoize()], Metadata.prototype, "operator", null);
+__decorate([Memoize()], Metadata.prototype, "originalurl", null);
+__decorate([Memoize()], Metadata.prototype, "osf_category", null);
+__decorate([Memoize()], Metadata.prototype, "osf_project", null);
+__decorate([Memoize()], Metadata.prototype, "osf_registration_doi", null);
+__decorate([Memoize()], Metadata.prototype, "osf_registration_schema", null);
+__decorate([Memoize()], Metadata.prototype, "osf_registry", null);
+__decorate([Memoize()], Metadata.prototype, "osf_subjects", null);
+__decorate([Memoize()], Metadata.prototype, "osf_tags", null);
+__decorate([Memoize()], Metadata.prototype, "output_time_minutes", null);
+__decorate([Memoize()], Metadata.prototype, "pacer_case_num", null);
+__decorate([Memoize()], Metadata.prototype, "packaging_time_minutes", null);
+__decorate([Memoize()], Metadata.prototype, "page_number_confidence", null);
+__decorate([Memoize()], Metadata.prototype, "page_number_module_version", null);
+__decorate([Memoize()], Metadata.prototype, "page_progression", null);
+__decorate([Memoize()], Metadata.prototype, "paginated", null);
+__decorate([Memoize()], Metadata.prototype, "parse_date", null);
+__decorate([Memoize()], Metadata.prototype, "parse_state", null);
+__decorate([Memoize()], Metadata.prototype, "partner", null);
+__decorate([Memoize()], Metadata.prototype, "pashto_title", null);
+__decorate([Memoize()], Metadata.prototype, "pashto_title_romanized", null);
+__decorate([Memoize()], Metadata.prototype, "pdf_degraded", null);
+__decorate([Memoize()], Metadata.prototype, "pdf_module_version", null);
+__decorate([Memoize()], Metadata.prototype, "pick", null);
+__decorate([Memoize()], Metadata.prototype, "podcastindexid", null);
+__decorate([Memoize()], Metadata.prototype, "post_text", null);
+__decorate([Memoize()], Metadata.prototype, "ppi", null);
+__decorate([Memoize()], Metadata.prototype, "previous_item", null);
+__decorate([Memoize()], Metadata.prototype, "program", null);
+__decorate([Memoize()], Metadata.prototype, "publicdate", null);
+__decorate([Memoize()], Metadata.prototype, "publisher", null);
+__decorate([Memoize()], Metadata.prototype, "political_religious_party", null);
+__decorate([Memoize()], Metadata.prototype, "rcs_key", null);
+__decorate([Memoize()], Metadata.prototype, "repub_state", null);
+__decorate([Memoize()], Metadata.prototype, "republisher_date", null);
+__decorate([Memoize()], Metadata.prototype, "republisher_operator", null);
+__decorate([Memoize()], Metadata.prototype, "republisher_time", null);
+__decorate([Memoize()], Metadata.prototype, "reviewdate", null);
+__decorate([Memoize()], Metadata.prototype, "reviews_allowed", null);
+__decorate([Memoize()], Metadata.prototype, "ribbon_state", null);
+__decorate([Memoize()], Metadata.prototype, "ribbon_state_modify_date", null);
+__decorate([Memoize()], Metadata.prototype, "rights", null);
+__decorate([Memoize()], Metadata.prototype, "rights_holder", null);
+__decorate([Memoize()], Metadata.prototype, "rssfeed", null);
+__decorate([Memoize()], Metadata.prototype, "runtime", null);
+__decorate([Memoize()], Metadata.prototype, "scan_time_minutes", null);
+__decorate([Memoize()], Metadata.prototype, "scandate", null);
+__decorate([Memoize()], Metadata.prototype, "scanfee", null);
+__decorate([Memoize()], Metadata.prototype, "scanner", null);
+__decorate([Memoize()], Metadata.prototype, "scanner_operator", null);
+__decorate([Memoize()], Metadata.prototype, "scanningcenter", null);
+__decorate([Memoize()], Metadata.prototype, "scribe3_search_catalog", null);
+__decorate([Memoize()], Metadata.prototype, "scribe3_search_id", null);
+__decorate([Memoize()], Metadata.prototype, "segments", null);
+__decorate([Memoize()], Metadata.prototype, "sessionid", null);
+__decorate([Memoize()], Metadata.prototype, "shndiscs", null);
+__decorate([Memoize()], Metadata.prototype, "shotlist", null);
+__decorate([Memoize()], Metadata.prototype, "signal_path", null);
+__decorate([Memoize()], Metadata.prototype, "size", null);
+__decorate([Memoize()], Metadata.prototype, "sizehint", null);
+__decorate([Memoize()], Metadata.prototype, "software_version", null);
+__decorate([Memoize()], Metadata.prototype, "sort_order", null);
+__decorate([Memoize()], Metadata.prototype, "sound", null);
+__decorate([Memoize()], Metadata.prototype, "soundcreator", null);
+__decorate([Memoize()], Metadata.prototype, "soundtitle", null);
+__decorate([Memoize()], Metadata.prototype, "source", null);
+__decorate([Memoize()], Metadata.prototype, "source_pixel_height", null);
+__decorate([Memoize()], Metadata.prototype, "source_pixel_width", null);
+__decorate([Memoize()], Metadata.prototype, "source_url", null);
+__decorate([Memoize()], Metadata.prototype, "sponsor", null);
+__decorate([Memoize()], Metadata.prototype, "sponsordate", null);
+__decorate([Memoize()], Metadata.prototype, "start_localtime", null);
+__decorate([Memoize()], Metadata.prototype, "start_time", null);
+__decorate([Memoize()], Metadata.prototype, "station_name", null);
+__decorate([Memoize()], Metadata.prototype, "stop_time", null);
+__decorate([Memoize()], Metadata.prototype, "subject", null);
+__decorate([Memoize()], Metadata.prototype, "taper", null);
+__decorate([Memoize()], Metadata.prototype, "thumbs", null);
+__decorate([Memoize()], Metadata.prototype, "times", null);
+__decorate([Memoize()], Metadata.prototype, "title", null);
+__decorate([Memoize()], Metadata.prototype, "title_alt_script", null);
+__decorate([Memoize()], Metadata.prototype, "transferer", null);
+__decorate([Memoize()], Metadata.prototype, "track", null);
+__decorate([Memoize()], Metadata.prototype, "tts_version", null);
+__decorate([Memoize()], Metadata.prototype, "tuner", null);
+__decorate([Memoize()], Metadata.prototype, "type", null);
+__decorate([Memoize()], Metadata.prototype, "updatedate", null);
+__decorate([Memoize()], Metadata.prototype, "updater", null);
+__decorate([Memoize()], Metadata.prototype, "uploader", null);
+__decorate([Memoize()], Metadata.prototype, "uploadsoftware", null);
+__decorate([Memoize()], Metadata.prototype, "utc_offset", null);
+__decorate([Memoize()], Metadata.prototype, "venue", null);
+__decorate([Memoize()], Metadata.prototype, "video_codec", null);
+__decorate([Memoize()], Metadata.prototype, "volume", null);
+__decorate([Memoize()], Metadata.prototype, "website", null);
+__decorate([Memoize()], Metadata.prototype, "week", null);
+__decorate([Memoize()], Metadata.prototype, "width", null);
+__decorate([Memoize()], Metadata.prototype, "year", null);
+//#endregion
+//#region dist/src/models/review.js
+var Review = class {
+	get reviewbody() {
+		return this.rawValue.reviewbody;
+	}
+	get reviewtitle() {
+		return this.rawValue.reviewtitle;
+	}
+	get reviewer() {
+		return this.rawValue.reviewer;
+	}
+	get reviewer_itemname() {
+		return this.rawValue.reviewer_itemname;
+	}
+	get reviewdate() {
+		return parseField(this.rawValue, (v) => DateParser.shared.parseValue(v), "reviewdate");
+	}
+	get createdate() {
+		return parseField(this.rawValue, (v) => DateParser.shared.parseValue(v), "createdate");
+	}
+	get stars() {
+		return parseField(this.rawValue, (v) => NumberParser.shared.parseValue(v), "stars");
+	}
+	constructor(json = {}) {
+		this.rawValue = json;
+	}
+};
+__decorate([Memoize()], Review.prototype, "reviewdate", null);
+__decorate([Memoize()], Review.prototype, "createdate", null);
+__decorate([Memoize()], Review.prototype, "stars", null);
+//#endregion
+//#region dist/demo/app-root.js
+/**
+* Every field the model exposes, read off `Metadata`'s prototype getters. The
+* table is built from this, so a field added to the model shows up in the demo
+* without anyone touching this file. Sorted to give the table a stable order.
+*/
+var MODELED_FIELDS = Object.getOwnPropertyNames(Metadata.prototype).filter((name) => {
+	var _a;
+	return typeof ((_a = Object.getOwnPropertyDescriptor(Metadata.prototype, name)) === null || _a === void 0 ? void 0 : _a.get) === "function";
+}).sort();
+/** Reads a field off the model by name. */
+function fieldValue(metadata, name) {
+	return metadata[name];
+}
+/** True for parsed field objects (`StringField`, `DateField`, and friends). */
+function isMetadataField(value) {
+	return typeof value === "object" && value !== null && "rawValue" in value;
+}
+/**
+* The field class that parsed a value, e.g. `DateField`. Read off the
+* constructor rather than a lookup table so a new field type names itself,
+* which is why the demo build leaves class names unminified.
+*/
+function fieldTypeName(value) {
+	var _a, _b;
+	if (value === void 0) return "—";
+	if (isMetadataField(value)) return (_b = (_a = value.constructor) === null || _a === void 0 ? void 0 : _a.name) !== null && _b !== void 0 ? _b : "unknown";
+	return typeof value;
+}
+/**
+* The raw keys the model reads, collected by handing `Metadata` a Proxy over the
+* raw response and then touching every field. Comparing getter names to raw keys
+* would miss the cases that matter here: keys that differ from their getter
+* (`access-restricted-item`) and fields that fall back across several keys.
+*/
+function modeledRawKeys(raw) {
+	const touched = /* @__PURE__ */ new Set();
+	const metadata = new Metadata(new Proxy(raw, { get(target, key) {
+		if (typeof key === "string") touched.add(key);
+		return Reflect.get(target, key);
+	} }));
+	for (const name of MODELED_FIELDS) fieldValue(metadata, name);
+	return touched;
+}
+/**
+* A few stable archive.org items demonstrating different metadata shapes.
+* The last two have multi-value `subject` arrays that exercise the list parser
+* (StringListField), so their `subject` row shows `.value` (first) diverging
+* from `.values` (all).
+*/
+var EXAMPLES = [
+	"gd73-06-10.sbd.hollister.174.sbeok.shnf",
+	"nasa",
+	"goody",
+	"eventsounds_pack",
+	"womeningovernmen0000jame",
+	"KGO_20101106_063500_Nightline"
+];
+/**
+* Query params the demo reads on load and keeps up to date, so a link can point
+* someone at a particular item with the table already filtered.
+*/
+var IDENTIFIER_PARAM = "identifier";
+var FILTER_PARAM = "filter";
+/** A trimmed query param off the current URL, or undefined if absent or blank. */
+function paramFromUrl(name) {
+	var _a;
+	return ((_a = new URLSearchParams(window.location.search).get(name)) === null || _a === void 0 ? void 0 : _a.trim()) || void 0;
+}
+/**
+* The filter split on commas, so `aspect, tuner` narrows to both rather than
+* looking for one field with that whole string in its name.
+*/
+function filterTerms(query) {
+	return query.split(",").map((term) => term.trim().toLowerCase()).filter(Boolean);
+}
+/** True when the filter is empty, or `name` contains any one of its terms. */
+function matchesFilter(name, terms) {
+	if (!terms.length) return true;
+	const lower = name.toLowerCase();
+	return terms.some((term) => lower.includes(term));
+}
+/** Render any parsed value (Date, number, string, array, object) as text. */
+function display(value) {
+	if (value === void 0 || value === null) return "—";
+	if (value instanceof Date) return value.toISOString();
+	if (Array.isArray(value)) return value.length ? value.map(display).join(", ") : "—";
+	if (typeof value === "object") return JSON.stringify(value);
+	return String(value);
+}
+var AppRoot = class AppRoot extends i {
+	constructor() {
+		var _a, _b;
+		super(...arguments);
+		this.identifier = (_a = paramFromUrl(IDENTIFIER_PARAM)) !== null && _a !== void 0 ? _a : EXAMPLES[0];
+		this.loading = false;
+		/** Raw keys present in the response that no field reads. */
+		this.unmodeledKeys = [];
+		/** Comma-separated terms; a field shows when its name contains any of them. */
+		this.query = (_b = paramFromUrl(FILTER_PARAM)) !== null && _b !== void 0 ? _b : "";
+		/** Whether to keep rows for fields the item leaves unset. */
+		this.showUnset = false;
+	}
+	firstUpdated() {
+		this.loadFromArchive();
+	}
+	async loadFromArchive() {
+		var _a;
+		const identifier = this.identifier.trim();
+		if (!identifier) {
+			this.error = "Enter an archive.org identifier.";
+			return;
+		}
+		this.loading = true;
+		this.error = void 0;
+		try {
+			const response = await fetch(`https://archive.org/metadata/${encodeURIComponent(identifier)}`);
+			if (!response.ok) throw new Error(`Request failed (${response.status})`);
+			const json = await response.json();
+			if (!json.metadata) throw new Error(`No item found for identifier “${identifier}”.`);
+			this.setMetadata(json.metadata);
+			this.fileCount = (_a = json.files) === null || _a === void 0 ? void 0 : _a.length;
+			this.syncUrl();
+		} catch (e) {
+			this.metadata = void 0;
+			this.fileCount = void 0;
+			this.unmodeledKeys = [];
+			this.error = e instanceof Error ? e.message : "Failed to load item.";
+		} finally {
+			this.loading = false;
+		}
+	}
+	/** Builds the model and works out which raw keys it leaves untouched. */
+	setMetadata(raw) {
+		this.metadata = new Metadata(raw);
+		const modeled = modeledRawKeys(raw);
+		this.unmodeledKeys = Object.keys(raw).filter((key) => !modeled.has(key)).sort();
+	}
+	parseJson() {
+		var _a, _b, _c;
+		const textarea = (_a = this.shadowRoot) === null || _a === void 0 ? void 0 : _a.querySelector("textarea");
+		const text = (_b = textarea === null || textarea === void 0 ? void 0 : textarea.value) !== null && _b !== void 0 ? _b : "";
+		if (!text.trim()) {
+			this.error = "Paste some metadata JSON first.";
+			return;
+		}
+		try {
+			const parsed = JSON.parse(text);
+			const raw = (_c = parsed.metadata) !== null && _c !== void 0 ? _c : parsed;
+			this.setMetadata(raw);
+			this.fileCount = void 0;
+			this.error = void 0;
+		} catch (_d) {
+			this.error = "Could not parse that as JSON.";
+		}
+	}
+	render() {
+		return b`
       <h1>Item Metadata Demo</h1>
       <p>
         Models for
@@ -24,18 +2763,18 @@
           />
         </label>
         <button type="submit" ?disabled=${this.loading}>
-          ${this.loading?`Loading…`:`Load item`}
+          ${this.loading ? "Loading…" : "Load item"}
         </button>
       </form>
 
       <p class="examples">
         Try:
-        ${xt.map(e=>S`<button
+        ${EXAMPLES.map((id) => b`<button
               type="button"
               class="link"
-              @click=${()=>this.useExample(e)}
+              @click=${() => this.useExample(id)}
             >
-              ${e}
+              ${id}
             </button>`)}
       </p>
 
@@ -53,18 +2792,22 @@
         </form>
       </details>
 
-      ${this.error?S`<p class="error" role="alert">${this.error}</p>`:w}
-      ${this.metadata?this.renderResult(this.metadata):w}
-    `}renderResult(e){let{identifier:t}=e;return S`
+      ${this.error ? b`<p class="error" role="alert">${this.error}</p>` : A}
+      ${this.metadata ? this.renderResult(this.metadata) : A}
+    `;
+	}
+	renderResult(metadata) {
+		const { identifier } = metadata;
+		return b`
       <h2>
-        ${t?S`<a
-              href="https://archive.org/details/${t}"
+        ${identifier ? b`<a
+              href="https://archive.org/details/${identifier}"
               target="_blank"
               rel="noopener"
-              >${t}</a
-            >`:`Parsed metadata`}
+              >${identifier}</a
+            >` : "Parsed metadata"}
       </h2>
-      ${this.fileCount===void 0?w:S`<p class="meta">${this.fileCount} files in response</p>`}
+      ${this.fileCount !== void 0 ? b`<p class="meta">${this.fileCount} files in response</p>` : A}
 
       <div class="toolbar">
         <label class="field">
@@ -86,52 +2829,145 @@
         </label>
       </div>
 
-      ${this.renderTable(e)} ${this.renderUnmodeled()}
-    `}visibleFields(e){let t=Tt(this.query);return X.filter(n=>Et(n,t)?this.showUnset||Z(e,n)!==void 0:!1)}renderTable(e){let t=this.visibleFields(e),n=X.filter(t=>Z(e,t)!==void 0).length;return S`
+      ${this.renderTable(metadata)} ${this.renderUnmodeled()}
+    `;
+	}
+	/**
+	* The fields to show: every modeled field, minus the ones this item leaves
+	* unset (unless asked for) and the ones the filter excludes.
+	*/
+	visibleFields(metadata) {
+		const terms = filterTerms(this.query);
+		return MODELED_FIELDS.filter((name) => {
+			if (!matchesFilter(name, terms)) return false;
+			return this.showUnset || fieldValue(metadata, name) !== void 0;
+		});
+	}
+	renderTable(metadata) {
+		const fields = this.visibleFields(metadata);
+		const setCount = MODELED_FIELDS.filter((name) => fieldValue(metadata, name) !== void 0).length;
+		return b`
       <p class="meta">
-        Showing ${t.length} of ${X.length} modeled fields.
-        ${n} set on this item.
+        Showing ${fields.length} of ${MODELED_FIELDS.length} modeled fields.
+        ${setCount} set on this item.
       </p>
-      ${t.length?S`
-            <table>
-              <thead>
-                <tr>
-                  <th>Field</th>
-                  <th><code>.value</code></th>
-                  <th><code>.values</code></th>
-                  <th><code>.rawValue</code></th>
-                </tr>
-              </thead>
-              <tbody>
-                ${t.map(t=>this.renderRow(e,t))}
-              </tbody>
-            </table>
-          `:S`<p class="meta">No field names match that filter.</p>`}
-    `}renderRow(e,t){let n=Z(e,t),r=yt(n)?[Q(n.value),Q(n.values),Q(n.rawValue)]:[Q(n),Q(void 0),Q(void 0)];return S`
-      <tr class=${n===void 0?`unset`:``}>
-        <td><code>${t}</code></td>
-        <td>${r[0]}</td>
-        <td>${r[1]}</td>
-        <td class="raw">${r[2]}</td>
+      ${fields.length ? b`
+            <div class="table-scroll">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Field</th>
+                    <th>Parsed as</th>
+                    <th><code>.value</code></th>
+                    <th><code>.values</code></th>
+                    <th><code>.rawValue</code></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${fields.map((name) => this.renderRow(metadata, name))}
+                </tbody>
+              </table>
+            </div>
+          ` : b`<p class="meta">No field names match that filter.</p>`}
+    `;
+	}
+	renderRow(metadata, name) {
+		const value = fieldValue(metadata, name);
+		const cells = isMetadataField(value) ? [
+			display(value.value),
+			display(value.values),
+			display(value.rawValue)
+		] : [
+			display(value),
+			display(void 0),
+			display(void 0)
+		];
+		return b`
+      <tr class=${value === void 0 ? "unset" : ""}>
+        <td><code>${name}</code></td>
+        <td class="type">${fieldTypeName(value)}</td>
+        <td>${cells[0]}</td>
+        <td>${cells[1]}</td>
+        <td class="raw">${cells[2]}</td>
       </tr>
-    `}renderUnmodeled(){if(!this.unmodeledKeys.length)return w;let e=Tt(this.query),t=this.unmodeledKeys.filter(t=>Et(t,e));return S`
+    `;
+	}
+	/**
+	* Raw keys the model doesn't read, so a field missing from the table above
+	* reads as a gap in the model rather than a gap in this demo.
+	*/
+	renderUnmodeled() {
+		if (!this.unmodeledKeys.length) return A;
+		const terms = filterTerms(this.query);
+		const keys = this.unmodeledKeys.filter((key) => matchesFilter(key, terms));
+		return b`
       <details class="unmodeled">
         <summary>
-          ${t.length===this.unmodeledKeys.length?this.unmodeledKeys.length:`${t.length} of ${this.unmodeledKeys.length}`}
+          ${keys.length === this.unmodeledKeys.length ? this.unmodeledKeys.length : `${keys.length} of ${this.unmodeledKeys.length}`}
           raw keys the model doesn't expose
         </summary>
-        ${t.length?S`<p class="keys">
-              ${t.map(e=>S`<code>${e}</code>`)}
-            </p>`:S`<p class="meta">No unmodeled keys match that filter.</p>`}
+        ${keys.length ? b`<p class="keys">
+              ${keys.map((key) => b`<code>${key}</code>`)}
+            </p>` : b`<p class="meta">No unmodeled keys match that filter.</p>`}
       </details>
-    `}onIdentifierInput(e){this.identifier=e.currentTarget.value}onQueryInput(e){this.query=e.currentTarget.value,this.syncUrl()}syncUrl(){let e=new URL(window.location.href),t={[St]:this.identifier,[Ct]:Tt(this.query).join(`,`)};for(let[n,r]of Object.entries(t))r.trim()?e.searchParams.set(n,r.trim()):e.searchParams.delete(n);let n=e.search.replace(/%2C/g,`,`);window.history.replaceState({},``,`${e.origin}${e.pathname}${n}`)}onShowUnsetChange(e){this.showUnset=e.currentTarget.checked}onSubmit(e){e.preventDefault(),this.loadFromArchive()}useExample(e){this.identifier=e,this.loadFromArchive()}};$.styles=s`
+    `;
+	}
+	onIdentifierInput(event) {
+		this.identifier = event.currentTarget.value;
+	}
+	onQueryInput(event) {
+		this.query = event.currentTarget.value;
+		this.syncUrl();
+	}
+	/**
+	* Mirrors the loaded item and the field filter into the URL, so the address bar
+	* is always a link to what's on screen. Blank values drop out of the query
+	* string rather than sitting there empty.
+	*/
+	syncUrl() {
+		const url = new URL(window.location.href);
+		const params = {
+			[IDENTIFIER_PARAM]: this.identifier,
+			[FILTER_PARAM]: filterTerms(this.query).join(",")
+		};
+		for (const [name, value] of Object.entries(params)) if (value.trim()) url.searchParams.set(name, value.trim());
+		else url.searchParams.delete(name);
+		const search = url.search.replace(/%2C/g, ",");
+		window.history.replaceState({}, "", `${url.origin}${url.pathname}${search}`);
+	}
+	onShowUnsetChange(event) {
+		this.showUnset = event.currentTarget.checked;
+	}
+	onSubmit(event) {
+		event.preventDefault();
+		this.loadFromArchive();
+	}
+	useExample(id) {
+		this.identifier = id;
+		this.loadFromArchive();
+	}
+};
+AppRoot.styles = i$3`
     :host {
       display: block;
-      max-width: 60rem;
+      /* wide enough for the structured values, which run long as JSON */
+      max-width: 110rem;
       margin: 0 auto;
       padding: 1rem;
       color: #222;
       line-height: 1.4;
+    }
+
+    /* the prose reads badly at the full table width */
+    h1,
+    :host > p {
+      max-width: 60rem;
+    }
+
+    /* identifiers are long unbroken tokens and will push the page sideways */
+    h2,
+    .examples button {
+      overflow-wrap: anywhere;
     }
 
     h1 {
@@ -272,10 +3108,28 @@
       font-size: 0.8rem;
     }
 
+    /* keep a wide table inside its own scroller rather than stretching the page */
+    .table-scroll {
+      overflow-x: auto;
+      max-width: 100%;
+    }
+
     table {
       border-collapse: collapse;
       width: 100%;
       font-size: 0.9rem;
+    }
+
+    td.type {
+      color: #555;
+      font-family: monospace;
+      font-size: 0.8rem;
+      white-space: nowrap;
+    }
+
+    /* the field name and its type are the anchors, so keep them intact */
+    tbody td:first-child {
+      white-space: nowrap;
     }
 
     th,
@@ -303,4 +3157,14 @@
       overflow: hidden;
       clip: rect(0 0 0 0);
     }
-  `,e([k()],$.prototype,`identifier`,void 0),e([k()],$.prototype,`metadata`,void 0),e([k()],$.prototype,`fileCount`,void 0),e([k()],$.prototype,`loading`,void 0),e([k()],$.prototype,`error`,void 0),e([k()],$.prototype,`unmodeledKeys`,void 0),e([k()],$.prototype,`query`,void 0),e([k()],$.prototype,`showUnset`,void 0),$=e([Re(`app-root`)],$);
+  `;
+__decorate([r()], AppRoot.prototype, "identifier", void 0);
+__decorate([r()], AppRoot.prototype, "metadata", void 0);
+__decorate([r()], AppRoot.prototype, "fileCount", void 0);
+__decorate([r()], AppRoot.prototype, "loading", void 0);
+__decorate([r()], AppRoot.prototype, "error", void 0);
+__decorate([r()], AppRoot.prototype, "unmodeledKeys", void 0);
+__decorate([r()], AppRoot.prototype, "query", void 0);
+__decorate([r()], AppRoot.prototype, "showUnset", void 0);
+AppRoot = __decorate([t("app-root")], AppRoot);
+//#endregion
