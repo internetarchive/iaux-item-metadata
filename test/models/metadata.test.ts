@@ -80,8 +80,25 @@ describe('Metadata', () => {
     expect(metadata.mediatype?.rawValue).to.equal('blah');
   });
 
+  it('properly instantiates metadata with page-progression', async () => {
+    // the spelling the API actually returns
+    const json = { identifier: 'foo', 'page-progression': 'rl' };
+    const metadata = new Metadata(json);
+    expect(metadata.page_progression?.value).to.equal('rl');
+  });
+
   it('properly instantiates metadata with page_progression', async () => {
     const json = { identifier: 'foo', page_progression: 'rl' };
+    const metadata = new Metadata(json);
+    expect(metadata.page_progression?.value).to.equal('rl');
+  });
+
+  it('prefers page-progression over the underscored spelling', async () => {
+    const json = {
+      identifier: 'foo',
+      'page-progression': 'rl',
+      page_progression: 'lr'
+    };
     const metadata = new Metadata(json);
     expect(metadata.page_progression?.value).to.equal('rl');
   });

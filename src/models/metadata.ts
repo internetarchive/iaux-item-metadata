@@ -54,6 +54,201 @@ export class Metadata {
   /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
   readonly rawMetadata: Readonly<Record<string, any>>;
 
+  @Memoize() get access(): StringField | undefined {
+    return this.field(StringField, 'access');
+  }
+
+  @Memoize() get adder(): StringField | undefined {
+    return this.field(StringField, 'adder');
+  }
+
+  @Memoize() get amrc_id(): StringField | undefined {
+    return this.field(StringField, 'amrc-id');
+  }
+
+  @Memoize() get archiveit_account_id(): NumberField | undefined {
+    return this.field(NumberField, 'archiveit-account-id');
+  }
+
+  @Memoize() get archiveit_account_organization_name():
+    | StringField
+    | undefined {
+    return this.field(StringField, 'archiveit-account-organization-name');
+  }
+
+  @Memoize() get archiveit_collection_id(): NumberField | undefined {
+    return this.field(NumberField, 'archiveit-collection-id');
+  }
+
+  @Memoize() get archiveit_collection_name(): StringField | undefined {
+    return this.field(StringField, 'archiveit-collection-name');
+  }
+
+  @Memoize() get archiveit_job_type(): StringField | undefined {
+    return this.field(StringField, 'archiveit-job-type');
+  }
+
+  @Memoize() get audit_time_minutes(): NumberField | undefined {
+    return this.field(NumberField, 'audit_time_minutes');
+  }
+
+  @Memoize() get auditor(): StringField | undefined {
+    return this.field(StringField, 'auditor');
+  }
+
+  @Memoize() get author(): StringField | undefined {
+    return this.field(StringField, 'author');
+  }
+
+  @Memoize() get autocrop_version(): StringField | undefined {
+    return this.field(StringField, 'autocrop_version');
+  }
+
+  @Memoize() get bookplateleaf(): NumberField | undefined {
+    return this.field(NumberField, 'bookplateleaf');
+  }
+
+  @Memoize() get bookreader_defaults(): StringField | undefined {
+    return this.field(StringField, 'bookreader-defaults');
+  }
+
+  @Memoize() get boxid(): StringField | undefined {
+    return this.field(StringField, 'boxid');
+  }
+
+  @Memoize() get camera(): StringField | undefined {
+    return this.field(StringField, 'camera');
+  }
+
+  @Memoize() get canister(): StringField | undefined {
+    return this.field(StringField, 'canister');
+  }
+
+  @Memoize() get case_name(): StringField | undefined {
+    return this.field(StringField, 'case-name');
+  }
+
+  @Memoize() get col_number(): StringField | undefined {
+    return this.field(StringField, 'col_number');
+  }
+
+  @Memoize() get collection_added(): StringListField | undefined {
+    return this.field(StringListField, 'collection_added');
+  }
+
+  @Memoize() get collection_library(): StringField | undefined {
+    return this.field(StringField, 'collection-library');
+  }
+
+  @Memoize() get collection_set(): StringField | undefined {
+    return this.field(StringField, 'collection_set');
+  }
+
+  @Memoize() get court(): StringField | undefined {
+    return this.field(StringField, 'court');
+  }
+
+  @Memoize() get crawler(): StringField | undefined {
+    return this.field(StringField, 'crawler');
+  }
+
+  @Memoize() get crawljob(): StringField | undefined {
+    return this.field(StringField, 'crawljob');
+  }
+
+  @Memoize() get curation(): StringField | undefined {
+    return this.field(StringField, 'curation');
+  }
+
+  @Memoize() get dari_title(): StringField | undefined {
+    return this.field(StringField, 'dari-title');
+  }
+
+  @Memoize() get dari_title_romanized(): StringField | undefined {
+    return this.field(StringField, 'dari-title-romanized');
+  }
+
+  @Memoize() get date_case_filed(): DateField | undefined {
+    return this.field(DateField, 'date-case-filed');
+  }
+
+  @Memoize() get date_case_terminated(): DateField | undefined {
+    return this.field(DateField, 'date-case-terminated');
+  }
+
+  @Memoize() get date_created(): DateField | undefined {
+    return this.field(DateField, 'date_created');
+  }
+
+  @Memoize() get date_last_filing(): DateField | undefined {
+    return this.field(DateField, 'date-last-filing');
+  }
+
+  @Memoize() get derive_submittime(): DateField | undefined {
+    return this.field(DateField, 'derive_submittime');
+  }
+
+  @Memoize() get derive_version(): StringField | undefined {
+    return this.field(StringField, 'derive_version');
+  }
+
+  @Memoize() get discs(): NumberField | undefined {
+    return this.field(NumberField, 'discs');
+  }
+
+  @Memoize() get docket_num(): StringField | undefined {
+    return this.field(StringField, 'docket-num');
+  }
+
+  @Memoize() get external_metadata_update(): DateField | undefined {
+    return this.field(DateField, 'external_metadata_update');
+  }
+
+  @Memoize() get filesxml(): StringField | undefined {
+    return this.field(StringField, 'filesxml');
+  }
+
+  /** Compact `YYYYMMDD[HHMMSS]` timestamp. */
+  @Memoize() get firstfiledate(): DateField | undefined {
+    return this.field(DateField, 'firstfiledate');
+  }
+
+  @Memoize() get firstfileserial(): NumberField | undefined {
+    return this.field(NumberField, 'firstfileserial');
+  }
+
+  @Memoize() get foldoutcount(): NumberField | undefined {
+    return this.field(NumberField, 'foldoutcount');
+  }
+
+  @Memoize() get format(): StringField | undefined {
+    return this.field(StringField, 'format');
+  }
+
+  @Memoize() get geo_restricted(): StringField | undefined {
+    return this.field(StringField, 'geo_restricted');
+  }
+
+  @Memoize() get guid(): StringField | undefined {
+    return this.field(StringField, 'guid');
+  }
+
+  @Memoize() get has_mp3(): NumberField | undefined {
+    return this.field(NumberField, 'has_mp3');
+  }
+
+  @Memoize() get height(): NumberField | undefined {
+    return this.field(NumberField, 'height');
+  }
+
+  @Memoize() get hidden(): BooleanField | undefined {
+    return this.field(BooleanField, 'hidden');
+  }
+
+  @Memoize() get ia_orig__runtime(): StringField | undefined {
+    return this.field(StringField, 'ia_orig__runtime');
+  }
+
   /**
    * The item identifier.
    *
@@ -238,6 +433,18 @@ export class Metadata {
     return this.field(StringField, 'identifier-access');
   }
 
+  @Memoize() get identifier_ark(): StringField | undefined {
+    return this.field(StringField, 'identifier-ark');
+  }
+
+  @Memoize() get identifier_bib(): StringField | undefined {
+    return this.field(StringField, 'identifier-bib');
+  }
+
+  @Memoize() get image_count(): NumberField | undefined {
+    return this.field(NumberField, 'image_count');
+  }
+
   @Memoize() get imagecount(): NumberField | undefined {
     return this.field(NumberField, 'imagecount');
   }
@@ -246,12 +453,24 @@ export class Metadata {
     return this.field(DateField, 'indexdate');
   }
 
+  @Memoize() get invoice(): NumberField | undefined {
+    return this.field(NumberField, 'invoice');
+  }
+
   @Memoize() get isbn(): StringField | undefined {
     return this.field(StringField, 'isbn');
   }
 
   @Memoize() get issue(): StringField | undefined {
     return this.field(StringField, 'issue');
+  }
+
+  @Memoize() get issue_count(): NumberField | undefined {
+    return this.field(NumberField, 'issue_count');
+  }
+
+  @Memoize() get issue_page_count(): NumberField | undefined {
+    return this.field(NumberField, 'issue_page_count');
   }
 
   /**
@@ -278,8 +497,26 @@ export class Metadata {
     return this.field(StringField, 'language');
   }
 
+  /** Compact `YYYYMMDD[HHMMSS]` timestamp. */
+  @Memoize() get lastdate(): DateField | undefined {
+    return this.field(DateField, 'lastdate');
+  }
+
+  /** Compact `YYYYMMDD[HHMMSS]` timestamp. */
+  @Memoize() get lastfiledate(): DateField | undefined {
+    return this.field(DateField, 'lastfiledate');
+  }
+
+  @Memoize() get lastfileserial(): NumberField | undefined {
+    return this.field(NumberField, 'lastfileserial');
+  }
+
   @Memoize() get length(): DurationField | undefined {
     return this.field(DurationField, 'length');
+  }
+
+  @Memoize() get license(): StringField | undefined {
+    return this.field(StringField, 'license');
   }
 
   @Memoize() get licenseurl(): StringField | undefined {
@@ -288,6 +525,36 @@ export class Metadata {
 
   @Memoize() get lineage(): StringField | undefined {
     return this.field(StringField, 'lineage');
+  }
+
+  /** Spelled `yes`/`no` in the API. */
+  @Memoize() get mature_content(): BooleanField | undefined {
+    return this.field(BooleanField, 'mature_content');
+  }
+
+  @Memoize() get md5(): StringField | undefined {
+    return this.field(StringField, 'md5');
+  }
+
+  @Memoize() get md5s(): StringField | undefined {
+    return this.field(StringField, 'md5s');
+  }
+
+  @Memoize() get medium(): StringField | undefined {
+    return this.field(StringField, 'medium');
+  }
+
+  @Memoize() get metadata_operator(): StringField | undefined {
+    return this.field(StringField, 'metadata_operator');
+  }
+
+  @Memoize() get metasource_catalog(): StringField | undefined {
+    return this.field(StringField, 'metasource_catalog');
+  }
+
+  /** Spelled `yes`/`no` in the API. */
+  @Memoize() get monochromatic(): BooleanField | undefined {
+    return this.field(BooleanField, 'monochromatic');
   }
 
   /**
@@ -312,6 +579,10 @@ export class Metadata {
     return this.field(StringField, 'next_item');
   }
 
+  @Memoize() get noarchivetorrent(): BooleanField | undefined {
+    return this.field(BooleanField, 'noarchivetorrent');
+  }
+
   @Memoize() get noindex(): BooleanField | undefined {
     return this.field(BooleanField, 'noindex');
   }
@@ -334,6 +605,50 @@ export class Metadata {
     return this.field(NumberField, 'num_reviews');
   }
 
+  @Memoize() get numwarcs(): NumberField | undefined {
+    return this.field(NumberField, 'numwarcs');
+  }
+
+  @Memoize() get ocr(): StringField | undefined {
+    return this.field(StringField, 'ocr');
+  }
+
+  @Memoize() get ocr_autonomous(): BooleanField | undefined {
+    return this.field(BooleanField, 'ocr_autonomous');
+  }
+
+  @Memoize() get ocr_detected_lang(): StringField | undefined {
+    return this.field(StringField, 'ocr_detected_lang');
+  }
+
+  @Memoize() get ocr_detected_lang_conf(): NumberField | undefined {
+    return this.field(NumberField, 'ocr_detected_lang_conf');
+  }
+
+  @Memoize() get ocr_detected_script(): StringField | undefined {
+    return this.field(StringField, 'ocr_detected_script');
+  }
+
+  @Memoize() get ocr_detected_script_conf(): NumberField | undefined {
+    return this.field(NumberField, 'ocr_detected_script_conf');
+  }
+
+  @Memoize() get ocr_invalid_language(): StringField | undefined {
+    return this.field(StringField, 'ocr_invalid_language');
+  }
+
+  @Memoize() get ocr_module_version(): StringField | undefined {
+    return this.field(StringField, 'ocr_module_version');
+  }
+
+  @Memoize() get ocr_parameters(): StringField | undefined {
+    return this.field(StringField, 'ocr_parameters');
+  }
+
+  @Memoize() get old_pallet(): StringField | undefined {
+    return this.field(StringField, 'old_pallet');
+  }
+
   @Memoize() get openlibrary_edition(): StringField | undefined {
     return this.field(StringField, 'openlibrary_edition');
   }
@@ -342,16 +657,112 @@ export class Metadata {
     return this.field(StringField, 'openlibrary_work');
   }
 
+  @Memoize() get operator(): StringField | undefined {
+    return this.field(StringField, 'operator');
+  }
+
+  @Memoize() get originalurl(): StringField | undefined {
+    return this.field(StringField, 'originalurl');
+  }
+
+  @Memoize() get osf_category(): StringField | undefined {
+    return this.field(StringField, 'osf_category');
+  }
+
+  @Memoize() get osf_project(): StringField | undefined {
+    return this.field(StringField, 'osf_project');
+  }
+
+  @Memoize() get osf_registration_doi(): StringField | undefined {
+    return this.field(StringField, 'osf_registration_doi');
+  }
+
+  @Memoize() get osf_registration_schema(): StringField | undefined {
+    return this.field(StringField, 'osf_registration_schema');
+  }
+
+  @Memoize() get osf_registry(): StringField | undefined {
+    return this.field(StringField, 'osf_registry');
+  }
+
+  @Memoize() get osf_subjects(): StringListField | undefined {
+    return this.field(StringListField, 'osf_subjects');
+  }
+
+  @Memoize() get osf_tags(): StringListField | undefined {
+    return this.field(StringListField, 'osf_tags');
+  }
+
+  @Memoize() get output_time_minutes(): NumberField | undefined {
+    return this.field(NumberField, 'output_time_minutes');
+  }
+
+  @Memoize() get pacer_case_num(): NumberField | undefined {
+    return this.field(NumberField, 'pacer-case-num');
+  }
+
+  @Memoize() get packaging_time_minutes(): NumberField | undefined {
+    return this.field(NumberField, 'packaging_time_minutes');
+  }
+
+  @Memoize() get page_number_confidence(): NumberField | undefined {
+    return this.field(NumberField, 'page_number_confidence');
+  }
+
+  @Memoize() get page_number_module_version(): StringField | undefined {
+    return this.field(StringField, 'page_number_module_version');
+  }
+
+  /**
+   * The reading direction. The API spells this `page-progression`; the
+   * underscored spelling is accepted as a fallback.
+   */
   @Memoize() get page_progression(): PageProgressionField | undefined {
-    return this.field(PageProgressionField, 'page_progression');
+    return this.field(
+      PageProgressionField,
+      'page-progression',
+      'page_progression'
+    );
   }
 
   @Memoize() get paginated(): BooleanField | undefined {
     return this.field(BooleanField, 'paginated');
   }
 
+  @Memoize() get parse_date(): DateField | undefined {
+    return this.field(DateField, 'parse_date');
+  }
+
+  @Memoize() get parse_state(): StringField | undefined {
+    return this.field(StringField, 'parse_state');
+  }
+
   @Memoize() get partner(): StringField | undefined {
     return this.field(StringField, 'partner');
+  }
+
+  @Memoize() get pashto_title(): StringField | undefined {
+    return this.field(StringField, 'pashto-title');
+  }
+
+  @Memoize() get pashto_title_romanized(): StringField | undefined {
+    return this.field(StringField, 'pashto-title-romanized');
+  }
+
+  @Memoize() get pdf_degraded(): StringField | undefined {
+    return this.field(StringField, 'pdf_degraded');
+  }
+
+  @Memoize() get pdf_module_version(): StringField | undefined {
+    return this.field(StringField, 'pdf_module_version');
+  }
+
+  @Memoize() get pick(): NumberField | undefined {
+    return this.field(NumberField, 'pick');
+  }
+
+  @Memoize() get podcastindexid(): NumberField | undefined {
+    return this.field(NumberField, 'podcastindexid');
   }
 
   @Memoize() get post_text(): StringField | undefined {
@@ -378,6 +789,27 @@ export class Metadata {
     return this.field(StringField, 'publisher');
   }
 
+  @Memoize() get rcs_key(): NumberField | undefined {
+    return this.field(NumberField, 'rcs_key');
+  }
+
+  @Memoize() get repub_state(): NumberField | undefined {
+    return this.field(NumberField, 'repub_state');
+  }
+
+  /** Compact `YYYYMMDD[HHMMSS]` timestamp. */
+  @Memoize() get republisher_date(): DateField | undefined {
+    return this.field(DateField, 'republisher_date');
+  }
+
+  @Memoize() get republisher_operator(): StringField | undefined {
+    return this.field(StringField, 'republisher_operator');
+  }
+
+  @Memoize() get republisher_time(): NumberField | undefined {
+    return this.field(NumberField, 'republisher_time');
+  }
+
   @Memoize() get reviewdate(): DateField | undefined {
     return this.field(DateField, 'reviewdate');
   }
@@ -395,6 +827,14 @@ export class Metadata {
     );
   }
 
+  @Memoize() get ribbon_state(): StringField | undefined {
+    return this.field(StringField, 'ribbon_state');
+  }
+
+  @Memoize() get ribbon_state_modify_date(): DateField | undefined {
+    return this.field(DateField, 'ribbon_state_modify_date');
+  }
+
   @Memoize() get rights(): StringField | undefined {
     return this.field(StringField, 'rights');
   }
@@ -403,8 +843,16 @@ export class Metadata {
     return this.field(StringField, 'rights-holder', 'rights_holder');
   }
 
+  @Memoize() get rssfeed(): StringField | undefined {
+    return this.field(StringField, 'rssfeed');
+  }
+
   @Memoize() get runtime(): DurationField | undefined {
     return this.field(DurationField, 'runtime');
+  }
+
+  @Memoize() get scan_time_minutes(): NumberField | undefined {
+    return this.field(NumberField, 'scan_time_minutes');
   }
 
   /**
@@ -415,20 +863,66 @@ export class Metadata {
     return this.field(DateField, 'scandate');
   }
 
+  @Memoize() get scanfee(): StringField | undefined {
+    return this.field(StringField, 'scanfee');
+  }
+
   @Memoize() get scanner(): StringField | undefined {
     return this.field(StringField, 'scanner');
+  }
+
+  @Memoize() get scanner_operator(): StringField | undefined {
+    return this.field(StringField, 'scanner_operator');
   }
 
   @Memoize() get scanningcenter(): StringField | undefined {
     return this.field(StringField, 'scanningcenter');
   }
 
+  @Memoize() get scribe3_search_catalog(): StringField | undefined {
+    return this.field(StringField, 'scribe3_search_catalog');
+  }
+
+  @Memoize() get scribe3_search_id(): StringField | undefined {
+    return this.field(StringField, 'scribe3_search_id');
+  }
+
   @Memoize() get segments(): StringField | undefined {
     return this.field(StringField, 'segments');
   }
 
+  @Memoize() get sessionid(): StringField | undefined {
+    return this.field(StringField, 'sessionid');
+  }
+
+  @Memoize() get shndiscs(): NumberField | undefined {
+    return this.field(NumberField, 'shndiscs');
+  }
+
   @Memoize() get shotlist(): StringField | undefined {
     return this.field(StringField, 'shotlist');
+  }
+
+  @Memoize() get signal_path(): StringField | undefined {
+    return this.field(StringField, 'signal-path');
+  }
+
+  /** A byte count. */
+  @Memoize() get size(): ByteField | undefined {
+    return this.field(ByteField, 'size');
+  }
+
+  /** A byte count. */
+  @Memoize() get sizehint(): ByteField | undefined {
+    return this.field(ByteField, 'sizehint');
+  }
+
+  @Memoize() get software_version(): StringField | undefined {
+    return this.field(StringField, 'software_version');
+  }
+
+  @Memoize() get sort_order(): StringField | undefined {
+    return this.field(StringField, 'sort_order');
   }
 
   @Memoize() get sound(): EnumField<Sound> | undefined {
@@ -437,6 +931,14 @@ export class Metadata {
       raw => new EnumField<Sound>(raw, soundParser),
       'sound'
     );
+  }
+
+  @Memoize() get soundcreator(): StringField | undefined {
+    return this.field(StringField, 'soundcreator');
+  }
+
+  @Memoize() get soundtitle(): StringField | undefined {
+    return this.field(StringField, 'soundtitle');
   }
 
   @Memoize() get source(): StringField | undefined {
@@ -451,8 +953,17 @@ export class Metadata {
     return this.field(NumberField, 'source_pixel_width');
   }
 
+  @Memoize() get source_url(): StringField | undefined {
+    return this.field(StringField, 'source_url');
+  }
+
   @Memoize() get sponsor(): StringField | undefined {
     return this.field(StringField, 'sponsor');
+  }
+
+  /** Compact `YYYYMMDD[HHMMSS]` timestamp. */
+  @Memoize() get sponsordate(): DateField | undefined {
+    return this.field(DateField, 'sponsordate');
   }
 
   @Memoize() get start_localtime(): DateField | undefined {
@@ -503,6 +1014,10 @@ export class Metadata {
     return this.field(NumberField, 'track');
   }
 
+  @Memoize() get tts_version(): StringField | undefined {
+    return this.field(StringField, 'tts_version');
+  }
+
   /**
    * The capture tuner setting. Parses the `"Channel <n> (<freq> MHz)"` form
    * into channel and frequency; other formats expose only the raw value.
@@ -515,8 +1030,20 @@ export class Metadata {
     return this.field(StringField, 'type');
   }
 
+  @Memoize() get updatedate(): DateField | undefined {
+    return this.field(DateField, 'updatedate');
+  }
+
+  @Memoize() get updater(): StringListField | undefined {
+    return this.field(StringListField, 'updater');
+  }
+
   @Memoize() get uploader(): StringField | undefined {
     return this.field(StringField, 'uploader');
+  }
+
+  @Memoize() get uploadsoftware(): StringField | undefined {
+    return this.field(StringField, 'uploadsoftware');
   }
 
   /**
@@ -539,6 +1066,10 @@ export class Metadata {
     return this.field(StringField, 'volume');
   }
 
+  @Memoize() get website(): StringField | undefined {
+    return this.field(StringField, 'website');
+  }
+
   /**
    * The number of downloads in the last week
    *
@@ -547,6 +1078,10 @@ export class Metadata {
    */
   @Memoize() get week(): NumberField | undefined {
     return this.field(NumberField, 'week');
+  }
+
+  @Memoize() get width(): NumberField | undefined {
+    return this.field(NumberField, 'width');
   }
 
   @Memoize() get year(): NumberField | undefined {
