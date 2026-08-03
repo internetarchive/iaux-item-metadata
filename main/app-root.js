@@ -1253,6 +1253,98 @@ var NumberListField = class extends ListField {
 	}
 };
 //#endregion
+//#region dist/src/models/metadata-fields/field-types/checksum.js
+/** `<md5> *<file>`, the md5sum output format. */
+var HASH_FIRST = /^([0-9a-f]{32})\s+\*?(.+)$/i;
+/** `<file>:<md5>`, the other form seen in the wild. */
+var FILE_FIRST = /^(.+):([0-9a-f]{32})$/i;
+/** Reads one line of a checksum listing, in either layout. */
+function parseLine(line) {
+	const hashFirst = line.match(HASH_FIRST);
+	if (hashFirst) return {
+		file: hashFirst[2].trim(),
+		md5: hashFirst[1].toLowerCase()
+	};
+	const fileFirst = line.match(FILE_FIRST);
+	if (fileFirst) return {
+		file: fileFirst[1].trim(),
+		md5: fileFirst[2].toLowerCase()
+	};
+}
+/**
+* Parses a newline-delimited checksum listing into one {@link Checksum} per
+* line, accepting either the `<md5> *<file>` or `<file>:<md5>` layout.
+*
+* Lines in neither layout are dropped, and a value with no usable line at all
+* is rejected (returns `undefined`) rather than reported as an empty listing.
+* That matters because the field is sometimes filled with something else
+* entirely, such as a track listing, and the raw value stays on the field for
+* anyone who needs to look.
+*
+* @class ChecksumParser
+*/
+var ChecksumParser = class {
+	parseValue(rawValue) {
+		if (typeof rawValue !== "string") return void 0;
+		const checksums = rawValue.split("\n").map((line) => line.trim()).filter(Boolean).map(parseLine).filter((entry) => entry !== void 0);
+		return checksums.length ? checksums : void 0;
+	}
+};
+ChecksumParser.shared = new ChecksumParser();
+/**
+* A field whose values are the {@link Checksum} entries of a checksum listing.
+*
+* @class ChecksumField
+*/
+var ChecksumField = class extends MetadataField {
+	constructor(rawValue) {
+		super(ChecksumParser.shared, rawValue);
+	}
+};
+//#endregion
+//#region dist/src/models/metadata-fields/field-types/curation.js
+/** Reads the contents of one `[tag]…[/tag]` pair. */
+function tagContents(rawValue, tag) {
+	var _a;
+	const match = rawValue.match(new RegExp(`\\[${tag}\\]([\\s\\S]*?)\\[/${tag}\\]`, "i"));
+	const contents = (_a = match === null || match === void 0 ? void 0 : match[1]) === null || _a === void 0 ? void 0 : _a.trim();
+	return contents ? contents : void 0;
+}
+/**
+* Parses the bracketed curation tags. Values carrying none of the known tags
+* are rejected (returns `undefined`) so the raw string stays available on the
+* field rather than being reported as an empty note.
+*
+* @class CurationParser
+*/
+var CurationParser = class {
+	parseValue(rawValue) {
+		if (typeof rawValue !== "string") return void 0;
+		const curator = tagContents(rawValue, "curator");
+		const rawDate = tagContents(rawValue, "date");
+		const comment = tagContents(rawValue, "comment");
+		const state = tagContents(rawValue, "state");
+		if (!curator && !rawDate && !comment && !state) return void 0;
+		return {
+			curator,
+			date: rawDate ? DateParser.shared.parseValue(rawDate) : void 0,
+			comment,
+			state
+		};
+	}
+};
+CurationParser.shared = new CurationParser();
+/**
+* A field whose value is a parsed {@link Curation}.
+*
+* @class CurationField
+*/
+var CurationField = class extends MetadataField {
+	constructor(rawValue) {
+		super(CurationParser.shared, rawValue);
+	}
+};
+//#endregion
 //#region dist/src/models/metadata-fields/field-types/aspect-ratio.js
 /**
 * Parses an aspect ratio expressed as two numbers separated by `:`, `/`, or `x`
@@ -1361,6 +1453,11 @@ var reviewsAllowedParser = new EnumParser([
 ]);
 var soundParser = new EnumParser(["sound", "silent"]);
 var colorParser = new EnumParser(["color", "b&w"]);
+var bookReaderDefaultsParser = new EnumParser([
+	"mode/1up",
+	"mode/2up",
+	"mode/thumb"
+]);
 /**
 * Metadata is an expansive model that describes an Item.
 *
@@ -1372,6 +1469,175 @@ var colorParser = new EnumParser(["color", "b&w"]);
 * @class Metadata
 */
 var Metadata = class {
+	get access() {
+		return this.field(StringField, "access");
+	}
+	get adder() {
+		return this.field(StringField, "adder");
+	}
+	get amrc_id() {
+		return this.field(StringField, "amrc-id");
+	}
+	get archiveit_account_id() {
+		return this.field(NumberField, "archiveit-account-id");
+	}
+	get archiveit_account_organization_name() {
+		return this.field(StringField, "archiveit-account-organization-name");
+	}
+	get archiveit_collection_id() {
+		return this.field(NumberField, "archiveit-collection-id");
+	}
+	get archiveit_collection_name() {
+		return this.field(StringField, "archiveit-collection-name");
+	}
+	get archiveit_job_type() {
+		return this.field(StringField, "archiveit-job-type");
+	}
+	get audit_time_minutes() {
+		return this.field(NumberField, "audit_time_minutes");
+	}
+	get auditor() {
+		return this.field(StringField, "auditor");
+	}
+	get author() {
+		return this.field(StringField, "author");
+	}
+	get autocrop_version() {
+		return this.field(StringField, "autocrop_version");
+	}
+	get bookplateleaf() {
+		return this.field(NumberField, "bookplateleaf");
+	}
+	/** The BookReader view an item opens in. */
+	get bookreader_defaults() {
+		return mapField(this.rawMetadata, (raw) => new EnumField(raw, bookReaderDefaultsParser), "bookreader-defaults");
+	}
+	get boxid() {
+		return this.field(StringField, "boxid");
+	}
+	get camera() {
+		return this.field(StringField, "camera");
+	}
+	get cameraman() {
+		return this.field(StringField, "cameraman");
+	}
+	get canister() {
+		return this.field(StringField, "canister");
+	}
+	get case_name() {
+		return this.field(StringField, "case-name");
+	}
+	get col_number() {
+		return this.field(StringField, "col_number");
+	}
+	/** Repeatable, so it arrives as an array of collection names. */
+	get collection_added() {
+		return this.field(StringField, "collection_added");
+	}
+	get collection_library() {
+		return this.field(StringField, "collection-library");
+	}
+	get collection_set() {
+		return this.field(StringField, "collection_set");
+	}
+	get copyright_holder() {
+		return this.field(StringField, "copyright_holder");
+	}
+	get court() {
+		return this.field(StringField, "court");
+	}
+	get crawler() {
+		return this.field(StringField, "crawler");
+	}
+	get crawljob() {
+		return this.field(StringField, "crawljob");
+	}
+	/**
+	* The curation note, parsed from its bracketed tags into a curator, date,
+	* comment, and state.
+	*/
+	get curation() {
+		return this.field(CurationField, "curation");
+	}
+	get dari_title() {
+		return this.field(StringField, "dari-title");
+	}
+	/** Sent under either key ordering. */
+	get dari_title_romanized() {
+		return this.field(StringField, "dari-title-romanized", "dari-romanized-title");
+	}
+	get date_case_filed() {
+		return this.field(DateField, "date-case-filed");
+	}
+	get date_case_terminated() {
+		return this.field(DateField, "date-case-terminated");
+	}
+	get date_created() {
+		return this.field(DateField, "date_created");
+	}
+	get date_last_filing() {
+		return this.field(DateField, "date-last-filing");
+	}
+	get derive_submittime() {
+		return this.field(DateField, "derive_submittime");
+	}
+	get derive_version() {
+		return this.field(StringField, "derive_version");
+	}
+	get discs() {
+		return this.field(NumberField, "discs");
+	}
+	get docket_num() {
+		return this.field(StringField, "docket-num");
+	}
+	get external_metadata_update() {
+		return this.field(DateField, "external_metadata_update");
+	}
+	get fail_reasons() {
+		return this.field(StringField, "fail-reasons");
+	}
+	/** When the item's `files.xml` was written, e.g. `"Wed Mar 23 3:18:56 UTC 2011"`. */
+	get filesxml() {
+		return this.field(DateField, "filesxml");
+	}
+	/** Compact `YYYYMMDD[HHMMSS]` timestamp. */
+	get firstfiledate() {
+		return this.field(DateField, "firstfiledate");
+	}
+	get firstfileserial() {
+		return this.field(NumberField, "firstfileserial");
+	}
+	get foldoutcount() {
+		return this.field(NumberField, "foldoutcount");
+	}
+	get format() {
+		return this.field(StringField, "format");
+	}
+	get geo_restricted() {
+		return this.field(StringField, "geo_restricted");
+	}
+	get guid() {
+		return this.field(StringField, "guid");
+	}
+	/** A flag, spelled `0` or `1` in the API. */
+	get has_mp3() {
+		return this.field(BooleanField, "has_mp3");
+	}
+	get height() {
+		return this.field(NumberField, "height");
+	}
+	get hidden() {
+		return this.field(BooleanField, "hidden");
+	}
+	/**
+	* The runtime as it was originally written, before being normalized into
+	* {@link runtime}. Free-form prose like `"1.8 Hours"` or `"33 minutes"`, so
+	* it stays a string: `DurationParser` takes the leading number and drops the
+	* unit, reading `"1.8 Hours"` as 1.8 seconds. Read `runtime` for a duration.
+	*/
+	get ia_orig__runtime() {
+		return this.field(StringField, "ia_orig__runtime");
+	}
 	/**
 	* The item identifier.
 	*
@@ -1522,17 +1788,35 @@ var Metadata = class {
 	get identifier_access() {
 		return this.field(StringField, "identifier-access");
 	}
+	get identifier_ark() {
+		return this.field(StringField, "identifier-ark");
+	}
+	get identifier_bib() {
+		return this.field(StringField, "identifier-bib");
+	}
+	get image_count() {
+		return this.field(NumberField, "image_count");
+	}
 	get imagecount() {
 		return this.field(NumberField, "imagecount");
 	}
 	get indexdate() {
 		return this.field(DateField, "indexdate");
 	}
+	get invoice() {
+		return this.field(NumberField, "invoice");
+	}
 	get isbn() {
 		return this.field(StringField, "isbn");
 	}
 	get issue() {
 		return this.field(StringField, "issue");
+	}
+	get issue_count() {
+		return this.field(NumberField, "issue_count");
+	}
+	get issue_page_count() {
+		return this.field(NumberField, "issue_page_count");
 	}
 	/**
 	* For collections, the number of items in the collection
@@ -1555,14 +1839,59 @@ var Metadata = class {
 	get language() {
 		return this.field(StringField, "language");
 	}
+	/** Compact `YYYYMMDD[HHMMSS]` timestamp. */
+	get lastdate() {
+		return this.field(DateField, "lastdate");
+	}
+	/** Compact `YYYYMMDD[HHMMSS]` timestamp. */
+	get lastfiledate() {
+		return this.field(DateField, "lastfiledate");
+	}
+	get lastfileserial() {
+		return this.field(NumberField, "lastfileserial");
+	}
 	get length() {
 		return this.field(DurationField, "length");
+	}
+	get license() {
+		return this.field(StringField, "license");
 	}
 	get licenseurl() {
 		return this.field(StringField, "licenseurl");
 	}
 	get lineage() {
 		return this.field(StringField, "lineage");
+	}
+	/** Spelled `yes`/`no` in the API. */
+	get mature_content() {
+		return this.field(BooleanField, "mature_content");
+	}
+	get md5() {
+		return this.field(StringField, "md5");
+	}
+	/** A checksum listing, in the same layouts as `md5s`. */
+	get md5contents() {
+		return this.field(ChecksumField, "md5contents");
+	}
+	/**
+	* The item's checksum listing, one file and digest per entry. Parses either
+	* the `<md5> *<file>` or `<file>:<md5>` layout.
+	*/
+	get md5s() {
+		return this.field(ChecksumField, "md5s");
+	}
+	get medium() {
+		return this.field(StringField, "medium");
+	}
+	get metadata_operator() {
+		return this.field(StringField, "metadata_operator");
+	}
+	get metasource_catalog() {
+		return this.field(StringField, "metasource_catalog");
+	}
+	/** Spelled `yes`/`no` in the API. */
+	get monochromatic() {
+		return this.field(BooleanField, "monochromatic");
 	}
 	/**
 	* The number of downloads in the last month
@@ -1582,6 +1911,9 @@ var Metadata = class {
 	get next_item() {
 		return this.field(StringField, "next_item");
 	}
+	get noarchivetorrent() {
+		return this.field(BooleanField, "noarchivetorrent");
+	}
 	get noindex() {
 		return this.field(BooleanField, "noindex");
 	}
@@ -1600,20 +1932,127 @@ var Metadata = class {
 	get num_reviews() {
 		return this.field(NumberField, "num_reviews");
 	}
+	get numeric_id() {
+		return this.field(NumberField, "numeric_id");
+	}
+	get numwarcs() {
+		return this.field(NumberField, "numwarcs");
+	}
+	get ocr() {
+		return this.field(StringField, "ocr");
+	}
+	get ocr_autonomous() {
+		return this.field(BooleanField, "ocr_autonomous");
+	}
+	get ocr_detected_lang() {
+		return this.field(StringField, "ocr_detected_lang");
+	}
+	get ocr_detected_lang_conf() {
+		return this.field(NumberField, "ocr_detected_lang_conf");
+	}
+	get ocr_detected_script() {
+		return this.field(StringField, "ocr_detected_script");
+	}
+	get ocr_detected_script_conf() {
+		return this.field(NumberField, "ocr_detected_script_conf");
+	}
+	get ocr_invalid_language() {
+		return this.field(StringField, "ocr_invalid_language");
+	}
+	get ocr_module_version() {
+		return this.field(StringField, "ocr_module_version");
+	}
+	get ocr_parameters() {
+		return this.field(StringField, "ocr_parameters");
+	}
+	get old_pallet() {
+		return this.field(StringField, "old_pallet");
+	}
 	get openlibrary_edition() {
 		return this.field(StringField, "openlibrary_edition");
 	}
 	get openlibrary_work() {
 		return this.field(StringField, "openlibrary_work");
 	}
+	get operator() {
+		return this.field(StringField, "operator");
+	}
+	get originalurl() {
+		return this.field(StringField, "originalurl");
+	}
+	get osf_category() {
+		return this.field(StringField, "osf_category");
+	}
+	get osf_project() {
+		return this.field(StringField, "osf_project");
+	}
+	get osf_registration_doi() {
+		return this.field(StringField, "osf_registration_doi");
+	}
+	get osf_registration_schema() {
+		return this.field(StringField, "osf_registration_schema");
+	}
+	get osf_registry() {
+		return this.field(StringField, "osf_registry");
+	}
+	get osf_subjects() {
+		return this.field(StringField, "osf_subjects");
+	}
+	get osf_tags() {
+		return this.field(StringField, "osf_tags");
+	}
+	get output_time_minutes() {
+		return this.field(NumberField, "output_time_minutes");
+	}
+	get pacer_case_num() {
+		return this.field(NumberField, "pacer-case-num");
+	}
+	get packaging_time_minutes() {
+		return this.field(NumberField, "packaging_time_minutes");
+	}
+	get page_number_confidence() {
+		return this.field(NumberField, "page_number_confidence");
+	}
+	get page_number_module_version() {
+		return this.field(StringField, "page_number_module_version");
+	}
+	/**
+	* The reading direction. The API spells this `page-progression`; the
+	* underscored spelling is accepted as a fallback.
+	*/
 	get page_progression() {
-		return this.field(PageProgressionField, "page_progression");
+		return this.field(PageProgressionField, "page-progression", "page_progression");
 	}
 	get paginated() {
 		return this.field(BooleanField, "paginated");
 	}
+	get parse_date() {
+		return this.field(DateField, "parse_date");
+	}
+	get parse_state() {
+		return this.field(StringField, "parse_state");
+	}
 	get partner() {
 		return this.field(StringField, "partner");
+	}
+	get pashto_title() {
+		return this.field(StringField, "pashto-title");
+	}
+	/** Sent under either key ordering. */
+	get pashto_title_romanized() {
+		return this.field(StringField, "pashto-title-romanized", "romanized-pashto-title");
+	}
+	get pdf_degraded() {
+		return this.field(StringField, "pdf_degraded");
+	}
+	get pdf_module_version() {
+		return this.field(StringField, "pdf_module_version");
+	}
+	get pick() {
+		return this.field(NumberField, "pick");
+	}
+	get podcastindexid() {
+		return this.field(NumberField, "podcastindexid");
 	}
 	get post_text() {
 		return this.field(StringField, "post_text");
@@ -1633,6 +2072,26 @@ var Metadata = class {
 	get publisher() {
 		return this.field(StringField, "publisher");
 	}
+	get political_religious_party() {
+		return this.field(StringField, "political-religious-party");
+	}
+	get rcs_key() {
+		return this.field(NumberField, "rcs_key");
+	}
+	get repub_state() {
+		return this.field(NumberField, "repub_state");
+	}
+	/** Compact `YYYYMMDD[HHMMSS]` timestamp. */
+	get republisher_date() {
+		return this.field(DateField, "republisher_date");
+	}
+	/** One or more operators, semicolon-separated when there are several. */
+	get republisher_operator() {
+		return this.field(StringListField, "republisher_operator");
+	}
+	get republisher_time() {
+		return this.field(NumberField, "republisher_time");
+	}
 	get reviewdate() {
 		return this.field(DateField, "reviewdate");
 	}
@@ -1644,14 +2103,26 @@ var Metadata = class {
 	get reviews_allowed() {
 		return mapField(this.rawMetadata, (raw) => new EnumField(raw, reviewsAllowedParser), "reviews-allowed");
 	}
+	get ribbon_state() {
+		return this.field(StringField, "ribbon_state");
+	}
+	get ribbon_state_modify_date() {
+		return this.field(DateField, "ribbon_state_modify_date");
+	}
 	get rights() {
 		return this.field(StringField, "rights");
 	}
 	get rights_holder() {
 		return this.field(StringField, "rights-holder", "rights_holder");
 	}
+	get rssfeed() {
+		return this.field(StringField, "rssfeed");
+	}
 	get runtime() {
 		return this.field(DurationField, "runtime");
+	}
+	get scan_time_minutes() {
+		return this.field(NumberField, "scan_time_minutes");
 	}
 	/**
 	* The scan/capture date. Parses compact `YYYYMMDD[HHMMSS]` timestamps in
@@ -1660,20 +2131,62 @@ var Metadata = class {
 	get scandate() {
 		return this.field(DateField, "scandate");
 	}
+	/** Semicolon-separated fee components, e.g. `"300;10;200"`. */
+	get scanfee() {
+		return this.field(NumberListField, "scanfee");
+	}
 	get scanner() {
 		return this.field(StringField, "scanner");
+	}
+	get scanner_operator() {
+		return this.field(StringField, "scanner_operator");
 	}
 	get scanningcenter() {
 		return this.field(StringField, "scanningcenter");
 	}
+	get scribe3_search_catalog() {
+		return this.field(StringField, "scribe3_search_catalog");
+	}
+	get scribe3_search_id() {
+		return this.field(StringField, "scribe3_search_id");
+	}
 	get segments() {
 		return this.field(StringField, "segments");
+	}
+	get sessionid() {
+		return this.field(StringField, "sessionid");
+	}
+	get shndiscs() {
+		return this.field(NumberField, "shndiscs");
 	}
 	get shotlist() {
 		return this.field(StringField, "shotlist");
 	}
+	get signal_path() {
+		return this.field(StringField, "signal-path");
+	}
+	/** A byte count. */
+	get size() {
+		return this.field(ByteField, "size");
+	}
+	/** A byte count. */
+	get sizehint() {
+		return this.field(ByteField, "sizehint");
+	}
+	get software_version() {
+		return this.field(StringField, "software_version");
+	}
+	get sort_order() {
+		return this.field(StringField, "sort_order");
+	}
 	get sound() {
 		return mapField(this.rawMetadata, (raw) => new EnumField(raw, soundParser), "sound");
+	}
+	get soundcreator() {
+		return this.field(StringField, "soundcreator");
+	}
+	get soundtitle() {
+		return this.field(StringField, "soundtitle");
 	}
 	get source() {
 		return this.field(StringField, "source");
@@ -1684,8 +2197,15 @@ var Metadata = class {
 	get source_pixel_width() {
 		return this.field(NumberField, "source_pixel_width");
 	}
+	get source_url() {
+		return this.field(StringField, "source_url");
+	}
 	get sponsor() {
 		return this.field(StringField, "sponsor");
+	}
+	/** Compact `YYYYMMDD[HHMMSS]` timestamp. */
+	get sponsordate() {
+		return this.field(DateField, "sponsordate");
 	}
 	get start_localtime() {
 		return this.field(DateField, "start_localtime");
@@ -1723,6 +2243,9 @@ var Metadata = class {
 	get track() {
 		return this.field(NumberField, "track");
 	}
+	get tts_version() {
+		return this.field(StringField, "tts_version");
+	}
 	/**
 	* The capture tuner setting. Parses the `"Channel <n> (<freq> MHz)"` form
 	* into channel and frequency; other formats expose only the raw value.
@@ -1733,8 +2256,18 @@ var Metadata = class {
 	get type() {
 		return this.field(StringField, "type");
 	}
+	get updatedate() {
+		return this.field(DateField, "updatedate");
+	}
+	/** Repeatable, so it arrives as an array of account names. */
+	get updater() {
+		return this.field(StringField, "updater");
+	}
 	get uploader() {
 		return this.field(StringField, "uploader");
+	}
+	get uploadsoftware() {
+		return this.field(StringField, "uploadsoftware");
 	}
 	/**
 	* The UTC offset encoded as `±HHMM` (e.g. `"-800"`), parsed into hours,
@@ -1752,6 +2285,9 @@ var Metadata = class {
 	get volume() {
 		return this.field(StringField, "volume");
 	}
+	get website() {
+		return this.field(StringField, "website");
+	}
 	/**
 	* The number of downloads in the last week
 	*
@@ -1760,6 +2296,9 @@ var Metadata = class {
 	*/
 	get week() {
 		return this.field(NumberField, "week");
+	}
+	get width() {
+		return this.field(NumberField, "width");
 	}
 	get year() {
 		return this.field(NumberField, "year");
@@ -1782,6 +2321,57 @@ var Metadata = class {
 		this.rawMetadata = json;
 	}
 };
+__decorate([Memoize()], Metadata.prototype, "access", null);
+__decorate([Memoize()], Metadata.prototype, "adder", null);
+__decorate([Memoize()], Metadata.prototype, "amrc_id", null);
+__decorate([Memoize()], Metadata.prototype, "archiveit_account_id", null);
+__decorate([Memoize()], Metadata.prototype, "archiveit_account_organization_name", null);
+__decorate([Memoize()], Metadata.prototype, "archiveit_collection_id", null);
+__decorate([Memoize()], Metadata.prototype, "archiveit_collection_name", null);
+__decorate([Memoize()], Metadata.prototype, "archiveit_job_type", null);
+__decorate([Memoize()], Metadata.prototype, "audit_time_minutes", null);
+__decorate([Memoize()], Metadata.prototype, "auditor", null);
+__decorate([Memoize()], Metadata.prototype, "author", null);
+__decorate([Memoize()], Metadata.prototype, "autocrop_version", null);
+__decorate([Memoize()], Metadata.prototype, "bookplateleaf", null);
+__decorate([Memoize()], Metadata.prototype, "bookreader_defaults", null);
+__decorate([Memoize()], Metadata.prototype, "boxid", null);
+__decorate([Memoize()], Metadata.prototype, "camera", null);
+__decorate([Memoize()], Metadata.prototype, "cameraman", null);
+__decorate([Memoize()], Metadata.prototype, "canister", null);
+__decorate([Memoize()], Metadata.prototype, "case_name", null);
+__decorate([Memoize()], Metadata.prototype, "col_number", null);
+__decorate([Memoize()], Metadata.prototype, "collection_added", null);
+__decorate([Memoize()], Metadata.prototype, "collection_library", null);
+__decorate([Memoize()], Metadata.prototype, "collection_set", null);
+__decorate([Memoize()], Metadata.prototype, "copyright_holder", null);
+__decorate([Memoize()], Metadata.prototype, "court", null);
+__decorate([Memoize()], Metadata.prototype, "crawler", null);
+__decorate([Memoize()], Metadata.prototype, "crawljob", null);
+__decorate([Memoize()], Metadata.prototype, "curation", null);
+__decorate([Memoize()], Metadata.prototype, "dari_title", null);
+__decorate([Memoize()], Metadata.prototype, "dari_title_romanized", null);
+__decorate([Memoize()], Metadata.prototype, "date_case_filed", null);
+__decorate([Memoize()], Metadata.prototype, "date_case_terminated", null);
+__decorate([Memoize()], Metadata.prototype, "date_created", null);
+__decorate([Memoize()], Metadata.prototype, "date_last_filing", null);
+__decorate([Memoize()], Metadata.prototype, "derive_submittime", null);
+__decorate([Memoize()], Metadata.prototype, "derive_version", null);
+__decorate([Memoize()], Metadata.prototype, "discs", null);
+__decorate([Memoize()], Metadata.prototype, "docket_num", null);
+__decorate([Memoize()], Metadata.prototype, "external_metadata_update", null);
+__decorate([Memoize()], Metadata.prototype, "fail_reasons", null);
+__decorate([Memoize()], Metadata.prototype, "filesxml", null);
+__decorate([Memoize()], Metadata.prototype, "firstfiledate", null);
+__decorate([Memoize()], Metadata.prototype, "firstfileserial", null);
+__decorate([Memoize()], Metadata.prototype, "foldoutcount", null);
+__decorate([Memoize()], Metadata.prototype, "format", null);
+__decorate([Memoize()], Metadata.prototype, "geo_restricted", null);
+__decorate([Memoize()], Metadata.prototype, "guid", null);
+__decorate([Memoize()], Metadata.prototype, "has_mp3", null);
+__decorate([Memoize()], Metadata.prototype, "height", null);
+__decorate([Memoize()], Metadata.prototype, "hidden", null);
+__decorate([Memoize()], Metadata.prototype, "ia_orig__runtime", null);
 __decorate([Memoize()], Metadata.prototype, "access_restricted_item", null);
 __decorate([Memoize()], Metadata.prototype, "addeddate", null);
 __decorate([Memoize()], Metadata.prototype, "aspect_ratio", null);
@@ -1811,50 +2401,128 @@ __decorate([Memoize()], Metadata.prototype, "external_link", null);
 __decorate([Memoize()], Metadata.prototype, "files_count", null);
 __decorate([Memoize()], Metadata.prototype, "frames_per_second", null);
 __decorate([Memoize()], Metadata.prototype, "identifier_access", null);
+__decorate([Memoize()], Metadata.prototype, "identifier_ark", null);
+__decorate([Memoize()], Metadata.prototype, "identifier_bib", null);
+__decorate([Memoize()], Metadata.prototype, "image_count", null);
 __decorate([Memoize()], Metadata.prototype, "imagecount", null);
 __decorate([Memoize()], Metadata.prototype, "indexdate", null);
+__decorate([Memoize()], Metadata.prototype, "invoice", null);
 __decorate([Memoize()], Metadata.prototype, "isbn", null);
 __decorate([Memoize()], Metadata.prototype, "issue", null);
+__decorate([Memoize()], Metadata.prototype, "issue_count", null);
+__decorate([Memoize()], Metadata.prototype, "issue_page_count", null);
 __decorate([Memoize()], Metadata.prototype, "item_count", null);
 __decorate([Memoize()], Metadata.prototype, "item_size", null);
 __decorate([Memoize()], Metadata.prototype, "language", null);
+__decorate([Memoize()], Metadata.prototype, "lastdate", null);
+__decorate([Memoize()], Metadata.prototype, "lastfiledate", null);
+__decorate([Memoize()], Metadata.prototype, "lastfileserial", null);
 __decorate([Memoize()], Metadata.prototype, "length", null);
+__decorate([Memoize()], Metadata.prototype, "license", null);
 __decorate([Memoize()], Metadata.prototype, "licenseurl", null);
 __decorate([Memoize()], Metadata.prototype, "lineage", null);
+__decorate([Memoize()], Metadata.prototype, "mature_content", null);
+__decorate([Memoize()], Metadata.prototype, "md5", null);
+__decorate([Memoize()], Metadata.prototype, "md5contents", null);
+__decorate([Memoize()], Metadata.prototype, "md5s", null);
+__decorate([Memoize()], Metadata.prototype, "medium", null);
+__decorate([Memoize()], Metadata.prototype, "metadata_operator", null);
+__decorate([Memoize()], Metadata.prototype, "metasource_catalog", null);
+__decorate([Memoize()], Metadata.prototype, "monochromatic", null);
 __decorate([Memoize()], Metadata.prototype, "month", null);
 __decorate([Memoize()], Metadata.prototype, "mediatype", null);
 __decorate([Memoize()], Metadata.prototype, "mpeg_program", null);
 __decorate([Memoize()], Metadata.prototype, "next_item", null);
+__decorate([Memoize()], Metadata.prototype, "noarchivetorrent", null);
 __decorate([Memoize()], Metadata.prototype, "noindex", null);
 __decorate([Memoize()], Metadata.prototype, "notes", null);
 __decorate([Memoize()], Metadata.prototype, "num_favorites", null);
 __decorate([Memoize()], Metadata.prototype, "num_reviews", null);
+__decorate([Memoize()], Metadata.prototype, "numeric_id", null);
+__decorate([Memoize()], Metadata.prototype, "numwarcs", null);
+__decorate([Memoize()], Metadata.prototype, "ocr", null);
+__decorate([Memoize()], Metadata.prototype, "ocr_autonomous", null);
+__decorate([Memoize()], Metadata.prototype, "ocr_detected_lang", null);
+__decorate([Memoize()], Metadata.prototype, "ocr_detected_lang_conf", null);
+__decorate([Memoize()], Metadata.prototype, "ocr_detected_script", null);
+__decorate([Memoize()], Metadata.prototype, "ocr_detected_script_conf", null);
+__decorate([Memoize()], Metadata.prototype, "ocr_invalid_language", null);
+__decorate([Memoize()], Metadata.prototype, "ocr_module_version", null);
+__decorate([Memoize()], Metadata.prototype, "ocr_parameters", null);
+__decorate([Memoize()], Metadata.prototype, "old_pallet", null);
 __decorate([Memoize()], Metadata.prototype, "openlibrary_edition", null);
 __decorate([Memoize()], Metadata.prototype, "openlibrary_work", null);
+__decorate([Memoize()], Metadata.prototype, "operator", null);
+__decorate([Memoize()], Metadata.prototype, "originalurl", null);
+__decorate([Memoize()], Metadata.prototype, "osf_category", null);
+__decorate([Memoize()], Metadata.prototype, "osf_project", null);
+__decorate([Memoize()], Metadata.prototype, "osf_registration_doi", null);
+__decorate([Memoize()], Metadata.prototype, "osf_registration_schema", null);
+__decorate([Memoize()], Metadata.prototype, "osf_registry", null);
+__decorate([Memoize()], Metadata.prototype, "osf_subjects", null);
+__decorate([Memoize()], Metadata.prototype, "osf_tags", null);
+__decorate([Memoize()], Metadata.prototype, "output_time_minutes", null);
+__decorate([Memoize()], Metadata.prototype, "pacer_case_num", null);
+__decorate([Memoize()], Metadata.prototype, "packaging_time_minutes", null);
+__decorate([Memoize()], Metadata.prototype, "page_number_confidence", null);
+__decorate([Memoize()], Metadata.prototype, "page_number_module_version", null);
 __decorate([Memoize()], Metadata.prototype, "page_progression", null);
 __decorate([Memoize()], Metadata.prototype, "paginated", null);
+__decorate([Memoize()], Metadata.prototype, "parse_date", null);
+__decorate([Memoize()], Metadata.prototype, "parse_state", null);
 __decorate([Memoize()], Metadata.prototype, "partner", null);
+__decorate([Memoize()], Metadata.prototype, "pashto_title", null);
+__decorate([Memoize()], Metadata.prototype, "pashto_title_romanized", null);
+__decorate([Memoize()], Metadata.prototype, "pdf_degraded", null);
+__decorate([Memoize()], Metadata.prototype, "pdf_module_version", null);
+__decorate([Memoize()], Metadata.prototype, "pick", null);
+__decorate([Memoize()], Metadata.prototype, "podcastindexid", null);
 __decorate([Memoize()], Metadata.prototype, "post_text", null);
 __decorate([Memoize()], Metadata.prototype, "ppi", null);
 __decorate([Memoize()], Metadata.prototype, "previous_item", null);
 __decorate([Memoize()], Metadata.prototype, "program", null);
 __decorate([Memoize()], Metadata.prototype, "publicdate", null);
 __decorate([Memoize()], Metadata.prototype, "publisher", null);
+__decorate([Memoize()], Metadata.prototype, "political_religious_party", null);
+__decorate([Memoize()], Metadata.prototype, "rcs_key", null);
+__decorate([Memoize()], Metadata.prototype, "repub_state", null);
+__decorate([Memoize()], Metadata.prototype, "republisher_date", null);
+__decorate([Memoize()], Metadata.prototype, "republisher_operator", null);
+__decorate([Memoize()], Metadata.prototype, "republisher_time", null);
 __decorate([Memoize()], Metadata.prototype, "reviewdate", null);
 __decorate([Memoize()], Metadata.prototype, "reviews_allowed", null);
+__decorate([Memoize()], Metadata.prototype, "ribbon_state", null);
+__decorate([Memoize()], Metadata.prototype, "ribbon_state_modify_date", null);
 __decorate([Memoize()], Metadata.prototype, "rights", null);
 __decorate([Memoize()], Metadata.prototype, "rights_holder", null);
+__decorate([Memoize()], Metadata.prototype, "rssfeed", null);
 __decorate([Memoize()], Metadata.prototype, "runtime", null);
+__decorate([Memoize()], Metadata.prototype, "scan_time_minutes", null);
 __decorate([Memoize()], Metadata.prototype, "scandate", null);
+__decorate([Memoize()], Metadata.prototype, "scanfee", null);
 __decorate([Memoize()], Metadata.prototype, "scanner", null);
+__decorate([Memoize()], Metadata.prototype, "scanner_operator", null);
 __decorate([Memoize()], Metadata.prototype, "scanningcenter", null);
+__decorate([Memoize()], Metadata.prototype, "scribe3_search_catalog", null);
+__decorate([Memoize()], Metadata.prototype, "scribe3_search_id", null);
 __decorate([Memoize()], Metadata.prototype, "segments", null);
+__decorate([Memoize()], Metadata.prototype, "sessionid", null);
+__decorate([Memoize()], Metadata.prototype, "shndiscs", null);
 __decorate([Memoize()], Metadata.prototype, "shotlist", null);
+__decorate([Memoize()], Metadata.prototype, "signal_path", null);
+__decorate([Memoize()], Metadata.prototype, "size", null);
+__decorate([Memoize()], Metadata.prototype, "sizehint", null);
+__decorate([Memoize()], Metadata.prototype, "software_version", null);
+__decorate([Memoize()], Metadata.prototype, "sort_order", null);
 __decorate([Memoize()], Metadata.prototype, "sound", null);
+__decorate([Memoize()], Metadata.prototype, "soundcreator", null);
+__decorate([Memoize()], Metadata.prototype, "soundtitle", null);
 __decorate([Memoize()], Metadata.prototype, "source", null);
 __decorate([Memoize()], Metadata.prototype, "source_pixel_height", null);
 __decorate([Memoize()], Metadata.prototype, "source_pixel_width", null);
+__decorate([Memoize()], Metadata.prototype, "source_url", null);
 __decorate([Memoize()], Metadata.prototype, "sponsor", null);
+__decorate([Memoize()], Metadata.prototype, "sponsordate", null);
 __decorate([Memoize()], Metadata.prototype, "start_localtime", null);
 __decorate([Memoize()], Metadata.prototype, "start_time", null);
 __decorate([Memoize()], Metadata.prototype, "station_name", null);
@@ -1867,14 +2535,20 @@ __decorate([Memoize()], Metadata.prototype, "title", null);
 __decorate([Memoize()], Metadata.prototype, "title_alt_script", null);
 __decorate([Memoize()], Metadata.prototype, "transferer", null);
 __decorate([Memoize()], Metadata.prototype, "track", null);
+__decorate([Memoize()], Metadata.prototype, "tts_version", null);
 __decorate([Memoize()], Metadata.prototype, "tuner", null);
 __decorate([Memoize()], Metadata.prototype, "type", null);
+__decorate([Memoize()], Metadata.prototype, "updatedate", null);
+__decorate([Memoize()], Metadata.prototype, "updater", null);
 __decorate([Memoize()], Metadata.prototype, "uploader", null);
+__decorate([Memoize()], Metadata.prototype, "uploadsoftware", null);
 __decorate([Memoize()], Metadata.prototype, "utc_offset", null);
 __decorate([Memoize()], Metadata.prototype, "venue", null);
 __decorate([Memoize()], Metadata.prototype, "video_codec", null);
 __decorate([Memoize()], Metadata.prototype, "volume", null);
+__decorate([Memoize()], Metadata.prototype, "website", null);
 __decorate([Memoize()], Metadata.prototype, "week", null);
+__decorate([Memoize()], Metadata.prototype, "width", null);
 __decorate([Memoize()], Metadata.prototype, "year", null);
 //#endregion
 //#region dist/src/models/review.js
