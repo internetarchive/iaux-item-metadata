@@ -35,3 +35,6 @@ storybook-static
 logs
 *.log
 npm-debug.log*
+
+## git worktrees for feature branches
+/.claude/worktrees/
