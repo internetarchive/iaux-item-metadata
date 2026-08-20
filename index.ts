@@ -63,3 +63,4 @@ export {
   MetadataFieldInterface,
   MetadataRawValue
 } from './src/models/metadata-fields/metadata-field';
+export type { MetadataFieldKey } from './src/models/metadata-field-key';
