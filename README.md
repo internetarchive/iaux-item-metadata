@@ -50,6 +50,31 @@ console.log('Duration', metadata.duration.value);
 // > 5025
 ```
 
+## Metadata schema
+
+What each field accepts, from the [archive.org metadata schema](https://archive.org/developers/metadata-schema/), for clients that write metadata.
+
+```ts
+fieldSchema('isbn');
+// > { type: 'isbn', repeatable: true, access: 'user' }
+
+fieldSchema('page-progression').values;
+// > { options: ['lr', 'rl'], closed: true }
+
+isUserEditableField('collection');
+// > false (admins only)
+
+checkMetadataValue('isbn', '978-0-306-40615-8');
+// > 'invalid-isbn'
+
+checkMetadataValue('runtime', '1:32:05');
+// > undefined (it fits)
+```
+
+- `access` is `user`, `admin` or `system`. Keys the schema doesn't list are custom fields, which users may set as free text.
+- `values` are matched case-insensitively. When `closed` is false they're just the common ones.
+- `checkMetadataValue` returns a problem code rather than a message, so each client can word it in its own language. It only rejects what the schema rejects, so `date` takes any text; `isRecommendedDateFormat` says whether a date uses one of the formats the schema recommends.
+
 ## Local Demo with `web-dev-server`
 ```bash
 npm run start
