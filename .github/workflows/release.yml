@@ -1,0 +1,40 @@
+# Cuts the GitHub Release when a version tag is pushed, so the tag is the only
+# manual step. npm publish stays manual because it needs 2FA.
+
+name: Release on tag
+
+permissions:
+  contents: write
+
+on:
+  push:
+    tags: [ 'v*' ]
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      # full history so the generated notes can find the previous tag
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Create the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ github.ref_name }}
+        run: |
+          # a hyphen marks a prerelease (v1.0.7-webdev-7550.0), which must not
+          # take the Latest badge off the newest final release
+          case "$TAG" in
+            *-*) DISPOSITION=--prerelease ;;
+            *)   DISPOSITION=--latest ;;
+          esac
+
+          gh release create "$TAG" \
+            --title "$TAG" \
+            --verify-tag \
+            --generate-notes \
+            "$DISPOSITION"
