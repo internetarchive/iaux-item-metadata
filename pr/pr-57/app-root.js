@@ -2582,6 +2582,180 @@ __decorate([Memoize()], Review.prototype, "reviewdate", null);
 __decorate([Memoize()], Review.prototype, "createdate", null);
 __decorate([Memoize()], Review.prototype, "stars", null);
 //#endregion
+//#region dist/src/schema/metadata-schema.js
+var conditions = [
+	"Mint",
+	"Near Mint",
+	"Very Good",
+	"Good",
+	"Fair",
+	"Worn",
+	"Poor",
+	"Fragile",
+	"Incomplete"
+];
+var user = (type, repeatable = false, extra = {}) => ({
+	type,
+	repeatable,
+	access: "user",
+	...extra
+});
+var admin = (type, repeatable = false, extra = {}) => ({
+	type,
+	repeatable,
+	access: "admin",
+	...extra
+});
+var system = (type, repeatable = false) => ({
+	type,
+	repeatable,
+	access: "system"
+});
+var closed = (options) => ({ values: {
+	options,
+	closed: true
+} });
+var common = (options) => ({ values: {
+	options,
+	closed: false
+} });
+Object.freeze({
+	adaptive_ocr: user("boolean"),
+	addeddate: system("datetime"),
+	aspect_ratio: user("aspect-ratio"),
+	audio_codec: admin("text"),
+	audio_sample_rate: admin("integer"),
+	betterpdf: user("boolean"),
+	"bookreader-defaults": user("text", false, closed([
+		"mode/1up",
+		"mode/2up",
+		"mode/thumb"
+	])),
+	bwocr: user("text"),
+	call_number: user("text"),
+	camera: admin("text"),
+	ccnum: user("text"),
+	closed_captioning: user("text", false, closed(["yes", "no"])),
+	collection: admin("identifier", true),
+	color: user("text", false, common(["color", "B&W"])),
+	condition: user("text", false, closed(conditions)),
+	"condition-visual": user("text", false, closed([
+		...conditions,
+		"None",
+		"Unknown"
+	])),
+	contributor: user("text"),
+	coverage: user("text", true),
+	creator: user("text", true),
+	"creator-alt-script": user("text"),
+	date: user("date"),
+	description: user("html", true),
+	"external-identifier": user("text", true),
+	firstfiledate: user("timestamp"),
+	"fixed-ppi": user("number"),
+	frames_per_second: user("number"),
+	identifier: admin("identifier"),
+	"identifier-ark": user("ark"),
+	"identifier-bib": user("text", true),
+	isbn: user("isbn", true),
+	issn: user("issn", true),
+	language: user("text", true),
+	lastfiledate: user("timestamp"),
+	lccn: user("integer", true),
+	licenseurl: user("url"),
+	"marc-insert-only": admin("boolean"),
+	mediatype: admin("text", false, closed([
+		"texts",
+		"etree",
+		"audio",
+		"movies",
+		"software",
+		"image",
+		"data",
+		"web",
+		"collection",
+		"account"
+	])),
+	notes: user("html", true),
+	"oclc-id": user("text", true),
+	openlibrary: user("openlibrary-edition", false, { deprecated: true }),
+	openlibrary_author: user("openlibrary-author", true),
+	openlibrary_edition: user("openlibrary-edition"),
+	openlibrary_subject: user("text", true),
+	openlibrary_work: user("openlibrary-work"),
+	"page-progression": user("text", false, closed(["lr", "rl"])),
+	"possible-copyright-status": user("text"),
+	ppi: user("integer"),
+	publisher: user("text"),
+	related_collection: admin("identifier"),
+	"related-external-id": user("text", true),
+	rights: user("html"),
+	runtime: user("runtime", true),
+	scandate: user("text"),
+	scanner: user("text"),
+	size: user("number", true),
+	"sort-by": admin("text", false, closed([
+		"addeddate",
+		"creatorSorter",
+		"date",
+		"downloads",
+		"publicdate",
+		"reviewdate",
+		"titleSorter"
+	].flatMap((key) => [key, `-${key}`]))),
+	sound: user("text", false, common(["sound", "silent"])),
+	source: user("text"),
+	sponsor: user("text"),
+	subject: user("text", true),
+	summary: admin("html"),
+	title: user("plain-text"),
+	"title-alt-script": user("text"),
+	volume: user("text"),
+	year: user("year", false, { deprecated: true }),
+	"access-restricted": admin("boolean"),
+	"access-restricted-item": admin("boolean"),
+	"admin-collection": admin("boolean"),
+	boxid: admin("text", true),
+	curation: admin("text"),
+	foldoutcount: admin("integer"),
+	"force-update": user("boolean"),
+	geo_restricted: admin("text"),
+	hidden: admin("boolean"),
+	imagecount: system("integer"),
+	neverindex: admin("boolean"),
+	next_item: admin("identifier"),
+	no_ol_import: admin("boolean"),
+	noindex: user("boolean"),
+	ocr: admin("text"),
+	operator: admin("email"),
+	previous_item: admin("identifier"),
+	"public-format": admin("text", true),
+	publicdate: system("datetime"),
+	repub_state: admin("integer"),
+	republisher: admin("email", false, { deprecated: true }),
+	republisher_date: admin("timestamp"),
+	republisher_operator: admin("email"),
+	republisher_time: system("integer"),
+	scanfee: admin("text"),
+	scanningcenter: admin("text"),
+	show_related_music_by_track: admin("boolean"),
+	source_pixel_height: admin("integer"),
+	source_pixel_width: admin("integer"),
+	sponsordate: admin("text"),
+	start_localtime: admin("datetime"),
+	start_time: admin("datetime"),
+	stop_time: admin("datetime"),
+	title_message: admin("text"),
+	tuner: admin("text"),
+	updated: system("text", true),
+	updatedate: system("datetime", true),
+	updater: system("text", true),
+	uploader: admin("email"),
+	utc_offset: admin("integer"),
+	video_codec: admin("text"),
+	viruscheck: admin("boolean")
+});
+//#endregion
 //#region dist/demo/app-root.js
 /**
 * Every field the model exposes, read off `Metadata`'s prototype getters. The
