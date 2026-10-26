@@ -2,6 +2,8 @@
 
 # Internet Archive Item Metadata
 
+> Moved to [@internetarchive/elements](https://github.com/internetarchive/elements) (`src/services/item-metadata`). New work goes there.
+
 These are the data models for Internet Archive Metadata. The Metadata models handle automatic conversions between the raw values to native Typescript data types.
 
 When receiving JSON responses from the Internet Archive's metadata service, the values can be strings, numbers, or arrays. These take all of those values and normalizes them.
